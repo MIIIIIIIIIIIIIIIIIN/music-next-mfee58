@@ -1,4 +1,4 @@
-import { AddToCartBar } from "@/components/addtocart-bar/add-to-cart";
+import { AddToCartBar } from "@/components/public/addtocart-bar/add-to-cart";
 
 export default function AddToCart() {
   return (
