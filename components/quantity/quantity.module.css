@@ -1,0 +1,69 @@
+.quantity {
+  align-items: center;
+  display: inline-flex;
+  gap: 3px;
+  justify-content: center;
+  position: relative;
+}
+
+.quantity .QUTANTITY {
+  align-items: center;
+  background-color: #ffffff;
+  border: 0.5px solid;
+  border-color: #dddddd;
+  display: flex;
+  gap: 10px;
+  height: 15px;
+  justify-content: center;
+  padding: 5px 0px;
+  position: relative;
+  width: 30px;
+}
+
+.quantity .text-wrapper {
+  color: #000000;
+  font-family: "Nunito Sans-ExtraLight", Helvetica;
+  font-size: 10px;
+  font-weight: 200;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-bottom: -4.00px;
+  margin-top: -5.00px;
+  position: relative;
+  width: fit-content;
+}
+
+.quantity .div-wrapper {
+  background-color: #ffffff;
+  border: 0.5px solid;
+  border-color: #dddddd;
+  height: 15px;
+  position: relative;
+  width: 15px;
+}
+
+.quantity .div {
+  color: #000000;
+  font-family: var(--regular-english-p12-font-family);
+  font-size: var(--regular-english-p12-font-size);
+  font-style: var(--regular-english-p12-font-style);
+  font-weight: var(--regular-english-p12-font-weight);
+  left: 4px;
+  letter-spacing: var(--regular-english-p12-letter-spacing);
+  line-height: var(--regular-english-p12-line-height);
+  position: absolute;
+  top: -2px;
+}
+
+.quantity .text-wrapper-2 {
+  color: #000000;
+  font-family: var(--regular-english-p12-font-family);
+  font-size: var(--regular-english-p12-font-size);
+  font-style: var(--regular-english-p12-font-style);
+  font-weight: var(--regular-english-p12-font-weight);
+  left: 5px;
+  letter-spacing: var(--regular-english-p12-letter-spacing);
+  line-height: var(--regular-english-p12-line-height);
+  position: absolute;
+  top: -2px;
+}
