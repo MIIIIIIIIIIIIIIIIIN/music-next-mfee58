@@ -1,12 +1,12 @@
 import React from "react";
-import Carousel from "../components/Carousel"; // 確保路徑正確
+import Carousel from "../components/public/Carousel"; // 確保路徑正確
 
 const images = [
-  "/image/001album.jpg",
-  "/image/002album.jpg",
-  "/image/003album.jpg",
-  "/image/004album.jpg",
-  "/image/005album.jpg",
+  "/George/products (1).jpg",
+  "/George/products (2).jpg",
+  "/George/products (3).jpg",
+  "/George/products (4).jpg",
+  "/George/products (5).jpg",
 ];
 
 const CarouselPage = () => {
