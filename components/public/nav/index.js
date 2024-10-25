@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { FiSearch } from "react-icons/fi";
 import { CiBellOn } from "react-icons/ci";
-import { ProfileIcons } from "../ProfileIcons";
+import { ProfileIcons } from '../profileIcons/ProfileIcons';
 import Mall from './checklist/mall';
 import Fundraising from './checklist/fundraising';
 import Forum from './checklist/forum';
@@ -17,7 +17,7 @@ export default function Nav() {
   const [displayForum, setDisplayForum] = useState(false);
 
   const [activeIndex, setActiveIndex] = useState(null);
-
+  let hoverTimeout = useRef(null);
 
   useEffect(()=>{
     
@@ -32,16 +32,27 @@ export default function Nav() {
         </div>
         <ul ref={items} className='nav'>
           <li className='item'
-            onClick={(e) => {
-              setDisplayMall(!displayMall);
-              if(displayFundraising){
+             onMouseEnter={(e) => {
+              if (hoverTimeout.current) {
+                clearTimeout(hoverTimeout.current); // 清除之前的 timeout，防止过早隐藏
+              }
+              setDisplayMall(true);
+              if (displayFundraising) {
                 setDisplayFundraising(false);
               }
-              if(displayForum){
-                setDisplayForum(false)
+              if (displayForum) {
+                setDisplayForum(false);
               }
-              setActiveIndex(0);  // 設置當前索引為 1
+              setActiveIndex(0);
             }}
+            onMouseLeave={(e) => {
+              hoverTimeout.current = setTimeout(() => {
+                setDisplayMall(false); // 延迟隐藏 Mall
+                setActiveIndex(null);
+              }, 200); // 延迟 200ms 后隐藏 Mall
+            }}
+
+            
             style={{ backgroundColor: activeIndex === 0 ? '#14ff00' : '#fff' }}
             
           // onMouseLeave={(e) => {
@@ -54,8 +65,9 @@ export default function Nav() {
             <div className="bottom">
               <p>商城</p>
             </div>
+            {displayMall && <Mall  />}
           </li>
-          {displayMall && <Mall  />}
+          
           <li className='item'
             onClick={(e) => {
               setDisplayFundraising(!displayFundraising);
