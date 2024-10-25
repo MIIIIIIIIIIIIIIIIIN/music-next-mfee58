@@ -1,4 +1,4 @@
-import { AddToCartBar } from "@/components/addtocart-bar/add-to-cart";
+import { AddToCartBar } from "@/components/public/addtocart-bar/add-to-cart";
 
 export default function AddToCart() {
   return (
@@ -9,16 +9,16 @@ export default function AddToCart() {
       <div className="container"></div>
 
       <style jsx>{`
-        .container{
+        .container {
           width: 1500px;
           height: 100vh;
           margin: auto;
           background: Cornsilk;
         }
-        h1{
+        h1 {
           text-align: center;
         }
-        `}</style>
+      `}</style>
     </>
   );
 }

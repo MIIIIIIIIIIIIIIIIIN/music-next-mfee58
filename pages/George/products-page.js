@@ -1,5 +1,6 @@
 import React from 'react'
 import ProductsCarousel from '@/components/George/products-mall/products-carousel'
+import Footer from '@/components/public/footer';
 
 const images = [
   "/George/products (1).jpg",
@@ -12,7 +13,8 @@ const images = [
 export default function ProductsPage() {
   return (
     <>
-    <ProductsCarousel images={images} length={length}/>
+    <ProductsCarousel images={images} interval={2500}/>
+    {/* <Footer /> */}
     </>
   )
 }

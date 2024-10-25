@@ -1,8 +1,8 @@
 /* Carousel 容器樣式 */
 .carousel {
   position: relative;
-  width: 30%;
-  height: 300px; /* 幻燈片高度 + 上下留白 */
+  width: 100%;
+  height: 800px; /* 幻燈片高度 + 上下留白 */
   margin: auto;
   padding-top: 25px; /* 上方留白 */
   padding-bottom: 25px; /* 下方留白 */

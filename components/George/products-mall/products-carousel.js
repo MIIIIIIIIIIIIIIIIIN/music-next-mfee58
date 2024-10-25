@@ -1,68 +1,96 @@
-import React, { useState, useEffect } from 'react';
-import styles from "./prodcuts-carousel.module.css"
+import React, { useState } from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import Items from "./items";
 
-export default function ProductsCarousel({ images, interval = 3000 }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // 自動輪播
-  useEffect(() => {
-    const autoSlide = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
-    }, interval);
-
-    return () => clearInterval(autoSlide); // 清除計時器
-  }, [currentIndex, images.length, interval]);
-
-  // 手動切換到上一張圖片
-  const goToPrevious = () => {
-    setCurrentIndex(
-      currentIndex === 0 ? images.length - 1 : currentIndex - 1
-    );
-  };
-
-  // 手動切換到下一張圖片
-  const goToNext = () => {
-    setCurrentIndex(
-      currentIndex === images.length - 1 ? 0 : currentIndex + 1
-    );
-  };
-
-  // 點擊指示器跳轉到對應的幻燈片
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-  };
+export default function ProductsCarousel() {
+  const products = [
+    {
+      description:
+        "專輯《時光碎片》通過音樂表達時間的流逝與回憶的碎片，融合現代流行與抒情元素，帶領聽眾穿梭在過去與現在的交錯中，感受每一刻的美好與回憶。",
+      headline: "時光碎片",
+      image: "/prodcuts-images-250px/products-9.jpg",
+    },
+    {
+      description:
+        "專輯《時光碎片》通過音樂表達時間的流逝與回憶的碎片，融合現代流行與抒情元素，帶領聽眾穿梭在過去與現在的交錯中，感受每一刻的美好與回憶。",
+      headline: "時光碎片",
+      image: "/prodcuts-images-250px/products-8.jpg",
+    },
+    {
+      description:
+        "專輯《時光碎片》通過音樂表達時間的流逝與回憶的碎片，融合現代流行與抒情元素，帶領聽眾穿梭在過去與現在的交錯中，感受每一刻的美好與回憶。",
+      headline: "時光碎片",
+      image: "/prodcuts-images-250px/products-10.jpg",
+    },
+  ];
 
   return (
-    <div className={styles.carousel}>
-      <div className={styles.carouselInner}>
-        <img
-          src={images[currentIndex]}
-          alt={`Slide ${currentIndex}`}
-          className={styles.carouselImage}
-        />
-      </div>
-
-      <button className={styles.leftArrow} onClick={goToPrevious}>
-        <img src="/image/arrow-left.png" alt="Left Arrow" className={styles.arrowImage} />
-      </button>
-      <button className={styles.rightArrow} onClick={goToNext}>
-        <img src="/image/arrow-right.png" alt="Left Arrow" className={styles.arrowImage} />
-      </button>
-
-      {/* 幻燈片指示器 */}
-      <div className={styles.indicators}>
-        {images.map((_, index) => (
-          <div
-            key={index}
-            className={`${styles.indicator} ${
-              index === currentIndex ? styles.active : ''
-            }`}
-            onClick={() => goToSlide(index)}
-          />
-        ))}
-      </div>
-    </div>
+    <>
+      <Carousel
+        additionalTransfrom={0}
+        arrows
+        autoPlaySpeed={3000}
+        centerMode={false}
+        className=""
+        containerClass="container-with-dots"
+        dotListClass=""
+        draggable
+        focusOnSelect={false}
+        infinite
+        itemClass=""
+        keyBoardControl
+        minimumTouchDrag={80}
+        pauseOnHover
+        renderArrowsWhenDisabled={false}
+        renderButtonGroupOutside={false}
+        renderDotsOutside={false}
+        responsive={{
+          desktop: {
+            breakpoint: {
+              max: 3000,
+              min: 1024,
+            },
+            items: 3,
+            partialVisibilityGutter: 40,
+          },
+          mobile: {
+            breakpoint: {
+              max: 375,
+              min: 0,
+            },
+            items: 1,
+            partialVisibilityGutter: 30,
+          },
+          tablet: {
+            breakpoint: {
+              max: 1024,
+              min: 464,
+            },
+            items: 2,
+            partialVisibilityGutter: 30,
+          },
+        }}
+        rewind={false}
+        rewindWithAnimation={false}
+        rtl={false}
+        shouldResetAutoplay
+        showDots={false}
+        sliderClass=""
+        slidesToSlide={1}
+        swipeable
+      >
+        {products.map((v, i) => {
+          return (
+            <Items
+              key={i}
+              description={v.description}
+              headline={v.headline}
+              image={v.image}
+            />
+          );
+        })}
+      </Carousel>
+    </>
   );
 }
