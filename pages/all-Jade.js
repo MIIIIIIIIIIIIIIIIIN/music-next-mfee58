@@ -1,13 +1,13 @@
 import React from "react";
-import UserIcon from "@/components/Jade/user-icon";
-import Carousel from "@/components/Jade/carousel";
-import FormCheckbox from "@/components/Jade/form-checkbox";
-import FormOption from "@/components/Jade/form-option";
-import FormInput from "@/components/Jade/form-input";
-import PasswordInput from "@/components/Jade/PasswordInput";
-import PlayButton from "@/components/Jade/play-button";
-import PlayButtonS from "@/components/Jade/play-button-s";
-import Mp3Uploader from "@/components/Jade/mp3-uploader";
+import UserIcon from "@/components/public/user-icon";
+import Carousel from "@/components/public/carousel";
+import FormCheckbox from "@/components/public/form-checkbox";
+import FormOption from "@/components/public/form-option";
+import FormInput from "@/components/public/form-input";
+import PasswordInput from "@/components/public/PasswordInput";
+import PlayButton from "@/components/public/play-button";
+import PlayButtonS from "@/components/public/play-button-s";
+import Mp3Uploader from "@/components/public/mp3-uploader";
 
 import styles from "../styles/Home.module.css";
 
