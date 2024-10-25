@@ -11,11 +11,7 @@ export default function home() {
 
        <Category />
        <Footer />
-       <style jsx>
-          {`
-           
-          `}
-       </style>
+   
     </div>
 
   )
