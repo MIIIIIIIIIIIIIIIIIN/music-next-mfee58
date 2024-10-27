@@ -1,13 +1,17 @@
 import React from 'react'
-import Nav from '@/components/nav'
+import NavDesktop from '@/components/nav/desktop'
 import Footer from '@/components/footer'
 import Commodity1 from '@/components/card/ commodity'
 import Category from '@/components/card/category'
+import NavMobile from '@/components/nav/mobile'
+
+
 export default function home() {
   return (
     <div>
-       <Nav />
-       <Commodity1 />
+       <NavDesktop />
+       <NavMobile />
+       {/* <Commodity1 /> */}
 
        <Category />
        <Footer />
