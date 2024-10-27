@@ -42,6 +42,10 @@ export default function Mall() {
             z-index:10;
             left:0;
             top:105px;
+            
+          }
+          ul{
+            display:flex;
           }
           .item{
             border:1px solid #111;
