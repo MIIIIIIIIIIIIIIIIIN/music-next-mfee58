@@ -155,7 +155,7 @@ export default function NavDesktop() {
 
         <div className={styles.iconsContainer}>
           <a href="#">
-            <ProfileIcons property1="XS" /> {/* 小尺寸圖示 */}
+            <ProfileIcons property1="XS"  className={styles.header} /> {/* 小尺寸圖示 */}
           </a>
 
           <div className={styles.icon}>

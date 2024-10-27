@@ -6,6 +6,7 @@
   align-items: center;
   margin: auto;
 
+
 }
 
 
@@ -77,9 +78,14 @@
   justify-content: space-between;
   align-items: center;
 }
+.iconsContainer .header{
+  margin-right: 10px;
+
+}
 .iconsContainer .icon {
   width: 30px;
   height: 30px;
+  margin-right: 10px;
 }
 
 .Mall {

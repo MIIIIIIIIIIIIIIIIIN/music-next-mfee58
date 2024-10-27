@@ -34,6 +34,14 @@ export default function MallList() {
           </li>
         </ul>
       </div>
+      <style jsx>
+        {`
+        li a{
+          display:block;
+          padding:5px
+        }
+        `}
+      </style>
     </>
   );
 }
