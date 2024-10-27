@@ -1,80 +1,7 @@
-.container{
-  width: 80vw;
-  margin: auto;
-}
-a{
-  text-decoration: none;
-}
-ul{
-  list-style: none;
-}
-h1{
-  font-size: 64px;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: normal;
-}
-h2{
-  font-size: 48px;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: normal;
-}
-h3{
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: normal;
-}
-h4{
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: normal;
-}
-h4{
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: normal;
-}
-h5{
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: normal;
-}
-h6{
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: normal;
-}
-p{
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: normal;
-}
-
-
-
-
-
-
 :root {
   --basecolor: rgba(20, 255, 0, 1);
   --black: rgba(0, 0, 0, 1);
-  --cardsssss: -10px 0px 30px 10px rgba(0, 0, 0, 0.25),
-    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  --cardsssss: -10px 0px 30px 10px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   --gray-1: rgba(104, 104, 104, 1);
   --gray-2: rgba(216, 219, 216, 1);
   --little-card: -2px 2px 10px 0px rgba(0, 0, 0, 0.25);
@@ -84,109 +11,132 @@ p{
   --primary-100-font-weight: 400;
   --primary-100-letter-spacing: 0px;
   --primary-100-line-height: normal;
-  --primary-200-font-family: "Noto Sans TC", Helvetica;
-  --primary-200-font-size: 12px;
-  --primary-200-font-style: normal;
-  --primary-200-font-weight: 400;
-  --primary-200-letter-spacing: 0px;
-  --primary-200-line-height: normal;
-  --primary-300-font-family: "Noto Sans TC", Helvetica;
-  --primary-300-font-size: 20px;
-  --primary-300-font-style: normal;
-  --primary-300-font-weight: 400;
-  --primary-300-letter-spacing: 0px;
-  --primary-300-line-height: normal;
-  --primary-400-font-family: "Noto Sans TC", Helvetica;
-  --primary-400-font-size: 24px;
-  --primary-400-font-style: normal;
-  --primary-400-font-weight: 400;
-  --primary-400-letter-spacing: 0px;
-  --primary-400-line-height: normal;
-  --primary-500-font-family: "Noto Sans TC", Helvetica;
-  --primary-500-font-size: 32px;
-  --primary-500-font-style: normal;
-  --primary-500-font-weight: 400;
-  --primary-500-letter-spacing: 0px;
-  --primary-500-line-height: normal;
-  --primary-600-font-family: "Noto Sans TC", Helvetica;
-  --primary-600-font-size: 36px;
-  --primary-600-font-style: normal;
-  --primary-600-font-weight: 400;
-  --primary-600-letter-spacing: 0px;
-  --primary-600-line-height: normal;
-  --primary-700-font-family: "Noto Sans TC", Helvetica;
-  --primary-700-font-size: 48px;
-  --primary-700-font-style: normal;
-  --primary-700-font-weight: 400;
-  --primary-700-letter-spacing: 0px;
-  --primary-700-line-height: normal;
-  --primary-800-font-family: "Noto Sans TC", Helvetica;
-  --primary-800-font-size: 64px;
-  --primary-800-font-style: normal;
-  --primary-800-font-weight: 400;
-  --primary-800-letter-spacing: 0px;
-  --primary-800-line-height: normal;
-  --primary-p-font-family: "Noto Sans TC", Helvetica;
+
   --primary-p-font-size: 16px;
   --primary-p-font-style: normal;
   --primary-p-font-weight: 400;
   --primary-p-letter-spacing: 0px;
   --primary-p-line-height: normal;
-  --secondary-100-font-family: "Noto Sans TC", Helvetica;
-  --secondary-100-font-size: 10px;
-  --secondary-100-font-style: normal;
-  --secondary-100-font-weight: 700;
-  --secondary-100-letter-spacing: 0px;
-  --secondary-100-line-height: normal;
-  --secondary-200-font-family: "Noto Sans TC", Helvetica;
-  --secondary-200-font-size: 12px;
-  --secondary-200-font-style: normal;
-  --secondary-200-font-weight: 700;
-  --secondary-200-letter-spacing: 0px;
-  --secondary-200-line-height: normal;
-  --secondary-300-font-family: "Noto Sans TC", Helvetica;
-  --secondary-300-font-size: 20px;
-  --secondary-300-font-style: normal;
-  --secondary-300-font-weight: 700;
-  --secondary-300-letter-spacing: 0px;
-  --secondary-300-line-height: normal;
-  --secondary-400-font-family: "Noto Sans TC", Helvetica;
-  --secondary-400-font-size: 24px;
-  --secondary-400-font-style: normal;
-  --secondary-400-font-weight: 700;
-  --secondary-400-letter-spacing: 0px;
-  --secondary-400-line-height: normal;
-  --secondary-500-font-family: "Noto Sans TC", Helvetica;
-  --secondary-500-font-size: 32px;
-  --secondary-500-font-style: normal;
-  --secondary-500-font-weight: 700;
-  --secondary-500-letter-spacing: 0px;
-  --secondary-500-line-height: normal;
-  --secondary-600-font-family: "Noto Sans TC", Helvetica;
-  --secondary-600-font-size: 36px;
-  --secondary-600-font-style: normal;
-  --secondary-600-font-weight: 700;
-  --secondary-600-letter-spacing: 0px;
-  --secondary-600-line-height: normal;
-  --secondary-700-font-family: "Noto Sans TC", Helvetica;
-  --secondary-700-font-size: 48px;
-  --secondary-700-font-style: normal;
-  --secondary-700-font-weight: 700;
-  --secondary-700-letter-spacing: 0px;
-  --secondary-700-line-height: normal;
-  --secondary-800-font-family: "Noto Sans TC", Helvetica;
-  --secondary-800-font-size: 64px;
-  --secondary-800-font-style: normal;
-  --secondary-800-font-weight: 700;
-  --secondary-800-letter-spacing: 0px;
-  --secondary-800-line-height: normal;
-  --secondary-p-font-family: "Noto Sans TC", Helvetica;
-  --secondary-p-font-size: 16px;
-  --secondary-p-font-style: normal;
-  --secondary-p-font-weight: 700;
-  --secondary-p-letter-spacing: 0px;
-  --secondary-p-line-height: normal;
-  --subcolor: rgba(255, 225, 0, 1);
-  --white: rgba(255, 255, 255, 1);
-}
+  /* 省略其他變數 */
 
+
+    --basecolor: rgba(20, 255, 0, 1);
+    --black: rgba(0, 0, 0, 1);
+    --cardsssss: -10px 0px 30px 10px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px
+        rgba(0, 0, 0, 0.25);
+    --gray-1: rgba(104, 104, 104, 1);
+    --gray-2: rgba(216, 219, 216, 1);
+    --little-card: -2px 2px 10px 0px rgba(0, 0, 0, 0.25);
+    --primary-100-font-family: "Noto Sans TC", Helvetica;
+    --primary-100-font-size: 10px;
+    --primary-100-font-style: normal;
+    --primary-100-font-weight: 400;
+    --primary-100-letter-spacing: 0px;
+    --primary-100-line-height: normal;
+    --primary-200-font-family: "Noto Sans TC", Helvetica;
+    --primary-200-font-size: 12px;
+    --primary-200-font-style: normal;
+    --primary-200-font-weight: 400;
+    --primary-200-letter-spacing: 0px;
+    --primary-200-line-height: normal;
+    --primary-300-font-family: "Noto Sans TC", Helvetica;
+    --primary-300-font-size: 20px;
+    --primary-300-font-style: normal;
+    --primary-300-font-weight: 400;
+    --primary-300-letter-spacing: 0px;
+    --primary-300-line-height: normal;
+    --primary-400-font-family: "Noto Sans TC", Helvetica;
+    --primary-400-font-size: 24px;
+    --primary-400-font-style: normal;
+    --primary-400-font-weight: 400;
+    --primary-400-letter-spacing: 0px;
+    --primary-400-line-height: normal;
+    --primary-500-font-family: "Noto Sans TC", Helvetica;
+    --primary-500-font-size: 32px;
+    --primary-500-font-style: normal;
+    --primary-500-font-weight: 400;
+    --primary-500-letter-spacing: 0px;
+    --primary-500-line-height: normal;
+    --primary-600-font-family: "Noto Sans TC", Helvetica;
+    --primary-600-font-size: 36px;
+    --primary-600-font-style: normal;
+    --primary-600-font-weight: 400;
+    --primary-600-letter-spacing: 0px;
+    --primary-600-line-height: normal;
+    --primary-700-font-family: "Noto Sans TC", Helvetica;
+    --primary-700-font-size: 48px;
+    --primary-700-font-style: normal;
+    --primary-700-font-weight: 400;
+    --primary-700-letter-spacing: 0px;
+    --primary-700-line-height: normal;
+    --primary-800-font-family: "Noto Sans TC", Helvetica;
+    --primary-800-font-size: 64px;
+    --primary-800-font-style: normal;
+    --primary-800-font-weight: 400;
+    --primary-800-letter-spacing: 0px;
+    --primary-800-line-height: normal;
+    --primary-p-font-family: "Noto Sans TC", Helvetica;
+    --primary-p-font-size: 16px;
+    --primary-p-font-style: normal;
+    --primary-p-font-weight: 400;
+    --primary-p-letter-spacing: 0px;
+    --primary-p-line-height: normal;
+    --secondary-100-font-family: "Noto Sans TC", Helvetica;
+    --secondary-100-font-size: 10px;
+    --secondary-100-font-style: normal;
+    --secondary-100-font-weight: 700;
+    --secondary-100-letter-spacing: 0px;
+    --secondary-100-line-height: normal;
+    --secondary-200-font-family: "Noto Sans TC", Helvetica;
+    --secondary-200-font-size: 12px;
+    --secondary-200-font-style: normal;
+    --secondary-200-font-weight: 700;
+    --secondary-200-letter-spacing: 0px;
+    --secondary-200-line-height: normal;
+    --secondary-300-font-family: "Noto Sans TC", Helvetica;
+    --secondary-300-font-size: 20px;
+    --secondary-300-font-style: normal;
+    --secondary-300-font-weight: 700;
+    --secondary-300-letter-spacing: 0px;
+    --secondary-300-line-height: normal;
+    --secondary-400-font-family: "Noto Sans TC", Helvetica;
+    --secondary-400-font-size: 24px;
+    --secondary-400-font-style: normal;
+    --secondary-400-font-weight: 700;
+    --secondary-400-letter-spacing: 0px;
+    --secondary-400-line-height: normal;
+    --secondary-500-font-family: "Noto Sans TC", Helvetica;
+    --secondary-500-font-size: 32px;
+    --secondary-500-font-style: normal;
+    --secondary-500-font-weight: 700;
+    --secondary-500-letter-spacing: 0px;
+    --secondary-500-line-height: normal;
+    --secondary-600-font-family: "Noto Sans TC", Helvetica;
+    --secondary-600-font-size: 36px;
+    --secondary-600-font-style: normal;
+    --secondary-600-font-weight: 700;
+    --secondary-600-letter-spacing: 0px;
+    --secondary-600-line-height: normal;
+    --secondary-700-font-family: "Noto Sans TC", Helvetica;
+    --secondary-700-font-size: 48px;
+    --secondary-700-font-style: normal;
+    --secondary-700-font-weight: 700;
+    --secondary-700-letter-spacing: 0px;
+    --secondary-700-line-height: normal;
+    --secondary-800-font-family: "Noto Sans TC", Helvetica;
+    --secondary-800-font-size: 64px;
+    --secondary-800-font-style: normal;
+    --secondary-800-font-weight: 700;
+    --secondary-800-letter-spacing: 0px;
+    --secondary-800-line-height: normal;
+    --secondary-p-font-family: "Noto Sans TC", Helvetica;
+    --secondary-p-font-size: 16px;
+    --secondary-p-font-style: normal;
+    --secondary-p-font-weight: 700;
+    --secondary-p-letter-spacing: 0px;
+    --secondary-p-line-height: normal;
+    --subcolor: rgba(255, 225, 0, 1);
+    --white: rgba(255, 255, 255, 1);
+
+
+}
