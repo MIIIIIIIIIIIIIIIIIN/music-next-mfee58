@@ -1,6 +1,7 @@
 import React from 'react'
-import ProductsCarousel from '@/components/George/products-mall/products-carousel'
+import ProductsLatestLaunched from '@/components/George/products-mall/products-latest-launched'
 import Footer from '@/components/public/footer';
+import ProductsRecommendation from '@/components/George/products-mall/products-recommendation';
 
 const images = [
   "/George/products (1).jpg",
@@ -13,8 +14,9 @@ const images = [
 export default function ProductsPage() {
   return (
     <>
-    <ProductsCarousel images={images} interval={2500}/>
-    {/* <Footer /> */}
+    <ProductsRecommendation />
+    <ProductsLatestLaunched />
+    <Footer />
     </>
   )
 }
