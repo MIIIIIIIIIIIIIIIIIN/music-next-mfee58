@@ -1,57 +1,79 @@
 import styles from "./member-info.module.css";
 import { useRouter } from "next/router";
-import UserIcon from "../public/user-icon";
+import UserIcon from "../../public/user-icon";
+import FormOption from "../form-option";
+import FormInput from "../form-input";
+import ButtonToggle from "../button-show";
 
-const MemberInfo = () => {
+const MemberInfo2 = () => {
   const router = useRouter();
 
   const handleClick = () => {
     router.push("/");
   };
 
-  // const handleClick = () => {
-  //   console.log("HandleClick 被觸發");
-  //   router.push("http://localhost:3000/");
-  // };
   return (
-    <div className={styles["member-S1"]}>
-      <div className={styles.section1}>
-        <div className={styles['info-nav']}>
-          <b className={styles['info-title']}>會員中心</b>
+    <div className={styles["member-info"]}>
+      <div className={styles.container}>
+        <div className={styles["info-nav"]}>
+          <div className={styles["nav-title"]}>會員中心</div>
           <div className={styles["nav-body"]}>
-            {/* <div className={styles.p}>
-              <div className={styles.hover}>
-                <b className={styles.b}>基本資料</b>
+            <div className={styles["body-text"]}>基本資料</div>
+            <div className={styles["body-text"]}>帳號設定</div>
+            <div className={styles["body-text"]}>變更密碼</div>
+            <div className={styles["body-text"]}>訂單查詢</div>
+            <div className={styles["body-text"]}>收藏名單</div>
+            <div className={styles["body-text"]}>帳號刪除</div>
+          </div>
+        </div>
+        <div className={styles["info-main"]}>
+          <div className={styles["main-title"]}>個人頭像</div>
+          <div className={styles["main-body"]}>
+            <div className={styles["body-icon"]}>
+              <UserIcon />
+              <div>
+                上傳頭像 建議尺寸：360x360px 以上，圖片檔案大小不可超過 2MB
               </div>
-            </div> */}
-            <div className={styles["info-nav-title"]}>
-              <div className={styles["nav-text"]}>基本資料</div>
             </div>
-            <div className={styles["info-nav-title"]}>
-              <div className={styles["nav-text"]}>帳號設定</div>
-            </div>
-            <div className={styles["info-nav-title"]}>
-              <div className={styles["nav-text"]}>變更密碼</div>
-            </div>
-            <div className={styles["info-nav-title"]}>
-              <div className={styles["nav-text"]}>訂單查詢</div>
-            </div>
-            <div className={styles["info-nav-title"]}>
-              <div className={styles["nav-text"]}>收藏名單</div>
-            </div>
-            <div className={styles["info-nav-title"]}>
-              <div className={styles["nav-text"]}>封鎖名單</div>
-            </div>
-            <div className={styles["info-nav-title"]}>
-              <div className={styles["nav-text"]}>帳號刪除</div>
+
+            <div className={styles["body-input"]}>
+              <div className={styles["input-left"]}>
+                {/* 左側內容 */}
+
+                <div className={styles["left-title"]}>暱稱(顯示名稱)</div>
+
+                <div className={styles["left-text"]}>
+                  <FormInput />
+                </div>
+
+                <div className={styles["left-title"]}>暱稱(顯示名稱)</div>
+
+                <div className={styles["left-text"]}>
+                  <FormInput />
+                </div>
+              </div>
+
+              <div className={styles["input-right"]}>
+                {/* 右側內容 */}
+
+                <div className={styles["right-title"]}>性別</div>
+                <div className={styles["right-text"]}>
+                  <FormOption />
+                  <ButtonToggle className={styles["right-text2"]} />
+                </div>
+                <div className={styles["right-title"]}>性別</div>
+                <div className={styles["right-text"]}>
+                  <FormOption />
+                  <ButtonToggle />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className={styles.right}>
+        {/* <div className={styles["info-main"]}>
           <div className={styles.top}>
             <div className={styles.s04}>
-              <b className={styles['info-title']}>{`個人頭像 `}</b>
-              {/* <img className={styles.s04Child} alt="" src="Frame 34.png" /> */}
+              <b className={styles["nav-title"]}>{`個人頭像 `}</b>
               <UserIcon />
               <div className={styles.x360px2mbContainer}>
                 <p className={styles.x360px2mb}>上傳頭像</p>
@@ -114,10 +136,10 @@ const MemberInfo = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
 };
 
-export default MemberInfo;
+export default MemberInfo2;

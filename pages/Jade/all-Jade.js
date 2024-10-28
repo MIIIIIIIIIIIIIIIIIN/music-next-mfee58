@@ -9,7 +9,7 @@ import PlayButton from "@/components/public/play-button";
 import PlayButtonS from "@/components/public/play-button-s";
 import Mp3Uploader from "@/components/public/mp3-uploader";
 
-import styles from "../styles/Home.module.css";
+// import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const goToHome = () => {
