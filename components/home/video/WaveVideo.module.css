@@ -1,0 +1,17 @@
+.videoContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.video {
+  /* position: absolute; */
+  /* top: -10px; */
+  width: 100%;
+  height: auto;
+  /* 使用波浪遮罩圖片 */
+  mask-image: url('/video/Exclude.png'); /* 替換為你的遮罩圖片路徑 */
+  -webkit-mask-image: url('/video/Exclude.png');
+  /* mask-size:contain;  */
+  mask-repeat: no-repeat;
+}

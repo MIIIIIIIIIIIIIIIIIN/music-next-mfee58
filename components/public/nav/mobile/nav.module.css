@@ -2,8 +2,12 @@
 
 .container {
   padding: 25px 0;
-  width: 80vw;
+  width: 80%;
   display: flex;
+  
+  /* position: fixed;
+  top:0;
+  z-index: 2; */
   margin: auto;
   justify-content: space-between;
   align-items: center;

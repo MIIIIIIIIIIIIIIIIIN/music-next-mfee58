@@ -4,8 +4,9 @@
   width: 80vw;
   height: 793px; /* 幻燈片高度 + 上下留白 */
   margin: auto;
-  padding-top: 25px; /* 上方留白 */
-  padding-bottom: 25px; /* 下方留白 */
+  /* padding-top: 25px;  */
+  padding-bottom: 100px;
+  margin-bottom: 60px; 
   overflow: hidden;
 }
 
@@ -15,6 +16,7 @@
   justify-content: center;
   height: 743px; /* 確保圖片本身的高度是 743px */
   width: 100%;
+  padding-bottom: 40px;
 }
 
 /* 圖片樣式 */
