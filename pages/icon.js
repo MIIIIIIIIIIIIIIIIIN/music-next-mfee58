@@ -1,6 +1,6 @@
-import HideIcon from "@/components/icons/hide_icon.js";
-import ShareIcon from "@/components/icons/share_icon.js";
-import CloseIcon from "@/components/icons/close_icon.js";
+import HideIcon from "@/components/public/icons/hide_icon.js";
+import ShareIcon from "@/components/public/icons/share_icon.js";
+import CloseIcon from "@/components/public/icons/close_icon.js";
 
 const IconPage = () => (
   <div>
