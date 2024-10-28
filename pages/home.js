@@ -10,6 +10,9 @@ import Carousel from '@/components/public/Carousel'
 
 export default function home() {
   const [isMobile, setIsMobile] = useState(false);
+  const images = [ "/image/001album.jpg", "/image/002album.jpg",
+    "/image/003album.jpg", "/image/004album.jpg", "/image/005album.jpg", ];
+    
   // const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
@@ -30,7 +33,7 @@ export default function home() {
     <div>
        {isMobile ? <NavMobile /> : <NavDesktop />}
 
-       <Carousel />
+       <Carousel images={images} interval={2000} />
       
        {/* <Category /> */}
        {isMobile ? <FooterMobile /> : < FooterDeskTop/>}
