@@ -138,6 +138,7 @@ export default function NavMobile() {
                 } 
                 else {
                   setDisplayFundraising(false);
+                  setDisplayMember(false);
                   setDisplayForum(false);
                   setDisplayLive(false);
                   setActiveIndex(0);
