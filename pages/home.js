@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import React,{useState, useEffect} from 'react'
-import NavDesktop from '@/components/public/nav/desktop'
-import FooterDeskTop from '@/components/footer/desktop'
-import FooterMobile from '@/components/footer/mobile'
-import Commodity1 from '@/components/card/ commodity'
-import Category from '@/components/card/category'
-import NavMobile from '@/components/public/nav/mobile'
-// import Carousel from '@/components/public/carousel'
-import Daily from '@/components/home/daily'
-
-=======
 import React, { useState, useEffect } from "react";
 import NavDesktop from "@/components/nav/desktop";
 import FooterDeskTop from "@/components/footer/desktop";
@@ -18,10 +6,9 @@ import Commodity1 from "@/components/card/ commodity";
 import Category from "@/components/card/category";
 import NavMobile from "@/components/nav/mobile";
 import Title from "@/components/home/title";
-import Carousel from "@/components/public/Carousel";
+import Carousel from "@/components/public/carousel";
 import Daily from "@/components/home/daily";
 import WaveVideo from "@/components/home/video";
->>>>>>> Liam
 
 export default function home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -55,13 +42,7 @@ export default function home() {
   }, []);
   return (
     <div>
-<<<<<<< HEAD
-       {isMobile ? <NavMobile /> : <NavDesktop />}
-
-       {/* <Carousel images={images} interval={2000} /> */}
-=======
       { isMobile ? <NavMobile />: isNavVisible? <NavDesktop />:isNavVisible}
->>>>>>> Liam
       
       <WaveVideo />
       <Title />
