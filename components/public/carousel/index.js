@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import styles from './carousel.module.css'; // 引入 CSS 模組
+import React, { useState, useEffect } from "react";
+import styles from "./carousel.module.css"; // 引入 CSS 模組
 
 const Carousel = ({ images, interval = 3000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,16 +17,12 @@ const Carousel = ({ images, interval = 3000 }) => {
 
   // 手動切換到上一張圖片
   const goToPrevious = () => {
-    setCurrentIndex(
-      currentIndex === 0 ? images.length - 1 : currentIndex - 1
-    );
+    setCurrentIndex(currentIndex === 0 ? images.length - 1 : currentIndex - 1);
   };
 
   // 手動切換到下一張圖片
   const goToNext = () => {
-    setCurrentIndex(
-      currentIndex === images.length - 1 ? 0 : currentIndex + 1
-    );
+    setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1);
   };
 
   // 點擊指示器跳轉到對應的幻燈片
@@ -44,21 +40,35 @@ const Carousel = ({ images, interval = 3000 }) => {
         />
       </div>
 
-      
       <button className={styles.leftArrow} onClick={goToPrevious}>
-<<<<<<<< HEAD:components/public/carousel/index.js
-  <img src="/image/img-Jade/arrow-left.png" alt="Left Arrow" className={styles.arrowImage} />
-</button>
-<button className={styles.rightArrow} onClick={goToNext}>
-<img src="/image/img-Jade/arrow-right.png" alt="Left Arrow" className={styles.arrowImage} />
-========
-  <img src="/arrow-left.png" alt="Left Arrow" className={styles.arrowImage} />
-</button>
-<button className={styles.rightArrow} onClick={goToNext}>
-<img src="/arrow-right.png" alt="Left Arrow" className={styles.arrowImage} />
->>>>>>>> Liam:components/public/Carousel/index.js
-
-</button>
+        {/* <<<<<<<< HEAD:components/public/carousel/index.js */}
+        <img
+          src="/image/img-Jade/arrow-left.png"
+          alt="Left Arrow"
+          className={styles.arrowImage}
+        />
+      </button>
+      <button className={styles.rightArrow} onClick={goToNext}>
+        <img
+          src="/image/img-Jade/arrow-right.png"
+          alt="Left Arrow"
+          className={styles.arrowImage}
+        />
+        {/* ========
+        <img
+          src="/arrow-left.png"
+          alt="Left Arrow"
+          className={styles.arrowImage}
+        /> */}
+      </button>
+      <button className={styles.rightArrow} onClick={goToNext}>
+        {/* <img
+          src="/arrow-right.png"
+          alt="Left Arrow"
+          className={styles.arrowImage}
+        /> */}
+        {/* >>>>>>>> Liam:components/public/Carousel/index.js */}
+      </button>
 
       {/* 幻燈片指示器 */}
       <div className={styles.indicators}>
@@ -66,7 +76,7 @@ const Carousel = ({ images, interval = 3000 }) => {
           <div
             key={index}
             className={`${styles.indicator} ${
-              index === currentIndex ? styles.active : ''
+              index === currentIndex ? styles.active : ""
             }`}
             onClick={() => goToSlide(index)}
           />
