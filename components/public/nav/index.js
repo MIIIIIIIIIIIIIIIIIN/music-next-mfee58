@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { FiSearch } from "react-icons/fi";
 import { CiBellOn } from "react-icons/ci";
-import { ProfileIcons } from '../profileIcons/ProfileIcons';
+import { ProfileIcons } from "../../profileIcons/ProfileIcons";
 import Mall from './checklist/mall';
 import Fundraising from './checklist/fundraising';
 import Forum from './checklist/forum';

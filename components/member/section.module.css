@@ -1,8 +1,189 @@
 .b {
+  position: relative;
+}
+.guavavibe {
+  position: relative;
+  font-size: 20px;
+  color: #14ff00;
+  text-align: center;
+  margin-top: -10px;
+}
+.logoVertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.frameChild {
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: contain;
+}
+.vectorWrapper {
+  flex: 1;
+  background-color: #fff;
+  border-top: 1px solid #000;
+  border-right: 1px solid #000;
+  border-left: 1px solid #000;
+  box-sizing: border-box;
+  height: 26px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 7px;
+}
+.menuItemInner {
+  align-self: stretch;
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.wrapper {
+  background-color: #fff;
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+}
+.menuItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.menuItemParent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px;
+  font-size: 24px;
+}
+.unionIcon {
+  width: 25.3px;
+  position: relative;
+  height: 25.3px;
+}
+.search {
+  height: 52px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 14px 10px;
+  box-sizing: border-box;
+}
+.searchWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px 8px;
+}
+.headershotChild {
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+  border-radius: 200px;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: cover;
+}
+.headershot {
+  width: 60px;
+  background-color: #fff;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.bellIcon {
+  width: 46px;
+  position: relative;
+  height: 46px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.bellWrapper {
+  width: 68px;
+  height: 102px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.shoppingCartIcon {
+  width: 40px;
+  position: relative;
+  height: 40px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.shoppingCartWrapper {
+  width: 63px;
+  height: 102px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.frameParent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 28px;
+}
+.logoVerticalParent {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1280px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.continerInner {
+  width: 1280px;
+  position: relative;
+  height: 102px;
+}
+.continer {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0px;
+}
+.desktopNavbarIndex {
+  align-self: stretch;
+  background-color: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px 130px;
+}
+.b1 {
   align-self: stretch;
   position: relative;
 }
-.wrapper {
+.wrapper2 {
   position: absolute;
   top: calc(50% - 24.5px);
   left: calc(50% - 80px);
@@ -21,7 +202,7 @@
   height: 35px;
   color: #fff;
 }
-.div {
+.div4 {
   position: absolute;
   top: 0%;
   left: 8.33%;
@@ -31,7 +212,7 @@
   position: relative;
   height: 35px;
 }
-.div3 {
+.div7 {
   position: absolute;
   top: 0%;
   left: 18.75%;
@@ -88,15 +269,12 @@
   flex-wrap: wrap;
   align-content: flex-start;
 }
-.div7 {
+.div11 {
   align-self: stretch;
   position: relative;
   display: inline-block;
   height: 23px;
   flex-shrink: 0;
-}
-.guavavibe {
-  position: relative;
 }
 .guavavibeWrapper {
   align-self: stretch;
@@ -158,12 +336,12 @@
   justify-content: flex-start;
   gap: 50px;
 }
-.div10 {
+.div14 {
   align-self: stretch;
   flex: 1;
   position: relative;
 }
-.div11 {
+.div15 {
   flex: 1;
   position: relative;
 }
@@ -261,8 +439,7 @@
   font-size: 32px;
 }
 .section1 {
-  width: 100%;
-  position: relative;
+  align-self: stretch;
   background: linear-gradient(180deg, #fff 65%, #84ff79 90%, #14ff00);
   height: 736px;
   display: flex;
@@ -274,6 +451,16 @@
   gap: 50px;
   text-align: center;
   font-size: 24px;
+}
+.desktopNavbarIndexParent {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 36px;
   color: #000;
   font-family: 'Noto Sans TC';
 }
