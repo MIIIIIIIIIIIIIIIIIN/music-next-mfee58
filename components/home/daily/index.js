@@ -1,4 +1,4 @@
-import styles from "./Frame.module.css";
+import styles from "./daily.module.css";
 
 const Daily = () => {
   return (
