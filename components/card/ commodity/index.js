@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@/components/public/buttons'
-import Heart from '@/components/hearts'
+import Heart from '@/components/public/hearts'
 import WhiteWBtns from '@/components/public/white_wbtns'
 
 export default function Commodity1() {
