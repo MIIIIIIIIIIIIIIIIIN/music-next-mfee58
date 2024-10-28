@@ -1,11 +1,11 @@
 import React,{useState, useEffect} from 'react'
-import NavDesktop from '@/components/nav/desktop'
+import NavDesktop from '@/components/public/nav/desktop'
 import FooterDeskTop from '@/components/footer/desktop'
 import FooterMobile from '@/components/footer/mobile'
 import Commodity1 from '@/components/card/ commodity'
 import Category from '@/components/card/category'
-import NavMobile from '@/components/nav/mobile'
-import Carousel from '@/components/public/Carousel'
+import NavMobile from '@/components/public/nav/mobile'
+// import Carousel from '@/components/public/carousel'
 import Daily from '@/components/home/daily'
 
 
@@ -34,7 +34,7 @@ export default function home() {
     <div>
        {isMobile ? <NavMobile /> : <NavDesktop />}
 
-       <Carousel images={images} interval={2000} />
+       {/* <Carousel images={images} interval={2000} /> */}
       
        <Commodity1 />
        <Daily /> 
