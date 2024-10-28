@@ -63,6 +63,12 @@
   justify-content: center;
   align-items: center;
 }
+.containerbottom span{
+  display: inline-block;
+  justify-content: center;
+  
+  align-items: center;
+}
 
 .iconsContainer {
   display: flex;

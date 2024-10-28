@@ -2,9 +2,13 @@ import React, { useRef, useState, useEffect } from "react";
 import styles from "./nav.module.css";
 import { FaBars } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
+import { FaAngleRight } from "react-icons/fa6";
+import { FiCornerRightDown } from "react-icons/fi";
 
 import { ProfileIcons } from "../../profileIcons/ProfileIcons";
 import MallList from "./system-list/mall";
+import FundraisingList from "./system-list/fundraising";
+import MemberList from "./system-list/member";
 import Logo from "../../logo";
 
 export default function NavMobile() {
@@ -15,6 +19,8 @@ export default function NavMobile() {
   const [displayMall, setDisplayMall] = useState(false);
   const [displayFundraising, setDisplayFundraising] = useState(false);
   const [displayForum, setDisplayForum] = useState(false);
+  const [displayLive, setDisplayLive] = useState(false);
+  const [displayMember, setDisplayMember] = useState(false);
 
   const [activeIndex, setActiveIndex] = useState(null);
   let hoverTimeout = useRef(null);
@@ -102,10 +108,38 @@ export default function NavMobile() {
             </li>
             <li
               onClick={() => {
+                setDisplayMember(!displayMember);
+                if (activeIndex === 4) {
+                  setActiveIndex(null);
+                } 
+                else {
+                  setDisplayMall(false);
+                  setDisplayFundraising(false);
+                  setDisplayForum(false);
+                  setDisplayLive(false);
+                  setActiveIndex(4);
+                }
+              }}
+              style={{
+                backgroundColor: activeIndex === 4 ? "#14ff00" : "#fff",
+              }}
+            >
+              <a href="#">
+                <h6>會員<span>{displayMember?<FiCornerRightDown />:<FaAngleRight />} </span></h6>
+              </a>
+             
+            </li>
+            {displayMember && <MemberList />}
+            <li
+              onClick={() => {
                 setDisplayMall(!displayMall);
                 if (activeIndex === 0) {
                   setActiveIndex(null);
-                } else {
+                } 
+                else {
+                  setDisplayFundraising(false);
+                  setDisplayForum(false);
+                  setDisplayLive(false);
                   setActiveIndex(0);
                 }
               }}
@@ -114,15 +148,79 @@ export default function NavMobile() {
               }}
             >
               <a href="#">
-                <h6>商城</h6>
+                <h6>商城<span>{displayMall?<FiCornerRightDown />:<FaAngleRight />} </span></h6>
               </a>
+             
             </li>
             {displayMall && <MallList />}
-            <li>
+            <li
+                onClick={() => {
+                  setDisplayFundraising(!displayFundraising);
+                  if (activeIndex === 1) {
+                    setActiveIndex(null);
+                  } else {
+                    setDisplayMall(false);
+                    setDisplayForum(false);
+                    setDisplayLive(false);
+                    setDisplayMember(false);
+                    setActiveIndex(1);
+                  }
+                }}
+                style={{
+                  backgroundColor: activeIndex === 1 ? "#14ff00" : "#fff",
+                }}
+            
+            >
               <a href="#">
-                <h6>募資</h6>
+                <h6>募資<span>{displayFundraising?<FiCornerRightDown />:<FaAngleRight />} </span></h6>
               </a>
             </li>
+            {displayFundraising && <FundraisingList />}
+            <li
+                onClick={() => {
+                  setDisplayForum(!displayForum);
+                  if (activeIndex === 2) {
+                    setActiveIndex(null);
+                  } else {
+                    setDisplayMall(false);
+                    setDisplayFundraising(false);
+                    setDisplayLive(false);
+                    setDisplayMember(false);
+                    setActiveIndex(2);
+                  }
+                }}
+                style={{
+                  backgroundColor: activeIndex === 2 ? "#14ff00" : "#fff",
+                }}
+            
+            >
+              <a href="#">
+                <h6>論壇<span>{displayForum?<FiCornerRightDown />:<FaAngleRight />} </span></h6>
+              </a>
+            </li>
+            <li
+                onClick={() => {
+                  setDisplayLive(!displayLive);
+                  if (activeIndex === 3) {
+                    setActiveIndex(null);
+                  } else {
+                    setDisplayMall(false);
+                    setDisplayFundraising(false);
+                    setDisplayForum(false);
+                    setDisplayMember(false);
+                    setActiveIndex(3);
+                  }
+                }}
+                style={{
+                  backgroundColor: activeIndex === 3 ? "#14ff00" : "#fff",
+                }}
+            
+            >
+              <a href="#">
+                <h6>直播<span>{displayLive?<FiCornerRightDown />:<FaAngleRight />} </span></h6>
+              </a>
+            </li>
+
           </ul>
         </div>
       </div>

@@ -1,4 +1,4 @@
-export default function MallList() {
+export default function FundraisingList() {
   return (
     <>
       <div className="container display">

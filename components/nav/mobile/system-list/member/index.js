@@ -1,4 +1,4 @@
-export default function MallList() {
+export default function MemberList() {
   return (
     <>
       <div className="container display">
@@ -7,28 +7,42 @@ export default function MallList() {
           <li className="item">
             <a href="#">
             <div className="info">
-              <p>Pop</p>
+              <p>基本資料</p>
             </div>
             </a>
           </li>
           <li className="item">
             <a href="#">
             <div className="info">
-              <p>Rock</p>
+              <p>帳號設定</p>
             </div>
             </a>
           </li>
           <li className="item">
             <a href="#">
             <div className="info">
-              <p>Blue</p>
+              <p>變更密碼</p>
             </div>
             </a>
           </li>
           <li className="item">
             <a href="#">
             <div className="info">
-              <p>Soul</p>
+              <p>訂單查詢</p>
+            </div>
+            </a>
+          </li>
+          <li className="item">
+            <a href="#">
+            <div className="info">
+              <p>收藏名單</p>
+            </div>
+            </a>
+          </li>
+          <li className="item">
+            <a href="#">
+            <div className="info">
+              <p>帳號刪除</p>
             </div>
             </a>
           </li>
@@ -36,7 +50,7 @@ export default function MallList() {
       </div>
       <style jsx>
         {`
-          li{
+        li{
           background-color:#333;
           border-bottom: .5px solid #fff
 
