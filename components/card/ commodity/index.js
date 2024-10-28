@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '@/components/buttons'
 import Heart from '@/components/hearts'
-import WhiteWBtns from '@/components/white_wbtns'
+import WhiteWBtns from '@/components/public/white_wbtns'
 
 export default function Commodity1() {
   return (

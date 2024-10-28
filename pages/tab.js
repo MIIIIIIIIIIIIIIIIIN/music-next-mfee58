@@ -1,6 +1,6 @@
 // pages/tab.js
 import React from "react";
-import Tab from "@/components/tabs";
+import Tab from "@/components/public/tabs";
 
 const TabPage = () => {
   const handleTabClick = (tabName) => {
