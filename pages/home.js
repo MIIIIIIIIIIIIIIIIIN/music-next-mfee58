@@ -26,6 +26,7 @@ export default function home() {
 
     // 添加 resize 事件監聽器
     window.addEventListener('resize', handleResize);
+    <p></p>
 
     // 移除事件監聽器以避免內存洩漏
     return () => window.removeEventListener('resize', handleResize);
