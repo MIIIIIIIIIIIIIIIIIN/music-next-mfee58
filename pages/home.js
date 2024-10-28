@@ -5,6 +5,7 @@ import FooterMobile from '@/components/footer/mobile'
 import Commodity1 from '@/components/card/ commodity'
 import Category from '@/components/card/category'
 import NavMobile from '@/components/nav/mobile'
+import Carousel from '@/components/public/Carousel'
 
 
 export default function home() {
@@ -28,6 +29,8 @@ export default function home() {
   return (
     <div>
        {isMobile ? <NavMobile /> : <NavDesktop />}
+
+       <Carousel />
       
        {/* <Category /> */}
        {isMobile ? <FooterMobile /> : < FooterDeskTop/>}

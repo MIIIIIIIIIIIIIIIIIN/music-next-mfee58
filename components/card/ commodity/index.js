@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '@/components/buttons'
+import Button from '@/components/public/buttons'
 import Heart from '@/components/hearts'
 import WhiteWBtns from '@/components/public/white_wbtns'
 
