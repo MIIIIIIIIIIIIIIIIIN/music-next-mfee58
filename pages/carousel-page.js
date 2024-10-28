@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
 import Carousel from "@/components/public/carousel"; // 確保路徑正確
-=======
-import Carousel from "../components/public/Carousel"; // 確保路徑正確
->>>>>>> Liam
 
 const images = [
   "/prodcuts-images-250px/products-1.jpg",
