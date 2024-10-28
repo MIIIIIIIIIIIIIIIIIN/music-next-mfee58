@@ -34,27 +34,32 @@ export default function Fundraising() {
       </div>
       <style jsx>
         {`
-          {/* .display{
+                {/* .display{
                     display:block
           } */}
           .container{
             position:absolute;
             z-index:10;
-            left:85px;
-            top:105px;
+            left:0;
+            top:100px;
+            
+          }
+          ul{
+            display:flex;
           }
           .item{
             border:1px solid #111;
             display:inline-block;
             position:relative;
-            padding:0 5px;
-            background-color:white;
+            padding:10px 5px;
+            background-color:#fff
             
           }
           .item:hover {
           background-color:#14ff00;
           cursor:pointer
           }
+          
           .triangle {
            
             width: 0;
@@ -64,11 +69,10 @@ export default function Fundraising() {
             border-color: transparent transparent black transparent;
             position:absolute;
             top:-10px;
-            left:50px
+            left:10px
           
 
           }
-          
         `}
       </style>
 
