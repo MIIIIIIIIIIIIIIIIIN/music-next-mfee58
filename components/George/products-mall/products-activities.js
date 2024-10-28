@@ -147,7 +147,7 @@ export default function ProductsActivities() {
 
   return (
     <>
-      <div className="container">
+      <div className={style.container}>
         <div className={style["pics-box"]}>
           <div className={style["left-side"]}>
             <div className={style.leftSideImageContainer}> </div>

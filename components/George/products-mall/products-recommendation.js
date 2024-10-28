@@ -156,7 +156,8 @@ export default function ProductsRecommendation() {
           style={{
             fontWeight: "bold",
             borderBottom: "1.5px solid rgba(20, 255, 0, 1)",
-            paddingBottom: "0.5em",
+            paddingBottom: "0.5em 0em 0.5em 0em",
+            margin: "0.5em 0em 0.5em 0em",
           }}
         >
           本日推薦專輯

@@ -157,6 +157,7 @@ export default function ProductsLatestLaunched() {
             fontWeight: "bold",
             borderBottom: "1.5px solid rgba(20, 255, 0, 1)",
             paddingBottom: "0.5em",
+            margin: "0.5em 0em 0.5em 0em",
           }}
         >
           新發行
