@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import Items1 from "./items1";
-import styles from "./products-carousel.module.css";
-import { MdArrowForwardIos } from "react-icons/md";
+import React from "react";
+import style from "./products-activities.module.css";
 
-export default function ProductsLatestLaunched() {
+export default function ProductsActivities() {
   const products = [
     {
       description:
@@ -151,92 +147,40 @@ export default function ProductsLatestLaunched() {
 
   return (
     <>
-      <div className={styles["carousel"]}>
-        <h4
-          style={{
-            fontWeight: "bold",
-            borderBottom: "1.5px solid rgba(20, 255, 0, 1)",
-            paddingBottom: "0.5em",
-          }}
-        >
-          新發行
-          <MdArrowForwardIos style={{ fontSize: "20px", marginLeft: "5px" }} />
-        </h4>
-        <div className="latestlaunch"></div>
-        <Carousel
-          additionalTransfrom={0}
-          arrows
-          autoPlaySpeed={3000}
-          centerMode={false}
-          className=""
-          containerClass="container"
-          dotListClass=""
-          draggable
-          focusOnSelect={false}
-          infinite={false}
-          itemClass=""
-          keyBoardControl
-          minimumTouchDrag={80}
-          pauseOnHover
-          renderArrowsWhenDisabled={false}
-          renderButtonGroupOutside={false}
-          renderDotsOutside={false}
-          responsive={{
-            desktop: {
-              breakpoint: {
-                max: 3000,
-                min: 1024,
-              },
-              items: 6.5,
-              partialVisibilityGutter: 40,
-            },
-            mobile: {
-              breakpoint: {
-                max: 464,
-                min: 0,
-              },
-              items: 1,
-              partialVisibilityGutter: 30,
-            },
-            tablet: {
-              breakpoint: {
-                max: 1024,
-                min: 464,
-              },
-              items: 2,
-              partialVisibilityGutter: 30,
-            },
-          }}
-          rewind={false}
-          rewindWithAnimation={false}
-          rtl={false}
-          shouldResetAutoplay
-          showDots={false}
-          sliderClass=""
-          slidesToSlide={1}
-          swipeable
-        >
-          {products.map((v, i) => {
-            return (
-              <Items1
-                key={i}
-                description={v.description}
-                headline={v.headline}
-                image={v.image}
-              />
-            );
-          })}
-        </Carousel>
+      <div className="container">
+        <div className={style["pics-box"]}>
+          <div className={style["left-side"]}>
+            <div className={style.leftSideImageContainer}> </div>
+            <img
+              src="/George/products-images-940px/products-(66).jpg"
+              alt="no.66"
+            />
+            <div className={style["text-box"]}>
+              <div className={style["text-title"]}>
+                王宏 (Hom Wang) Future Beats
+              </div>
+              <div className={style["text-description"]}>
+                專輯《Future
+                Beats》探索未來音樂的可能性，融合科技與創新，創作出具有前瞻性的音樂作品，展現未來音樂的無限潛力。
+              </div>
+            </div>
+          </div>
+          <div className={style["right-side"]}>
+            <img
+              src="/George/products-images-350px/products-(118).jpg"
+              alt="no.118"
+            />
+            <img
+              src="/George/products-images-350px/products-(112).jpg"
+              alt="no.112"
+            />
+            <img
+              src="/George/products-images-350px/products-(99).jpg"
+              alt="no.114"
+            />
+          </div>
+        </div>
       </div>
-      <style jsx>
-        {`
-          .latestlaunch {
-            display: flex;
-            align-items: center;
-            line-height: 70px;
-          }
-        `}
-      </style>
     </>
   );
 }

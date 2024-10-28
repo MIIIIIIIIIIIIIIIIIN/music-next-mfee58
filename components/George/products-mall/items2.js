@@ -29,7 +29,7 @@ export default function Items2({ description, headline, image, singer }) {
             margin: 15px;
             transition: transform 0.3s ease;
           }
-
+          
           .item-container:hover {
             transform: scale(1.05);
           }
@@ -47,6 +47,14 @@ export default function Items2({ description, headline, image, singer }) {
           }
           .item-description {
             font-size: 14px;
+          }
+          .overlay-content {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+
+          .item-container:hover .overlay-content {
+            opacity: 1; /* 當滑鼠懸停在卡片上時顯示疊加的內容 */
           }
           .overlay-items {
             position: absolute;
