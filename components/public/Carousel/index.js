@@ -46,10 +46,10 @@ const Carousel = ({ images, interval = 3000 }) => {
 
       
       <button className={styles.leftArrow} onClick={goToPrevious}>
-  <img src="/image/arrow-left.png" alt="Left Arrow" className={styles.arrowImage} />
+  <img src="/arrow-left.png" alt="Left Arrow" className={styles.arrowImage} />
 </button>
 <button className={styles.rightArrow} onClick={goToNext}>
-<img src="/image/arrow-right.png" alt="Left Arrow" className={styles.arrowImage} />
+<img src="/arrow-right.png" alt="Left Arrow" className={styles.arrowImage} />
 
 </button>
 

@@ -6,6 +6,7 @@ import Commodity1 from '@/components/card/ commodity'
 import Category from '@/components/card/category'
 import NavMobile from '@/components/nav/mobile'
 import Carousel from '@/components/public/Carousel'
+import Daily from '@/components/home/daily'
 
 
 export default function home() {
@@ -35,7 +36,9 @@ export default function home() {
 
        <Carousel images={images} interval={2000} />
       
-       {/* <Category /> */}
+       <Commodity1 />
+       <Daily /> 
+
        {isMobile ? <FooterMobile /> : < FooterDeskTop/>}
      
        

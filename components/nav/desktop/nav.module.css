@@ -1,3 +1,10 @@
+.wrap{
+  width: 100% ;
+  position: sticky;
+  top:0;
+  z-index: 2;
+  background: linear-gradient(0deg, rgba(255,255,255,0) 41%, rgba(20,255,0,1) 100%);
+}
 .container {
   height: 120.5px;
   width: 80vw;
@@ -5,6 +12,7 @@
   justify-content: space-between;
   align-items: center;
   margin: auto;
+  
 
 
 }
@@ -17,6 +25,7 @@
 }
 .item {
   border: 1px solid #111;
+  background-color: #fff;
   display: inline-block;
   position: relative;
   margin-right: 10px;
