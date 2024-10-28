@@ -1,46 +1,58 @@
-import styles from "./section.module.css";
+import styles from "./member-info.module.css";
+import { useRouter } from "next/router";
+import UserIcon from "../public/user-icon";
 
-const Frame = () => {
+const MemberInfo = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/");
+  };
+
+  // const handleClick = () => {
+  //   console.log("HandleClick 被觸發");
+  //   router.push("http://localhost:3000/");
+  // };
   return (
-    <div className={styles.desktopNavbarIndexParent}>
-
+    <div className={styles["member-S1"]}>
       <div className={styles.section1}>
-        <div className={styles.s03}>
-          <b className={styles.b1}>會員中心</b>
-          <div className={styles.body}>
-            <div className={styles.p}>
-              <div className={styles.wrapper2}>
+        <div className={styles['info-nav']}>
+          <b className={styles['info-title']}>會員中心</b>
+          <div className={styles["nav-body"]}>
+            {/* <div className={styles.p}>
+              <div className={styles.hover}>
                 <b className={styles.b}>基本資料</b>
               </div>
+            </div> */}
+            <div className={styles["info-nav-title"]}>
+              <div className={styles["nav-text"]}>基本資料</div>
             </div>
-            <div className={styles.p1}>
-              <div className={styles.div4}>帳號設定</div>
+            <div className={styles["info-nav-title"]}>
+              <div className={styles["nav-text"]}>帳號設定</div>
             </div>
-            <div className={styles.p1}>
-              <div className={styles.div4}>變更密碼</div>
+            <div className={styles["info-nav-title"]}>
+              <div className={styles["nav-text"]}>變更密碼</div>
             </div>
-            <div className={styles.p1}>
-              <div className={styles.div4}>訂單查詢</div>
+            <div className={styles["info-nav-title"]}>
+              <div className={styles["nav-text"]}>訂單查詢</div>
             </div>
-            <div className={styles.p1}>
-              <div className={styles.div7}>折價券</div>
+            <div className={styles["info-nav-title"]}>
+              <div className={styles["nav-text"]}>收藏名單</div>
             </div>
-            <div className={styles.p1}>
-              <div className={styles.div4}>收藏名單</div>
+            <div className={styles["info-nav-title"]}>
+              <div className={styles["nav-text"]}>封鎖名單</div>
             </div>
-            <div className={styles.p1}>
-              <div className={styles.div4}>封鎖名單</div>
-            </div>
-            <div className={styles.p1}>
-              <div className={styles.div4}>帳號刪除</div>
+            <div className={styles["info-nav-title"]}>
+              <div className={styles["nav-text"]}>帳號刪除</div>
             </div>
           </div>
         </div>
         <div className={styles.right}>
           <div className={styles.top}>
             <div className={styles.s04}>
-              <b className={styles.b1}>{`個人頭像 `}</b>
-              <img className={styles.s04Child} alt="" src="Frame 34.png" />
+              <b className={styles['info-title']}>{`個人頭像 `}</b>
+              {/* <img className={styles.s04Child} alt="" src="Frame 34.png" /> */}
+              <UserIcon />
               <div className={styles.x360px2mbContainer}>
                 <p className={styles.x360px2mb}>上傳頭像</p>
                 <p className={styles.x360px2mb}>
@@ -108,4 +120,4 @@ const Frame = () => {
   );
 };
 
-export default Frame;
+export default MemberInfo;

@@ -1,6 +1,6 @@
 import React from 'react'
 import Nav from '@/components/public/nav'
-import Section01 from '@/components/member/section'
+import MemberInfo from '@/components/member/member-info'
 import FormInput from '@/components/public/form-input'
 
 export default function MemberPage() {
@@ -8,7 +8,7 @@ export default function MemberPage() {
     <>
     <Nav />
     {/* <div>member-page</div> */}
-<Section01 />
+    <MemberInfo />
 
     </>
 
