@@ -41,7 +41,7 @@ export default function Mall() {
             position:absolute;
             z-index:10;
             left:0;
-            top:105px;
+            top:100px;
             
           }
           ul{
@@ -51,7 +51,7 @@ export default function Mall() {
             border:1px solid #111;
             display:inline-block;
             position:relative;
-            padding:0 5px;
+            padding:10px 5px;
             background-color:#fff
             
           }
@@ -59,6 +59,7 @@ export default function Mall() {
           background-color:#14ff00;
           cursor:pointer
           }
+          
           .triangle {
            
             width: 0;
@@ -68,7 +69,7 @@ export default function Mall() {
             border-color: transparent transparent black transparent;
             position:absolute;
             top:-10px;
-            left:50px
+            left:10px
           
 
           }
