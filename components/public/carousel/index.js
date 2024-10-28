@@ -46,10 +46,17 @@ const Carousel = ({ images, interval = 3000 }) => {
 
       
       <button className={styles.leftArrow} onClick={goToPrevious}>
+<<<<<<<< HEAD:components/public/carousel/index.js
   <img src="/image/img-Jade/arrow-left.png" alt="Left Arrow" className={styles.arrowImage} />
 </button>
 <button className={styles.rightArrow} onClick={goToNext}>
 <img src="/image/img-Jade/arrow-right.png" alt="Left Arrow" className={styles.arrowImage} />
+========
+  <img src="/arrow-left.png" alt="Left Arrow" className={styles.arrowImage} />
+</button>
+<button className={styles.rightArrow} onClick={goToNext}>
+<img src="/arrow-right.png" alt="Left Arrow" className={styles.arrowImage} />
+>>>>>>>> Liam:components/public/Carousel/index.js
 
 </button>
 

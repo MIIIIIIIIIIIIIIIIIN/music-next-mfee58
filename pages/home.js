@@ -5,10 +5,15 @@ import FooterMobile from '@/components/footer/mobile'
 import Commodity1 from '@/components/card/ commodity'
 import Category from '@/components/card/category'
 import NavMobile from '@/components/nav/mobile'
+import Carousel from '@/components/public/Carousel'
+import Daily from '@/components/home/daily'
 
 
 export default function home() {
   const [isMobile, setIsMobile] = useState(false);
+  const images = [ "/01.jpg", "/02.jpg",
+    "/03.jpg", ];
+    
   // const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
@@ -28,8 +33,12 @@ export default function home() {
   return (
     <div>
        {isMobile ? <NavMobile /> : <NavDesktop />}
+
+       <Carousel images={images} interval={2000} />
       
-       {/* <Category /> */}
+       <Commodity1 />
+       <Daily /> 
+
        {isMobile ? <FooterMobile /> : < FooterDeskTop/>}
      
        

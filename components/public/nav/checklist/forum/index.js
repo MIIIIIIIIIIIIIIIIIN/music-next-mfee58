@@ -35,10 +35,11 @@ export default function Forum() {
       <style jsx>
         {`
           .container{
-            position:absolute;
-            z-index:10;
+            position:fixed;
+            z-index:1110;
             left:210px;
             top:105px;
+
             
           }
           .forum-list {
