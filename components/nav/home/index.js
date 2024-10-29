@@ -8,7 +8,7 @@ import Fundraising from "../checklist/fundraising";
 import Forum from "../checklist/forum";
 import Logo from "../../public/logo";
 
-export default function NavDesktop() {
+export default function NavHome() {
   const [display, setDislay] = useState(false);
   const items = useRef(null);
   const input = useRef(null);
