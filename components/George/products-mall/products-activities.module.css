@@ -1,0 +1,104 @@
+.container{
+  width: 80vw;
+  margin: auto;
+}
+.pics-box{
+  display: flex;
+}
+.left-side{
+  position: relative;
+  width: 100%;
+}
+.left-side img{
+  height: 48em;
+  margin-right: 1em;
+  
+}
+.right-side{
+  display: flex;
+  flex-direction: column;
+}
+.right-side img{
+  overflow: hidden;
+  height: 15.5em;
+  margin-bottom: 0.5em;
+}
+.text-box{
+  position: absolute;
+  left: 1em;
+  bottom: 2em;
+}
+.text-title{
+  color: white;
+  font-size: 64px;
+}
+.text-description{
+  color: white;
+  font-size: 16px;
+}
+.leftSideImageContainer::after {
+  content: ""; /* 必須添加 */
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.2em;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  pointer-events: none;
+  margin-right: 1em;
+  font-weight: bold;
+}
+
+@media (max-width: 375px){
+  .container{
+    width: 95vw;
+    margin: auto;
+  }
+  .pics-box{
+    flex-direction: column;
+  }
+  .left-side{
+    position: relative;
+    width: 100%;
+  }
+  .left-side img{
+    height: 14.9em;
+    margin-right: 1em;
+    
+  }
+  .right-side{
+    display: flex;
+    flex-direction: column;
+  }
+  .right-side img{
+    overflow: hidden;
+    height: 15.5em;
+    margin-bottom: 0.5em;
+  }
+  .text-box{
+    position: absolute;
+    left: 1em;
+    bottom: 2em;
+  }
+  .text-title{
+    color: white;
+    font-size: 20px;
+  }
+  .text-description{
+    color: white;
+    font-size: 12px;
+  }
+  .leftSideImageContainer::after {
+    content: ""; /* 必須添加 */
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.3em;
+    height: 40%;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    pointer-events: none;
+    margin-right: 1em;
+    font-weight: bold;
+  }
+}

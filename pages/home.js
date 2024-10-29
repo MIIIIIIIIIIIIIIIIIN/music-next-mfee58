@@ -5,7 +5,7 @@ import FooterMobile from "@/components/public/footer/mobile";
 import Commodity1 from "@/components/public/card/ commodity";
 import NavMobile from "@/components/public/nav/mobile";
 import Title from "@/components/home/title";
-import Carousel from "@/components/public/Carousel";
+import Carousel from "@/components/public/carousel";
 import Daily from "@/components/home/daily";
 import WaveVideo from "@/components/home/video";
 import NavHome from "@/components/public/nav/home";
@@ -15,7 +15,10 @@ import ListNewCard from "@/components/Liam/Fundraising-list/new";
 import Footer from "@/components/public/footer";
 
 
-export default function home() {
+export default function Home() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  const images = ["/01.jpg", "/02.jpg", "/03.jpg"];
 
   return (
     <>
