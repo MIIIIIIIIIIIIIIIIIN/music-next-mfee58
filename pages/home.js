@@ -43,8 +43,7 @@ export default function home() {
   }, []);
   return (
     <div>
-      {/* { isMobile ? <NavMobile />: isNavVisible? <NavDesktop />:isNavVisible} */}
-      <NavHome />
+      { isMobile ? <NavMobile />: isNavVisible? <NavDesktop />:isNavVisible}
       <WaveVideo />
       <Title />
 
