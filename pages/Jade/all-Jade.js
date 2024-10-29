@@ -8,8 +8,12 @@ import PasswordInput from "@/components/public/PasswordInput";
 import PlayButton from "@/components/public/play-button";
 import PlayButtonS from "@/components/public/play-button-s";
 import Mp3Uploader from "@/components/public/mp3-uploader";
+import FormInputM from "@/components/member/form-input";
+import Button from "@/components/public/buttons";
+import ButtonToggleM from "@/components/member/button-show";
+import InfoNav from "@/components/member/info-nav";
 
-import styles from "../styles/Home.module.css";
+// import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const goToHome = () => {
@@ -19,6 +23,23 @@ export default function Home() {
     <>
       <div>
         <h1>All Components on One Page</h1>
+        <hr />
+        <br />
+
+        <InfoNav />
+        <br />
+        <hr />
+        <br />
+
+        <br />
+        <ButtonToggleM size="small" />
+        <br />
+
+        <ButtonToggleM size="medium" />
+        <br />
+
+        <ButtonToggleM size="large" />
+        <br />
         <hr />
         <h2>UserIcon</h2>
         <UserIcon />
@@ -35,12 +56,12 @@ export default function Home() {
           ]}
           interval={3000}
         />
-        
+
         <br />
         <br />
         <br />
-        <hr/>
-        <Mp3Uploader/>
+        <hr />
+        <Mp3Uploader />
         <br />
         <hr />
         <h2>Form Checkbox</h2>
@@ -67,6 +88,8 @@ export default function Home() {
         <FormInput size="large" />
         <br />
         <br />
+        <FormInputM size="textSmall" />
+        <FormInputM />
         <br />
         <br />
         <hr />
@@ -92,12 +115,14 @@ export default function Home() {
         <PlayButtonS />
         <br />
         <br />
+        <FormInputM />
+
         {/*
         <br />
         <br />
         <hr />
         <h2>user icon</h2> */}
-        {/* <UserIcon /> */}
+        <UserIcon />
         {/* <button className={styles.backToHomeButton} onClick={goToHome}>
           回到首頁
         </button> */}

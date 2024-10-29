@@ -1,7 +1,5 @@
 import { CiBellOn, } from "react-icons/ci";
 import { FiSearch } from "react-icons/fi";
-
-
 // import { Link } from "react-router-dom";
 
 import { ProfileIcons } from "../../profileIcons/ProfileIcons";
@@ -24,11 +22,25 @@ export default function NavDesktop() {
   const [activeIndex, setActiveIndex] = useState(null);
   let hoverTimeout = useRef(null);
 
-  useEffect(() => {}, []);
+  const [isNavVisible, setIsNavVisible] = useState(false);
+
+
+  useEffect(() => {
+    
+    const handleScroll = () => {
+      setIsNavVisible(window.scrollY > 1); // 當滾動超過 30px 時顯示 nav
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    // 移除事件監聽器以避免內存洩漏
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <>
-      <div className={styles.wrap}>
+      <div className={isNavVisible?styles.wrap1:styles.wrap}>
         <div className={styles.container}>
           <div className={styles.logo}>
             <a href="../home">

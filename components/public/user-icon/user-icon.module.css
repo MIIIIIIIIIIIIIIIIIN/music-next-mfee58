@@ -1,7 +1,7 @@
 /* 頭像容器樣式 */
 .avatarContainer {
-  width: 145px;
-  height: 145px;
+  width: 142px;
+  height: 142px;
   border-radius: 50%;
   /* background-color: black; */
   display: flex;
