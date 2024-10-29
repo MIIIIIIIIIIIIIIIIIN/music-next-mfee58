@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavDesktop from "@/components/public/nav/desktop";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import FooterMobile from "@/components/public/footer/mobile";
-import Commodity1 from "@/components/card/ commodity";
-import Category from "@/components/card/category";
+import Commodity1 from "@/components/public/card/ commodity";
 import NavMobile from "@/components/public/nav/mobile";
 import Title from "@/components/home/title";
 import Carousel from "@/components/public/Carousel";
@@ -27,6 +26,8 @@ export default function home() {
 
       {/* <Commodity1 /> */}
       <Daily />
+      <Commodity1 />
+
       <Footer />
 
       
