@@ -1,5 +1,5 @@
 import styles from "./daily.module.css";
-import Heart from "@/components/hearts";
+import Heart from "@/components/public/hearts";
 import TimelineComponent from "./time-line";
 
 const Daily = () => {

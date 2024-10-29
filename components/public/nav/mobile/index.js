@@ -5,11 +5,11 @@ import { FiSearch } from "react-icons/fi";
 import { FaAngleRight } from "react-icons/fa6";
 import { FiCornerRightDown } from "react-icons/fi";
 
-import { ProfileIcons } from "../../public/profileIcons/ProfileIcons";
+import { ProfileIcons } from "../../profileIcons/ProfileIcons"; 
 import MallList from "./system-list/mall";
 import FundraisingList from "./system-list/fundraising";
 import MemberList from "./system-list/member";
-import Logo from "../../public/logo";
+import Logo from "../../logo";
 
 export default function NavMobile() {
   const [display, setDislay] = useState(false);
@@ -29,6 +29,7 @@ export default function NavMobile() {
 
   return (
     <>
+    <div className={styles.wrap}>
       <div className={styles.container}>
         <div className={styles.containerTop}>
           <div className={styles.logo}>
@@ -224,6 +225,7 @@ export default function NavMobile() {
 
           </ul>
         </div>
+      </div>
       </div>
       <style jsx>{``}</style>
     </>

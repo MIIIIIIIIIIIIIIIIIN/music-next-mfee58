@@ -1,4 +1,4 @@
-import Heart from "@/components/hearts";
+import Heart from "@/components/public/hearts";
 
 
 const HeartPage = () => {
