@@ -3,10 +3,7 @@
   flex-direction: column;
   height: calc(100vh - 120px);
   width: 100%;
-  position:fixed;
-  bottom: 0;
   background: linear-gradient(180deg, #fff 65%, #84ff79 90%, #14ff00);
-  /* background-color: #000; */
 }
 
 .container {
@@ -73,7 +70,7 @@
 
 
 
-/* 右半部  info-main */
+/* �喳���  info-main */
 .info-main {
   flex: 8;
   /* background-color: #000; */
@@ -93,7 +90,7 @@
 }
 
 .body-icon h6 {
-  margin-top: 30px; /* 與上方 UserIcon 的間距 */
+  margin-top: 30px; /* ����� UserIcon ���頝� */
 }
 
 .body-input {
