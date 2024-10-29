@@ -1,11 +1,14 @@
 import styles from "./member-info.module.css";
 import { useRouter } from "next/router";
+import Nav from "@/components/public/nav";
 import UserIcon from "../../public/user-icon";
 import FormOption from "../form-option";
 import FormInput from "../form-input";
 import ButtonToggleM from "../button-show";
 import Dropdown from "../form-option";
 import InfoNav from "../info-nav";
+import FooterDeskTop from "@/components/public/footer/desktop";
+
 
 const MemberInfo = () => {
   const router = useRouter();
@@ -15,9 +18,12 @@ const MemberInfo = () => {
   };
 
   return (
+    <>
+      <Nav />
+
     <div className={styles["member-info"]}>
       <div className={styles.container}>
-      <InfoNav />
+        <InfoNav />
 
         <div className={styles["info-main"]}>
           <h5 className={styles["main-title"]}>個人頭像</h5>
@@ -51,20 +57,25 @@ const MemberInfo = () => {
 
                 <h7 className={styles["right-title"]}>性別</h7>
                 <div className={styles["right-text"]}>
-                <Dropdown type="gender" />
+                  <Dropdown type="gender" />
                   <ButtonToggleM size="small" />
                 </div>
                 <h7 className={styles["right-title"]}>所在地</h7>
                 <div className={styles["right-text"]}>
-                <Dropdown type="region" />
-                  <ButtonToggleM size="small"/>
+                  <Dropdown type="region" />
+                  <ButtonToggleM size="small" />
+                  
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <FooterDeskTop />
     </div>
+    </>
+
   );
 };
 

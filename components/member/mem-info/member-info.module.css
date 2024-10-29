@@ -68,9 +68,6 @@
   display: flex;
 }
 
-
-
-/* �喳���  info-main */
 .info-main {
   flex: 8;
   /* background-color: #000; */
@@ -106,7 +103,7 @@
 .input-left {
   width: 300px;
   /* background-color: pink; */
-  padding: 50px;
+  padding: 50px 0;
   margin: 0 50px;
   display: flex;
   flex-direction: column;
@@ -137,8 +134,6 @@
   margin: 5px 0;
 }
 
-.left-text{
 
-}
 
 /* END */

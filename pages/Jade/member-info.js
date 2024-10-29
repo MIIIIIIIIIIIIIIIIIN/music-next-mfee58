@@ -6,7 +6,7 @@ import FormInput from '@/components/public/form-input'
 export default function MemberInfoPage() {
   return (
     <>
-    <Nav />
+    {/* <Nav /> */}
     {/* <div>member-page</div> */}
     <MemberInfo />
 
