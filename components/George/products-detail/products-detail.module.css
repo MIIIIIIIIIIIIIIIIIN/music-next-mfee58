@@ -20,7 +20,7 @@
   font-weight: bold;
   color: #333;
   text-align: center;
-  margin-bottom: 1em;
+  margin: 1em 0;
 }
 /* content */
 .containContent{
@@ -78,34 +78,9 @@
   align-items: center;
   margin: 1em 0em;
 }
-.blackBtn, .whiteBtn {
-  width: 15em;
-  padding: 1em;
-  margin-top: 1em;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.3s ease;  /* 添加交互動畫效果 */
-}
-.blackBtn {
-  background-color: #000;
-  color: #fff;
-}
-.blackBtn:hover {
-  background-color: #444;  /* 當鼠標懸停時改變顏色 */
-  transform: scale(1.05);   /* 放大按鈕 */
-}
-.whiteBtn {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #000;
-}
-.whiteBtn:hover {
-  background-color: #e0e0e0; /* 懸停時給白色按鈕添加背景色 */
-  transform: scale(1.05);
-}
 .albumDescription {
   font-size: 16px;
   color: #777;
   text-align: center;
-  margin-bottom: 2em;
+  margin: 1em 0;
 }
