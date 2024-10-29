@@ -1,12 +1,20 @@
-import React, { useRef, useState, useEffect } from "react";
-import styles from "./nav.module.css";
+import { CiBellOn, } from "react-icons/ci";
 import { FiSearch } from "react-icons/fi";
+<<<<<<< HEAD
 import { CiBellOn } from "react-icons/ci";
+=======
+
+>>>>>>> Liam
 import { ProfileIcons } from "../../profileIcons/ProfileIcons";
 import Mall from "../checklist/mall";
 import Fundraising from "../checklist/fundraising";
 import Forum from "../checklist/forum";
 import Logo from "../../logo";
+<<<<<<< HEAD
+=======
+import React, { useRef, useState, useEffect } from "react";
+import styles from "./nav.module.css"
+>>>>>>> Liam
 
 export default function NavDesktop() {
   const [display, setDislay] = useState(false);

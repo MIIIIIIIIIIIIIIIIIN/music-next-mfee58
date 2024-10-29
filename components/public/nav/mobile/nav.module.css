@@ -1,5 +1,9 @@
 
+.wrap{
+  width: 100% ;
 
+  background: linear-gradient(0deg, rgba(255,255,255,0) 41%, rgba(20,255,0,1) 100%);
+}
 .container {
   padding: 25px 0;
   width: 80%;

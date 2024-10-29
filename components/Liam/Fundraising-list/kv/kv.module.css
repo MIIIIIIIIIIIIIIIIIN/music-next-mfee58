@@ -1,0 +1,23 @@
+.top{
+  background-color: aqua;
+  height: 80vh;
+  position: relative;
+  background-image: url('../../../../public/03.jpg');
+}
+.title{
+  background-color: #fff;
+  display: inline-block;
+  position: absolute;
+  padding: 10px;
+  top:70%
+}
+.bottom{
+  padding: 10px;
+  border: 2px solid black;
+}
+.bar{
+  width: 200px;
+  background-color: rgb(9, 255, 0);
+  height: 50px;
+}
+

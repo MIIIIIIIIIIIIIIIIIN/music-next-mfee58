@@ -5,7 +5,11 @@ import { FiSearch } from "react-icons/fi";
 import { FaAngleRight } from "react-icons/fa6";
 import { FiCornerRightDown } from "react-icons/fi";
 
+<<<<<<< HEAD
 import { ProfileIcons } from "../../profileIcons/ProfileIcons";
+=======
+import { ProfileIcons } from "../../profileIcons/ProfileIcons"; 
+>>>>>>> Liam
 import MallList from "./system-list/mall";
 import FundraisingList from "./system-list/fundraising";
 import MemberList from "./system-list/member";
@@ -29,6 +33,7 @@ export default function NavMobile() {
 
   return (
     <>
+    <div className={styles.wrap}>
       <div className={styles.container}>
         <div className={styles.containerTop}>
           <div className={styles.logo}>
@@ -224,6 +229,7 @@ export default function NavMobile() {
 
           </ul>
         </div>
+      </div>
       </div>
       <style jsx>{``}</style>
     </>
