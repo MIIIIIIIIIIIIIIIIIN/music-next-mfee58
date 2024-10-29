@@ -9,13 +9,10 @@ import Carousel from "@/components/public/carousel";
 import Daily from "@/components/home/daily";
 import WaveVideo from "@/components/home/video";
 import NavHome from "@/components/public/nav/home";
-<<<<<<< HEAD
-=======
 import Nav from "@/components/public/nav/index";
 import NavHomePage from "@/components/public/nav/home";
 import ListNewCard from "@/components/Liam/Fundraising-list/new";
 import Footer from "@/components/public/footer";
->>>>>>> Liam
 
 
 export default function home() {

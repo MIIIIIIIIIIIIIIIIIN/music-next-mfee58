@@ -1,14 +1,8 @@
 .wrap{
   width: 100% ;
-<<<<<<< HEAD
-  position:fixed;
-  top:0;
-  z-index: 9999;
-=======
   position: fixed;
   top:0;
   z-index: 2;
->>>>>>> Liam
   background: linear-gradient(0deg, rgba(255,255,255,0) 41%, rgba(20,255,0,1) 100%);
 }
 .container {
