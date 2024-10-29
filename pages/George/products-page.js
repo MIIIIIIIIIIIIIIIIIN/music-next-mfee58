@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import ProductsLatestLaunched from "@/components/George/products-mall/products-latest-launched";
 import ProductsRecommendation from "@/components/George/products-mall/products-recommendation";
 import ProductsActivities from "@/components/George/products-mall/products-activities";
-import NavDesktop from "@/components/public/nav/desktop";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import FooterMobile from "@/components/public/footer/mobile";
-import NavMobile from "@/components/public/nav/mobile";
+import Nav from "@/components/public/nav";
 
 export default function ProductsPage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -37,7 +36,7 @@ export default function ProductsPage() {
   }, []);
   return (
     <>
-      {isMobile ? <NavMobile /> : isNavVisible ? <NavDesktop /> : isNavVisible}
+      <Nav />
       <ProductsActivities />
       <ProductsRecommendation />
       <ProductsLatestLaunched />

@@ -13,22 +13,22 @@
   border-color: #dddddd;
   display: flex;
   gap: 10px;
-  height: 15px;
+  height: 1.5em;
+  width: 2em;
   justify-content: center;
   padding: 5px 0px;
   position: relative;
-  width: 30px;
 }
 
 .quantity .text-wrapper {
   color: #000000;
   font-family: "Nunito Sans-ExtraLight", Helvetica;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 200;
   letter-spacing: 0;
   line-height: normal;
-  margin-bottom: -4.00px;
-  margin-top: -5.00px;
+  margin-bottom: -4px;
+  margin-top: -5px;
   position: relative;
   width: fit-content;
 }
@@ -37,33 +37,23 @@
   background-color: #ffffff;
   border: 0.5px solid;
   border-color: #dddddd;
-  height: 15px;
+  height: 1.5em;
+  width: 1.5em;
   position: relative;
-  width: 15px;
+  padding: 5px 5px;
+  line-height: 1.5em;
+  cursor: pointer;  /* 添加手型光標，表示可點擊 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .quantity .div {
   color: #000000;
-  font-family: var(--regular-english-p12-font-family);
-  font-size: var(--regular-english-p12-font-size);
-  font-style: var(--regular-english-p12-font-style);
-  font-weight: var(--regular-english-p12-font-weight);
-  left: 4px;
-  letter-spacing: var(--regular-english-p12-letter-spacing);
-  line-height: var(--regular-english-p12-line-height);
-  position: absolute;
-  top: -2px;
+  font-weight: bold;
 }
 
 .quantity .text-wrapper-2 {
   color: #000000;
-  font-family: var(--regular-english-p12-font-family);
-  font-size: var(--regular-english-p12-font-size);
-  font-style: var(--regular-english-p12-font-style);
-  font-weight: var(--regular-english-p12-font-weight);
-  left: 5px;
-  letter-spacing: var(--regular-english-p12-letter-spacing);
-  line-height: var(--regular-english-p12-line-height);
-  position: absolute;
-  top: -2px;
+  font-weight: bold;
 }

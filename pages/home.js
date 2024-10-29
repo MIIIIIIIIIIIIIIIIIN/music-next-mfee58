@@ -15,7 +15,10 @@ import ListNewCard from "@/components/Liam/Fundraising-list/new";
 import Footer from "@/components/public/footer";
 
 
-export default function home() {
+export default function Home() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  const images = ["/01.jpg", "/02.jpg", "/03.jpg"];
 
   return (
     <>

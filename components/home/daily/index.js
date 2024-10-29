@@ -17,7 +17,7 @@ const Daily = () => {
         </a>
       </div>
       <div className={styles.frameContainer}>
-      <TimelineComponent />
+        <TimelineComponent />
       </div>
     </div>
   );
