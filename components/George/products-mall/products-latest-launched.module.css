@@ -41,3 +41,14 @@
   -webkit-line-clamp: 4;
   text-overflow: ellipsis;
 }
+
+@media (max-width: 375px) {
+  .carouselItem {
+    width: 225px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 30em;
+    margin: auto;
+    transition: transform 0.3s ease;
+  }
+}

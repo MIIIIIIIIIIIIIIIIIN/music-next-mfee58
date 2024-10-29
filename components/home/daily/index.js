@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import styles from "./daily.module.css"
-=======
 import styles from "./daily.module.css";
 import Heart from "@/components/hearts";
 import TimelineComponent from "./time-line";
->>>>>>> Liam
 
 const Daily = () => {
   return (
@@ -21,7 +17,7 @@ const Daily = () => {
         </a>
       </div>
       <div className={styles.frameContainer}>
-      <TimelineComponent />
+        <TimelineComponent />
       </div>
     </div>
   );

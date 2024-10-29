@@ -1,6 +1,6 @@
 import React from "react";
 import WhiteWBtns from "@/components/public/white_wbtns";
-import BlackWBtns from "@/components/black_wbtns";
+import BlackWBtns from "@/components/public/black_wbtns";
 
 const WbtnPage = () => {
   const handleClick = () => {

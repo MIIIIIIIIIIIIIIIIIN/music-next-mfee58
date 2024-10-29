@@ -1,0 +1,111 @@
+.containBox {
+  width: 80vw;
+  margin: 3em auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 2em;
+  background-color: #f8f9fa;  /* 增加背景色來區分內容區域 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* 添加陰影讓內容更加突出 */
+  border-radius: 8px;  /* 讓容器有圓角 */
+}
+.albumpic {
+  width: 40em;
+  height: 40em;
+  object-fit: cover;
+  border-radius: 10px;  /* 讓圖片有圓角 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  /* 添加陰影讓圖片更加立體 */
+}
+.albumName {
+  font-size: 32px;  /* 調整標題字體大小以使其更加突出 */
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1em;
+}
+/* content */
+.containContent{
+  height: 50em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content {
+  width: 100%;
+  display: flex;
+}
+.contentTitles {
+  width: 15em;
+  font-size: 18px;
+  display: inline-flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.contentTitles li, .contentDetails li {
+  color: #555;
+  margin: 1em 0;
+}
+.contentDetails {
+  width: 20em;
+  font-size: 18px;
+  display: inline-flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 1em;
+}
+
+.contentTitles li:nth-child(6) {
+  line-height: 30px;
+}
+
+/* seperation line */
+.seperationLine {
+  border: 1px solid lightgray;
+  margin: 1.5em 0 1.5em 0;
+}
+.totalAmount {
+  font-size: 28px;
+  font-weight: bold;
+  color: rgba(20, 255, 0, 1);  /* 使用醒目的顏色來強調總金額 */
+  text-shadow: 1px 1px 1px black;
+  text-align: center;
+  margin: 1.5em 0;
+}
+.btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0em;
+}
+.blackBtn, .whiteBtn {
+  width: 15em;
+  padding: 1em;
+  margin-top: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;  /* 添加交互動畫效果 */
+}
+.blackBtn {
+  background-color: #000;
+  color: #fff;
+}
+.blackBtn:hover {
+  background-color: #444;  /* 當鼠標懸停時改變顏色 */
+  transform: scale(1.05);   /* 放大按鈕 */
+}
+.whiteBtn {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+.whiteBtn:hover {
+  background-color: #e0e0e0; /* 懸停時給白色按鈕添加背景色 */
+  transform: scale(1.05);
+}
+.albumDescription {
+  font-size: 16px;
+  color: #777;
+  text-align: center;
+  margin-bottom: 2em;
+}

@@ -3,14 +3,14 @@ import NavDesktop from "@/components/nav/desktop";
 import FooterDeskTop from "@/components/footer/desktop";
 import FooterMobile from "@/components/footer/mobile";
 import Commodity1 from "@/components/card/ commodity";
-import Category from "@/components/card/category";
+import Category from "@/components/card/category"
 import NavMobile from "@/components/nav/mobile";
 import Title from "@/components/home/title";
 import Carousel from "@/components/public/carousel";
 import Daily from "@/components/home/daily";
 import WaveVideo from "@/components/home/video";
 
-export default function home() {
+export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(false);
   const images = ["/01.jpg", "/02.jpg", "/03.jpg"];
