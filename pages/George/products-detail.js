@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import NavDesktop from "@/components/public/nav/desktop";
-import FooterDeskTop from "@/components/footer/desktop";
-import FooterMobile from "@/components/footer/mobile";
-import NavMobile from "@/components/public/nav/mobile";
+import FooterDeskTop from "@/components/public/footer/desktop";
+import FooterMobile from "@/components/public/footer/mobile";
+import Nav from "@/components/public/nav";
 import ProductsDetailPage from "@/components/George/products-detail/products-detail-page";
 
 export default function ProductsDetail() {
@@ -35,7 +34,7 @@ export default function ProductsDetail() {
   }, []);
   return (
     <>
-      {isMobile ? <NavMobile /> : isNavVisible ? <NavDesktop /> : isNavVisible}
+      <Nav />
       <ProductsDetailPage />
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
