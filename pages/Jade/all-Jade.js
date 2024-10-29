@@ -8,6 +8,9 @@ import PasswordInput from "@/components/public/PasswordInput";
 import PlayButton from "@/components/public/play-button";
 import PlayButtonS from "@/components/public/play-button-s";
 import Mp3Uploader from "@/components/public/mp3-uploader";
+import FormInputM from "@/components/member/form-input";
+import Button from "@/components/public/buttons";
+import ButtonToggleM from "@/components/member/button-show";
 
 // import styles from "../styles/Home.module.css";
 
@@ -19,6 +22,11 @@ export default function Home() {
     <>
       <div>
         <h1>All Components on One Page</h1>
+        <hr />
+        <br />
+
+        <ButtonToggleM />
+        <br />
         <hr />
         <h2>UserIcon</h2>
         <UserIcon />
@@ -92,12 +100,14 @@ export default function Home() {
         <PlayButtonS />
         <br />
         <br />
+<FormInputM />
+
         {/*
         <br />
         <br />
         <hr />
         <h2>user icon</h2> */}
-        {/* <UserIcon /> */}
+        <UserIcon />
         {/* <button className={styles.backToHomeButton} onClick={goToHome}>
           回到首頁
         </button> */}

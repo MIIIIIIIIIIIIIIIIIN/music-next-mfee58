@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styles from "./form-input.module.css";
+import styles from "./form-inputM.module.css";
 
-const FormInput = ({ size }) => {
+const FormInputM = ({ size }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState("GuavaVibe");
 
@@ -47,4 +47,4 @@ const FormInput = ({ size }) => {
   );
 };
 
-export default FormInput;
+export default FormInputM;
