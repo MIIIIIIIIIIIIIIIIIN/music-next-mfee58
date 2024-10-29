@@ -136,6 +136,7 @@ export default function Commodity1({title}) {
           width:80%;
           display:flex;
           margin:auto;
+          margin-top:60px
           
         }
         .left{
