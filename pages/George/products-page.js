@@ -1,20 +1,19 @@
 import React from 'react'
-import ProductsCarousel from '@/components/George/products-mall/products-carousel'
+import ProductsLatestLaunched from '@/components/George/products-mall/products-latest-launched'
 import Footer from '@/components/public/footer';
-
-const images = [
-  "/George/products (1).jpg",
-  "/George/products (2).jpg",
-  "/George/products (3).jpg",
-  "/George/products (4).jpg",
-  "/George/products (5).jpg",
-];
+import ProductsRecommendation from '@/components/George/products-mall/products-recommendation';
+import ProductsActivities from '@/components/George/products-mall/products-activities';
+import Forum from '@/components/public/nav/checklist/forum';
+import NavDesktop from '@/components/public/nav/desktop';
 
 export default function ProductsPage() {
   return (
     <>
-    <ProductsCarousel images={images} interval={2500}/>
-    {/* <Footer /> */}
+    <NavDesktop />
+    <ProductsActivities/>
+    <ProductsRecommendation />
+    <ProductsLatestLaunched />
+    <Footer />
     </>
   )
 }
