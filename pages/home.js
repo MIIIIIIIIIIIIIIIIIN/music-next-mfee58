@@ -9,7 +9,7 @@ import Title from "@/components/home/title";
 import Carousel from "@/components/public/carousel";
 import Daily from "@/components/home/daily";
 import WaveVideo from "@/components/home/video";
-import NavHome from "@/components/nav/home";
+import NavHome from "@/components/public/nav/home";
 
 export default function home() {
   const [isMobile, setIsMobile] = useState(false);
