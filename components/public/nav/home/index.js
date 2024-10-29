@@ -1,18 +1,14 @@
-import { CiBellOn, } from "react-icons/ci";
+import React, { useRef, useState, useEffect } from "react";
+import styles from "./nav.module.css";
 import { FiSearch } from "react-icons/fi";
-
-
-// import { Link } from "react-router-dom";
-
+import { CiBellOn } from "react-icons/ci";
 import { ProfileIcons } from "../../profileIcons/ProfileIcons";
 import Mall from "../checklist/mall";
 import Fundraising from "../checklist/fundraising";
 import Forum from "../checklist/forum";
 import Logo from "../../logo";
-import React, { useRef, useState, useEffect } from "react";
-import styles from "./nav.module.css"
 
-export default function NavDesktop() {
+export default function NavHome() {
   const [display, setDislay] = useState(false);
   const items = useRef(null);
   const input = useRef(null);
@@ -31,7 +27,7 @@ export default function NavDesktop() {
       <div className={styles.wrap}>
         <div className={styles.container}>
           <div className={styles.logo}>
-            <a href="../home">
+            <a href="#">
               <Logo type={1} />
             </a>
           </div>
@@ -100,7 +96,7 @@ export default function NavDesktop() {
                 backgroundColor: activeIndex === 1 ? "#14ff00" : "#fff",
               }}
             >
-              <a href="/Liam/Fundraising-list">
+              <a href="#">
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>募資</h6>

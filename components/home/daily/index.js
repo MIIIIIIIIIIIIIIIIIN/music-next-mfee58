@@ -1,12 +1,12 @@
 import styles from "./daily.module.css";
-import Heart from "@/components/hearts";
+import Heart from "@/components/public/hearts";
 import TimelineComponent from "./time-line";
 
 const Daily = () => {
   return (
     <div className={styles.frameParent}>
       <div className={styles.frameGroup}>
-        <a href="">
+        <a href="#">
           <div className={styles.rectangleWrapper}>
             <img className={styles.frameChild} alt="" src="./day.jpg" />
           </div>

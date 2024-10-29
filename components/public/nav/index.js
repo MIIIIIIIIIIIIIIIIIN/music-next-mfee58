@@ -1,8 +1,10 @@
 import React,{useState, useEffect} from 'react'
-import FooterDeskTop from './desktop';
-import FooterMobile from './mobile';
+import NavDesktop from './desktop';
+import NavMobile from './mobile';
+import NavHome from './home';
 
-export default function Footer() {
+
+export default function Nav() {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
@@ -23,7 +25,7 @@ export default function Footer() {
   }, []);
   return (
     <div>
-      {isMobile ? <FooterMobile /> : <FooterDeskTop />}
+      { isMobile ? <NavMobile />: <NavDesktop />}
     </div>
   )
 }

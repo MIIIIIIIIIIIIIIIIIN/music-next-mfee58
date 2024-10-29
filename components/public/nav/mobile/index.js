@@ -5,7 +5,7 @@ import { FiSearch } from "react-icons/fi";
 import { FaAngleRight } from "react-icons/fa6";
 import { FiCornerRightDown } from "react-icons/fi";
 
-import { ProfileIcons } from "../../profileIcons/ProfileIcons";
+import { ProfileIcons } from "../../profileIcons/ProfileIcons"; 
 import MallList from "./system-list/mall";
 import FundraisingList from "./system-list/fundraising";
 import MemberList from "./system-list/member";
@@ -29,6 +29,7 @@ export default function NavMobile() {
 
   return (
     <>
+    <div className={styles.wrap}>
       <div className={styles.container}>
         <div className={styles.containerTop}>
           <div className={styles.logo}>
@@ -69,12 +70,12 @@ export default function NavMobile() {
                   width="30"
                   height="30"
                   viewBox="0 0 24 24"
-                  fill="none"
+                  fill="white"
                 >
                   <path
                     d="M15.9999 8H17.1596C18.1998 8 19.0663 8.79732 19.1527 9.83391L19.8194 17.8339C19.9165 18.9999 18.9964 20 17.8263 20H6.17348C5.0034 20 4.08322 18.9999 4.18039 17.8339L4.84705 9.83391C4.93344 8.79732 5.79997 8 6.84014 8H7.99988M15.9999 8H7.99988M15.9999 8L15.9999 7C15.9999 5.93913 15.5784 4.92172 14.8283 4.17157C14.0782 3.42143 13.0607 3 11.9999 3C10.939 3 9.9216 3.42143 9.17145 4.17157C8.42131 4.92172 7.99988 5.93913 7.99988 7L7.99988 8M15.9999 8L15.9999 12M7.99988 8L7.99988 12"
-                    stroke="#686868"
-                    stroke-width="1.5"
+                    stroke="black"
+                    stroke-width="1"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   />
@@ -224,6 +225,7 @@ export default function NavMobile() {
 
           </ul>
         </div>
+      </div>
       </div>
       <style jsx>{``}</style>
     </>

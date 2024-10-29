@@ -1,8 +1,8 @@
 .wrap{
   width: 100% ;
-  position:fixed;
+  position: fixed;
   top:0;
-  z-index: 9999;
+  z-index: 2;
   background: linear-gradient(0deg, rgba(255,255,255,0) 41%, rgba(20,255,0,1) 100%);
 }
 .container {
@@ -19,6 +19,10 @@
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Liam
 .nav {
   position: relative;
   display:flex
