@@ -1,5 +1,6 @@
 import { CiBellOn, } from "react-icons/ci";
 import { FiSearch } from "react-icons/fi";
+// import { Link } from "react-router-dom";
 
 import { ProfileIcons } from "../../profileIcons/ProfileIcons";
 import Mall from "../checklist/mall";
@@ -28,7 +29,7 @@ export default function NavDesktop() {
       <div className={styles.wrap}>
         <div className={styles.container}>
           <div className={styles.logo}>
-            <a href="#">
+            <a href="../home">
               <Logo type={1} />
             </a>
           </div>
@@ -97,7 +98,7 @@ export default function NavDesktop() {
                 backgroundColor: activeIndex === 1 ? "#14ff00" : "#fff",
               }}
             >
-              <a href="#">
+              <a href="/Liam/Fundraising-list">
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>募資</h6>
