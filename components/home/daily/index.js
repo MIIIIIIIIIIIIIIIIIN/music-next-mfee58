@@ -10,7 +10,7 @@ const Daily = () => {
   return (
     <div className={styles.frameParent}>
       <div className={styles.frameGroup}>
-        <a href="">
+        <a href="#">
           <div className={styles.rectangleWrapper}>
             <img className={styles.frameChild} alt="" src="./day.jpg" />
           </div>

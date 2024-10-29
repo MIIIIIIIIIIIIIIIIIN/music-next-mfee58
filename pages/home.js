@@ -13,27 +13,38 @@ import NavHome from "@/components/public/nav/home";
 =======
 import Nav from "@/components/public/nav/index";
 import NavHomePage from "@/components/public/nav/home";
+import ListNewCard from "@/components/Liam/Fundraising-list/new";
 import Footer from "@/components/public/footer";
 >>>>>>> Liam
+
 
 export default function home() {
 
   return (
+    <>
     <div>
 
       <Nav />
       <WaveVideo />
-      <Title />
+      <Title num={1} text="每日推薦"/>
 
       {/* <Carousel images={images} interval={2000} /> */}
 
       {/* <Commodity1 /> */}
       <Daily />
-      <Commodity1 />
-
+      <Title num={2} text="最新募資"  className='ma'/>
+      
+      <ListNewCard />
+      
       <Footer />
 
       
     </div>
+    <style jsx>
+      {`
+       
+      `}
+    </style>
+    </>
   );
 }
