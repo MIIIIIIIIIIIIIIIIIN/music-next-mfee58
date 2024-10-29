@@ -2,13 +2,13 @@ import React, { useRef, useState, useEffect } from "react";
 import styles from "./nav.module.css";
 import { FiSearch } from "react-icons/fi";
 import { CiBellOn } from "react-icons/ci";
-import { ProfileIcons } from "../../profileIcons/ProfileIcons";
+import { ProfileIcons } from "../../public/profileIcons/ProfileIcons";
 import Mall from "../checklist/mall";
 import Fundraising from "../checklist/fundraising";
 import Forum from "../checklist/forum";
-import Logo from "../../logo";
+import Logo from "../../public/logo";
 
-export default function NavDesktop() {
+export default function NavHome() {
   const [display, setDislay] = useState(false);
   const items = useRef(null);
   const input = useRef(null);
