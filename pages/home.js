@@ -19,7 +19,7 @@ export default function home() {
   return (
     <div>
 
-      <NavHomePage />
+      <Nav />
       <WaveVideo />
       <Title />
 
