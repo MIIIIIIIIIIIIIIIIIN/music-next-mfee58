@@ -1,7 +1,7 @@
 import styles from "./mem-account.module.css";
 import InfoNav from "../info-nav";
 
-const Section = () => {
+const Section1 = () => {
   return (
     <>
 
@@ -89,4 +89,4 @@ const Section = () => {
   );
 };
 
-export default Section;
+export default Section1;
