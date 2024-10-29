@@ -229,6 +229,21 @@ export default function ProductsLatestLaunched() {
           })}
         </Carousel>
       </div>
+      <style jsx>
+        {`
+          .custom-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 2; /* 確保箭頭顯示在 Carousel 之上 */
+          }
+
+          .custom-left-arrow {
+            left: 10px; /* 靠左側 10px */
+          }
+        `}
+      </style>
     </>
   );
 }
