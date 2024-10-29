@@ -1,0 +1,229 @@
+.b {
+  align-self: stretch;
+  position: relative;
+}
+.div {
+  position: absolute;
+  top: 0%;
+  left: 8.33%;
+}
+.p {
+  width: 96px;
+  position: relative;
+  height: 35px;
+}
+.wrapper {
+  position: absolute;
+  top: calc(50% - 24.5px);
+  left: calc(50% - 80px);
+  background-color: #000;
+  border-right: 3px solid #14ff00;
+  border-left: 3px solid #14ff00;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 40px;
+}
+.p1 {
+  width: 96px;
+  position: relative;
+  height: 35px;
+  color: #fff;
+}
+.div3 {
+  position: absolute;
+  top: 0%;
+  left: 18.75%;
+}
+.body {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px 0px 30px;
+  gap: 20px;
+  font-size: 20px;
+}
+.s03 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px 80px;
+  gap: 20px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 10px;
+  font-size: 24px;
+}
+.frame {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.iconsEssentials {
+  width: 24px;
+  position: relative;
+  height: 24px;
+}
+.guavavibe {
+  position: relative;
+}
+.iconsEssentialsParent {
+  flex: 1;
+  border-bottom: 1px solid #000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 30px;
+  gap: 20px;
+}
+.check1 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  left: 0%;
+  background-color: #ffe100;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.check {
+  width: 100px;
+  position: relative;
+  height: 19px;
+  overflow: hidden;
+  flex-shrink: 0;
+  font-family: 'Inria Serif';
+}
+.frameGroup {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 21px;
+}
+.frameParent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 21px;
+}
+.s01 {
+  width: 414px;
+  height: 87px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.div9 {
+  align-self: stretch;
+  position: relative;
+  display: inline-block;
+  height: 1px;
+  flex-shrink: 0;
+}
+.iconsAudio {
+  width: 24px;
+  position: relative;
+  height: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.checkuncheck {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  left: 0%;
+  background-color: #d8dbd8;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.check2 {
+  width: 100px;
+  position: relative;
+  height: 19px;
+  font-family: 'Inria Serif';
+}
+.frameContainer {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 21px;
+}
+.frameChild {
+  width: 611px;
+  position: relative;
+  height: 85px;
+}
+.line01Inner {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0px 30px;
+}
+.line01 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 30px;
+}
+.right {
+  width: 960px;
+  height: 670px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 16px;
+}
+.section3 {
+  width: 100%;
+  position: relative;
+  background: linear-gradient(180deg, #fff 65%, #84ff79 90%, #14ff00);
+  height: 736px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 100px;
+  box-sizing: border-box;
+  gap: 50px;
+  text-align: center;
+  font-size: 24px;
+  color: #000;
+  font-family: 'Noto Sans TC';
+}
+
