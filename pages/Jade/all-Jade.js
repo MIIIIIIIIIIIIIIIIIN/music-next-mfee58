@@ -11,6 +11,7 @@ import Mp3Uploader from "@/components/public/mp3-uploader";
 import FormInputM from "@/components/member/form-input";
 import Button from "@/components/public/buttons";
 import ButtonToggleM from "@/components/member/button-show";
+import InfoNav from "@/components/member/info-nav";
 
 // import styles from "../styles/Home.module.css";
 
@@ -25,7 +26,19 @@ export default function Home() {
         <hr />
         <br />
 
-        <ButtonToggleM />
+        <InfoNav />
+        <br />
+        <hr />
+        <br />
+
+        <br />
+        <ButtonToggleM size="small" />
+        <br />
+
+        <ButtonToggleM size="medium" />
+        <br />
+
+        <ButtonToggleM size="large" />
         <br />
         <hr />
         <h2>UserIcon</h2>
@@ -43,12 +56,12 @@ export default function Home() {
           ]}
           interval={3000}
         />
-        
+
         <br />
         <br />
         <br />
-        <hr/>
-        <Mp3Uploader/>
+        <hr />
+        <Mp3Uploader />
         <br />
         <hr />
         <h2>Form Checkbox</h2>
@@ -75,6 +88,8 @@ export default function Home() {
         <FormInput size="large" />
         <br />
         <br />
+        <FormInputM size="textSmall" />
+        <FormInputM />
         <br />
         <br />
         <hr />
@@ -100,7 +115,7 @@ export default function Home() {
         <PlayButtonS />
         <br />
         <br />
-<FormInputM />
+        <FormInputM />
 
         {/*
         <br />

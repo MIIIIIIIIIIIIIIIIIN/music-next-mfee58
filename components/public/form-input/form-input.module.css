@@ -11,7 +11,7 @@
   font-size: 18px;
   padding: 10px 0;
   text-align: center;
-  border-bottom: 1px solid black; /* 底部邊框 */
+  /* border-bottom: 1px solid black; 底部邊框 */
   transition: background-color 0.3s; /* 過渡效果 */
   cursor: pointer; /* 當滑鼠懸停在文字上，顯示指標 */
   /* width: 210px; */

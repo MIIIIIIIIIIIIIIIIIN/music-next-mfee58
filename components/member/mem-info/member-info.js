@@ -5,6 +5,7 @@ import FormOption from "../form-option";
 import FormInput from "../form-input";
 import ButtonToggleM from "../button-show";
 import Dropdown from "../form-option";
+import InfoNav from "../info-nav";
 
 const MemberInfo = () => {
   const router = useRouter();
@@ -16,25 +17,16 @@ const MemberInfo = () => {
   return (
     <div className={styles["member-info"]}>
       <div className={styles.container}>
-        <div className={styles["info-nav"]}>
-          <h5 className={styles["nav-title"]}>會員中心</h5>
-          <div className={styles["nav-body"]}>
-            <h6 className={styles["body-text"]}>基本資料</h6>
-            <h6 className={styles["body-text"]}>帳號設定</h6>
-            <h6 className={styles["body-text"]}>變更密碼</h6>
-            <h6 className={styles["body-text"]}>訂單查詢</h6>
-            <h6 className={styles["body-text"]}>收藏名單</h6>
-            <h6 className={styles["body-text"]}>帳號刪除</h6>
-          </div>
-        </div>
+      <InfoNav />
+
         <div className={styles["info-main"]}>
           <h5 className={styles["main-title"]}>個人頭像</h5>
           <div className={styles["main-body"]}>
             <div className={styles["body-icon"]}>
               <UserIcon />
-              <div>
+              <h6>
                 上傳頭像 建議尺寸：360x360px 以上，圖片檔案大小不可超過 2MB
-              </div>
+              </h6>
             </div>
 
             <div className={styles["body-input"]}>
