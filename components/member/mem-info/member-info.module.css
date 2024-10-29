@@ -3,6 +3,8 @@
   flex-direction: column;
   height: calc(100vh - 120px);
   width: 100%;
+  position:fixed;
+  bottom: 0;
   background: linear-gradient(180deg, #fff 65%, #84ff79 90%, #14ff00);
   /* background-color: #000; */
 }
