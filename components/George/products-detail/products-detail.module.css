@@ -2,11 +2,13 @@
   width: 80vw;
   margin: 3em auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
+  gap: 150px;
   padding: 2em;
   background-color: #f8f9fa;  /* 增加背景色來區分內容區域 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* 添加陰影讓內容更加突出 */
   border-radius: 8px;  /* 讓容器有圓角 */
+
 }
 .albumpic {
   width: 40em;
@@ -19,7 +21,7 @@
   font-size: 32px;  /* 調整標題字體大小以使其更加突出 */
   font-weight: bold;
   color: #333;
-  text-align: center;
+  text-align: left;
   margin: 1em 0;
 }
 /* content */
@@ -27,18 +29,19 @@
   height: 50em;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 .content {
   width: 100%;
   display: flex;
+
 }
 .contentTitles {
-  width: 15em;
+  width: 8cap;
   font-size: 18px;
   display: inline-flex;
   flex-direction: column;
-  text-align: right;
+  text-align: left;
 }
 
 .contentTitles li, .contentDetails li {
@@ -52,6 +55,7 @@
   flex-direction: column;
   text-align: left;
   margin-left: 1em;
+
 }
 
 .contentTitles li:nth-child(6) {
@@ -66,7 +70,8 @@
 .totalAmount {
   font-size: 28px;
   font-weight: bold;
-  color: rgba(20, 255, 0, 1);  /* 使用醒目的顏色來強調總金額 */
+  /* color: rgba(20, 255, 0, 1); */
+  color: black;
   text-shadow: 1px 1px 1px black;
   text-align: center;
   margin: 1.5em 0;
