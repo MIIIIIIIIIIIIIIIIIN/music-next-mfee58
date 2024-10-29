@@ -3,8 +3,8 @@ import ProductsLatestLaunched from "@/components/George/products-mall/products-l
 import ProductsRecommendation from "@/components/George/products-mall/products-recommendation";
 import ProductsActivities from "@/components/George/products-mall/products-activities";
 import NavDesktop from "@/components/public/nav/desktop";
-import FooterDeskTop from "@/components/footer/desktop";
-import FooterMobile from "@/components/footer/mobile";
+import FooterDeskTop from "@/components/public/footer/desktop";
+import FooterMobile from "@/components/public/footer/mobile";
 import NavMobile from "@/components/public/nav/mobile";
 
 export default function ProductsPage() {
