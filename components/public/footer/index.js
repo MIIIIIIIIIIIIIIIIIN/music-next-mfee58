@@ -13,8 +13,14 @@ export default function Footer() {
     // 初次渲染時呼叫一次以設置初始狀態
     handleResize();
 
-    // 添加 resize 事件監聽器
-  })
+    // 添加事件監聽器以監測螢幕寬度變化
+    window.addEventListener("resize", handleResize);
+
+    // 清理事件監聽器以避免內存洩漏
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
