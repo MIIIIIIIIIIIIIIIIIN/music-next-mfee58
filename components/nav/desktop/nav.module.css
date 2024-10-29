@@ -80,6 +80,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
+  color: #111;
 }
 
 .iconsContainer {
