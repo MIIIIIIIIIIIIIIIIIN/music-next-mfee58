@@ -44,11 +44,14 @@ export default function Home() {
         <br />
 
         <br />
+        <span>size="small"</span>
         <ButtonToggleM size="small" />
         <br />
+        <span>size="medium"</span>
 
         <ButtonToggleM size="medium" />
         <br />
+        <span>size="large"</span>
 
         <ButtonToggleM size="large" />
         <br />
@@ -91,17 +94,30 @@ export default function Home() {
         <br />
         <hr />
         <h2>Form Input</h2>
+        <span> FormInput size="small"</span>
         <FormInput size="small" />
         <br />
         <br />
+        <span> FormInput size="medium"</span>
+
         <FormInput size="medium" />
         <br />
         <br />
+        <span> FormInput size="large"</span>
+        
         <FormInput size="large" />
         <br />
         <br />
-        <FormInputM size="textSmall" />
-        <FormInputM />
+        <hr/>
+        <h2>Form Input M</h2>
+        <h5>size="small</h5>
+        <FormInputM size="small" />
+        <br/>
+        <h5>size="medium</h5>
+        <FormInputM size="medium"/>
+        <br />
+        <h5>size="large</h5>
+        <FormInputM size="large" />
         <br />
         <br />
         <hr />

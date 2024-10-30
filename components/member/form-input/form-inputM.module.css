@@ -1,51 +1,29 @@
-.container {
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  padding: 20px 0;
+.input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.text {
-  /* font-size: 18px; */
-  /* padding: 10px 0; */
-  text-align:start;
-  padding: 10px 0px 10px 20px;
-  transition: background-color 0.3s; 
-  cursor: pointer; 
-  border-radius: 5px;
-
+.small {
+  width: 120px;
 }
 
-
-.textSmall {
-  width: 520px;
+.medium {
+  width: 200px;
 }
 
-.textMedium {
-  width: 220px;
+.large {
+  width: 300px;
 }
 
-.textLarge {
-  width: 340px;
-  width: 15vw;
-}
-
-
-.text:hover {
-  background-color: #000000; 
+.input:hover {
+  background-color: #000000; /* 改變背景色 */
   color: var(--basecolor);
-  /* padding: 10px 20px; */
-  border-top: 1px solid black; 
-  border-bottom: 1px solid black; 
+  /* padding: 10px 20px; 擴大內邊距，模擬效果 */
+  border-top: 1px solid black; /* 添加頂部邊框 */
+  border-bottom: 1px solid black; /* 保持底部邊框 */
   border-radius: 5px;
+  cursor:text;
   
 }
 
-.input {
-  font-size: 18px;
-  padding: 10px 0px 10px 20px;
-  border: 1px solid black;
-  border-radius: 5px;
-  outline: none; 
-  text-align: start;
-}

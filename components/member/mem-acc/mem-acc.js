@@ -10,7 +10,6 @@ import InfoNav from "../info-nav";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import MemIcons from "../mem-icons";
 
-
 const MemberACC = () => {
   const router = useRouter();
 
@@ -31,12 +30,21 @@ const MemberACC = () => {
             {/* 右側內容 */}
             <h5 className={styles["main-title"]}>(h5)帳號設定</h5>
             <div className={styles["main-body"]}>
-              <div className={styles["body-sec"]}>
+            <div className={styles["body-sec"]}>
                 <h7 className={styles["body-title"]}>帳號(不會顯示於頁面)</h7>
                 <div className={styles["body-input"]}>
-      <MemIcons /> {/* 預設 icon-mail, 中尺寸 */}
                 
-                  <FormInput />
+                  <MemIcons /> {/* 預設 icon-mail, 中尺寸 */}
+                  <FormInput size="large"/>
+
+                  <ButtonToggleM size="small" />
+                </div>
+              </div>              <div className={styles["body-sec"]}>
+                <h7 className={styles["body-title"]}>帳號(不會顯示於頁面)</h7>
+                <div className={styles["body-input"]}>
+                
+                  <MemIcons /> {/* 預設 icon-mail, 中尺寸 */}
+                  <FormInput size="small"/>
                   <ButtonToggleM size="small" />
                 </div>
               </div>
