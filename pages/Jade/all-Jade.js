@@ -110,13 +110,13 @@ export default function Home() {
         <br />
         <hr/>
         <h2>Form Input M</h2>
-        <h5>size="small</h5>
+        <h5>size="small w120</h5>
         <FormInputM size="small" />
         <br/>
-        <h5>size="medium</h5>
+        <h5>size="medium w200</h5>
         <FormInputM size="medium"/>
         <br />
-        <h5>size="large</h5>
+        <h5>size="large w300</h5>
         <FormInputM size="large" />
         <br />
         <br />

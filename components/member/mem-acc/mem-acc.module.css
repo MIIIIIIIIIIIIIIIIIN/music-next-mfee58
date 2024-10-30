@@ -26,7 +26,7 @@
 
 
 .main-title {
-  width: 100%;
+  width: 70%;
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -38,16 +38,31 @@
 .main-body {
   display: flex;
   flex-direction: column;
-  width: 100%; /* 填滿父層寬度 */
+  width: 70%;
+
   align-items: flex-start; /* 整體內容靠左 */
   padding-left: 20px; /* 可以調整為與 .main-title 一致的 padding */
+}
+.body-sec{
+  padding: 30px 0 0 0;
+}
+
+.body-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* 靠左對齊 */
+  width: 100%; /* 讓 .body-input 和父層寬度一致 */
+  margin-top: 10px; /* 添加與 .body-title 之間的間距 */
+  border-bottom: 1px solid var(--gray-2);
+  padding: 10px ;
+  gap: 30px;
 }
 
 .body-title{
   align-items: center;
   justify-content: left;
   display: flex;
-  padding: 30px 0 00;
+  /* padding: 30px ; */
 }
 
 
@@ -58,17 +73,15 @@
   flex: 8;
   /* background-color: #000; */
   height: 100%;
+
+  /* add */
+  position:relative;
+  background-image: url("/image/img-Jade/mem-bgImg.png");
+background-repeat: no-repeat;
+background-position: 60% 80% ;
 }
 
-.body-input {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start; /* 靠左對齊 */
-  width: 100%; /* 讓 .body-input 和父層寬度一致 */
-  margin-top: 10px; /* 添加與 .body-title 之間的間距 */
-  border-bottom: 1px solid var(--gray-2);
-  padding: 0 30px;
-}
+
 
 .input-right,
 .input-left {

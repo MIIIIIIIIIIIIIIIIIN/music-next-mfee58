@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Nav from "@/components/public/nav";
 import UserIcon from "../../public/user-icon";
 import FormOption from "../form-option";
-import FormInput from "../form-input";
+import FormInputM from "../form-input";
 import ButtonToggleM from "../button-show";
 import Dropdown from "../form-option";
 import InfoNav from "../info-nav";
@@ -30,21 +30,27 @@ const MemberACC = () => {
             {/* 右側內容 */}
             <h5 className={styles["main-title"]}>(h5)帳號設定</h5>
             <div className={styles["main-body"]}>
-            <div className={styles["body-sec"]}>
-                <h7 className={styles["body-title"]}>帳號(不會顯示於頁面)</h7>
+              <div className={styles["body-sec"]}>
+                <h6 className={styles["body-title"]}>帳號(不會顯示於頁面)</h6>
                 <div className={styles["body-input"]}>
-                
-                  <MemIcons /> {/* 預設 icon-mail, 中尺寸 */}
-                  <FormInput size="large"/>
-
+                  <MemIcons iconName="icon-user"/> {/* 預設 icon-mail, 中尺寸 */}
+                  <FormInputM size="medium" />
                   <ButtonToggleM size="small" />
                 </div>
-              </div>              <div className={styles["body-sec"]}>
-                <h7 className={styles["body-title"]}>帳號(不會顯示於頁面)</h7>
+              </div>
+              <div className={styles["body-sec"]}>
+                <h6 className={styles["body-title"]}>手機</h6>
                 <div className={styles["body-input"]}>
-                
-                  <MemIcons /> {/* 預設 icon-mail, 中尺寸 */}
-                  <FormInput size="small"/>
+                  <MemIcons iconName="icon-phone"/> {/* 預設 icon-mail, 中尺寸 */}
+                  <FormInputM size="medium" />
+                  <ButtonToggleM size="small" />
+                </div>
+              </div>
+              <div className={styles["body-sec"]}>
+                <h6 className={styles["body-title"]}>信箱</h6>
+                <div className={styles["body-input"]}>
+                  <MemIcons iconName="icon-mail"/> {/* 預設 icon-mail, 中尺寸 */}
+                  <FormInputM size="medium" />
                   <ButtonToggleM size="small" />
                 </div>
               </div>

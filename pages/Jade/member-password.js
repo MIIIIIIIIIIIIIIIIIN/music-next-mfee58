@@ -1,8 +1,18 @@
 import React from 'react'
-import MemberPassword from '@/components/member/mem-password' // 假設真正要渲染的組件名稱是 MemberPassword
+import Nav from '@/components/public/nav'
+// import MemberInfo from '@/components/member/mem-info/member-info'
+import FormInput from '@/components/public/form-input'
+import MemberPassword from '@/components/member/mem-password'
 
-export default function MemberPasswordPage() {
+export default function MemberTestPage() {
   return (
-    <MemberPassword />  // 使用 MemberPassword 組件，而不是遞歸調用 MemberPasswordPage
+    <>
+    {/* <Nav /> */}
+    {/* <div>member-page</div> */}
+    <MemberPassword />
+
+    </>
+
+
   )
 }

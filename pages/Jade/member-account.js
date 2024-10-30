@@ -1,8 +1,18 @@
 import React from 'react'
-import MemberAccount from '@/components/member/mem-account'
+import Nav from '@/components/public/nav'
+// import MemberInfo from '@/components/member/mem-info/member-info'
+import FormInput from '@/components/public/form-input'
+import MemberACC from '@/components/member/mem-acc/mem-acc'
 
-export default function MemberAccountPage() {
+export default function MemberTestPage() {
   return (
-    <MemberAccount />
+    <>
+    {/* <Nav /> */}
+    {/* <div>member-page</div> */}
+    <MemberACC />
+
+    </>
+
+
   )
 }

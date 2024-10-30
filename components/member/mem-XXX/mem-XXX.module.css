@@ -136,6 +136,18 @@
   margin: 5px 0;
 }
 
+/* 背景圖 */
+.XXX-main {
+  flex: 8;
+  /* background-color: #000; */
+  height: 100%;
+
+  /* add */
+  position:relative;
+  background-image: url("/image/img-Jade/mem-bgImg.png");
+background-repeat: no-repeat;
+background-position: 60% 80% ;
+}
 
 
 /* END */
