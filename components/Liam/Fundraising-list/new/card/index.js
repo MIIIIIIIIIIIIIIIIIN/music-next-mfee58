@@ -8,11 +8,12 @@ export default function NewCard({
   description='Broken Wings  / Electric Heartbeat / Waves of Recklessnes',
   progress,
   bgColor,
+  url
 }) {
   return (
     <div className={styles.card} style={{ backgroundColor: bgColor }}>
       <div className={styles.image}>
-        <img src="/path/to/image.jpg" alt={title} />
+        <img src={url} alt={title} />
     
       </div>
       <div className={styles.progress}>

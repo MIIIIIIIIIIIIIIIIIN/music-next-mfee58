@@ -1,215 +1,107 @@
-import React from 'react'
-import Button from '@/components/public/buttons'
-import Heart from '@/components/public/hearts'
-import WhiteWBtns from '@/components/public/white_wbtns'
+import React, { useState, useRef } from "react";
+import Button from "@/components/public/buttons";
+import Heart from "@/components/public/hearts";
+import WhiteWBtns from "@/components/public/white_wbtns";
+import styles from "./cate.module.css";
+import PlayButton from "../../play-button";
 
-export default function Commodity1({title}) {
+export default function Commodity1({ images = [] }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [position, setPosition] = useState(0);
+  const carouselRef = useRef(null);
+  const thumbnailsToShow = images.length * 50;
+  const carouse = useRef();
+
+  const handleThumbnailClick = (index) => {
+    setCurrentIndex(index);
+  };
+  console.log(thumbnailsToShow);
+  console.log(position);
+
+  const handlePrev = () => {
+    if (position > -thumbnailsToShow) {
+      const newPosition = position - 50; // 向右移動 50px
+      setPosition(newPosition);
+      if (carouselRef.current) {
+        carouselRef.current.style.left = `${newPosition}px`;
+      }
+    }
+  };
+
+  const handleNext = () => {
+    if (position != 0) {
+      const newPosition = position + 50; // 向左移動 50px
+      setPosition(newPosition);
+      if (carouselRef.current) {
+        carouselRef.current.style.left = `${newPosition}px`;
+      }
+    }
+  };
+
   return (
-    <>
-      <div className='container'>
-        <div className='left'>
-          <ul>
-            <li>
-              <a href='#'>
-                <div className='crossImg'>
-                  <img />
+    <div className={styles.container}>
+      <div className={styles.left}>
+        <ul>
+          {images.map((item, index) => (
+            <li key={index}>
+              <div className={styles.link} onClick={() => handleThumbnailClick(index)}>
+                <div className={styles.crossImg}>
+                  <img className={styles.cursorPointer} src={item.url}/>
                 </div>
-                <div className='bottom'>
-                  <h3 >
-                    xxxxx
-                  </h3>
-                  <p>
-                    xxxxxxxxxxxxxxxxxxxxxxxx
-                  </p>
+                <div className={styles.bottom}>
+                  <h3>xxxxx</h3>
+                  <p>xxxxxxxxxxxxxxxxxxxxxxxx</p>
                 </div>
-              </a>
+              </div>
             </li>
-            <li>
-              <a href='#'>
-                <div className='crossImg'>
-                  <img />
-                </div>
-                <div className='bottom'>
-                  <h3 >
-                    xxxxx
-                  </h3>
-                  <p>
-                    xxxxxxxxxxxxxxxxxxxxxxxx
-                  </p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href='#'>
-                <div className='crossImg'>
-                  <img />
-                </div>
-                <div className='bottom'>
-                  <h3 >
-                    xxxxx
-                  </h3>
-                  <p>
-                    xxxxxxxxxxxxxxxxxxxxxxxx
-                  </p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href='#'>
-                <div className='crossImg'>
-                  <img />
-                </div>
-                <div className='bottom'>
-                  <h3 >
-                    xxxxx
-                  </h3>
-                  <p>
-                    xxxxxxxxxxxxxxxxxxxxxxxx
-                  </p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href='#'>
-                <div className='crossImg'>
-                  <img />
-                </div>
-                <div className='bottom'>
-                  <h3 >
-                    xxxxx
-                  </h3>
-                  <p>
-                    xxxxxxxxxxxxxxxxxxxxxxxx
-                  </p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href='#'>
-                <div className='crossImg'>
-                  <img />
-                </div>
-                <div className='bottom'>
-                  <h3 >
-                    xxxxx
-                  </h3>
-                  <p>
-                    xxxxxxxxxxxxxxxxxxxxxxxx
-                  </p>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className='right'>
-          <div className='img'>
-            <div className='bg'>
-              <img />
-            </div>
-            <ul className='sm'>
-              <li>
-                <img></img>
-              </li>
-              <li>
-                <img></img>
-              </li>
-              <li>
-                <img></img>
-              </li>
-            </ul>
-            <WhiteWBtns type={3} style={{}}>前往專輯</WhiteWBtns>
-            <div className='margin'></div>
-            <WhiteWBtns type={3} >我的最愛</WhiteWBtns>
-          </div>
-        </div>
-
+          ))}
+        </ul>
       </div>
 
-
-      <style jsx>
-        {`
-        a{
-          text-decoration:none;
-          color:#333
-        }
-        .container{
-          width:80%;
-          display:flex;
-          margin:auto;
-          margin-top:60px
-          
-        }
-        .left{
-          flex-grow:1;
-        }
-        .right{
-          width:40%
-        }
-        .left ul{
-          
-          margin:auto;
-          display:flex;
-          flex-wrap:wrap;
-          justify-content:center;
-          list-style:none;
-        }
-        .left li{
-          border:1px solid #ccc;
-          width:20%;
-          margin:0 30px;
-          margin-bottom:30px
-          
-        }
-        .left  .bottom{
-          padding:10px;
-          {/* width:100%; */}
-        }
-        .left .bottom h3{
-          margin:0;
-        }
-        .left .bottom p{
-          margin:0;
-          word-wrap:break-word;;
-
-        }
-
-        .crossImg{
-          width:100%;
-        }
-       
-        .left  img{
-            width:100%;
-            height:150px;
-            background-color:#ccc;
-          }
-          .bg img{
-          width:100%;
-          height:250px;
-          background-color:#ccc;
-        } 
-          .right .img ul{
-            padding:0;
-            margin:10px 0;
-            width:100%;
-            display:flex;
-            gap: 10px;
-            list-style:none;
-            justify-content:space-between;
-          }
-          .right li {
-            flex-grow:1;
-            
-          }
-          .right .sm img{
-            width:100%;
-            height:70px;
-            background-color:#ccc;
-          }
-          .margin{
-            margin:10px 0;
-          }
-        `}
-      </style>
-    </ >
-  )
+      <div className={styles.right}>
+        <div className={styles.img}>
+          <div className={styles.bg}>
+            <img
+              src={images[currentIndex]?.url}
+              className={styles.cursorPointer}
+            />
+          </div>
+          <div className={styles.carouse}>
+            <button className={styles.button} onClick={handleNext}>
+              -
+            </button>
+            <div className={styles.crossSm}>
+              <ul
+                className={styles.sm}
+                ref={carouselRef}
+                style={{ left: `${position}px` }}
+              >
+                {images.map((image, index) => (
+                  <li key={index} className={styles.crossSmImg}>
+                    <img
+                      src={image.url}
+                      onClick={() => handleThumbnailClick(index)}
+                      className={styles.cursorPointer}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <button className={styles.button} onClick={handlePrev}>
+              +
+            </button>
+          </div>
+          <button className={styles.buttonBig}>
+            <p>前往專輯</p>
+          </button>
+          <button className={styles.buttonBig}>
+            <p>我的最愛</p>
+          </button>
+          <div className={styles.PlayButton}>
+           <PlayButton />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

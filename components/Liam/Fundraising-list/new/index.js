@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import NewCard from "./card";
 import styles from "./list.module.css";
 
-export default function ListNewCard() {
+export default function ListNewCard({ images = []}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const list = useRef();
 
@@ -36,7 +36,7 @@ export default function ListNewCard() {
           <button className={styles.button} onClick={handlePrevious}>&lt;</button>
           <div className={styles.cut}>
             <div className={styles.carousel} ref={list}>
-              {data.map((item, index) => (
+              {images.map((item, index) => (
                 <div key={index} className={styles.cardContainer}>
                   <NewCard {...item} />
                 </div>
