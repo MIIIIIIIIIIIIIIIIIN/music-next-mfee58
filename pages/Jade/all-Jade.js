@@ -12,6 +12,7 @@ import FormInputM from "@/components/member/form-input";
 import Button from "@/components/public/buttons";
 import ButtonToggleM from "@/components/member/button-show";
 import InfoNav from "@/components/member/info-nav";
+import MemIcons from "@/components/member/mem-icons";
 
 // import styles from "../styles/Home.module.css";
 
@@ -25,6 +26,17 @@ export default function Home() {
         <h1>All Components on One Page</h1>
         <hr />
         <br />
+        <h2>MemIcons</h2>
+      <h4>三種尺寸：16, 24, 48</h4>
+      <MemIcons /> {/* 預設 icon-mail, 中尺寸 */}
+      <MemIcons iconName="icon-mail" />
+      <MemIcons iconName="icon-user" size="small" /> {/* 小尺寸 */}
+      <MemIcons iconName="icon-user" size="medium" /> {/* 中尺寸 */}
+      <MemIcons iconName="icon-user" size="large" /> {/* 大尺寸 */}
+      <MemIcons iconName="icon-phone" /> {/* 預設中尺寸 */}
+      <br />
+      <br />
+      <hr/>
 
         <InfoNav />
         <br />
