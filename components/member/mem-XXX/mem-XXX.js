@@ -1,4 +1,4 @@
-import styles from "./member-info.module.css";
+import styles from "./mem-XXX.module.css";
 import { useRouter } from "next/router";
 import Nav from "@/components/public/nav";
 import UserIcon from "../../public/user-icon";
@@ -9,7 +9,7 @@ import Dropdown from "../form-option";
 import InfoNav from "../info-nav";
 import FooterDeskTop from "@/components/public/footer/desktop";
 
-const MemberInfo = () => {
+const MemberTest = () => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -20,12 +20,12 @@ const MemberInfo = () => {
     <>
       <Nav />
 
-      <div className={styles["member-info"]}>
+      <div className={styles["member-XXX"]}>
         <div className={styles.container}>
-        <div className={styles["info-nav"]}>
+        <div className={styles["XXX-nav"]}>
             <InfoNav />
           </div>
-          <div className={styles["info-main"]}>
+          <div className={styles["XXX-main"]}>
             <h5 className={styles["main-title"]}>(h5)個人頭像</h5>
 
             <div className={styles["main-body"]}>
@@ -76,4 +76,4 @@ const MemberInfo = () => {
   );
 };
 
-export default MemberInfo;
+export default MemberTest;

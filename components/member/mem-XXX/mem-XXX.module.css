@@ -1,4 +1,4 @@
-.member-info {
+.member-XXX {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 120px);
@@ -67,10 +67,10 @@
   display: flex;
 }
 
-.info-nav{
+.XXX-nav{
   flex: 2;
 }
-.info-main {
+.XXX-main {
   flex: 8;
   /* background-color: #000; */
   height: 100%;

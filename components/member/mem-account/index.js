@@ -3,97 +3,58 @@ import InfoNav from "../info-nav";
 import Nav from "@/components/public/nav";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import PasswordInput from "@/components/public/PasswordInput";
+import ButtonShow from "../button-show";
+import FormInput from "@/components/public/form-input";
 
 const MemberAccount = () => {
   return (
     <>
       <Nav />
-      <div className={styles.section3}>
-        <InfoNav />
-        <div className={styles.right}>
-          <div className={styles.line01}>
-            <div className={styles.container2}>
-              <h6 className={styles["main-title"]}>帳號設定</h6>
-            </div>
-            <div className={styles.s01}>
-              <div className={styles.frameParent}>
-                <div className={styles.frame}>
-                  <div className={styles.guavavibe}>帳號(不會顯示於頁面)</div>
-                </div>
-                <PasswordInput />
-                {/* <div className={styles.frameGroup}>
-                  <div className={styles.iconsEssentialsParent}>
-                    <img
-                      className={styles.iconsEssentials}
-                      alt=""
-                      src="icons-Essentials.svg"
-                    />
-                    <div className={styles.guavavibe}>GuavaVibe</div>
-                  </div>
-                  <div className={styles.check}>
-                    <div className={styles.check1}>
-                      <div className={styles.guavavibe}>已驗證</div>
-                    </div>
-                  </div>
-                </div> */}
-              </div>
-            </div>
-            <div className={styles.s01}>
-              <div className={styles.frameParent}>
-                <div className={styles.div9}>手機</div>
-                <PasswordInput />
-                
-                {/* <div className={styles.frameContainer}>
-                  <div className={styles.iconsEssentialsParent}>
-                    <img
-                      className={styles.iconsAudio}
-                      alt=""
-                      src="icons-Audio.svg"
-                    />
-                    <div
-                      className={styles.guavavibe}
-                    >{`(+886) 912-345-678 `}</div>
-                  </div>
-                  <div className={styles.check2}>
-                    <div className={styles.checkuncheck}>
-                      <div className={styles.guavavibe}>待驗證</div>
-                    </div>
-                  </div>
-                </div> */}
-              </div>
-            </div>
-            <div className={styles.s01}>
-              <div className={styles.frameParent}>
-                <div className={styles.frame}>
-                  <div className={styles.guavavibe}>信箱</div>
-                </div>
-                <PasswordInput />
 
-                {/* <div className={styles.frameGroup}>
-                  <div className={styles.iconsEssentialsParent}>
-                    <img
-                      className={styles.iconsAudio}
-                      alt=""
-                      src="icons-messages.svg"
-                    />
-                    <div className={styles.guavavibe}>ballad@gmail.com</div>
+      <div className={styles["member-acc"]}>
+        <div className={styles["container"]}>
+          <div className={styles["acc-nav"]}>
+            <InfoNav />
+          </div>
+          <div className={styles["main-container"]}>
+            <div className={styles["acc-main"]}>
+              <h6 className={styles["main-title"]}>帳號設定</h6>
+
+              <div className={styles["main-body"]}>
+                <div className={styles["body-sec"]}>
+                  <div className={styles["body-title"]}>帳號</div>
+                  <div className={styles["body-input"]}>
+                    <PasswordInput /> <ButtonShow size="small" />
                   </div>
-                  <div className={styles.check}>
-                    <div className={styles.check1}>
-                      <div className={styles.guavavibe}>已驗證</div>
-                    </div>
+                </div>
+
+                <div className={styles["body-sec"]}>
+                  <div className={styles["body-title"]}>信箱</div>
+                  <div className={styles["body-input"]}>
+                    <PasswordInput /> <ButtonShow size="small" />
                   </div>
-                </div> */}
+                </div>
+                <hr/>
+                <div className={styles["body-sec"]}>
+                  <div className={styles["body-title"]}>手機</div>
+                  <div className={styles["body-input"]}>
+                    <FormInput /> <ButtonShow size="small" />
+                  </div>
+                </div>
+                <div className={styles["body-sec"]}>
+                  <div className={styles["body-title"]}>手機</div>
+                  <div className={styles["body-input"]}>
+                    <FormInput /> <ButtonShow size="small" />
+                  </div>
+                </div>
               </div>
             </div>
-            {/* 背景線條底圖
-             <div className={styles.line01Inner}>
-              <img className={styles.frameChild} alt="" src="Vector 6.svg" />
-            </div> */}
           </div>
         </div>
+
       </div>
-      <FooterDeskTop />
+      {/* <FooterDeskTop /> */}
+
     </>
   );
 };

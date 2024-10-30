@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './ButtonShowM.module.css';
 
-const ButtonToggleM = ({ size = "large" }) => {
+const ButtonShow = ({ size = "large" }) => {
   const [isHidden, setIsHidden] = useState(false);
 
   // 根據 size prop 決定按鈕大小樣式
@@ -23,4 +23,4 @@ const ButtonToggleM = ({ size = "large" }) => {
   );
 };
 
-export default ButtonToggleM;
+export default ButtonShow;

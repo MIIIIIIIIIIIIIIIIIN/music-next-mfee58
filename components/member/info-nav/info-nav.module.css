@@ -9,10 +9,9 @@
 
 .nav-title {
   font-weight: bold;
-  /* margin-bottom: 30px; */
-  /* margin: 0 60px 100px 60px; */
-margin-bottom: 100px;
+  margin-bottom: 100px;
   cursor: pointer;
+  text-align: center;
 }
 .nav-title:hover {
   font-size: 26px;
@@ -48,4 +47,3 @@ margin-bottom: 100px;
   border-radius: 5px;
   /* font-size: 28px; */
 }
-
