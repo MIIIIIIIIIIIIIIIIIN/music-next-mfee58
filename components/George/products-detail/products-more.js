@@ -160,7 +160,7 @@ export default function ProductsMore() {
             margin: "0.5em 0em 0.5em 0em",
           }}
         >
-          更多不是周杰倫的專輯
+          你可能也喜歡
           <MdArrowForwardIos style={{ fontSize: "20px", marginLeft: "5px" }} />
         </h4>
         <div className="latestLaunch"></div>
@@ -218,7 +218,7 @@ export default function ProductsMore() {
           swipeable
         >
           {products.map((v, i) => {
-            return <Items1 key={i} image={v.image} />;
+            return <Items1 key={i} image={v.image} singer={v.singer} headline={v.headline}/>;
           })}
         </Carousel>
       </div>

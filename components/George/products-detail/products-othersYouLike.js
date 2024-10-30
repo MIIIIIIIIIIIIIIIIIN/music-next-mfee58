@@ -218,7 +218,7 @@ export default function OthersYouLike() {
           swipeable
         >
           {products.map((v, i) => {
-            return <Items1 key={i} image={v.image} />;
+            return <Items1 key={i} image={v.image} singer={v.singer} headline={v.headline}/>;
           })}
         </Carousel>
       </div>
