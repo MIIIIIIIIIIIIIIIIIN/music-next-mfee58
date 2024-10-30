@@ -30,7 +30,7 @@
   width: 1280px;
   gap: 50px;
   height: 100px;
-  top: 850px;
+  top: 850;
   bottom: 0px;
   left: 315px;
   box-shadow: -0.1px -0.1px 15px gray;
@@ -39,7 +39,7 @@
   opacity: 1;
 }
 
-.button-bar .frame {
+.frame {
   align-items: center;
   display: flex;
   gap: 20px;
@@ -48,7 +48,7 @@
   width: 769px;
 }
 
-.button-bar .logo-vertical {
+.logo-vertical {
   align-items: center;
   display: inline-flex;
   flex: 0 0 auto;
@@ -57,7 +57,7 @@
   position: relative;
 }
 
-.button-bar .guava-vibe {
+.guava-vibe {
   color: var(--basecolor);
   font-family: var(--secondary-400-font-family);
   font-size: var(--secondary-400-font-size);
@@ -65,13 +65,13 @@
   font-weight: var(--secondary-400-font-weight);
   letter-spacing: var(--secondary-400-letter-spacing);
   line-height: var(--secondary-400-line-height);
-  margin-top: -1.00px;
+  margin-top: -1px;
   position: relative;
   text-align: center;
   width: fit-content;
 }
 
-.button-bar .buttonbar-content {
+.buttonbar-content {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -79,7 +79,7 @@
   width: 592px;
 }
 
-.button-bar .text-wrapper {
+.text-wrapper {
   color: var(--black);
   font-family: var(--secondary-400-font-family);
   font-size: var(--secondary-400-font-size);
@@ -87,19 +87,19 @@
   font-weight: var(--secondary-400-font-weight);
   letter-spacing: var(--secondary-400-letter-spacing);
   line-height: var(--secondary-400-line-height);
-  margin-top: -1.00px;
+  margin-top: -1px;
   position: relative;
   text-align: center;
   width: fit-content;
 }
 
-.button-bar .small-words {
+.small-words {
   height: 24px;
   position: relative;
   width: 537px;
 }
 
-.button-bar .div {
+.div {
   color: var(--gray-1);
   font-family: var(--secondary-p-font-family);
   font-size: var(--secondary-p-font-size);
@@ -111,14 +111,13 @@
   position: absolute;
   text-align: center;
   top: 0;
-}
-
-.button-bar button {
   border: none;
   background-color: rgb(0, 0, 0, 0);
 }
 
-.button-bar .hand-index-thumb {
+
+
+.hand-index-thumb {
   height: 14px;
   left: 0;
   position: absolute;
@@ -126,7 +125,7 @@
   width: 14px;
 }
 
-.button-bar .text-wrapper-2 {
+.text-wrapper-2 {
   color: var(--gray-1);
   font-family: var(--secondary-p-font-family);
   font-size: var(--secondary-p-font-size);
@@ -138,9 +137,11 @@
   position: absolute;
   text-align: center;
   top: 0;
+  border: none;
+  background-color: rgb(0, 0, 0, 0);
 }
 
-.button-bar .finger2 {
+.finger2 {
   height: 13px;
   left: 128px;
   position: absolute;
@@ -148,7 +149,7 @@
   width: 14px;
 }
 
-.button-bar .delete {
+.delete {
   height: 21px;
   left: 270px;
   position: absolute;
@@ -156,7 +157,7 @@
   width: 21px;
 }
 
-.button-bar .text-wrapper-3 {
+.text-wrapper-3 {
   color: var(--gray-1);
   font-family: var(--secondary-p-font-family);
   font-size: var(--secondary-p-font-size);
@@ -170,7 +171,7 @@
   top: 0;
 }
 
-.button-bar .bottom-bar-buttons {
+.bottom-bar-buttons {
   align-items: center;
   display: flex;
   gap: 15px;
@@ -179,7 +180,7 @@
   width: 436px;
 }
 
-.button-bar .barbutton-addtocart {
+.barbutton-addtocart {
   all: unset;
   align-items: center;
   background-color: var(--black);
@@ -192,7 +193,7 @@
   width: 155px;
 }
 
-.button-bar .text-wrapper-4 {
+.text-wrapper-4 {
   color: var(--basecolor);
   font-family: var(--secondary-400-font-family);
   font-size: var(--secondary-400-font-size);
@@ -205,7 +206,7 @@
   width: fit-content;
 }
 
-.button-bar .div-wrapper {
+.div-wrapper {
   align-items: center;
   background-color: var(--black);
   border-radius: 10px;
@@ -217,4 +218,65 @@
 }
 
 
-/* @media (maxwidth: ) */
+/* 新增的縮小圖標樣式 */
+.cart-icon-container {
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.cart-icon {
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.cart-expanded {
+  position: fixed;
+  bottom: 120px;
+  right: 100px;
+  background-color: rgb(165, 165, 165, 0.15);
+  border-radius: 10px;
+  padding: 0px 5px;
+  width: 1280px;
+  height: 100px;
+  gap: 50px;
+  display: flex;
+  align-items: center;
+  box-shadow: -0.1px -0.1px 15px gray;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(20px);
+  z-index: 999;
+}
+
+
+/* 縮小圖標 hover 後展開購物車選項 */
+.cart-icon-container:hover .cart-expanded {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.cart-icon:hover {
+  background-color: #000;
+  color: rgba(20, 255, 0, 1);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+/* @media (maxwidth: 375px) */

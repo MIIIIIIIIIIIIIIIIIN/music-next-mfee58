@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import FooterMobile from "@/components/public/footer/mobile";
 import Nav from "@/components/public/nav";
+import { AddToCartBar } from "@/components/public/addtocart-bar/add-to-cart";
 import ProductsDetailPage from "@/components/George/products-detail/products-detail-page";
+import ProductsListen from "@/components/George/products-detail/products-listen";
+
 
 export default function ProductsDetail() {
   const [isMobile, setIsMobile] = useState(false);
@@ -36,6 +39,8 @@ export default function ProductsDetail() {
     <>
       <Nav />
       <ProductsDetailPage />
+      <ProductsListen />
+      <AddToCartBar />
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );
