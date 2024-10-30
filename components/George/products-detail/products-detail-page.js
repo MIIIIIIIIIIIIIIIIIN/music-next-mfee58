@@ -52,9 +52,9 @@ export default function ProductsDetailPage() {
                 <li>不是周杰倫</li>
                 <li>{<Quantity />}</li>
                 <li>
-                  <FaFacebookSquare size={30} />
-                  <FaLine size={30} />
-                  <FaSquareInstagram size={30} />
+                  <FaFacebookSquare size={30} className={style.icons}/>
+                  <FaLine size={30} className={style.icons} />
+                  <FaSquareInstagram size={30}/>
                 </li>
               </ul>
             </span>
