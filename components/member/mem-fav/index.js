@@ -1,144 +1,65 @@
 import styles from "./mem-fav.module.css";
 import Nav from "@/components/public/nav";
 import InfoNav from "../info-nav";
+import Heart from "@/components/public/hearts";
 
 const MemberFav = () => {
   return (
     <>
       <Nav />
-      <div className={styles.section5}>
-        <InfoNav />
-
-        <div className={styles.right}>
-          <div className={styles.favList}>
-            <div className={styles.container}>
-              <b className={styles.style}>收藏名單</b>
-            </div>
-            <div className={styles.favListInner}>
-              <div className={styles.frameParent}>
-                <div className={styles.frameGroup}>
-                  <div className={styles.frameWrapper}>
-                    <div className={styles.followingStreamParent}>
-                      <div className={styles.followingStream}>
-                        <img
-                          className={styles.followingStreamChild}
-                          alt=""
-                          src="Ellipse 23.png"
-                        />
-                        <div className={styles.streamerName}>
-                          Jimmy55555555555555
-                        </div>
-                      </div>
-                      <div className={styles.styleWrapper}>
-                        <div className={styles.style}>folk/country</div>
-                      </div>
-                      <div className={styles.heartWrapper}>
-                        <img
-                          className={styles.heartIcon}
-                          alt=""
-                          src="heart.svg"
-                        />
-                      </div>
-                    </div>
+      <div className={styles["member-fav"]}>
+        <div className={styles["container"]}>
+          <div className={styles["favNav"]}>
+            <InfoNav />
+          </div>
+          <div className={styles.favMain}>
+            <h5 className={styles.mainTitle}>收藏名單</h5>
+            <div className={styles.mainBody}>
+              <div className={styles.favInfo}>
+                <div className={styles.info1}>
+                  <div className={styles.favIcon}>
+                    <img
+                      src="/image/img-Jade/aimyon.png"
+                      alt="icon-aimyon"
+                      className={styles.photo}
+                    />
                   </div>
-                  <div className={styles.frameWrapper}>
-                    <div className={styles.followingStreamParent}>
-                      <div className={styles.followingStream}>
-                        <img
-                          className={styles.followingStreamChild}
-                          alt=""
-                          src="Ellipse 23.png"
-                        />
-                        <div className={styles.streamerName}>
-                          Jimmy55555555555555
-                        </div>
-                      </div>
-                      <div className={styles.styleWrapper}>
-                        <div className={styles.style}>folk/country</div>
-                      </div>
-                      <div className={styles.heartWrapper}>
-                        <img
-                          className={styles.heartIcon}
-                          alt=""
-                          src="heart.svg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.frameWrapper}>
-                    <div className={styles.followingStreamParent}>
-                      <div className={styles.followingStream}>
-                        <img
-                          className={styles.followingStreamChild}
-                          alt=""
-                          src="Ellipse 23.png"
-                        />
-                        <div className={styles.streamerName}>
-                          Jimmy55555555555555
-                        </div>
-                      </div>
-                      <div className={styles.styleWrapper}>
-                        <div className={styles.style}>folk/country</div>
-                      </div>
-                      <div className={styles.heartWrapper}>
-                        <img
-                          className={styles.heartIcon}
-                          alt=""
-                          src="heart.svg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.frameWrapper}>
-                    <div className={styles.followingStreamParent}>
-                      <div className={styles.followingStream}>
-                        <img
-                          className={styles.followingStreamChild}
-                          alt=""
-                          src="Ellipse 23.png"
-                        />
-                        <div className={styles.streamerName}>
-                          Jimmy55555555555555
-                        </div>
-                      </div>
-                      <div className={styles.styleWrapper}>
-                        <div className={styles.style}>folk/country</div>
-                      </div>
-                      <div className={styles.heartWrapper}>
-                        <img
-                          className={styles.heartIcon}
-                          alt=""
-                          src="heart.svg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.frameWrapper}>
-                    <div className={styles.followingStreamParent}>
-                      <div className={styles.followingStream}>
-                        <img
-                          className={styles.followingStreamChild}
-                          alt=""
-                          src="Ellipse 23.png"
-                        />
-                        <div className={styles.streamerName}>
-                          Jimmy55555555555555
-                        </div>
-                      </div>
-                      <div className={styles.styleWrapper}>
-                        <div className={styles.style}>folk/country</div>
-                      </div>
-                      <div className={styles.heartWrapper}>
-                        <img
-                          className={styles.heartIcon}
-                          alt=""
-                          src="heart.svg"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  <p className={styles.favName}>aimyonnnnnnnn-p</p>
                 </div>
-                <img className={styles.frameChild} alt="" src="Line 12.svg" />
+                <p className={styles.favInfo}>J-POP-p</p>
+                <div className={styles.favInfo}><Heart /></div>
+              </div>
+            </div>
+            <div className={styles.mainBody}>
+              <div className={styles.favInfo}>
+                <div className={styles.info1}>
+                  <div className={styles.favIcon}>
+                    <img
+                      src="/image/img-Jade/aimyon.png"
+                      alt="icon-aimyon"
+                      className={styles.photo}
+                    />
+                  </div>
+                  <p className={styles.favName}>aimyonnnnnnnn-p</p>
+                </div>
+                <p className={styles.favInfo}>J-POP-p</p>
+                <div className={styles.favInfo}><Heart /></div>
+              </div>
+            </div>
+            <div className={styles.mainBody}>
+              <div className={styles.favInfo}>
+                <div className={styles.info1}>
+                  <div className={styles.favIcon}>
+                    <img
+                      src="/image/img-Jade/aimyon.png"
+                      alt="icon-aimyon"
+                      className={styles.photo}
+                    />
+                  </div>
+                  <p className={styles.favName}>aimyonnnnnnnn-p</p>
+                </div>
+                <p className={styles.favInfo}>J-POP-p</p>
+                <div className={styles.favInfo}><Heart /></div>
               </div>
             </div>
           </div>

@@ -37,9 +37,9 @@ const MemberPassword = () => {
                   </div>
                 </div>
                 <div className={styles["body-sec"]}>
-                  <h7 className={styles["body-title"]}>信箱</h7>
+                  <h7 className={styles["body-title"]}>確認新密碼</h7>
                   <div className={styles["body-input"]}>
-                    <PasswordInput size="large" placeholder="請輸入信箱" isEmail={true}/> 
+                    <PasswordInput size="large" placeholder="請輸入新密碼"/> 
                   </div>
                 </div>
 
