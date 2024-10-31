@@ -59,7 +59,7 @@ const MemberPassword = () => {
                 <div className={styles["body-sec"]}>
                   <div className={styles["body-title"]}>信箱</div>
                   <div className={styles["body-input"]}>
-                    <PasswordInput /> <ButtonShow size="small" />
+                    <PasswordInput size="large" placeholder="請輸入信箱" isEmail={true}/> 
                   </div>
                 </div>
               </div>

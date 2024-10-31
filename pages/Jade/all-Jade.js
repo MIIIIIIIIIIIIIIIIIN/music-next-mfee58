@@ -5,6 +5,7 @@ import FormCheckbox from "@/components/public/form-checkbox";
 import FormOption from "@/components/public/form-option";
 import FormInput from "@/components/public/form-input";
 import PasswordInput from "@/components/public/PasswordInput";
+
 import PlayButton from "@/components/public/play-button";
 import PlayButtonS from "@/components/public/play-button-s";
 import Mp3Uploader from "@/components/public/mp3-uploader";
@@ -27,32 +28,29 @@ export default function Home() {
         <hr />
         <br />
         <h2>MemIcons</h2>
-      <h4>三種尺寸：16, 24, 48</h4>
-      <MemIcons /> {/* 預設 icon-mail, 中尺寸 */}
-      <MemIcons iconName="icon-mail" />
-      <MemIcons iconName="icon-user" size="small" /> {/* 小尺寸 */}
-      <MemIcons iconName="icon-user" size="medium" /> {/* 中尺寸 */}
-      <MemIcons iconName="icon-user" size="large" /> {/* 大尺寸 */}
-      <MemIcons iconName="icon-phone" /> {/* 預設中尺寸 */}
-      <br />
-      <br />
-      <hr/>
-
+        <h4>三種尺寸：16, 24, 48</h4>
+        <MemIcons /> {/* 預設 icon-mail, 中尺寸 */}
+        <MemIcons iconName="icon-mail" />
+        <MemIcons iconName="icon-user" size="small" /> {/* 小尺寸 */}
+        <MemIcons iconName="icon-user" size="medium" /> {/* 中尺寸 */}
+        <MemIcons iconName="icon-user" size="large" /> {/* 大尺寸 */}
+        <MemIcons iconName="icon-phone" /> {/* 預設中尺寸 */}
+        <br />
+        <br />
+        <hr />
         <InfoNav />
         <br />
         <hr />
         <br />
-
         <br />
+        <h2>ButtonToggleM</h2>
         <span>size="small"</span>
         <ButtonToggleM size="small" />
         <br />
         <span>size="medium"</span>
-
         <ButtonToggleM size="medium" />
         <br />
         <span>size="large"</span>
-
         <ButtonToggleM size="large" />
         <br />
         <hr />
@@ -71,7 +69,6 @@ export default function Home() {
           ]}
           interval={3000}
         />
-
         <br />
         <br />
         <br />
@@ -99,22 +96,20 @@ export default function Home() {
         <br />
         <br />
         <span> FormInput size="medium"</span>
-
         <FormInput size="medium" />
         <br />
         <br />
         <span> FormInput size="large"</span>
-        
         <FormInput size="large" />
         <br />
         <br />
-        <hr/>
+        <hr />
         <h2>Form Input M</h2>
         <h5>size="small w120</h5>
         <FormInputM size="small" />
-        <br/>
+        <br />
         <h5>size="medium w200</h5>
-        <FormInputM size="medium"/>
+        <FormInputM size="medium" />
         <br />
         <h5>size="large w300</h5>
         <FormInputM size="large" />
@@ -122,9 +117,18 @@ export default function Home() {
         <br />
         <hr />
         <h2>Password Input</h2>
+        <span>Default</span>
         <PasswordInput />
         <br />
-
+        <span>size="small"</span>
+        <PasswordInput size="small" />
+        <br />
+        <span>size="medium"</span>
+        <PasswordInput size="medium" />
+        <br />
+        <span>size="large"</span>
+        <PasswordInput size="large"/>
+        <br />
         <hr />
         <h2>Play Button</h2>
         <PlayButton size="small" />
@@ -144,7 +148,6 @@ export default function Home() {
         <br />
         <br />
         <FormInputM />
-
         {/*
         <br />
         <br />
