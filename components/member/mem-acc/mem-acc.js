@@ -9,12 +9,24 @@ import Dropdown from "../form-option";
 import InfoNav from "../info-nav";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import MemIcons from "../mem-icons";
+import { useState } from "react";
 
 const MemberACC = () => {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [isEmailValid, setEmailValid] = useState(true);
 
   const handleClick = () => {
     router.push("/");
+  };
+
+  const handleEmailChange = (e) => {
+    const emailValue = e.target.value;
+    setEmail(emailValue);
+
+    // 基本的信箱格式檢查(包含 @符號 以及 .符號)
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setEmailValid(emailPattern.test(emailValue));
   };
 
   return (
@@ -33,7 +45,8 @@ const MemberACC = () => {
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>帳號(不會顯示於頁面)</h6>
                 <div className={styles["body-input"]}>
-                  <MemIcons iconName="icon-user"/> {/* 預設 icon-mail, 中尺寸 */}
+                  <MemIcons iconName="icon-user" />
+                  {/* 預設 icon-mail, 中尺寸 */}
                   <FormInputM size="medium" />
                   <ButtonToggleM size="small" />
                 </div>
@@ -41,7 +54,8 @@ const MemberACC = () => {
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>手機</h6>
                 <div className={styles["body-input"]}>
-                  <MemIcons iconName="icon-phone"/> {/* 預設 icon-mail, 中尺寸 */}
+                  <MemIcons iconName="icon-phone" />
+                  {/* 預設 icon-mail, 中尺寸 */}
                   <FormInputM size="medium" />
                   <ButtonToggleM size="small" />
                 </div>
@@ -49,10 +63,20 @@ const MemberACC = () => {
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>信箱</h6>
                 <div className={styles["body-input"]}>
-                  <MemIcons iconName="icon-mail"/> {/* 預設 icon-mail, 中尺寸 */}
-                  <FormInputM size="medium" />
+                  <MemIcons iconName="icon-mail" />
+                  {/* 預設 icon-mail, 中尺寸 */}
+                  <FormInputM
+                    size="medium"
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
                   <ButtonToggleM size="small" />
                 </div>
+                {!isEmailValid && (
+                  <div className={styles["error-text"]}>
+                    請輸入有效的信箱地址
+                  </div>
+                )}
               </div>
             </div>
           </div>

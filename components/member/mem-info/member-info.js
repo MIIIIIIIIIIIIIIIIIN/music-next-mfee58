@@ -40,13 +40,13 @@ const MemberInfo = () => {
                 <div className={styles["input-left"]}>
                   {/* 左側內容 */}
 
-                  <h7 className={styles["left-title"]}>(h7)暱稱(顯示名稱)</h7>
+                  <h6 className={styles["left-title"]}>(h6)暱稱(顯示名稱)</h6>
 
                   <div className={styles["left-text"]}>
                     <FormInput />
                   </div>
 
-                  <h7 className={styles["left-title"]}>暱稱(顯示名稱)</h7>
+                  <h6 className={styles["left-title"]}>暱稱(顯示名稱)</h6>
 
                   <div className={styles["left-text"]}>
                     <FormInput />
@@ -56,12 +56,12 @@ const MemberInfo = () => {
                 <div className={styles["input-right"]}>
                   {/* 右側內容 */}
 
-                  <h7 className={styles["right-title"]}>性別</h7>
+                  <h6 className={styles["right-title"]}>性別</h6>
                   <div className={styles["right-text"]}>
                     <Dropdown type="gender" />
                     <ButtonToggleM size="small" />
                   </div>
-                  <h7 className={styles["right-title"]}>所在地</h7>
+                  <h6 className={styles["right-title"]}>所在地</h6>
                   <div className={styles["right-text"]}>
                     <Dropdown type="region" />
                     <ButtonToggleM size="small" />
