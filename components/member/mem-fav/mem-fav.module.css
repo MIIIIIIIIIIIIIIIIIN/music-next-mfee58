@@ -23,6 +23,7 @@
 .favMain {
   flex: 8;
   /* background-color: #000; */
+  /* border: 1px solid #ddd; */
   height: 80%;
 }
 
@@ -30,7 +31,8 @@
   width: 100%;
   font-weight: bold;
   display: flex;
-  margin: 0 70px 70px;
+  padding: 0 70px;
+  margin-bottom: 70px;
   /* align-items: flex-start; */
 }
 
@@ -41,23 +43,61 @@
   /* justify-content: space-around; */
   /* margin: 50px; */
   /* padding: 50px; */
+  max-height: 70%; /* 設置容器最大高度，視需求調整 */
+  overflow-y: auto; /* 當內容超過高度時顯示垂直滾動條 */
+  width: 70%;
 }
 
+/* 捲軸寬度和高度（垂直和水平捲軸） */
+.mainBody::-webkit-scrollbar {
+  width: 20px; /* 垂直捲軸寬度 */
+  height: 8px; /* 水平捲軸高度（如果需要） */
+}
+
+/* 捲軸軌道的樣式 */
+.mainBody::-webkit-scrollbar-track {
+  background: var(--gray-2); /* 軌道背景色 */
+  border-radius: 5px; /* 軌道圓角 */
+  border: var(--basecolor) 2px solid; /* 軌道邊框*/
+}
+
+/* 捲軸滑塊的樣式 */
+.mainBody::-webkit-scrollbar-thumb {
+  background: var(--gray-1); /* 滑塊顏色 */
+  border-radius: 5px; /* 滑塊圓角 */
+  border: black 2px solid; /* 軌道邊框*/
+
+}
+
+/* 當滑塊被懸停時的樣式 */
+.mainBody::-webkit-scrollbar-thumb:hover {
+  background: var(--basecolor); /* 滑塊懸停顏色 */
+}
+/* ------------------------------ */
 .favInfo {
   display: flex;
   flex-direction: row;
-  margin:20px 70px;
+  margin: 15px 70px;
   align-items: center;
 }
 
+.favInfo:hover {
+  cursor: pointer;
+  background-color: black;
+  color: var(--basecolor);
+  border-radius: 5px;
+  margin: 15px 70px;
+
+}
+
 .info1 {
+  margin: 0 10px;
   display: flex;
   flex-direction: row;
-  
 }
 
 .favIcon {
-  margin-right:20px;
+  margin-right: 20px;
   width: 50px;
   height: 50px;
   overflow: hidden;
@@ -80,3 +120,4 @@
   align-items: center;
   /* 样式内容 */
 }
+

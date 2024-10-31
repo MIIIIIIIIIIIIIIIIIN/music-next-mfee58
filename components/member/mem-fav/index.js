@@ -29,8 +29,90 @@ const MemberFav = () => {
                 <p className={styles.favInfo}>J-POP-p</p>
                 <div className={styles.favInfo}><Heart /></div>
               </div>
-            </div>
-            <div className={styles.mainBody}>
+              <div className={styles.favInfo}>
+                <div className={styles.info1}>
+                  <div className={styles.favIcon}>
+                    <img
+                      src="/image/img-Jade/aimyon.png"
+                      alt="icon-aimyon"
+                      className={styles.photo}
+                    />
+                  </div>
+                  <p className={styles.favName}>aimyonnnnnnnn-p</p>
+                </div>
+                <p className={styles.favInfo}>J-POP-p</p>
+                <div className={styles.favInfo}><Heart /></div>
+              </div>
+              <div className={styles.favInfo}>
+                <div className={styles.info1}>
+                  <div className={styles.favIcon}>
+                    <img
+                      src="/image/img-Jade/aimyon.png"
+                      alt="icon-aimyon"
+                      className={styles.photo}
+                    />
+                  </div>
+                  <p className={styles.favName}>aimyonnnnnnnn-p</p>
+                </div>
+                <p className={styles.favInfo}>J-POP-p</p>
+                <div className={styles.favInfo}><Heart /></div>
+              </div>
+              <div className={styles.favInfo}>
+                <div className={styles.info1}>
+                  <div className={styles.favIcon}>
+                    <img
+                      src="/image/img-Jade/aimyon.png"
+                      alt="icon-aimyon"
+                      className={styles.photo}
+                    />
+                  </div>
+                  <p className={styles.favName}>aimyonnnnnnnn-p</p>
+                </div>
+                <p className={styles.favInfo}>J-POP-p</p>
+                <div className={styles.favInfo}><Heart /></div>
+              </div>
+              <div className={styles.favInfo}>
+                <div className={styles.info1}>
+                  <div className={styles.favIcon}>
+                    <img
+                      src="/image/img-Jade/aimyon.png"
+                      alt="icon-aimyon"
+                      className={styles.photo}
+                    />
+                  </div>
+                  <p className={styles.favName}>aimyonnnnnnnn-p</p>
+                </div>
+                <p className={styles.favInfo}>J-POP-p</p>
+                <div className={styles.favInfo}><Heart /></div>
+              </div>
+              <div className={styles.favInfo}>
+                <div className={styles.info1}>
+                  <div className={styles.favIcon}>
+                    <img
+                      src="/image/img-Jade/aimyon.png"
+                      alt="icon-aimyon"
+                      className={styles.photo}
+                    />
+                  </div>
+                  <p className={styles.favName}>aimyonnnnnnnn-p</p>
+                </div>
+                <p className={styles.favInfo}>J-POP-p</p>
+                <div className={styles.favInfo}><Heart /></div>
+              </div>
+              <div className={styles.favInfo}>
+                <div className={styles.info1}>
+                  <div className={styles.favIcon}>
+                    <img
+                      src="/image/img-Jade/aimyon.png"
+                      alt="icon-aimyon"
+                      className={styles.photo}
+                    />
+                  </div>
+                  <p className={styles.favName}>aimyonnnnnnnn-p</p>
+                </div>
+                <p className={styles.favInfo}>J-POP-p</p>
+                <div className={styles.favInfo}><Heart /></div>
+              </div>
               <div className={styles.favInfo}>
                 <div className={styles.info1}>
                   <div className={styles.favIcon}>
@@ -46,22 +128,8 @@ const MemberFav = () => {
                 <div className={styles.favInfo}><Heart /></div>
               </div>
             </div>
-            <div className={styles.mainBody}>
-              <div className={styles.favInfo}>
-                <div className={styles.info1}>
-                  <div className={styles.favIcon}>
-                    <img
-                      src="/image/img-Jade/aimyon.png"
-                      alt="icon-aimyon"
-                      className={styles.photo}
-                    />
-                  </div>
-                  <p className={styles.favName}>aimyonnnnnnnn-p</p>
-                </div>
-                <p className={styles.favInfo}>J-POP-p</p>
-                <div className={styles.favInfo}><Heart /></div>
-              </div>
-            </div>
+           
+
           </div>
         </div>
       </div>
