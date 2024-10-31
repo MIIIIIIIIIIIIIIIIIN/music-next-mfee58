@@ -2,17 +2,11 @@ import React, { useState, useEffect } from "react";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import FooterMobile from "@/components/public/footer/mobile";
 import Nav from "@/components/public/nav";
-import { AddToCartBar } from "@/components/public/addtocart-bar/add-to-cart";
-import ProductsDetailPage from "@/components/George/products-detail/products-detail-page";
-import ProductsListen from "@/components/George/products-detail/products-listen";
-import ProductsDescription from "@/components/George/products-detail/products-description";
-import ProductsMore from "@/components/George/products-detail/products-more";
-import OthersYouLike from "@/components/George/products-detail/products-othersYouLike";
+import ProductsCart from "@/components/George/products-cart/products-cart";
 
-export default function ProductsDetail() {
+export default function ProductsCartPage(props) {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
-
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
     const handleResize = () => {
@@ -36,15 +30,11 @@ export default function ProductsDetail() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <>
       <Nav />
-      <ProductsDetailPage />
-      <ProductsListen />
-      <ProductsDescription />
-      <ProductsMore />
-      <OthersYouLike />
-      <AddToCartBar/>
+      <ProductsCart />
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

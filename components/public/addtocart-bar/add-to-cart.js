@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 export const AddToCartBar = () => {
   const [show, setShow] = useState(false);
   const [atBottom, setAtBottom] = useState(false);
+  const [smallBar, setSmallBar] = useState(false);
 
   useEffect(() => {
     const comparingScroll = () => {
@@ -30,10 +31,13 @@ export const AddToCartBar = () => {
 
   useEffect(() => {
     const handlerScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 50 && window.innerWidth > 400) {
         setShow(true);
+      } else if (window.innerWidth < 400 && window.scrollY > 50) {
+        setSmallBar(true);
       } else {
         setShow(false);
+        setSmallBar(false);
       }
     };
     window.addEventListener("scroll", handlerScroll);
@@ -44,13 +48,13 @@ export const AddToCartBar = () => {
 
   return (
     <>
-      {atBottom ? (
+      {smallBar ? '' : atBottom ? (
         <div className={`${styles["cart-icon-container"]}`}>
           <div className={styles["cart-icon"]}>
             <BsCart4 size={32} />
           </div>
-            <div className={`${styles["cart-expanded"]}`}>
-          <div className={styles["frame"]}>
+          <div className={`${styles["cart-expanded"]}`}>
+            <div className={styles["frame"]}>
               <div className={styles["logo-vertical"]}>
                 <div className={styles["guava-vibe"]}>GuavaVibe</div>
               </div>
@@ -83,10 +87,9 @@ export const AddToCartBar = () => {
               <div className={styles["div-wrapper"]}>
                 <div className={styles["text-wrapper-4"]}>Cart</div>
               </div>
-              </div>
             </div>
           </div>
-        
+        </div>
       ) : (
         <>
           <div

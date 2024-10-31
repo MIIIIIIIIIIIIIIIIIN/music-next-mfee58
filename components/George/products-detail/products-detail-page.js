@@ -1,8 +1,8 @@
 import React from "react";
 import style from "./products-detail.module.css";
-import WhiteWBtns from "./white_wbtns";
-import BlackWBtns from "./black_wbtns";
-import { Quantity } from "./quantity/quantity";
+import WhiteWBtns from "../george-components/white_wbtns";
+import BlackWBtns from "../george-components/black_wbtns";
+import { Quantity } from "../george-components/quantity/quantity";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaLine } from "react-icons/fa6";
 import { FaSquareInstagram } from "react-icons/fa6";

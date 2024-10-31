@@ -29,6 +29,7 @@ export default function ProductsDescription() {
         </div>
         {/* 右邊詳述 */}
         <div className={style.desBox}>
+          <h2>Description</h2>
           <p>
             {" "}
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum impedit
