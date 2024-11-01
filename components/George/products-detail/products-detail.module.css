@@ -89,7 +89,9 @@
   text-align: center;
   margin: 1em 0;
 }
-
+.icons{
+  margin-right: 10px;
+}
 
 @media (max-width: 375px){
   .containBox {

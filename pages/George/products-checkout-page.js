@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import FooterMobile from "@/components/public/footer/mobile";
 import Nav from "@/components/public/nav";
-import ProductsCart from "@/components/George/products-cart-checkout/products-cart";
+import ProductsCheckout from "@/components/George/products-cart-checkout/products-checkout";
 
-export default function ProductsCartPage(props) {
+export default function ProductsCheckoutPage(props) {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function ProductsCartPage(props) {
   return (
     <>
       <Nav />
-      <ProductsCart />
+      <ProductsCheckout />
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

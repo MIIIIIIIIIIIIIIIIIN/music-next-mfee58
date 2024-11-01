@@ -160,7 +160,7 @@ export default function ProductsMore() {
             margin: "0.5em 0em 0.5em 0em",
           }}
         >
-          你可能也喜歡
+          其他不是周杰倫的專輯
           <MdArrowForwardIos style={{ fontSize: "20px", marginLeft: "5px" }} />
         </h4>
         <div className="latestLaunch"></div>

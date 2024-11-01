@@ -1,0 +1,226 @@
+.container {
+  width: 60vw;
+  margin: 30px auto 100px;
+}
+/* checkbox */
+.checkoutcontainer1 input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  background-color: white;
+  border: 2px solid gray;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+.checkoutcontainer1 input[type="checkbox"]:checked {
+  background-color: white;
+  border: 2px solid black;
+}
+.checkoutcontainer1 input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid black;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+.checkoutcontainer1 input[type="checkbox"]:hover {
+  background-color: lightgray;
+  transform: scale(1.1);
+}
+
+/* 購物車結帳流程 */
+.checkingout {
+  width: 800px;
+  margin: 0 auto 50px;
+}
+.checkingoutlist {
+  display: flex;
+  width: 100%;
+}
+.checkingoutlist li {
+  width: 100%;
+  font-size: 24px;
+  margin-right: 50px;
+  text-align: center;
+}
+.procedure {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  text-align: center;
+  line-height: 35px;
+  background-color: lightgray;
+  color: white;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.proceduring {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  text-align: center;
+  line-height: 35px;
+  background-color: black;
+  color: rgba(20, 255, 0, 1);
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* 購買細項 */
+.checkoutcontainer {
+  width: 100%;
+  margin: 50px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.checkoutcontainer1 {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.albumbox {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+.albumpics {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 5px gray;
+}
+.checkoutdescriptions {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+.descriptionstitle {
+  font-weight: bold;
+}
+.descriptionsalbumname {
+  font-size: 18px;
+  margin-top: 5px;
+}
+.descriptionscontent {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+/* Price */
+.checkoutdirectorybox {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  height: 250px;
+  width: 300px;
+  margin: 25px 50px 0;
+}
+.checkoutdirectory {
+  font-size: 24px;
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+}
+
+/* seperation line */
+.seperationline {
+  width: 100%;
+  margin: 50px auto;
+  border: 1.5px solid rgb(51, 51, 51);
+}
+
+/* payment and address confirming */
+/* left side */
+.bottomcontainbox {
+  padding: auto;
+}
+.paymentandaddress {
+  display: flex;
+  justify-content: end;
+  padding-right: 100px;
+}
+.totalamount {
+  font-size: 24px;
+  margin-right: 30px;
+}
+.payaddresstitle {
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  background-color: var(--gray-2);
+  color: var(--black);
+  border: 1.5px solid black;
+  border-bottom: none;
+}
+.PandAdirectory {
+  display: flex;
+  gap: 50px;
+  border: 1.5px solid black;
+  padding: 20px;
+}
+.padirectory li {
+  margin-bottom: 20px;
+}
+
+/* right side */
+.finalcheck {
+  margin-left: 100px;
+  margin-right: 80px;
+}
+.finalcheckbox {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1.5px solid black;
+  padding: 20px;
+}
+.finalchecktitle {
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  background-color: var(--gray-2);
+  color: var(--black);
+  border: 1.5px solid black;
+  border-bottom: none;
+}
+.finalcheckdirectorybox {
+  display: flex;
+  flex-direction: row;
+}
+.finalcheckdirectory li {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+.finalcheckdirectory {
+  margin: 2px auto;
+}
+.paymentseperationline {
+  border: 1px solid black;
+}
+.finaltotalbox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.finaltotal {
+  font-size: 20px;
+  display: flex;
+  gap: 100px;
+  justify-content: center;
+}
+
+.colors {
+  --gray-1: rgba(104, 104, 104, 1);
+  --gray-2: rgba(216, 219, 216, 1);
+  --basecolor: rgba(20, 255, 0, 1);
+  --black: rgba(0, 0, 0, 1);
+  --subcolor: rgba(255, 225, 0, 1);
+  --white: rgba(255, 255, 255, 1);
+}

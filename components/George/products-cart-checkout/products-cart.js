@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./products-cart.module.css";
 import BlackWBtns from "../george-components/black_wbtns";
+import { Quantity } from "../george-components/quantity/quantity";
 
 export default function ProductsCart(props) {
   const handleClick = () => {
@@ -41,13 +42,15 @@ export default function ProductsCart(props) {
                 <h4 className={style.descriptionstitle}>七里香</h4>
                 <div className={style.descriptionsalbumname}>不是周杰倫</div>
                 <div className={style.descriptionscontent}>
-                在孤獨的呢喃中尋找心靈的平靜，這張專輯融合了民謠與電子元素。
+                  在孤獨的呢喃中尋找心靈的平靜，這張專輯融合了民謠與電子元素。
                 </div>
               </div>
-              <div className={style.checkoutquantity}>quantity</div>
+              <div className={style.checkoutquantity}>{<Quantity />}</div>
             </div>
           </div>
-          <div className={style.checkoutprice}>$549</div>
+          <div className={style.checkoutpircebox}>
+            <div className={style.checkoutprice}>$549</div>
+          </div>
         </div>
 
         {/* seperation line */}
@@ -57,13 +60,13 @@ export default function ProductsCart(props) {
         <div className={style.totalandcheckoutbutton}>
           <div className={style.totalamount}>總金額(1件商品)：$549</div>
           <BlackWBtns
-              type="2"
-              onClick={handleClick}
-              className={`${style.blackBtn} ${style.adjustblackbtn}`}
-            >
-              去結帳
-            </BlackWBtns>
-          </div>
+            type="2"
+            onClick={handleClick}
+            className={`${style.blackBtn} ${style.adjustblackbtn}`}
+          >
+            去結帳
+          </BlackWBtns>
+        </div>
       </div>
     </>
   );
