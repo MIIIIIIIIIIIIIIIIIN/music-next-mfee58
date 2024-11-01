@@ -198,10 +198,10 @@
 /* 新增的縮小圖標樣式 */
 .cart-icon-container {
   position: fixed;
-  bottom: 120px;
+  bottom: 130px;
   right: 20px;
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   z-index: 1000;
   cursor: pointer;
 }
@@ -210,18 +210,19 @@
   background-color: #000;
   color: #fff;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  transform: rotate(-10deg);
 }
 
 .cart-expanded {
   position: fixed;
   bottom: 120px;
-  right: 100px;
+  right: 120px;
   background-color: rgb(165, 165, 165, 0.15);
   border-radius: 10px;
   padding: 0px 5px;
@@ -248,10 +249,11 @@
   background-color: #000;
   color: rgba(20, 255, 0, 1);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  transform: rotate(-20deg);
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "./products-cart.module.css";
-import BlackWBtns from "../george-components/black_wbtns";
+import BlackWBtnsMobile from "../george-components/black_wbtns_mobile";
 import { Quantity } from "../george-components/quantity/quantity";
 
 export default function ProductsCart(props) {
@@ -29,6 +29,7 @@ export default function ProductsCart(props) {
         {/* 購買細項 */}
         <div className={style.checkoutcontainer}>
           <div className={style.checkoutcontainer1}>
+            <div className={style.checkboxandpic}>
             <input type="checkbox" name="albumcheck" />
             <div className={style.albumbox}>
               <img
@@ -37,19 +38,22 @@ export default function ProductsCart(props) {
                 className={style.albumpics}
               />
             </div>
+            </div>
+
             <div className={style.checkoutdescriptions}>
-              <div>
+              <div className={style.mobilecontroller}>
                 <h4 className={style.descriptionstitle}>七里香</h4>
                 <div className={style.descriptionsalbumname}>不是周杰倫</div>
                 <div className={style.descriptionscontent}>
                   在孤獨的呢喃中尋找心靈的平靜，這張專輯融合了民謠與電子元素。
                 </div>
               </div>
+              <div className={style.checkoutqpbox}>
               <div className={style.checkoutquantity}>{<Quantity />}</div>
+              <div className={style.checkoutprice}>$549</div>
+              </div>
             </div>
-          </div>
-          <div className={style.checkoutpircebox}>
-            <div className={style.checkoutprice}>$549</div>
+
           </div>
         </div>
 
@@ -59,13 +63,13 @@ export default function ProductsCart(props) {
         {/* total + checkout button */}
         <div className={style.totalandcheckoutbutton}>
           <div className={style.totalamount}>總金額(1件商品)：$549</div>
-          <BlackWBtns
+          <BlackWBtnsMobile
             type="2"
             onClick={handleClick}
             className={`${style.blackBtn} ${style.adjustblackbtn}`}
           >
             去結帳
-          </BlackWBtns>
+          </BlackWBtnsMobile>
         </div>
       </div>
     </>

@@ -51,7 +51,7 @@ export const AddToCartBar = () => {
       {smallBar ? '' : atBottom ? (
         <div className={`${styles["cart-icon-container"]}`}>
           <div className={styles["cart-icon"]}>
-            <BsCart4 size={32} />
+            <BsCart4 size={48}  />
           </div>
           <div className={`${styles["cart-expanded"]}`}>
             <div className={styles["frame"]}>

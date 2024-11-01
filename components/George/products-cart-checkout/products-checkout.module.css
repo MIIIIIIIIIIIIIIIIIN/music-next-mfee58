@@ -1,37 +1,11 @@
 .container {
   width: 60vw;
-  margin: 30px auto 100px;
-}
-/* checkbox */
-.checkoutcontainer1 input[type="checkbox"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  background-color: white;
-  border: 2px solid gray;
-  border-radius: 3px;
-  position: relative;
-  cursor: pointer;
-}
-.checkoutcontainer1 input[type="checkbox"]:checked {
-  background-color: white;
-  border: 2px solid black;
-}
-.checkoutcontainer1 input[type="checkbox"]:checked::after {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: 2px;
-  width: 5px;
-  height: 10px;
-  border: solid black;
-  border-width: 0 2.5px 2.5px 0;
-  transform: rotate(45deg);
-}
-.checkoutcontainer1 input[type="checkbox"]:hover {
-  background-color: lightgray;
-  transform: scale(1.1);
+  margin: 30px auto 30px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  text-align: center;
 }
 
 /* 購物車結帳流程 */
@@ -99,6 +73,7 @@
   display: flex;
   flex-direction: column;
   gap: 100px;
+  text-align: left;
 }
 .descriptionstitle {
   font-weight: bold;
@@ -146,10 +121,7 @@
   justify-content: end;
   padding-right: 100px;
 }
-.totalamount {
-  font-size: 24px;
-  margin-right: 30px;
-}
+
 .payaddresstitle {
   font-size: 24px;
   font-weight: 400;
@@ -167,6 +139,7 @@
 }
 .padirectory li {
   margin-bottom: 20px;
+  text-align: left;
 }
 
 /* right side */
@@ -216,11 +189,132 @@
   justify-content: center;
 }
 
-.colors {
-  --gray-1: rgba(104, 104, 104, 1);
-  --gray-2: rgba(216, 219, 216, 1);
-  --basecolor: rgba(20, 255, 0, 1);
-  --black: rgba(0, 0, 0, 1);
-  --subcolor: rgba(255, 225, 0, 1);
-  --white: rgba(255, 255, 255, 1);
+@media(max-width: 375px){
+  .container {
+    width: 95vw;
+    margin: 30px auto 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    text-align: center;
+  }
+  /* 購物車結帳流程 */
+  .checkingout {
+    width: 300px;
+  }
+  .checkoutcontainer1 {
+    display: flex;
+    gap: 15px;
+  }
+  .checkboxandpic {
+    gap: 15px;
+  }
+  .checkingoutlist {
+    display: flex;
+    width: 100%;
+  }
+  .checkingoutlist li {
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+  }
+  .procedure {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 29px;
+    background-color: lightgray;
+    color: white;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .proceduring {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 29px;
+    background-color: black;
+    color: rgba(20, 255, 0, 1);
+    border-radius: 50%;
+  }
+
+  /* 購買細項 */
+  .albumbox {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  .albumpics {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0px 5px gray;
+  }
+  .checkoutdescriptions {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100px;
+  }
+  .descriptionstitle {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .descriptionsalbumname {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  .descriptionscontent {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  /* Price */
+  .checkoutdirectorybox{
+    display: none;
+  }
+
+/* payment and address confirming */
+  /* left side */
+  .bottomcontainbox {
+    padding: 0;
+  }
+  .paymentandaddress {
+    display: flex;
+    flex-direction: column;
+    padding-right: 0px;
+  }
+  .payaddresstitle {
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    background-color: var(--gray-2);
+    color: var(--black);
+    border: 1.5px solid black;
+    border-bottom: none;
+  }
+  .PandAdirectory {
+    display: flex;
+    gap: 0px;
+    border: 1.5px solid black;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  .padirectory li {
+    width: 100px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  /* right side */
+  .finalcheck {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .finalcheckbox {
+    padding: 10px;
+  }
 }

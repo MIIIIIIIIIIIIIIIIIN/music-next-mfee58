@@ -29,7 +29,6 @@ export default function ProductsCheckout(props) {
         {/* 購買細項 */}
         <div className={style.checkoutcontainer}>
           <div className={style.checkoutcontainer1}>
-            <input type="checkbox" name="albumcheck" />
             <div className={style.albumbox}>
               <img
                 src="/George/products-images-250px/products-(2).jpg"
@@ -67,6 +66,7 @@ export default function ProductsCheckout(props) {
         <div className={style.seperationline}></div>
 
         {/* payment and address confirming */}
+        
         <div className={style.bottomcontainbox}>
           <div className={style.paymentandaddress}>
             <div className={style.paymentleftside}>
@@ -75,11 +75,14 @@ export default function ProductsCheckout(props) {
                 <ul className={style.padirectory}>
                   <li>收件姓名</li>
                   <li>聯絡電話</li>
+                  <li>電子郵件</li>
                   <li>送貨方式</li>
                   <li>付款方式</li>
-                  <li>優惠券</li>
                 </ul>
                 <ul className={style.padirectory}>
+                  <li>
+                    <input type="text" />
+                  </li>
                   <li>
                     <input type="text" />
                   </li>
@@ -103,9 +106,6 @@ export default function ProductsCheckout(props) {
                       <option value="cashondelivery">取貨付款</option>
                       <option value="debitcard">信用卡</option>
                     </select>
-                  </li>
-                  <li>
-                    <input type="text" />
                   </li>
                 </ul>
               </div>
