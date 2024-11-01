@@ -41,16 +41,20 @@
   flex-direction: column;
   align-items: flex-start;
   /* justify-content: space-around; */
-  /* margin: 50px; */
+  margin: 50px;
   /* padding: 50px; */
   max-height: 70%; /* 設置容器最大高度，視需求調整 */
-  overflow-y: auto; /* 當內容超過高度時顯示垂直滾動條 */
+  overflow-y: scroll; /* 當內容超過高度時顯示垂直滾動條 */
   width: 70%;
+  /* border: #14ff00 2px solid;  */
+  border-radius: 10px;
+  
+
 }
 
 /* 捲軸寬度和高度（垂直和水平捲軸） */
 .mainBody::-webkit-scrollbar {
-  width: 20px; /* 垂直捲軸寬度 */
+  width: 15px; /* 垂直捲軸寬度 */
   height: 8px; /* 水平捲軸高度（如果需要） */
 }
 
@@ -65,7 +69,7 @@
 .mainBody::-webkit-scrollbar-thumb {
   background: var(--gray-1); /* 滑塊顏色 */
   border-radius: 5px; /* 滑塊圓角 */
-  border: black 2px solid; /* 軌道邊框*/
+  /* border: black 2px solid; 軌道邊框 */
 
 }
 
@@ -87,13 +91,16 @@
   color: var(--basecolor);
   border-radius: 5px;
   margin: 15px 70px;
+  box-shadow: 0 0 0 10px black;
 
 }
 
 .info1 {
-  margin: 0 10px;
+  margin: auto;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .favIcon {
@@ -118,6 +125,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* 样式内容 */
-}
+padding: 20px 150px 20px 10px;}
 
+.favGenre{
+  width: 150px;
+}
