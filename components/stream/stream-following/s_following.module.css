@@ -1,0 +1,59 @@
+.followingStreamChild {
+  width: 88px;
+  position: relative;
+  border-radius: 50%;
+  height: 88px;
+  object-fit: cover;
+}
+
+.streamerName {
+  flex: 1;
+  position: relative;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
+  padding-right: 8px;
+}
+
+.div {
+  width: 36px;
+  position: relative;
+  display: inline-block;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+.veiwerCount {
+  height: 21px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  color: #e23131;
+}
+
+.followingStream {
+  width: 264px;
+  position: relative;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 8px;
+  margin-bottom: 11px;
+  gap: 1px 10px;
+  text-align: left;
+  font-size: 16px;
+  color: #000;
+  font-family: "Noto Sans TC";
+}
+
+.img {
+  width: 88px;
+  height: 88px;
+}
