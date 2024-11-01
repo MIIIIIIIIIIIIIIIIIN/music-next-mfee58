@@ -6,15 +6,13 @@ import MemberPassword from "@/components/member/mem-password";
 import MemberOrder from "@/components/member/mem-order";
 import MemberFav from "@/components/member/mem-fav";
 import FooterDeskTop from "@/components/public/footer/desktop";
+import Nav from "@/components/public/nav";
+import MemWeb2 from "@/components/member/mem-web-2";
 
 export default function MemberWeb() {
   return (
     <>
-      <MemberInfo />
-      <MemberACC />
-      <MemberPassword />
-      {/* <MemberOrder /> */}
-      <MemberFav />
+    <MemWeb2/>
     </>
   );
 }

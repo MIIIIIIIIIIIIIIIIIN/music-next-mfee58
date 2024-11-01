@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styles from "./form-inputM.module.css";
 
-const FormInputM = ({ size = "medium", value, onChange, isEmail = false }) => {
+const FormInputM = ({ size = "medium", isEmail = false }) => {
   const [inputValue, setInputValue] = useState(""); // 保存輸入的內容
-
   const [isValid, setIsValid] = useState(true); // 驗證狀態
-  const [isEditing, setIsEditing] = useState(true); // 是否正在編輯
+  const [isEditing, setIsEditing] = useState(true); // 是否顯示 input
+  
   const sizeClass =
     size === "small"
       ? styles.small
@@ -17,23 +17,17 @@ const FormInputM = ({ size = "medium", value, onChange, isEmail = false }) => {
     const inputValue = e.target.value;
     setInputValue(inputValue); // 更新輸入的值
 
-
     // 如果是信箱格式，檢查是否符合格式
     if (isEmail) {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       setIsValid(emailPattern.test(inputValue));
     }
-
-    // 將值傳遞回父元件
-    if (onChange) {
-      onChange(e);
-    }
   };
 
-  // 按下 Enter 鍵
+  // 當按下 Enter 鍵時顯示輸入內容
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      setIsEditing(false);
+      setIsEditing(false); // 隱藏輸入框，顯示輸入內容
     }
   };
 
@@ -50,7 +44,7 @@ const FormInputM = ({ size = "medium", value, onChange, isEmail = false }) => {
         />
       ) : (
         <span onClick={() => setIsEditing(true)} className={styles.displayText}>
-          {inputValue || ""}
+          {inputValue || "點擊編輯"}
         </span>
       )}
       {/* 錯誤訊息 */}
@@ -60,4 +54,5 @@ const FormInputM = ({ size = "medium", value, onChange, isEmail = false }) => {
     </div>
   );
 };
+
 export default FormInputM;

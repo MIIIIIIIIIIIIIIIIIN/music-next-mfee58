@@ -135,8 +135,21 @@
   align-items: center;
   margin: 5px 0;
   padding: 10px;
+  box-sizing: border-box;
 }
 
+.left-text input:hover{
+  background-color: #000000; /* 改變背景色 */
+  color: var(--basecolor);
+  /* padding: 10px 20px; 擴大內邊距，模擬效果 */
+  border-top: 1px solid black; /* 添加頂部邊框 */
+  border-bottom: 1px solid black; /* 保持底部邊框 */
+  border-radius: 5px;
+  /* cursor:text; */
+  height: 100%;
+  width: 100%;
+  
+}
 
 
 /* END */
