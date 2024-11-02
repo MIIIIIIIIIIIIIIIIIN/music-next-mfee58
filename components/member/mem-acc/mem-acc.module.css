@@ -1,49 +1,47 @@
 .member-acc {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 120px);
+  /* height: calc(100vh - 120px); */
   width: 100%;
-  /* background: linear-gradient(180deg, #fff 65%, #84ff79 90%, #14ff00); */
+  margin-top: 100px;
 }
 
 .container {
   display: flex;
-  height: 80%;
-  width: 80%;
+  height: 100%;
+  width: 100%;
   margin: auto;
   justify-content: center;
   align-items: flex-start;
   text-align: center;
-  /* font-size: 24px; */
-  /* padding: 30px; */
-
-  /* gap: 50px; */
-  /* background-color: #545353; */
 }
 .b {
   position: relative;
 }
 
 .main-title {
-  width: 70%;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* 確保主標題靠左 */
-  padding-left: 20px; /* 可以調整為與 .main-title 一致的 padding */
-  padding-bottom: 100px;
+  width: 100%;
+  font-weight: bold ;
+  text-align: left; 
+  padding: 0 150px;
+  margin-bottom: 50px;
+  
 }
 
 .main-body {
   display: flex;
   flex-direction: column;
   width: 70%;
+  
 
   align-items: flex-start; /* 整體內容靠左 */
   padding-left: 20px; /* 可以調整為與 .main-title 一致的 padding */
 }
 .body-sec {
-padding: 20px 0;}
+/* padding: 20px 0; */
+padding: 50px 150px;
+
+}
 
 .body-input {
   display: flex;

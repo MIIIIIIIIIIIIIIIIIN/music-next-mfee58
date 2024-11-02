@@ -4,12 +4,14 @@
   flex-direction: column;
   height: calc(100vh - 120px);
   width: 100%;
+  margin-top: 100px;
+
   /* background: linear-gradient(180deg, #fff 65%, #84ff79 90%, #14ff00); */
 }
 .container {
   display: flex;
-  height: 80%;
-  width: 80%;
+  height: 100%;
+  width: 100%;
   margin: auto;
   justify-content: center;
   align-items: flex-start;
@@ -25,15 +27,17 @@
   /* background-color: #000; */
   /* border: 1px solid #ddd; */
   height: 80%;
+  padding: 50px;
+
+  
 }
 
 .mainTitle {
   width: 100%;
-  font-weight: bold;
-  display: flex;
-  padding: 0 70px;
-  margin-bottom: 70px;
-  /* align-items: flex-start; */
+  font-weight: bold ;
+  text-align: left; 
+  padding: 0 150px;
+  margin-bottom: 50px;
 }
 
 .mainBody {
@@ -125,7 +129,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-padding: 20px 150px 20px 10px;}
+padding: 20px 150px 20px 10px;
+
+}
 
 .favGenre{
   width: 150px;

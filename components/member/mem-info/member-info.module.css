@@ -24,6 +24,8 @@
 .main-title {
   width: 100%;
   font-weight: bold ;
+  text-align: left; 
+  padding: 0 150px;
 }
 
 
@@ -65,15 +67,17 @@
   align-items: center;
   /* gap: 40px; */
   justify-content: space-around;
-  padding-top: 30px;
+  padding: 50px 0;
   /* height: 30%; */
   width: 100%;
   /* background-color: lightpink; */
 }
 
-.body-icon h6 {
-  margin-top: 30px; /* ����� UserIcon ���頝� */
+.icon-title{
+  margin: 30px; 
 }
+
+
 
 .body-input {
   display: flex;

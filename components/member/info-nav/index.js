@@ -9,9 +9,9 @@ const InfoNav = () => {
         <h5 className={styles["body-text"]}>基本資料</h5>
         <h5 className={styles["body-text"]}>帳號設定</h5>
         <h5 className={styles["body-text"]}>變更密碼</h5>
-        <h5 className={styles["body-text"]}>訂單查詢</h5>
+        {/* <h5 className={styles["body-text"]}>訂單查詢</h5> */}
         <h5 className={styles["body-text"]}>收藏名單</h5>
-        <h5 className={styles["body-text"]}>帳號刪除</h5>
+        {/* <h5 className={styles["body-text"]}>帳號刪除</h5> */}
       </div>
     </div>
   );

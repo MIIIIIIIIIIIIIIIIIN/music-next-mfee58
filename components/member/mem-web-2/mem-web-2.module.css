@@ -4,6 +4,10 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+    background-image: url("/image/img-Jade/mem-bgImg.png");
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
 }
 
 /* 固定 nav bar 在頂部 */
@@ -32,6 +36,7 @@
   width: 80%;
   margin: auto;
   /* margin-top: 90px; */
+  
 }
 
 /* 固定 footer 在底部 */
@@ -69,10 +74,13 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
 
 /* 右邊內容區域 */
 .rightContent {
-  width: 80%; /* 右側占 container 的 80% */
+  
+  width: 70%; /* 右側占 container 的 80% */
   /* background-color: #e0e0e0; */
   /* padding: 20px; */
-  margin-left: 20%; /* 留出左側固定區域的空間 */
+  margin-left: 25%; /* 留出左側固定區域的空間 */
+
+
   
 }
 

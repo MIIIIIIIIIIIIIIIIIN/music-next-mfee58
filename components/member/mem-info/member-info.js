@@ -31,11 +31,11 @@ const MemberInfo = () => {
             <div className={styles["main-body"]}>
               <div className={styles["body-icon"]}>
                 <UserIcon />
-                <h6>
+            
+              </div>
+              <h6 className={styles["icon-title"]}>
                   (h6)上傳頭像 建議尺寸：360x360px 以上，圖片檔案大小不可超過 2MB
                 </h6>
-              </div>
-
               <div className={styles["body-input"]}>
                 <div className={styles["input-left"]}>
                   {/* 左側內容 */}
