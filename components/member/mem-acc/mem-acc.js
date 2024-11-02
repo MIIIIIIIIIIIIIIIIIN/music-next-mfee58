@@ -40,7 +40,7 @@ const MemberACC = () => {
           </div> */}
           <div className={styles["acc-main"]}>
             {/* 右側內容 */}
-            <h5 className={styles["main-title"]}>(h5)帳號設定</h5>
+            <h5 className={styles["main-title"]}>帳號設定</h5>
             <div className={styles["main-body"]}>
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>帳號(不會顯示於頁面)</h6>

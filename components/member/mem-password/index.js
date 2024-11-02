@@ -25,19 +25,19 @@ const MemberPassword = () => {
               <div className={styles["main-body"]}>
           
                 <div className={styles["body-sec"]}>
-                  <h7 className={styles["body-title"]}>舊密碼</h7>
+                  <h6 className={styles["body-title"]}>舊密碼</h6>
                   <div className={styles["body-input"]}>
                     <PasswordInput size="large" placeholder="請輸入舊密碼" /> 
                   </div>
                 </div>
                 <div className={styles["body-sec"]}>
-                  <h7 className={styles["body-title"]}>新密碼</h7>
+                  <h6 className={styles["body-title"]}>新密碼</h6>
                   <div className={styles["body-input"]}>
                     <PasswordInput size="large" placeholder="請輸入新密碼" /> 
                   </div>
                 </div>
                 <div className={styles["body-sec"]}>
-                  <h7 className={styles["body-title"]}>確認新密碼</h7>
+                  <h6 className={styles["body-title"]}>確認新密碼</h6>
                   <div className={styles["body-input"]}>
                     <PasswordInput size="large" placeholder="請輸入新密碼"/> 
                   </div>

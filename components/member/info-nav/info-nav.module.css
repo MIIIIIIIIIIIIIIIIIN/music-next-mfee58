@@ -14,7 +14,10 @@
   text-align: center;
 }
 .nav-title:hover {
-  font-size: 26px;
+  /* font-size: 26px; */
+  color: gray;
+
+
 }
 
 .nav-body {

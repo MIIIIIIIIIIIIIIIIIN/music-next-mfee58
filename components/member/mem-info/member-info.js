@@ -26,7 +26,7 @@ const MemberInfo = () => {
             <InfoNav />
           </div> */}
           <div className={styles["info-main"]}>
-            <h5 className={styles["main-title"]}>(h5)個人頭像</h5>
+            <h5 className={styles["main-title"]}>基本資料</h5>
 
             <div className={styles["main-body"]}>
               <div className={styles["body-icon"]}>

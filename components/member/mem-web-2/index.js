@@ -26,15 +26,6 @@ const MemWeb2 = () => {
             <MemberACC />
             <MemberPassword />
             <MemberFav />
-          <UserIcon />
-          <UserIcon />
-          <UserIcon />
-          <UserIcon />
-          <UserIcon />
-          <UserIcon />
-          <UserIcon />
-          <UserIcon />
-          <UserIcon />
           </div>
         </div>
 
