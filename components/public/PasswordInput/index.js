@@ -29,31 +29,31 @@ const PasswordInput = ({
 
   return (
     <div className={`${styles.container} ${styles[size]}`}>
-      
       <div className={styles.inputContainer}>
-
-        {/* 顯示輸入框 */}
-        <input
-          type={isPasswordMode ? "password" : "text"} // 根據狀態設置 input 顯示為密碼或普通文本
-          className={`${styles.input} ${styles[size]}`}
-          value={text}
-          onChange={handleInputChange}
-          placeholder={placeholder}
-        />
-
-        {/* 眼睛圖標按鈕，用於切換顯示模式 */}
-        <button
-          className={`${styles.toggleButton} ${styles[size]}`}
-          onClick={togglePasswordMode}
-        >
-          <img
-            src={
-              isPasswordMode ? "/icons/eye-open.svg" : "/icons/eye-close.svg"
-            } // 正確引用路徑
-            alt="Toggle Visibility"
-            className={`${styles.icon} ${styles[size]}`}
+        <div className={styles["input-text"]}>
+          {/* 顯示輸入框 */}
+          <input
+            type={isPasswordMode ? "password" : "text"} // 根據狀態設置 input 顯示為密碼或普通文本
+            className={`${styles.input} ${styles[size]}`}
+            value={text}
+            onChange={handleInputChange}
+            placeholder={placeholder}
           />
-        </button>
+        </div>
+
+          {/* 眼睛圖標按鈕，用於切換顯示模式 */}
+          <button
+            className={`${styles.toggleButton} ${styles[size]}`}
+            onClick={togglePasswordMode}
+          >
+            <img
+              src={
+                isPasswordMode ? "/icons/eye-open.svg" : "/icons/eye-close.svg"
+              } // 正確引用路徑
+              alt="Toggle Visibility"
+              className={`${styles.icon} ${styles[size]}`}
+            />
+          </button>
       </div>
       {!isValid && <div className={styles.errorText}>請輸入有效的信箱</div>}
     </div>
