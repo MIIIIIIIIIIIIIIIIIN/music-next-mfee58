@@ -22,13 +22,16 @@
 /* 主內容區域 */
 .container {
   flex: 1;
-  padding-top: 100px;
+  padding-top: 80px;
   padding-bottom: 100px;
   overflow-y: auto;
   background-color: #fff;
   display: flex;
   flex-direction: row;
   gap: 20px;
+  width: 80%;
+  margin: auto;
+  /* margin-top: 90px; */
 }
 
 /* 固定 footer 在底部 */
@@ -48,21 +51,29 @@
 
 /* 左邊內容區域 */
 .leftContent {
-  flex: 3;
-  background-color: #f0f0f0;
+  flex: 2;
   padding: 20px;
-  margin: 0 50px;
   position: fixed; /* 固定位置 */
   top: 50%; /* 垂直置中 */
-  left: 0;
   transform: translateY(-50%); /* 垂直方向居中對齊 */
   z-index: 5; /* 保持層級低於 nav 和 footer */
+
+/* 霧面玻璃效果 */
+background: rgba(255, 255, 255, 0.15); /* 更低透明度的白色背景 */
+backdrop-filter: blur(15px) brightness(0.9); /* 增加模糊和略微降低亮度 */
+border-radius: 10px; /* 可選，圓角 */
+border: 1px solid rgba(255, 255, 255, 0.25); /* 可選，淡邊框增加玻璃感 */
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更立體 */
 }
+
 
 /* 右邊內容區域 */
 .rightContent {
-  flex: 7;
-  background-color: #e0e0e0;
-  padding: 020px;
-  margin-left: 20%; /* 為了避開固定的 leftContent */
+  width: 80%; /* 右側占 container 的 80% */
+  /* background-color: #e0e0e0; */
+  /* padding: 20px; */
+  margin-left: 20%; /* 留出左側固定區域的空間 */
+  
 }
+
+

@@ -31,13 +31,13 @@ const MemberACC = () => {
 
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
 
       <div className={styles["member-acc"]}>
         <div className={styles.container}>
-          <div className={styles["acc-nav"]}>
+          {/* <div className={styles["acc-nav"]}>
             <InfoNav />
-          </div>
+          </div> */}
           <div className={styles["acc-main"]}>
             {/* 右側內容 */}
             <h5 className={styles["main-title"]}>(h5)帳號設定</h5>

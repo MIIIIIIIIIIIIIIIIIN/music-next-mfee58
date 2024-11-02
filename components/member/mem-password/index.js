@@ -11,13 +11,13 @@ import MemIcons from "../mem-icons";
 const MemberPassword = () => {
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
 
       <div className={styles["member-pw"]}>
         <div className={styles.container}>
-          <div className={styles["pw-nav"]}>
+          {/* <div className={styles["pw-nav"]}>
             <InfoNav />
-          </div>
+          </div> */}
           {/* <div className={styles["main-container"]}> */}
             <div className={styles["pw-main"]}>
               <h5 className={styles["main-title"]}>變更密碼</h5>

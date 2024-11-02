@@ -4,7 +4,7 @@
   flex-direction: column;
   height: calc(100vh - 120px);
   width: 100%;
-  background: linear-gradient(180deg, #fff 65%, #84ff79 90%, #14ff00);
+  /* background: linear-gradient(180deg, #fff 65%, #84ff79 90%, #14ff00); */
 }
 .container {
   display: flex;

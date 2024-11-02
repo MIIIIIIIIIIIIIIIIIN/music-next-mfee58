@@ -54,12 +54,12 @@ const MemberFav = () => {
 
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <div className={styles["member-fav"]}>
         <div className={styles["container"]}>
-          <div className={styles["favNav"]}>
+          {/* <div className={styles["favNav"]}>
             <InfoNav />
-          </div>
+          </div> */}
           <div className={styles.favMain}>
             <h5 className={styles.mainTitle}>收藏名單</h5>
             <div className={styles.mainBody}>

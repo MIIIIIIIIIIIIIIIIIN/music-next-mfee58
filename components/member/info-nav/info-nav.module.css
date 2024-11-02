@@ -29,21 +29,16 @@
   /* font-size: 16px; */
   margin-bottom: 15px;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, background-color 0.3s ease; /* 添加背景色過渡效果 */
+  border-right: 3px solid transparent; /* 設置透明邊框 */
+  border-left: 3px solid transparent; /* 設置透明邊框 */
 }
-
 .body-text:hover {
-  cursor: pointer;
   position: relative;
-  background-color: #000;
-  border-right: 3px solid var(--basecolor);
-  border-left: 3px solid var(--basecolor);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 5px 25px;
-  color: var(--basecolor);
   border-radius: 5px;
-  /* font-size: 28px; */
+  color: gray;
 }

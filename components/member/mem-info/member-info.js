@@ -18,13 +18,13 @@ const MemberInfo = () => {
 
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
 
       <div className={styles["member-info"]}>
         <div className={styles.container}>
-        <div className={styles["info-nav"]}>
+        {/* <div className={styles["info-nav"]}>
             <InfoNav />
-          </div>
+          </div> */}
           <div className={styles["info-main"]}>
             <h5 className={styles["main-title"]}>(h5)個人頭像</h5>
 
