@@ -81,10 +81,28 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
   width: 70%; /* 右側占 container 的 80% */
   /* background-color: #e0e0e0; */
   /* padding: 20px; */
-  margin-left: 25%; /* 留出左側固定區域的空間 */
+  margin-left: 30%; /* 留出左側固定區域的空間 */
+  
+  display: grid;
+  grid-template-columns: repeat(3, 200px); /* 三列，平分寬度 */
+  gap: 30px; /* 方形之間的間距 */
+  width: 100%; /* 根據需求調整寬度 */
+  padding: 20px;
+
 
 
   
 }
 
 
+.album{
+  background-color: var(--gray-2); /* 方形背景色，可根據需求調整 */
+
+  width: 200px; /* 方形寬度 */
+  height: 200px; /* 方形高度 */
+  display: flex;
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 陰影效果 */
+  border-radius: 8px; /* 圓角 */
+}
