@@ -46,7 +46,7 @@ const MemberInfo = () => {
                     <FormInput />
                   </div>
 
-                  <h6 className={styles["left-title"]}>暱稱(顯示名稱)</h6>
+                  <h6 className={styles["left-title"]}>生日</h6>
 
                   <div className={styles["left-text"]}>
                     <FormInput />

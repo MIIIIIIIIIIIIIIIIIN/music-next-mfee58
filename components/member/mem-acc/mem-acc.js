@@ -56,9 +56,11 @@ const MemberACC = () => {
                 <div className={styles["body-input"]}>
                   <MemIcons iconName="icon-phone" />
                   {/* 預設 icon-mail, 中尺寸 */}
-                  <FormInputM size="medium" />
+                  <FormInputM size="medium" isPhone={true} onChange={(e) => console.log(e.target.value)} />
+
                   <ButtonToggleM size="small" />
                 </div>
+          
               </div>
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>信箱</h6>

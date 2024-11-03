@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styles from "./form-inputM.module.css";
 
-const FormInputM = ({ size = "medium", value, onChange, isEmail = false }) => {
+const FormInputM = ({ size = "medium", value, onChange, isEmail = false, isPhone = false }) => {
   const [inputValue, setInputValue] = useState(""); // 保存輸入的內容
-
   const [isValid, setIsValid] = useState(true); // 驗證狀態
   const [isEditing, setIsEditing] = useState(true); // 是否正在編輯
   const sizeClass =
@@ -17,11 +16,16 @@ const FormInputM = ({ size = "medium", value, onChange, isEmail = false }) => {
     const inputValue = e.target.value;
     setInputValue(inputValue); // 更新輸入的值
 
-
-    // 如果是信箱格式，檢查是否符合格式
+    // 信箱格式驗證
     if (isEmail) {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       setIsValid(emailPattern.test(inputValue));
+    }
+
+    // 手機格式驗證
+    if (isPhone) {
+      const phonePattern = /^(\+?\d{1,4}[-.\s]?)?(\d{10})$/; // 簡單的手機格式驗證
+      setIsValid(phonePattern.test(inputValue));
     }
 
     // 將值傳遞回父元件
@@ -42,11 +46,11 @@ const FormInputM = ({ size = "medium", value, onChange, isEmail = false }) => {
       {isEditing ? (
         <input
           type="text"
-          className={`${styles.input} ${sizeClass} ${isEmail && !isValid ? styles.invalid : ""}`}
+          className={`${styles.input} ${sizeClass} ${(isEmail || isPhone) && !isValid ? styles.invalid : ""}`}
           value={inputValue}
           onChange={handleChange}
           onKeyDown={handleKeyDown} // 監聽按下鍵盤事件
-          placeholder={isEmail ? "請輸入有效的信箱" : ""}
+          placeholder={isEmail ? "請輸入有效的信箱" : isPhone ? "請輸入有效的手機號碼" : ""}
         />
       ) : (
         <span onClick={() => setIsEditing(true)} className={styles.displayText}>
@@ -54,10 +58,14 @@ const FormInputM = ({ size = "medium", value, onChange, isEmail = false }) => {
         </span>
       )}
       {/* 錯誤訊息 */}
-      {isEmail && !isValid && (
+      {(isEmail && !isValid) && (
         <div className={styles.errorText}>請輸入有效的信箱地址</div>
+      )}
+      {(isPhone && !isValid) && (
+        <div className={styles.errorText}>請輸入有效的手機號碼</div>
       )}
     </div>
   );
 };
+
 export default FormInputM;
