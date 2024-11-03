@@ -48,7 +48,7 @@ const MemberACC = () => {
                   <MemIcons iconName="icon-user" />
                   {/* 預設 icon-mail, 中尺寸 */}
                   <FormInputM size="medium" />
-                  <ButtonToggleM size="small" />
+                  <ButtonToggleM size="small" className={styles["buttonToggle"]}/>
                 </div>
               </div>
               <div className={styles["body-sec"]}>

@@ -120,3 +120,91 @@ padding: 50px 150px;
   font-size: 12px;
   margin-top: 4px;
 }
+
+/* 建立 RWD */
+@media (max-width: 375px) {
+  .member-acc {
+    width: 100%;
+    margin-top: 20px; /* 減少上邊距 */
+    padding: 0 10px; /* 增加左右內邊距 */
+  }
+
+  .container {
+    flex-direction: column; /* 改為垂直排列 */
+    align-items: center;
+    padding: 0 5px;
+  }
+
+  .main-title {
+    padding: 0 10px; /* 減少左右內邊距 */
+    font-size: 1.５em; /* 調整字體大小 */
+    text-align: center; /* 標題居中對齊 */
+    /* margin-bottom: 20px; */
+  }
+
+  .main-body {
+    width: 100%;
+    padding-left: 10px;
+    align-items: center; /* 中心對齊 */
+  }
+
+  .body-sec {
+    padding: 20px 10px; /* 減少內邊距 */
+  }
+
+  .body-input {
+    flex-direction: row;
+    align-items: center; /* 中心對齊 */
+    width: 100%; /* 滿寬度 */
+    margin-top: 10px;
+    padding: 10px 5px;
+    gap: 10px; /* 減少間距 */
+  }
+
+  
+  
+  .body-title {
+    text-align: center; /* 標題居中 */
+    font-size: 1.2em; /* 調整字體大小 */
+  }
+
+  .acc-nav {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .acc-main {
+    width: 100%;
+    padding: 10px;
+    position: relative;
+  }
+
+  .input-right,
+  .input-left {
+    width: 100%; /* 滿寬度 */
+    padding: 20px 0; /* 減少內邊距 */
+    margin: 5px 0; /* 減少外邊距 */
+  }
+
+  .left-title,
+  .right-title {
+    align-items: center;
+    text-align: center;
+  }
+
+  .left-text,
+  .right-text {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9em; /* 調整字體大小 */
+    margin: 5px 0;
+    padding: 10px;
+  }
+
+  .error-text {
+    font-size: 10px; /* 減小字體大小 */
+    margin-top: 2px;
+    text-align: center;
+  }
+}
