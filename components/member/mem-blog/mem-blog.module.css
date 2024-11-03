@@ -106,3 +106,52 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 陰影效果 */
   border-radius: 8px; /* 圓角 */
 }
+
+
+@media (max-width: 375px) {
+  .leftContent {
+    display: flex; /* 使用 flex 以居中內容 */
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    position: relative; /* 取消固定定位 */
+    width: 100%; /* 佔滿寬度 */
+    margin-bottom: 10px; /* 增加下邊距與下方內容區分 */
+    top: 0; /* 確保內容顯示在頂部 */
+    transform: none; /* 取消原有的垂直置中效果 */
+    padding: 10px; /* 調整內邊距 */
+    z-index: 5; /* 保持層級 */
+    background: rgba(255, 255, 255, 0.8); /* 選擇性設置背景，讓內容區分 */
+    backdrop-filter: blur(10px); /* 選擇性設置模糊效果 */
+     box-shadow: none; 
+  }
+
+  .container {
+    width: 100%; /* 讓容器佔滿寬度 */
+    padding: 0; /* 移除多餘的內邊距 */
+    margin: auto; /* 居中對齊 */
+    flex-direction: column; /* 調整為垂直佈局 */
+  }
+
+  .rightContent {
+    width: 100%; /* 讓右側內容佔滿可用寬度 */
+    margin-left: 0; /* 移除左側空白 */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 兩列佈局，讓每個項目自適應寬度 */
+    gap: 15px; /* 調整間距以適應小螢幕 */
+    padding: 20px;
+    justify-items: center; /* 水平置中所有網格項目 */
+    align-items: center; /* 垂直置中所有網格項目 */
+  }
+
+  .album {
+    width: 150px; /* 調整方形寬度 */
+    height: 150px; /* 調整方形高度 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* 降低陰影效果 */
+    border-radius: 5px;
+  }
+
+  .footer {
+    height: 80px; /* 調整 footer 高度 */
+    font-size: 0.9em; /* 調整文字大小 */
+  }
+}

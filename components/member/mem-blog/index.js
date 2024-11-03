@@ -33,12 +33,6 @@ const MemBlog = () => {
             <div className={styles["album"]}>album</div>
             <div className={styles["album"]}>album</div>
             <div className={styles["album"]}>album</div>
-
-            <UserIcon />
-            <UserIcon />
-            <UserIcon />
-            <UserIcon />
-            <UserIcon />
           </div>
         </div>
 
