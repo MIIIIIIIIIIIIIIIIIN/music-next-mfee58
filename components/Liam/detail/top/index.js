@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./detail-top.module.css";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { CiChat1 } from "react-icons/ci";
 import Heart from "@/components/public/hearts";
+import ChatModal from "../ContactIcon";
 
 export default function DetailTop() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className={styles.wrap}>
       <div className={styles.top}>
@@ -51,7 +53,12 @@ export default function DetailTop() {
               <h6 className={styles.targetPresentMount}>14天</h6>
             </div>
             <div className={styles.rightBottom}>
-              <CiChat1 />
+              
+              <ChatModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onSubmit={() => console.log("表單提交")}
+              />
               <Heart />
               <button>贊助專案</button>
               <button>分享</button>

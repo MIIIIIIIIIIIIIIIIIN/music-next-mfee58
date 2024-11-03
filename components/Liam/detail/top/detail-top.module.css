@@ -8,20 +8,30 @@
 
 }
 .top{
-  height: 200px;
+  height: 250px;
   background-color: rgb(255, 0, 170);
-  mask-image: url('/video/Exclude.png'); /* 替換為你的遮罩圖片路徑 */
+  mask-image: url('/video/Exclude.png');
   -webkit-mask-image: url('/video/Exclude.png');
-  /* mask-size:contain;  */
-  /* mask-repeat: no-repeat; */
-
+  mask-size: 100% 100%; /* 確保遮罩完全覆蓋元素 */
+  -webkit-mask-size: 100% 100%;
+  mask-repeat: no-repeat; /* 防止遮罩重複 */
+  -webkit-mask-repeat: no-repeat;
+  position: relative; /* 添加定位 */
+  overflow: hidden; /* 防止內容溢出 */
+  width: 100%; /* 確保寬度正確 */
+}
+.top img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block; /* 移除圖片底部間隙 */
 }
 .container{
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 .left{
-  width: 50%;;
+  width: 60%;;
 
  /* background-color: rgb(51, 255, 0); */
 }
@@ -58,7 +68,7 @@
 
   padding: 30px 0;
   padding-top: 90px;
-  padding-left: 80px;
+  /* padding-left: 80px; */
   display: flex;
   flex-direction: column;
   gap: 10px;

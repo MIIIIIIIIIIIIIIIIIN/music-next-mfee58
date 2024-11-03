@@ -1,0 +1,17 @@
+.container {
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .item {
+    width: 100%;
+  }

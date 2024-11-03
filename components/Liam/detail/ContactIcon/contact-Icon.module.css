@@ -1,0 +1,156 @@
+.chatIcon {
+    font-size: 24px;
+    color: #4b5563;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .chatIcon:hover {
+    color: #22c55e;
+  }
+  
+  .modalOverlay {
+    position: fixed;
+    width: 80vw;
+    
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 255, 94, 0.1); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+  }
+  
+  .modalContent {
+    background-color: white;
+    width: 90%;
+    /* max-width: 600px; */
+    border-radius: 12px;
+    /* box-shadow: 0 4px 20px rgba(34, 197, 94, 0.2); */
+    /* overflow: hidden; */
+  }
+  
+  .authorSection {
+    /* background: linear-gradient(0deg, rgba(255,255,255,0) 41%, rgba(20,255,0,1) 100%); */
+    background-color: #020202;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+  
+  .authorInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .authorAvatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid white;
+    object-fit: cover;
+  }
+  
+  .authorDetails {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .authorName {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  
+  .authorTitle {
+    font-size: 0.875rem;
+    opacity: 0.9;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    color: rgb(255, 255, 255);
+    color: #020202;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 1;
+    opacity: 1;
+    transition: 0.2s ease;
+  }
+  
+  .closeButton:hover {
+    opacity: 1;
+  }
+  
+  .commentForm {
+    padding: 1.5rem;
+  }
+  
+  .commentInput {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 120px;
+    margin-bottom: 1rem;
+    border: 1px solid #020202;
+    transition: border-color 0.2s ease;
+  }
+  
+  .commentInput:focus {
+    outline: none;
+    border-color: #00ff5e;
+    /* box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1); */
+  }
+  
+  .submitButton {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    /* background-color: #ff0000; */
+    color: rgb(33, 33, 33);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition:  0.2s ease;
+    /* border: 1PX solid #333; */
+  }
+  
+  .submitButton:hover {
+    background-color: #16a34a;
+    /* color: #e5e7eb; */
+  }
+  
+  /* 響應式設計 */
+  @media (max-width: 640px) {
+    .modalContent {
+      width: 95%;
+      margin: 1rem;
+    }
+    
+    .authorSection {
+      padding: 1rem;
+    }
+    
+    .authorAvatar {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .commentForm {
+      padding: 1rem;
+    }
+  }

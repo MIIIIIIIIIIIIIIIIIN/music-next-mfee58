@@ -1,0 +1,78 @@
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.priceSection {
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.price {
+  color: #14FF00;
+  font-weight: bold;
+}
+
+.imageContainer {
+  width: 100%;
+}
+
+.image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.content {
+  padding: 1rem;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+}
+
+.description {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.list {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-top: 0.5rem;
+}
+
+.list li {
+  margin-top: 0.25rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.stats {
+  color: #4b5563;
+}
+
+.button {
+  color: #000000;
+  background: none;
+  border: 1px solid #111;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 5px;
+}
+
+.button:hover {
+  color: #ffffff;
+  background-color: #14FF00;
+  border-color: #14FF00;
+}
