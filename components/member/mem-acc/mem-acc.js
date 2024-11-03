@@ -14,7 +14,9 @@ import { useState } from "react";
 const MemberACC = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [isEmailValid, setEmailValid] = useState(true);
+  const [isPhoneValid, setPhoneValid] = useState(true);
 
   const handleClick = () => {
     router.push("/");
@@ -29,15 +31,24 @@ const MemberACC = () => {
     setEmailValid(emailPattern.test(emailValue));
   };
 
+  const handlePhoneChange = (e) => {
+    const phoneValue = e.target.value;
+    setPhone(phoneValue);
+
+    // 手機格式驗證 (基本驗證)
+    const phonePattern = /^(\+?\d{1,4}[-.\s]?)?(\d{10})$/;
+    setPhoneValid(phonePattern.test(phoneValue));
+  };
+
   return (
     <>
       {/* <Nav /> */}
 
       <div className={styles["member-acc"]}>
         <div className={styles.container}>
-          {/* <div className={styles["acc-nav"]}>
-            <InfoNav />
-          </div> */}
+          <div className={styles["acc-nav"]}>
+            {/* <InfoNav /> */}
+          </div>
           <div className={styles["acc-main"]}>
             {/* 右側內容 */}
             <h5 className={styles["main-title"]}>帳號設定</h5>
@@ -48,29 +59,39 @@ const MemberACC = () => {
                   <MemIcons iconName="icon-user" />
                   {/* 預設 icon-mail, 中尺寸 */}
                   <FormInputM size="medium" />
-                  <ButtonToggleM size="small" className={styles["buttonToggle"]}/>
+                  <ButtonToggleM
+                    size="small"
+                    className={styles["buttonToggle"]}
+                  />
                 </div>
               </div>
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>手機</h6>
                 <div className={styles["body-input"]}>
                   <MemIcons iconName="icon-phone" />
-                  {/* 預設 icon-mail, 中尺寸 */}
-                  <FormInputM size="medium" isPhone={true} onChange={(e) => console.log(e.target.value)} />
-
+                  <FormInputM
+                    size="medium"
+                    value={phone}
+                    onChange={handlePhoneChange}
+                    isPhone={true} // 啟用手機格式驗證
+                  />
                   <ButtonToggleM size="small" />
                 </div>
-          
+                {!isPhoneValid && (
+                  <div className={styles["error-text"]}>
+                    請輸入有效的手機號碼
+                  </div>
+                )}
               </div>
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>信箱</h6>
                 <div className={styles["body-input"]}>
                   <MemIcons iconName="icon-mail" />
-                  {/* 預設 icon-mail, 中尺寸 */}
                   <FormInputM
                     size="medium"
                     value={email}
                     onChange={handleEmailChange}
+                    isEmail={true} // 啟用信箱格式驗證
                   />
                   <ButtonToggleM size="small" />
                 </div>
@@ -84,6 +105,7 @@ const MemberACC = () => {
           </div>
         </div>
       </div>
+      {/* <FooterDeskTop /> */}
     </>
   );
 };

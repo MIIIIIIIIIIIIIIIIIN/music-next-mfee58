@@ -58,12 +58,12 @@ const FormInputM = ({ size = "medium", value, onChange, isEmail = false, isPhone
         </span>
       )}
       {/* 錯誤訊息 */}
-      {(isEmail && !isValid) && (
+      {/* {(isEmail && !isValid) && (
         <div className={styles.errorText}>請輸入有效的信箱地址</div>
       )}
       {(isPhone && !isValid) && (
         <div className={styles.errorText}>請輸入有效的手機號碼</div>
-      )}
+      )} */}
     </div>
   );
 };
