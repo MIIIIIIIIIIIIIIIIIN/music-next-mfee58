@@ -85,3 +85,11 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
 }
 
 
+/* 11.03 新增 */
+/* 當螢幕寬度小於 400px 時隱藏 nav 並顯示 menu-button */
+@media (max-width: 400px) {
+  .leftContent {
+    display: none; /* 隱藏 nav */
+  }
+
+}

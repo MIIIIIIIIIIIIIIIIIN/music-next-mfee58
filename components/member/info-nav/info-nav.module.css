@@ -45,3 +45,9 @@
   border-radius: 5px;
   color: gray;
 }
+
+@media (max-width: 500px) {
+  .info-nav {
+    display: none; /* 隱藏整個 .info-nav 區塊 */
+  }
+}
