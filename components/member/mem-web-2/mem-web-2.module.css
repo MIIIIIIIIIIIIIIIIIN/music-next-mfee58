@@ -92,4 +92,7 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
     display: none; /* 隱藏 nav */
   }
 
+  .rightContent {
+    margin: auto;
+  }
 }
