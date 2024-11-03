@@ -173,6 +173,7 @@ padding: 20px 150px 20px 10px;
     font-size: 1.5em; /* 調整字體大小 */
     text-align: center; /* 居中對齊標題 */
     margin-bottom: 20px;
+    margin-top: 50px;
   }
 
   .mainBody {
@@ -190,7 +191,7 @@ padding: 20px 150px 20px 10px;
     padding: 20px;
     align-items: center;
     box-shadow: none; /* 移除框陰影 */
-    border-bottom: 1px solid var(--gray-2);
+    border-top: 1px solid var(--gray-2);
   }
 
   .favInfo:hover {

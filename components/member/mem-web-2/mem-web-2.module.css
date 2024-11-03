@@ -88,11 +88,31 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
 /* 11.03 新增 */
 /* 當螢幕寬度小於 400px 時隱藏 nav 並顯示 menu-button */
 @media (max-width: 400px) {
-  .leftContent {
+  .nav {
     display: none; /* 隱藏 nav */
   }
 
+  .leftContent {
+    display: none; /* 隱藏左側內容 */
+  }
+
+  .container {
+    height: auto; /* 自動擴展高度 */
+    overflow-y: visible; /* 取消滾動條 */
+    width: 100%;
+    margin: 0 auto;
+  }
+
   .rightContent {
-    margin: auto;
+    width: 100%; /* 讓右側內容佔滿寬度 */
+    margin: 0;
+  }
+
+  .footer {
+    position: relative; /* 取消固定底部 */
+  }
+
+  .wrapper {
+    overflow: visible; /* 確保小螢幕上內容不被隱藏 */
   }
 }
