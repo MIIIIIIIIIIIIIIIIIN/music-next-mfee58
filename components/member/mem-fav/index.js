@@ -73,9 +73,11 @@ const MemberFav = () => {
                         className={styles.photo}
                       />
                     </div>
-                    <p className={styles.favName}>{fav.name}</p>
                   </div>
-                  <p className={styles.favGenre}>{fav.genre}</p>
+                  <p className={styles.favName}>{fav.name}</p>
+<div className={styles["RWD"]}>
+
+<p className={styles.favGenre}>{fav.genre}</p>
                   <div className={styles.favAction}>
                     <Heart
                       size={2}
@@ -83,6 +85,8 @@ const MemberFav = () => {
                       onClick={() => handleRemove(fav.id)}
                     />
                   </div>
+</div>
+                 
                 </div>
               ))}
             </div>

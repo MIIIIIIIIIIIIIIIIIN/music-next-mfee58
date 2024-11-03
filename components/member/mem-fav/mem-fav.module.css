@@ -133,6 +133,100 @@ padding: 20px 150px 20px 10px;
 
 }
 
+.RWD{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .favGenre{
   width: 150px;
+}
+
+@media (max-width: 375px) {
+  .member-fav {
+    margin-top: 20px;
+    padding: 0 10px;
+    height: auto; /* 自適應高度 */
+    width: 100%;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .favNav {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .favMain {
+    width: 300px;
+    padding: 10px;
+    height: auto;
+  }
+
+  .mainTitle {
+    padding: 0 10px;
+    font-size: 1.5em; /* 調整字體大小 */
+    text-align: center; /* 居中對齊標題 */
+    margin-bottom: 20px;
+  }
+
+  .mainBody {
+    width: 300px;
+    margin: 0;
+    /* padding: 10px; */
+    max-height: none; /* 移除高度限制 */
+    overflow-y: visible; /* 取消滾動條 */
+  }
+
+  .favInfo {
+    width: 300px;
+    flex-direction: column; /* 改為垂直排列 */
+    margin: auto; /* 減少外邊距 */
+    padding: 20px;
+    align-items: center;
+    box-shadow: none; /* 移除框陰影 */
+    border-bottom: 1px solid var(--gray-2);
+  }
+
+  .favInfo:hover {
+    cursor: default;
+    background-color: inherit; /* 重置背景顏色 */
+    color: inherit; /* 重置文字顏色 */
+    margin: 15px 0; /* 重置外邊距 */
+    box-shadow: none; /* 移除陰影效果 */
+  }
+
+  
+  .favIcon {
+    margin-right: 10px;
+    margin-bottom: 10px; /* 添加下方間距 */
+    width: 50px; /* 調整圖標大小 */
+    height: 50px;
+  }
+
+  .favName {
+    padding: 10px 5px;
+    text-align: center; /* 居中對齊 */
+    font-size: 1em; /* 調整字體大小 */
+  }
+
+  .favGenre {
+    width: auto;
+    text-align: center;
+    font-size: 0.9em; /* 調整字體大小 */
+    margin-bottom: 10px; /* 添加上邊距 */
+  }
+
+  .RWD{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+ 
 }
