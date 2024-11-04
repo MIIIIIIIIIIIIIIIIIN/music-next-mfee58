@@ -9,6 +9,10 @@
   overflow: hidden;
   
 }
+.linkstyle{
+  color: white;
+  text-decoration: none;
+}
 .latestLaunch {
   display: flex;
   align-items: center;

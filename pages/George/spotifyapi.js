@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Spotifyplaylist from "@/components/George/spotifyAPI/playlist";
-import SpotifyEmbedPlayer from "@/components/George/spotifyAPI/player";
+import Playlist from "@/components/George/playerdemo/playyylist";
 
 export default function Spotifyapi() {
   return (
     <>
-      <SpotifyEmbedPlayer />
-      <Spotifyplaylist />
+      <Playlist />
     </>
   );
 }

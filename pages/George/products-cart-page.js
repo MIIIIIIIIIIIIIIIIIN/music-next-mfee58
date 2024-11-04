@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import FooterDeskTop from "@/components/public/footer/desktop";
-import FooterMobile from "@/components/public/footer/mobile";
-import Nav from "@/components/public/nav";
+import FooterDeskTop from "@/components/George/george-components/footer/desktop";
+import FooterMobile from "@/components/George/george-components/footer/mobile";
+import Nav from "@/components/George/george-components/nav";
 import ProductsCart from "@/components/George/products-cart-checkout/products-cart";
 
 export default function ProductsCartPage(props) {

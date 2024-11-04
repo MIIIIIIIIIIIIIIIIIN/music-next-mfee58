@@ -1,7 +1,8 @@
 import React from "react";
 import style from "./products-activities.module.css";
+import Link from "next/link";
 
-export default function ProductsActivities() {
+export default function ProductsActivities({ accessToken }) {
   const products = [
     {
       description:
@@ -151,33 +152,52 @@ export default function ProductsActivities() {
         <div className={style["pics-box"]}>
           <div className={style["left-side"]}>
             <div className={style.leftSideImageContainer}> </div>
-            <img
-              src="/George/products-images-940px/products-(66).jpg"
-              alt="no.66"
-            />
+            <Link href={`/George/products-detail`} className={style.linkstyle}>
+              {" "}
+              <img
+                src="/George/products-images-940px/products-(66).jpg"
+                alt="no.66"
+              />
+            </Link>
             <div className={style["text-box"]}>
               <div className={style["text-title"]}>
-                王宏 (Hom Wang) Future Beats
+                <Link
+                  href={`/George/products-detail`}
+                  className={style.linkstyle}
+                >
+                  王宏 (Hom Wang) Future Beats
+                </Link>
               </div>
               <div className={style["text-description"]}>
-                專輯《Future
-                Beats》探索未來音樂的可能性，融合科技與創新，創作出具有前瞻性的音樂作品，展現未來音樂的無限潛力。
+                <Link
+                  href={`/George/products-detail`}
+                  className={style.linkstyle}
+                >
+                  專輯《Future
+                  Beats》探索未來音樂的可能性，融合科技與創新，創作出具有前瞻性的音樂作品，展現未來音樂的無限潛力。
+                </Link>
               </div>
             </div>
           </div>
           <div className={style["right-side"]}>
-            <img
-              src="/George/products-images-350px/products-(118).jpg"
-              alt="no.118"
-            />
-            <img
-              src="/George/products-images-350px/products-(112).jpg"
-              alt="no.112"
-            />
-            <img
-              src="/George/products-images-350px/products-(99).jpg"
-              alt="no.114"
-            />
+            <Link href={`/George/products-detail`} className={style.linkstyle}>
+              <img
+                src="/George/products-images-350px/products-(118).jpg"
+                alt="no.118"
+              />
+            </Link>
+            <Link href={`/George/products-detail`} className={style.linkstyle}>
+              <img
+                src="/George/products-images-350px/products-(112).jpg"
+                alt="no.112"
+              />
+            </Link>
+            <Link href={`/George/products-detail`} className={style.linkstyle}>
+              <img
+                src="/George/products-images-350px/products-(99).jpg"
+                alt="no.114"
+              />
+            </Link>
           </div>
         </div>
       </div>

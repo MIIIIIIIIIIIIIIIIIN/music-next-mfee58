@@ -3,11 +3,11 @@ import { FaHandPointRight } from "react-icons/fa";
 import { BsCart4 } from "react-icons/bs";
 import { TiDeleteOutline } from "react-icons/ti";
 import { useEffect, useState } from "react";
+import Logo from "../logo";
+import Link from "next/link";
 
 export const AddToCartBar = () => {
-  const [show, setShow] = useState(false);
   const [atBottom, setAtBottom] = useState(false);
-  const [smallBar, setSmallBar] = useState(false);
 
   useEffect(() => {
     const comparingScroll = () => {
@@ -29,109 +29,30 @@ export const AddToCartBar = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const handlerScroll = () => {
-      if (window.scrollY > 50 && window.innerWidth > 400) {
-        setShow(true);
-      } else if (window.innerWidth < 400 && window.scrollY > 50) {
-        setSmallBar(true);
-      } else {
-        setShow(false);
-        setSmallBar(false);
-      }
-    };
-    window.addEventListener("scroll", handlerScroll);
-    return () => {
-      window.removeEventListener("scroll", handlerScroll);
-    };
-  }, []);
-
   return (
     <>
-      {smallBar ? '' : atBottom ? (
-        <div className={`${styles["cart-icon-container"]}`}>
-          <div className={styles["cart-icon"]}>
-            <BsCart4 size={48}  />
-          </div>
+      <div className={`${styles["cart-icon-container"]}`}>
+        <div className={styles["cart-icon"]}>
+          <BsCart4 size={48} />
+        </div>
+        <div className={styles.bigwordsandlogo}>
           <div className={`${styles["cart-expanded"]}`}>
             <div className={styles["frame"]}>
-              <div className={styles["logo-vertical"]}>
-                <div className={styles["guava-vibe"]}>GuavaVibe</div>
-              </div>
-              <div className={styles["buttonbar-content"]}>
-                <p className={styles["text-wrapper"]}>
-                  Available for international shipping by Fedex
-                </p>
-                <div className={styles["small-words"]}>
-                  <button className={styles["div"]}>How to use</button>
-                  <FaHandPointRight />
-                  <div className={styles["finger2"]}>
-                    <FaHandPointRight />
-                  </div>
-                  <button className={styles["text-wrapper-2"]}>
-                    Privacy Policy
-                  </button>
-                  <div className={styles["delete"]}>
-                    <TiDeleteOutline />
-                  </div>
-                  <div className={styles["text-wrapper-3"]}>
-                    Ignore WorldShopping service
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={styles["bottom-bar-buttons"]}>
-              <button className={styles["barbutton-addtocart"]}>
-                <div className={styles["text-wrapper-4"]}>Add to Cart</div>
-              </button>
-              <div className={styles["div-wrapper"]}>
-                <div className={styles["text-wrapper-4"]}>Cart</div>
+              <Logo type={2}/>
+              <div className={styles["bottom-bar-buttons"]}>
+                <button className={styles["barbutton-addtocart"]}>
+                  <div className={styles["text-wrapper-4"]}>Add to Cart</div>
+                </button>
+                <Link href={"/George/products-cart-page"}>
+                <button className={styles["div-wrapper"]}>
+                  <div className={styles["text-wrapper-4"]}>Cart</div>
+                </button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
-      ) : (
-        <>
-          <div
-            className={`${styles["button-bar"]} ${show ? styles["show"] : ""}`}
-          >
-            <div className={styles["frame"]}>
-              <div className={styles["logo-vertical"]}>
-                <div className={styles["guava-vibe"]}>GuavaVibe</div>
-              </div>
-              <div className={styles["buttonbar-content"]}>
-                <p className={styles["text-wrapper"]}>
-                  Available for international shipping by Fedex
-                </p>
-                <div className={styles["small-words"]}>
-                  <button className={styles["div"]}>How to use</button>
-                  <FaHandPointRight />
-                  <div className={styles["finger2"]}>
-                    <FaHandPointRight />
-                  </div>
-                  <button className={styles["text-wrapper-2"]}>
-                    Privacy Policy
-                  </button>
-                  <div className={styles["delete"]}>
-                    <TiDeleteOutline />
-                  </div>
-                  <div className={styles["text-wrapper-3"]}>
-                    Ignore WorldShopping service
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={styles["bottom-bar-buttons"]}>
-              <button className={styles["barbutton-addtocart"]}>
-                <div className={styles["text-wrapper-4"]}>Add to Cart</div>
-              </button>
-              <div className={styles["div-wrapper"]}>
-                <div className={styles["text-wrapper-4"]}>Cart</div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
+      </div>
     </>
   );
 };

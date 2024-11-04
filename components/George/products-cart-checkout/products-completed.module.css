@@ -1,22 +1,66 @@
+.banner {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.vcover{
+  position: absolute;
+  top: 0px;
+  height: 30px;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1), /* 漸層顏色的起點（接近導航欄顏色） */
+    rgba(255, 255, 255, 0.8), /* 漸層顏色的起點（接近導航欄顏色） */
+    rgba(255, 255, 255, 0.6), /* 漸層顏色的起點（接近導航欄顏色） */
+    rgba(255, 255, 255, 0.4), /* 漸層顏色的起點（接近導航欄顏色） */
+    rgba(255, 255, 255, 0.2), /* 漸層顏色的起點（接近導航欄顏色） */
+    rgba(0, 0, 0, 0) /* 透明，和影片自然過渡 */
+  );
+  filter: blur(0px);
+  z-index: 500;
+}
+
+.banner video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  
+}
 .container {
-  width: 60vw;
+  width: 80vw;
   margin: auto;
   padding: 100px ;
+  z-index: 9999;
 }
 
 .ordercompletedbox {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  background: #fff;
+  gap: 100px;
+  background: rgba(255,255,255,0.5);
   border-radius: 10px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
   width: 80%;
   margin: auto;
   padding: 20px;
   text-align: center;
+}
+.orderbox{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+
 }
 .completedicon {
   border: none;

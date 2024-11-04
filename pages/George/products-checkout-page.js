@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import FooterDeskTop from "@/components/public/footer/desktop";
-import FooterMobile from "@/components/public/footer/mobile";
-import Nav from "@/components/public/nav";
+import FooterDeskTop from "@/components/George/george-components/footer/desktop";
+import FooterMobile from "@/components/George/george-components/footer/mobile";
+import Nav from "@/components/George/george-components/nav";
 import ProductsCheckout from "@/components/George/products-cart-checkout/products-checkout";
 
 export default function ProductsCheckoutPage(props) {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
+
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
     const handleResize = () => {
@@ -34,7 +35,9 @@ export default function ProductsCheckoutPage(props) {
   return (
     <>
       <Nav />
-      <ProductsCheckout />
+      <div className="video-container">
+        <ProductsCheckout /> {/* 圖卡及結帳頁面內容 */}
+      </div>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );
