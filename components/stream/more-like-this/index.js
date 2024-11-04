@@ -16,13 +16,13 @@ const MoreLikeThis = ({ apiKey }) => {
             id: "1",
             thumbnail:
               "https://yume-muso.com/wp-content/uploads/2020/06/%E7%9C%9F%E7%94%B0%E4%B8%B8%E3%80%8024.jpg",
-            title: "Gaming Stream Highlight",
+            title: "Stream Highlight",
           },
           {
             id: "2",
             thumbnail:
               "https://blog.zh-hant.playstation.com/tachyon/sites/8/2024/05/45f2bc21fc735dc3dc38a547722009ef94f80c4e.jpg",
-            title: "Assassin's Creed Gameplay",
+            title: "Monster Hunter",
           },
           {
             id: "3",
@@ -58,34 +58,35 @@ const MoreLikeThis = ({ apiKey }) => {
   }
 
   return (
-    <div className={styles.spacedContainer}>
-      <h3 className={styles.title}>看更多...</h3>
-      <div className={styles.grid}>
-        {videos.map((video) => (
-          <Card
-            key={video.id}
-            sx={{
-              cursor: "pointer",
-              transition: "transform 0.2s",
-              "&:hover": {
-                transform: "scale(1.05)",
-              },
-            }}
-          >
-            <CardContent sx={{ padding: 0 }}>
-              <div className={styles.imageContainer}>
-                <img
-                  src={video.thumbnail}
-                  alt={video.title}
-                  className={styles.image}
-                />
-                <div className={styles.overlay}>
-                  <div className={styles.overlayText}>{video.title}</div>
+    <div className={styles.container}>
+      <div className={styles.spacedContainer}>
+        <h3 className={styles.title}>看更多...</h3>
+        <div className={styles.grid}>
+          {videos.map((video) => (
+            <Card
+              key={video.id}
+              sx={{
+                cursor: "pointer",
+                transition: "transform 0.2s",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                },
+              }}
+            >
+              <CardContent sx={{ padding: 0 }}>
+                <div className={styles.imageContainer}>
+                  <img
+                    src={video.thumbnail}
+                    className={styles.image}
+                  />
+                  <div className={styles.overlay}>
+                    <div className={styles.overlayText}>{video.title}</div>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import styles from "./stream-frame.module.css";
 import ViewerCount from "@/components/public/icons/viewer_count";
 
-
 const LiveStream = ({
-  videoId = "neKSP2P7FIY",
+  videoId = "38ygP8qc7Uc",
   streamerName = "DefaultStreamer",
 }) => {
   const [streamData, setStreamData] = useState({
@@ -27,13 +26,36 @@ const LiveStream = ({
       try {
         setIsLoading(true);
         const response = await fetch(
-          "http://localhost:3006/api/live-stream-details"
+          `http://192.168.37.184:3006/api/live-stream-details/${videoId}`,
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          }
         );
-        if (!response.ok) {
-          const data = await response.json();
-          throw new Error(data.message || "Failed to fetch stream details");
+
+        // Log the raw response for debugging
+        const responseText = await response.text();
+        console.log("Raw response:", responseText);
+
+        // Try to parse the response as JSON
+        let data;
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          throw new Error(
+            `Failed to parse response as JSON: ${responseText.substring(
+              0,
+              100
+            )}...`
+          );
         }
-        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || `Server returned ${response.status}`);
+        }
+
         setStreamData(data);
         setError(null);
       } catch (err) {
@@ -49,17 +71,9 @@ const LiveStream = ({
     return () => clearInterval(pollInterval);
   }, [videoId]);
 
-  if (error) {
-    return (
-      <div className={styles.errorContainer}>
-        <p className={styles.errorText}>Error: {error}</p>
-      </div>
-    );
-  }
-
+  // Rest of the component remains the same...
   return (
     <div className={styles.container}>
-      {/* Header with Profile and Stream Info */}
       <div className={styles.header}>
         <div className={styles.profilePic}>
           <img src="/s_img/anya.png" alt={streamerName} />
@@ -73,27 +87,43 @@ const LiveStream = ({
         </div>
       </div>
 
-      {/* Video Container */}
       <div className={styles.videoContainer}>
         <iframe
           className={styles.videoFrame}
-          src={`https://www.youtube.com/embed/${videoId}`}
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
           title={streamData.title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
       </div>
-      {/* Stats Overlay */}
+
       {!isLoading && (
         <div className={styles.statsContainer}>
           <div className={styles.viewerCount}>
-            <ViewerCount /> {streamData.viewerCount.toLocaleString()}
+            <ViewerCount /> {streamData.viewerCount?.toLocaleString() || "0"}
           </div>
-          <div className={styles.elapsedTime}>⏱️ {streamData.elapsedTime}</div>
+          <div className={styles.elapsedTime}>
+            ⏱️ {streamData.elapsedTime || "0h 0m"}
+          </div>
+          {streamData.isLive && (
+            <div className={styles.statusIndicator}>
+              <span
+                className={`${styles.statusDot} ${styles.statusDotLive}`}
+              ></span>
+              <span>LIVE</span>
+            </div>
+          )}
         </div>
       )}
+
       {isLoading && (
         <p className={styles.loadingText}>Loading stream details...</p>
+      )}
+
+      {error && (
+        <div className={styles.errorContainer}>
+          <p className={styles.errorText}>{error}</p>
+        </div>
       )}
     </div>
   );

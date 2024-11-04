@@ -51,6 +51,12 @@
   font-size: 16px;
   color: #000;
   font-family: "Noto Sans TC";
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.followingStream:hover {
+  transform: scale(1.02);
 }
 
 .img {
