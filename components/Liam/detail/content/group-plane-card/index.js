@@ -13,13 +13,13 @@ export default function GroupPlaneCard() {
   };
 
   if (showProductSelector) {
-    return <ProductSelector selectedPlan={selectedPlan} />;
+    return <ProductSelector setShowProductSelector={setShowProductSelector} selectedPlan={selectedPlan} />;
   }
 
   return (
     <div className={styles.container}>
       <ul className={styles.list}>
-        {Array.from({ length: 5 }, (_, i) => (
+        {Array.from({ length: 3 }, (_, i) => (
           <li key={i} className={styles.item}>
             <PlaneCard onSelect={handlePlanSelect} />
           </li>

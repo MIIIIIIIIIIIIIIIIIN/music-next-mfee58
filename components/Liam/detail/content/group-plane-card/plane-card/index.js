@@ -21,7 +21,7 @@ const PlaneCard = ({ onSelect }) => {
 
       <div className={styles.imageContainer}>
         <img
-          src="/api/placeholder/400/300"
+          src="/01.jpg"
           alt="Promotion"
           className={styles.image}
         />

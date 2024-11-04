@@ -27,7 +27,7 @@ const INITIAL_FAQS = [
 ];
 
 // Component
-export const ProductSelector = ({ selectedPlan }) => {
+export const ProductSelector = ({ selectedPlan,setShowProductSelector }) => {
   // State
   const [albumInfo] = useState(INITIAL_ALBUM_INFO);
   const [products, setProducts] = useState([]);
@@ -237,9 +237,11 @@ export const ProductSelector = ({ selectedPlan }) => {
     <div className={styles.wrapper}>
       <div className={styles.albumHeader}>
         <div className={styles.albumTitle}>
-          <button>返回</button>
-          <span>{albumInfo.title}</span>
-          <span className={styles.albumSubtitle}>{albumInfo.subtitle}</span>
+          <button className={styles.back} onClick={()=>{
+            setShowProductSelector(false)
+          }}><ArrowLeft size={20} />返回</button>
+          <h5 className={styles.title}>{albumInfo.title}<span className={styles.albumSubtitle}>{albumInfo.subtitle}</span></h5>
+          
         </div>
       </div>
 

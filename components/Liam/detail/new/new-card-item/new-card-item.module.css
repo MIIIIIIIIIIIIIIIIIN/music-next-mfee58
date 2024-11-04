@@ -1,80 +1,57 @@
 .card {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    background: white;
-    margin-bottom: 20px;
-    transition: transform 0.2s ease;
-    cursor: pointer;
-    width: 80%;
-    margin: auto;
-    margin-bottom: 10px;
+  cursor: pointer;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background: white;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+  border: 1px solid #333;
+  transition: transform 0.2s ease;
+  user-select: none;  /* 防止文字被選中 */
+}
 
-  }
-  
-  .card:hover {
-    transform: translateY(-2px);
-    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
-    border: 2px solid #00ff1e;
-  }
-  
-  .content {
-    padding: 16px;
-  }
-  
-  .date {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 12px;
-  }
-  
-  .imageContainer {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 4px;
-    margin-bottom: 16px;
-  }
-  
-  .image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .textContent {
-    padding-right: 20px;
-  }
-  
-  .title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 8px;
-    line-height: 1.4;
-  }
-  
-  .description {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.6;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
-  
-  /* 響應式設計 */
-  @media (max-width: 768px) {
-    .imageContainer {
-      height: 160px;
-    }
-    
-    .title {
-      font-size: 16px;
-    }
-    
-    .description {
-      font-size: 13px;
-    }
-  }
+.card:hover {
+  transform: translateY(-2px);
+  border: 3px solid #09ff00;
+}
+
+/* 確保整個卡片都可以點擊 */
+.card * {
+  pointer-events: none;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  padding: 8px 0;
+}
+
+.title {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.description {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.date {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 8px;
+}

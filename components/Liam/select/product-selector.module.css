@@ -11,6 +11,18 @@
     gap: 1rem;
     margin-bottom: 1.5rem;
   }
+
+  .back{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    margin-bottom: 10px;
+    &:hover{
+      background-color: #14FF00;
+    }
+  }
   
   .backButton {
     display: flex;
@@ -23,7 +35,9 @@
   .backButton:hover {
     color: #333;
   }
-  
+  .title{
+    margin-bottom: 10px;
+  }
   .cartTitle {
     font-size: 1.5rem;
     font-weight: bold;

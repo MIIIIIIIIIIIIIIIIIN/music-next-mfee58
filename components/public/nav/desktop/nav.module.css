@@ -1,8 +1,14 @@
+
 .wrap{
   width: 100% ;
   position: relative;
+  height: 120.5px;
+
   top:0;
   z-index: 9999;
+  height: 60px;
+  
+
   background: linear-gradient(0deg, rgba(255,255,255,0) 41%, rgba(20,255,0,1) 100%);
 }
 .wrap1{
@@ -10,9 +16,11 @@
   position: fixed;
   top:0;
   z-index: 9999;
+  height: 60px;
   background: linear-gradient(0deg, rgba(255,255,255,0) 41%, rgba(20,255,0,1) 100%);
 }
 .container {
+  
   height: 120.5px;
   width: 80vw;
   display: flex;
