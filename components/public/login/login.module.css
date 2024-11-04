@@ -95,3 +95,10 @@
 .createAccount:hover {
   text-decoration: underline;
 }
+
+@media screen and (max-width: 375px) {
+  .loginBox{
+    width: 80%;
+  }
+  
+}
