@@ -15,24 +15,34 @@ const MemBlog = () => {
           <div className={styles["leftContent"]}>
             {/* <InfoNav /> */}
             <BlogNav />
+           
           </div>
           <div className={styles["rightContent"]}>
-            <div className={styles["album"]}>
-              <div className="icon"></div>
-              <UserIcon />
+            {/* 設定圖標，放置在右上角 */}
+            <img
+              src="/icons/icon-setting.svg"
+              alt="設定"
+              className={styles["settingIcon"]}
+            />
+
+            <div className={styles["albumSec"]}>
+              <div className={styles["album"]}>
+                <div className="icon"></div>
+                <UserIcon />
+              </div>
+
+              <div className={styles["album"]}>
+                <PlayButton size="large" />
+              </div>
+              <div className={styles["album"]}>album</div>
+              <div className={styles["album"]}>album</div>
+              <div className={styles["album"]}>album</div>
+              <div className={styles["album"]}>album</div>
+              <div className={styles["album"]}>album</div>
+              <div className={styles["album"]}>album</div>
+              <div className={styles["album"]}>album</div>
+              <div className={styles["album"]}>album</div>
             </div>
-            
-            <div className={styles["album"]}>
-              <PlayButton size="large" />
-            </div>
-            <div className={styles["album"]}>album</div>
-            <div className={styles["album"]}>album</div>
-            <div className={styles["album"]}>album</div>
-            <div className={styles["album"]}>album</div>
-            <div className={styles["album"]}>album</div>
-            <div className={styles["album"]}>album</div>
-            <div className={styles["album"]}>album</div>
-            <div className={styles["album"]}>album</div>
           </div>
         </div>
 

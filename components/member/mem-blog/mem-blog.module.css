@@ -77,38 +77,44 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
 
 /* 右邊內容區域 */
 .rightContent {
-  
-  width: 70%; /* 右側占 container 的 80% */
-  /* background-color: #e0e0e0; */
-  /* padding: 20px; */
-  margin-left: 30%; /* 留出左側固定區域的空間 */
-  
+  width: 70%;
+  margin-left: 30%;
   display: grid;
-  grid-template-columns: repeat(3, 200px); /* 三列，平分寬度 */
-  gap: 30px; /* 方形之間的間距 */
-  width: 100%; /* 根據需求調整寬度 */
+  grid-template-columns: repeat(4, 200px);
+  gap: 30px;
   padding: 20px;
-
-
-
-  
+  position: relative; /* 為絕對定位的設定圖標提供參考框架 */
 }
 
+.settingIcon {
+  position: absolute;
+  right: 50px; /* 距離右側 */
+  width: 30px; /* 設置圖標寬度 */
+  height: 30px; /* 設置圖標高度 */
+  cursor: pointer; /* 鼠標懸停顯示為可點擊狀態 */
+  z-index: 1; /* 保持在其他元素之上 */
+}
 
-.album{
-  background-color: var(--gray-2); /* 方形背景色，可根據需求調整 */
+.albumSec {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 調整 album 元素的排列 */
+  gap: 30px;
+}
 
-  width: 200px; /* 方形寬度 */
-  height: 200px; /* 方形高度 */
+.album {
+  background-color: var(--gray-2);
+  width: 200px;
+  height: 200px;
   display: flex;
-  align-items: center; /* 垂直居中 */
-  justify-content: center; /* 水平居中 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 陰影效果 */
-  border-radius: 8px; /* 圓角 */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 }
 
 
 @media (max-width: 375px) {
+  
   .leftContent {
     display: flex; /* 使用 flex 以居中內容 */
     align-items: center; /* 垂直居中 */
@@ -124,6 +130,25 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
     backdrop-filter: blur(10px); /* 選擇性設置模糊效果 */
      box-shadow: none; 
   }
+
+  
+  
+  .settingIcon0 {
+    position: absolute;
+    top: 10px; /* 距離 BlogNav 上方 */
+    right: 50px; /* 距離 BlogNav 右側 */
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .settingIcon{
+    top: 0px;
+    width: 20px;
+    height: 20px;
+  }
+  
 
   .container {
     width: 100%; /* 讓容器佔滿寬度 */

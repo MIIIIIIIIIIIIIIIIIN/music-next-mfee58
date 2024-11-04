@@ -18,10 +18,10 @@ const BlogNav = () => {
       </div>
       <div className={styles["status"]}>
         <h7>Love & Peace</h7>
+        {/* <h7>Love & Peace</h7>
         <h7>Love & Peace</h7>
         <h7>Love & Peace</h7>
-        <h7>Love & Peace</h7>
-        <h7>Love & Peace</h7>
+        <h7>Love & Peace</h7> */}
       </div>
     </div>
   );

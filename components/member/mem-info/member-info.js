@@ -36,6 +36,9 @@ const MemberInfo = () => {
               <h6 className={styles["icon-title"]}>
                   上傳頭像建議尺寸： 140x140px 以內，圖片檔案大小不可超過 2MB
                 </h6>
+                <h6 className={styles["input-top"]}>簡介 <FormInput />
+                </h6>
+
               <div className={styles["body-input"]}>
                 <div className={styles["input-left"]}>
                   {/* 左側內容 */}
