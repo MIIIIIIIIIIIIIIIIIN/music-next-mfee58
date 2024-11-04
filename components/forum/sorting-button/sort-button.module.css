@@ -124,7 +124,7 @@
   background-color: #000000; /* Changed from white to black for visibility */
   border-radius: 50%;
   position: absolute;
-  top: -11px;
+  top: -15px;
   right: -15px;
   animation: pulse 1.5s ease-in-out infinite;
 }
