@@ -1,6 +1,6 @@
 import React from "react";
 
-const ShareIcon = () => (
+const ViewerCount = () => (
   <svg
     width="19"
     height="22"
@@ -16,4 +16,4 @@ const ShareIcon = () => (
   </svg>
 );
 
-export default ShareIcon;
+export default ViewerCount;
