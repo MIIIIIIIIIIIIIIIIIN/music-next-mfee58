@@ -1,5 +1,6 @@
 .member-acc {
   display: flex;
+  ;
   flex-direction: column;
   /* height: calc(100vh - 120px); */
   width: 100%;
@@ -7,13 +8,13 @@
 }
 
 .container {
-  display: flex;
+  /* display: flex;
   height: 100%;
   width: 100%;
   margin: auto;
   justify-content: center;
   align-items: flex-start;
-  text-align: center;
+  text-align: center; */
 }
 .b {
   position: relative;
