@@ -26,16 +26,6 @@
   z-index: 10;
 }
 
-.settingIcon {
-  position: absolute;
-  right: 20%; /* 距離右側 */
-  top: 15%;
-  width: 30px; /* 設置圖標寬度 */
-  height: 30px; /* 設置圖標高度 */
-  cursor: pointer; /* 鼠標懸停顯示為可點擊狀態 */
-  z-index: 1; /* 保持在其他元素之上 */
-}
-
 /* 主內容區域 */
 .container {
   flex: 1;
@@ -96,7 +86,14 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
   position: relative; /* 為絕對定位的設定圖標提供參考框架 */
 }
 
-
+.settingIcon {
+  position: absolute;
+  right: 50px; /* 距離右側 */
+  width: 30px; /* 設置圖標寬度 */
+  height: 30px; /* 設置圖標高度 */
+  cursor: pointer; /* 鼠標懸停顯示為可點擊狀態 */
+  z-index: 1; /* 保持在其他元素之上 */
+}
 
 .albumSec {
   display: grid;
@@ -146,14 +143,10 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
     z-index: 10;
   }
 
-  .settingIcon {
-    /* position: absolute; */
-    right:10%; /* 距離右側 */
-    top: 15%;
-    width: 30px; /* 設置圖標寬度 */
-    height: 30px; /* 設置圖標高度 */
-    cursor: pointer; /* 鼠標懸停顯示為可點擊狀態 */
-    z-index: 1; /* 保持在其他元素之上 */
+  .settingIcon{
+    top: 0px;
+    width: 20px;
+    height: 20px;
   }
   
 
@@ -162,7 +155,6 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
     padding: 0; /* 移除多餘的內邊距 */
     margin: auto; /* 居中對齊 */
     flex-direction: column; /* 調整為垂直佈局 */
-    margin-top: 10px;
   }
 
   .rightContent {

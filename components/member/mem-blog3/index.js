@@ -10,21 +10,21 @@ const MemBlog = () => {
     <>
       <div className={styles["wrapper"]}>
         <Nav className={styles["nav"]} />
-        {/* 設定圖標，放置在右上角 */}
-        <a href="/Jade/MemberCenter">
-          <img
-            src="/icons/icon-setting.svg"
-            alt="設定"
-            className={styles["settingIcon"]}
-          />
-        </a>
 
         <div className={styles["container"]}>
           <div className={styles["leftContent"]}>
             {/* <InfoNav /> */}
             <BlogNav />
+           
           </div>
           <div className={styles["rightContent"]}>
+            {/* 設定圖標，放置在右上角 */}
+            <img
+              src="/icons/icon-setting.svg"
+              alt="設定"
+              className={styles["settingIcon"]}
+            />
+
             <div className={styles["albumSec"]}>
               <div className={styles["album"]}>
                 <div className="icon"></div>

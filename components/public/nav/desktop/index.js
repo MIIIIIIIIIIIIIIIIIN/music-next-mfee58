@@ -177,7 +177,7 @@ export default function NavDesktop() {
           </div>
 
           <div className={styles.iconsContainer}>
-            <a href="#">
+            <a href="/member-blog">
               <ProfileIcons property1="XS" className={styles.header} />
             </a>
 
