@@ -137,14 +137,16 @@ export default function NavDesktop() {
                 backgroundColor: activeIndex === 2 ? "#14ff00" : "#fff",
               }}
             >
+              <a href="/Allen/forum">
               <div className={styles.top}></div>
               <div className={styles.bottom}>
                 <h6>論壇</h6>
               </div>
+              </a>
             </li>
             {displayForum && <Forum />}
             <li className={styles.item}>
-              <a href="#">
+              <a href="/Allen/stream">
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>直播</h6>
