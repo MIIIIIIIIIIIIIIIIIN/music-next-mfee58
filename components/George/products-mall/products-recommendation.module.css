@@ -4,7 +4,10 @@
     margin: auto;
   }
 
-
+  .linkstyle{
+    color: white;
+    text-decoration: none;
+  }
 /* items 2 */
 .itemContainer {
   height: 27em;

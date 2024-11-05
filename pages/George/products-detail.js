@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import NavDesktop from "@/components/public/nav/desktop";
-import FooterDeskTop from "@/components/footer/desktop";
-import FooterMobile from "@/components/footer/mobile";
-import NavMobile from "@/components/public/nav/mobile";
+import FooterDeskTop from "@/components/public/footer/desktop";
+import FooterMobile from "@/components/public/footer/mobile";
+import Nav from "@/components/public/nav";
+import { AddToCartBar } from "@/components/public/addtocart-bar/add-to-cart";
 import ProductsDetailPage from "@/components/George/products-detail/products-detail-page";
+import ProductsListen from "@/components/George/products-detail/products-listen";
+import ProductsDescription from "@/components/George/products-detail/products-description";
+import ProductsMore from "@/components/George/products-detail/products-more";
+import OthersYouLike from "@/components/George/products-detail/products-othersYouLike";
 
 export default function ProductsDetail() {
   const [isMobile, setIsMobile] = useState(false);
-  const [isNavVisible, setIsNavVisible] = useState(false);
+  const [isNavMobile, setIsNavVisible] = useState(false);
 
-  // const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
     const handleResize = () => {
@@ -23,7 +26,7 @@ export default function ProductsDetail() {
     window.addEventListener("resize", handleResize);
 
     const handleScroll = () => {
-      setIsNavVisible(window.scrollY > 30); // 當滾動超過 100px 時顯示 nav
+      setIsNavVisible(window.scrollY > 30);
     };
     window.addEventListener("scroll", handleScroll);
 
@@ -35,8 +38,13 @@ export default function ProductsDetail() {
   }, []);
   return (
     <>
-      {isMobile ? <NavMobile /> : isNavVisible ? <NavDesktop /> : isNavVisible}
+      <Nav />
       <ProductsDetailPage />
+      <ProductsListen />
+      <ProductsDescription />
+      <ProductsMore />
+      <OthersYouLike />
+      <AddToCartBar/>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

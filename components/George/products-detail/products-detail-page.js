@@ -1,15 +1,16 @@
 import React from "react";
 import style from "./products-detail.module.css";
-import WhiteWBtns from "./white_wbtns";
-import BlackWBtns from "./black_wbtns";
-import { Quantity } from "./quantity/quantity";
+import WhiteWBtns from "../george-components/white_wbtns";
+import BlackWBtns from "../george-components/black_wbtns";
+import { Quantity } from "../george-components/quantity/quantity";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaLine } from "react-icons/fa6";
 import { FaSquareInstagram } from "react-icons/fa6";
+import Link from "next/link";
 
 export default function ProductsDetailPage() {
   const handleClick = () => {
-    alert("Wide Buttons clicked!");
+    "";
   };
   return (
     <>
@@ -52,9 +53,9 @@ export default function ProductsDetailPage() {
                 <li>不是周杰倫</li>
                 <li>{<Quantity />}</li>
                 <li>
-                  <FaFacebookSquare size={30} />
-                  <FaLine size={30} />
-                  <FaSquareInstagram size={30} />
+                  <FaFacebookSquare size={30} className={style.icons}/>
+                  <FaLine size={30} className={style.icons} />
+                  <FaSquareInstagram size={30}/>
                 </li>
               </ul>
             </span>
@@ -64,6 +65,7 @@ export default function ProductsDetailPage() {
           <div className={style.seperationLine}></div>
           <div className={style.totalAmount}>Total Purchase Amount $200</div>
           <div className={style.btns}>
+            <Link href={"/George/products-cart-page"}>
             <BlackWBtns
               type="2"
               onClick={handleClick}
@@ -71,6 +73,8 @@ export default function ProductsDetailPage() {
             >
               直接購買
             </BlackWBtns>
+            </Link>
+
             <WhiteWBtns
               type="1"
               onClick={handleClick}

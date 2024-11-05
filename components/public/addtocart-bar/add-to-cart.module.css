@@ -1,185 +1,20 @@
-.button-bar {
+.frame {
   align-items: center;
-  background-color: rgb(165, 165, 165, 0.15);
-  border-radius: 10px;
-  overflow: hidden;
+  justify-content: space-between;
   display: flex;
-  margin: auto;
-  padding: 0px 5px;
-  position: fixed;
-  width: 1280px;
-  gap: 50px;
-  height: 100px;
-  top: 850px;
-  bottom: 0px;
-  left: 320px;
-  box-shadow: -0.1px -0.1px 15px gray;
-  z-index: 1000;
-  opacity: 0;
-}
-
-.show {
-  align-items: center;
-  background-color: rgb(165, 165, 165, 0.15);
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  margin: auto;
-  padding: 0px 5px;
-  position: fixed;
-  width: 1280px;
-  gap: 50px;
-  height: 100px;
-  top: 850px;
-  bottom: 0px;
-  left: 315px;
-  box-shadow: -0.1px -0.1px 15px gray;
-  z-index: 1000;
-  transition: opacity 1s ease;
-  opacity: 1;
-}
-
-.button-bar .frame {
-  align-items: center;
-  display: flex;
+  width: 100%;
   gap: 20px;
   padding: 0px 10px;
-  position: relative;
-  width: 769px;
 }
 
-.button-bar .logo-vertical {
-  align-items: center;
-  display: inline-flex;
-  flex: 0 0 auto;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
-
-.button-bar .guava-vibe {
-  color: var(--basecolor);
-  font-family: var(--secondary-400-font-family);
-  font-size: var(--secondary-400-font-size);
-  font-style: var(--secondary-400-font-style);
-  font-weight: var(--secondary-400-font-weight);
-  letter-spacing: var(--secondary-400-letter-spacing);
-  line-height: var(--secondary-400-line-height);
-  margin-top: -1.00px;
-  position: relative;
-  text-align: center;
-  width: fit-content;
-}
-
-.button-bar .buttonbar-content {
-  align-items: flex-start;
+.bottom-bar-buttons {
   display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 592px;
+  gap: 20px;
+  justify-content: end;
+  width: 100%;
 }
 
-.button-bar .text-wrapper {
-  color: var(--black);
-  font-family: var(--secondary-400-font-family);
-  font-size: var(--secondary-400-font-size);
-  font-style: var(--secondary-400-font-style);
-  font-weight: var(--secondary-400-font-weight);
-  letter-spacing: var(--secondary-400-letter-spacing);
-  line-height: var(--secondary-400-line-height);
-  margin-top: -1.00px;
-  position: relative;
-  text-align: center;
-  width: fit-content;
-}
-
-.button-bar .small-words {
-  height: 24px;
-  position: relative;
-  width: 537px;
-}
-
-.button-bar .div {
-  color: var(--gray-1);
-  font-family: var(--secondary-p-font-family);
-  font-size: var(--secondary-p-font-size);
-  font-style: var(--secondary-p-font-style);
-  font-weight: var(--secondary-p-font-weight);
-  left: 18px;
-  letter-spacing: var(--secondary-p-letter-spacing);
-  line-height: var(--secondary-p-line-height);
-  position: absolute;
-  text-align: center;
-  top: 0;
-}
-
-.button-bar button {
-  border: none;
-  background-color: rgb(0, 0, 0, 0);
-}
-
-.button-bar .hand-index-thumb {
-  height: 14px;
-  left: 0;
-  position: absolute;
-  top: 6px;
-  width: 14px;
-}
-
-.button-bar .text-wrapper-2 {
-  color: var(--gray-1);
-  font-family: var(--secondary-p-font-family);
-  font-size: var(--secondary-p-font-size);
-  font-style: var(--secondary-p-font-style);
-  font-weight: var(--secondary-p-font-weight);
-  left: 146px;
-  letter-spacing: var(--secondary-p-letter-spacing);
-  line-height: var(--secondary-p-line-height);
-  position: absolute;
-  text-align: center;
-  top: 0;
-}
-
-.button-bar .finger2 {
-  height: 13px;
-  left: 128px;
-  position: absolute;
-  top: 0px;
-  width: 14px;
-}
-
-.button-bar .delete {
-  height: 21px;
-  left: 270px;
-  position: absolute;
-  top: 0px;
-  width: 21px;
-}
-
-.button-bar .text-wrapper-3 {
-  color: var(--gray-1);
-  font-family: var(--secondary-p-font-family);
-  font-size: var(--secondary-p-font-size);
-  font-style: var(--secondary-p-font-style);
-  font-weight: var(--secondary-p-font-weight);
-  left: 291px;
-  letter-spacing: var(--secondary-p-letter-spacing);
-  line-height: var(--secondary-p-line-height);
-  position: absolute;
-  text-align: center;
-  top: 0;
-}
-
-.button-bar .bottom-bar-buttons {
-  align-items: center;
-  display: flex;
-  gap: 15px;
-  justify-content: flex-end;
-  position: relative;
-  width: 436px;
-}
-
-.button-bar .barbutton-addtocart {
+.barbutton-addtocart {
   all: unset;
   align-items: center;
   background-color: var(--black);
@@ -192,7 +27,7 @@
   width: 155px;
 }
 
-.button-bar .text-wrapper-4 {
+.text-wrapper-4 {
   color: var(--basecolor);
   font-family: var(--secondary-400-font-family);
   font-size: var(--secondary-400-font-size);
@@ -205,16 +40,88 @@
   width: fit-content;
 }
 
-.button-bar .div-wrapper {
+.barbutton-addtocart,
+.div-wrapper {
+  all: unset;
+  display: flex;
   align-items: center;
+  justify-content: center;
   background-color: var(--black);
   border-radius: 10px;
-  display: flex;
   height: 51px;
-  justify-content: center;
-  position: relative;
-  width: 97px;
+  width: 155px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.barbutton-addtocart:hover,
+.div-wrapper:hover {
+  background-color: rgba(255, 225, 0, 1);
+  border: 2px solid black;
+  color: black;
+}
+.text-wrapper-4:hover {
+  color: black;
 }
 
+/* 新增的縮小圖標樣式 */
+.cart-icon-container {
+  position: fixed;
+  bottom: 130px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  z-index: 1000;
+  cursor: pointer;
+}
 
-/* @media (maxwidth: ) */
+.cart-icon {
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  transform: rotate(-10deg);
+}
+
+.cart-expanded {
+  position: fixed;
+  bottom: 120px;
+  right: 120px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 20px;
+  width: 600px;
+  height: auto; /* 根據內容自動調整高度 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(20px);
+  z-index: 999;
+}
+/* 縮小圖標 hover 後展開購物車選項 */
+.cart-icon-container:hover .cart-expanded {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.cart-icon:hover {
+  background-color: #000;
+  color: rgba(20, 255, 0, 1);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  transform: rotate(-20deg);
+}

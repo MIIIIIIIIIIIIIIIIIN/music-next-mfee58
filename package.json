@@ -17,6 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/material": "^6.1.6",
+    "axios": "^1.7.7",
     "lucide-react": "^0.453.0",
     "next": "14.2.15",
     "react": "^18",
@@ -27,6 +28,9 @@
     "react-multi-carousel": "^2.8.5",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1"
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.1.14"
   },
   "devDependencies": {
     "eslint": "^8",

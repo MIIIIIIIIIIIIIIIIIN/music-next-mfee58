@@ -5,6 +5,7 @@ import ProductsActivities from "@/components/George/products-mall/products-activ
 import FooterDeskTop from "@/components/public/footer/desktop";
 import FooterMobile from "@/components/public/footer/mobile";
 import Nav from "@/components/public/nav";
+import { AddToCartBar } from "@/components/public/addtocart-bar/add-to-cart";
 
 export default function ProductsPage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -40,6 +41,7 @@ export default function ProductsPage() {
       <ProductsActivities />
       <ProductsRecommendation />
       <ProductsLatestLaunched />
+      <AddToCartBar />
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

@@ -1,9 +1,11 @@
 import React from "react";
 import style from "./products-latest-launched.module.css";
+import Link from "next/link";
 
 export default function Items1({ description, headline, image }) {
   return (
     <>
+    <Link href={"/George/products-detail"}>
       <div className={style.carouselItem}>
         <img src={image} alt={headline} className={style.carouselImage} />
         <div className={style.carouselContent}>
@@ -11,6 +13,7 @@ export default function Items1({ description, headline, image }) {
           <div className={style.multilineEllipsis}>{description}</div>
         </div>
       </div>
+      </Link>
     </>
   );
 }
