@@ -78,7 +78,7 @@ export default function NavDesktop() {
               //     e.currentTarget.style.backgroundColor = '#fff';  // 還原背景顏色
               // }}
             >
-              <a href="#">
+              <a href="/George/products-page">
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>商城</h6>
