@@ -45,8 +45,8 @@ const ImageCarousel = () => {
     }
   ];
 
-  const CARD_WIDTH = 256;
-  const CARD_GAP = 16;
+  const CARD_WIDTH = 220;
+  const CARD_GAP = 35;
 
   useEffect(() => {
     if (containerRef.current) {

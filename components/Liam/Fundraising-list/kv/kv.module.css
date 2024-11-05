@@ -26,3 +26,23 @@
   transition: all 2s;
 }
 
+@media screen and (max-width: 375px) {
+  .top{
+    background-color: aqua;
+  height:75vh;
+  position: relative;
+  background-image: url('../../../../public/03.jpg');
+  
+  }
+  .title{
+    background-color: #ffffff;
+    display: inline-block;
+    position: absolute;
+    padding: 20px;
+    top:60%;
+ 
+  }
+  .title h3{
+    font-size: 14px;
+  }
+}
