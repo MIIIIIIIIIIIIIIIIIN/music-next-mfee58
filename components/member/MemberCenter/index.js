@@ -6,6 +6,7 @@ import MemberInfo from "../mem-info/member-info";
 import MemberACC from "../mem-acc/mem-acc";
 import MemberPassword from "../mem-password";
 import MemberFav from "../mem-fav";
+import Mp3Uploader from "@/components/public/mp3-uploader";
 
 
 import MemIcons from "../mem-icons";
@@ -26,6 +27,8 @@ const MemWeb2 = () => {
             <MemberACC />
             <MemberPassword />
             <MemberFav />
+            <Mp3Uploader />
+            
 
           </div>
         </div>

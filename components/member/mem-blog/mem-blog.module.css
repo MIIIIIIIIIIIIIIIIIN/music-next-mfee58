@@ -4,14 +4,11 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-    background-image: url("/image/img-Jade/mem-bgImg.png");
+  background-image: url("/image/img-Jade/mem-bgImg.png");
   position: relative;
   background-repeat: no-repeat;
   background-position: 100% 100%;
 }
-
-
-
 
 /* 固定 nav bar 在頂部 */
 .nav {
@@ -48,9 +45,8 @@
   gap: 20px;
   width: 80%;
   margin: auto;
-  
+
   /* margin-top: 90px; */
-  
 }
 
 /* 固定 footer 在底部 */
@@ -77,14 +73,13 @@
   transform: translateY(-50%); /* 垂直方向居中對齊 */
   z-index: 5; /* 保持層級低於 nav 和 footer */
 
-/* 霧面玻璃效果 */
-background: rgba(255, 255, 255, 0.15); /* 更低透明度的白色背景 */
-backdrop-filter: blur(15px) brightness(0.9); /* 增加模糊和略微降低亮度 */
-border-radius: 10px; /* 可選，圓角 */
-border: 1px solid rgba(255, 255, 255, 0.25); /* 可選，淡邊框增加玻璃感 */
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更立體 */
+  /* 霧面玻璃效果 */
+  background: rgba(255, 255, 255, 0.15); /* 更低透明度的白色背景 */
+  backdrop-filter: blur(15px) brightness(0.9); /* 增加模糊和略微降低亮度 */
+  border-radius: 10px; /* 可選，圓角 */
+  border: 1px solid rgba(255, 255, 255, 0.25); /* 可選，淡邊框增加玻璃感 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更立體 */
 }
-
 
 /* 右邊內容區域 */
 .rightContent {
@@ -98,13 +93,10 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
   /* position: relative; 為絕對定位的設定圖標提供參考框架 */
 }
 
-
-
 .albumSec {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
-  
 }
 
 .album {
@@ -118,9 +110,7 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
   border-radius: 8px;
 }
 
-
 @media (max-width: 375px) {
-  
   .leftContent {
     display: flex; /* 使用 flex 以居中內容 */
     align-items: center; /* 垂直居中 */
@@ -134,15 +124,13 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
     z-index: 5; /* 保持層級 */
     background: rgba(255, 255, 255, 0.8); /* 選擇性設置背景，讓內容區分 */
     backdrop-filter: blur(10px); /* 選擇性設置模糊效果 */
-     box-shadow: none; 
+    box-shadow: none;
   }
 
-  
-  
   .settingIcon0 {
     position: absolute;
-    top: 10px; /* 距離 BlogNav 上方 */
-    right: 50px; /* 距離 BlogNav 右側 */
+    top: 10px;
+    right: 50px;
     width: 24px;
     height: 24px;
     cursor: pointer;
@@ -151,14 +139,13 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
 
   .settingIcon {
     /* position: absolute; */
-    right:10%; /* 距離右側 */
+    right: 10%; /* 距離右側 */
     top: 15%;
     width: 30px; /* 設置圖標寬度 */
     height: 30px; /* 設置圖標高度 */
     cursor: pointer; /* 鼠標懸停顯示為可點擊狀態 */
     z-index: 1; /* 保持在其他元素之上 */
   }
-  
 
   .container {
     width: 100%; /* 讓容器佔滿寬度 */
