@@ -16,9 +16,6 @@ export default function test() {
           <FollowingStream />
           <FollowingStream />
           <FollowingStream />
-          <FollowingStream />
-          <FollowingStream />
-          <FollowingStream />
         </div>
         <LiveStream streamerName="ちちのムスメ" />
         <ChatRoom />
