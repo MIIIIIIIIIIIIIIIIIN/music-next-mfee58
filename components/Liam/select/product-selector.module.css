@@ -3,11 +3,15 @@
     max-width: 1024px;
     margin: 0 auto;
     padding: 1rem;
+    
+
+
   }
   
   .cartHeader {
     display: flex;
     align-items: center;
+    
     gap: 1rem;
     margin-bottom: 1.5rem;
   }
@@ -45,15 +49,16 @@
   
   .productLayout {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
   }
   
   .leftSection {
-    width: 66.666667%;
+    width: 100%;
   }
   
   .rightSection {
-    width: 33.333333%;
+    width: 100%;
   }
   
   .productItem {
@@ -91,6 +96,7 @@
   
   .productContent {
     display: flex;
+   
     gap: 1rem;
   }
   
