@@ -1,0 +1,132 @@
+.container {
+  max-width: 1024px;
+  min-width: 800px;
+  min-height: 450px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: inline-block;
+  flex: 1.5;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.profilePic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profilePic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.streamInfo {
+  flex: 1;
+}
+
+.streamerName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #7f8792;
+  margin: 0;
+  padding: 0;
+}
+
+.decorativeLine {
+  height: 2px;
+  background: linear-gradient(to right, #4a5568 50%, transparent);
+  margin: 0.25rem 0;
+}
+
+.streamTitle {
+  font-size: 0.9rem;
+  color: #a0aec0;
+  margin: 0;
+}
+
+.videoContainer {
+  position: relative;
+  width: 100%;
+  background-color: #000;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.videoFrame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+}
+
+.statsContainer {
+  position: relative;
+  left: 83%;
+  top: 1%;
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+  /* background-color: rgba(0, 0, 0, 0.7); */
+  padding: 0.5rem 1rem;
+  /* color: #fff; */
+}
+
+.viewerCount {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #e23131;
+}
+
+.elapsedTime {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.statusIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.statusDotLive {
+  background-color: #e53e3e;
+}
+
+.statusDotOffline {
+  background-color: #718096;
+}
+
+.errorContainer {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #fed7d7;
+}
+
+.errorText {
+  color: #c53030;
+  margin: 0;
+}
+
+.loadingText {
+  color: #718096;
+  text-align: center;
+}
