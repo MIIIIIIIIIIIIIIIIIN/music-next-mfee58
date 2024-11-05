@@ -9,35 +9,35 @@ const ImageCarousel = () => {
   
   const images = [
     {
-      src: "/01.jpg",
+      src: "/George/products-images-940px/products-(61).jpg",
       title: "Fragments of Youth",
       tag1: "Dreams",
       tag2: "Broken Wings",
       tag3: "Electronic"
     },
     {
-      src: "/01.jpg",
+      src: "/George/products-images-940px/products-(62).jpg",
       title: "Fragments of Youth",
       tag1: "Dreams", 
       tag2: "Broken Wings",
       tag3: "Electronic"
     },
     {
-      src: "/02.jpg",
+      src: "/George/products-images-940px/products-(63).jpg",
       title: "Fragments of Youth",
       tag1: "Dreams",
       tag2: "Broken Wings", 
       tag3: "Electronic"
     },
     {
-      src: "/03.jpg",
+      src: "/George/products-images-940px/products-(64).jpg",
       title: "Fragments of Youth",
       tag1: "Dreams",
       tag2: "Broken Wings",
       tag3: "Electronic"
     },
     {
-      src: "/01.jpg",
+      src: "/George/products-images-940px/products-(65).jpg",
       title: "Fragments of Youth",
       tag1: "Dreams",
       tag2: "Broken Wings",

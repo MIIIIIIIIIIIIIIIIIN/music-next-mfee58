@@ -26,13 +26,13 @@ export default function Home() {
 
       <Nav />
       <WaveVideo />
+    
       <Title num={1} text="每日推薦"/>
+      <Carousel images={images} interval={2000} />
 
-      {/* <Carousel images={images} interval={2000} /> */}
-
-      {/* <Commodity1 /> */}
+      <Title num={2} text="每日一曲"/>
       <Daily />
-      <Title num={2} text="最新募資"  className='ma'/>
+      <Title num={3} text="最新募資"  className='ma'/>
       
       <ListNewCard />
       

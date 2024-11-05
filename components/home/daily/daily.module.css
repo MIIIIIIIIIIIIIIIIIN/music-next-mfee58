@@ -8,6 +8,7 @@
   object-fit: cover;
 }
 .rectangleWrapper {
+  width: 100%;
   align-self: stretch;
   height: 378px;
   display: flex;
@@ -48,6 +49,9 @@
   justify-content: flex-start;
   padding: 17px 19px;
   gap: 20px;
+}
+.frameGroup a{
+  width: 100%;
 }
 .wrapper {
   align-self: stretch;
@@ -183,6 +187,7 @@
   color: #000;
 }
 .frameParent {
+
   width: 100%;
   position: relative;
   height: 538px;
@@ -196,5 +201,6 @@
   color: #14ff00;
   font-family: 'Noto Sans TC';
   margin-top: 30px;
+
 }
 
