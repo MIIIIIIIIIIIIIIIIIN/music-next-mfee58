@@ -48,6 +48,7 @@
   gap: 20px;
   width: 80%;
   margin: auto;
+  
   /* margin-top: 90px; */
   
 }
@@ -87,21 +88,23 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
 
 /* 右邊內容區域 */
 .rightContent {
+  height: 800px;
   width: 70%;
   margin-left: 30%;
   display: grid;
   grid-template-columns: repeat(4, 200px);
   gap: 30px;
   padding: 20px;
-  position: relative; /* 為絕對定位的設定圖標提供參考框架 */
+  /* position: relative; 為絕對定位的設定圖標提供參考框架 */
 }
 
 
 
 .albumSec {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 調整 album 元素的排列 */
+  grid-template-columns: repeat(4, 1fr);
   gap: 30px;
+  
 }
 
 .album {
