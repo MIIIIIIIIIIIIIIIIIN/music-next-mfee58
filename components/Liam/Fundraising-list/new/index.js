@@ -1,51 +1,141 @@
-import React, { useState, useRef } from "react";
-import NewCard from "./card";
-import styles from "./list.module.css";
+import React, { useState, useRef, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import styles from './list.module.css';
 
-export default function ListNewCard() {
+const ImageCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const list = useRef();
-
-  const data = [
-    { title: "Fragments of Youth", artist: "Neon Dreams", description: "Song list...", progress: 70, bgColor: "#fff" },
-    { title: "Electric Horizons", artist: "Wildfire Union", description: "Song list...", progress: 90, bgColor: "#fff" },
-    { title: "Embers and Echoes", artist: "Rising Rebels", description: "Song list...", progress: 60, bgColor: "#fff" },
-    { title: "Veins of Adventure", artist: "Crimson Pulse", description: "Song list...", progress: 80, bgColor: "#fff" },
-    { title: "Winds of Change", artist: "Sky Wanderers", description: "Song list...", progress: 50, bgColor: "#fff" },
-    { title: "Echoes of Time", artist: "Silent Horizon", description: "Song list...", progress: 85, bgColor: "#fff" },
+  const [maxScroll, setMaxScroll] = useState(0);
+  const containerRef = useRef(null);
+  
+  const images = [
+    {
+      src: "/01.jpg",
+      title: "Fragments of Youth",
+      tag1: "Dreams",
+      tag2: "Broken Wings",
+      tag3: "Electronic"
+    },
+    {
+      src: "/01.jpg",
+      title: "Fragments of Youth",
+      tag1: "Dreams", 
+      tag2: "Broken Wings",
+      tag3: "Electronic"
+    },
+    {
+      src: "/02.jpg",
+      title: "Fragments of Youth",
+      tag1: "Dreams",
+      tag2: "Broken Wings", 
+      tag3: "Electronic"
+    },
+    {
+      src: "/03.jpg",
+      title: "Fragments of Youth",
+      tag1: "Dreams",
+      tag2: "Broken Wings",
+      tag3: "Electronic"
+    },
+    {
+      src: "/01.jpg",
+      title: "Fragments of Youth",
+      tag1: "Dreams",
+      tag2: "Broken Wings",
+      tag3: "Electronic"
+    }
   ];
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
+  const CARD_WIDTH = 256;
+  const CARD_GAP = 16;
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const containerWidth = containerRef.current.clientWidth;
+      const visibleCards = Math.floor(containerWidth / (CARD_WIDTH + CARD_GAP));
+      const maxScrollIndex = images.length - visibleCards;
+      setMaxScroll(Math.max(0, maxScrollIndex));
+    }
+  }, [images.length]);
+
+  const nextSlide = () => {
+    if (currentIndex < maxScroll) {
+      setCurrentIndex(prev => prev + 1);
+    }
   };
 
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + data.length) % data.length);
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(prev => prev - 1);
+    }
   };
-
-  React.useEffect(() => {
-    // 每次 currentIndex 改變時更新 translateX 值
-    list.current.style.transform = `translateX(-${currentIndex * 220}px)`;
-    list.current.style.transition = "transform 0.5s ease"; // 添加平滑過渡效果
-  }, [currentIndex]);
 
   return (
-    <>
-      <div className="wrap">
-        <div className={styles.container}>
-          <button className={styles.button} onClick={handlePrevious}>&lt;</button>
-          <div className={styles.cut}>
-            <div className={styles.carousel} ref={list}>
-              {data.map((item, index) => (
-                <div key={index} className={styles.cardContainer}>
-                  <NewCard {...item} />
+    <div className={styles.container}>
+      <div className={styles.wrapper} ref={containerRef}>
+        <div 
+          className={styles.track}
+          style={{
+            transform: `translateX(-${currentIndex * (CARD_WIDTH + CARD_GAP)}px)`,
+          }}
+        >
+          {images.map((image, index) => (
+            <div key={index} className={styles.card}
+        
+            >
+              <div className={styles.cardInner }>
+                <a href='/Liam/detail' className={`card${index}`}
+                 
+                >
+                <img 
+                  src={image.src} 
+                  alt={image.title}
+                  className={styles.image}
+                />
+                <div className={styles.overlay}>
+                  <h3 className={styles.title}>{image.title}</h3>
+                  <div className={styles.tags}>
+                    <span className={styles.tag}>
+                      {image.tag1}
+                    </span>
+                    <span className={styles.tag}>
+                      {image.tag2}
+                    </span>
+                    <span className={styles.tag}>
+                      {image.tag3}
+                    </span>
+                  </div>
                 </div>
-              ))}
+                <div className={styles.progressBar}>
+                  <div className={styles.progressIndicator}></div>
+                </div>
+                </a>
+              </div>
             </div>
-          </div>
-          <button className={styles.button} onClick={handleNext}>&gt;</button>
+          ))}
         </div>
       </div>
-    </>
+      
+      <button 
+        onClick={prevSlide}
+        disabled={currentIndex === 0}
+        className={`${styles.button} ${styles.buttonLeft} ${
+          currentIndex === 0 ? styles.buttonDisabled : ''
+        }`}
+      >
+        <ChevronLeft className="w-4 h-4" />
+      </button>
+      
+      <button 
+        onClick={nextSlide}
+        disabled={currentIndex >= maxScroll}
+        className={`${styles.button} ${styles.buttonRight} ${
+          currentIndex >= maxScroll ? styles.buttonDisabled : ''
+        }`}
+      >
+        <ChevronRight className="w-4 h-4" />
+      </button>
+    </div>
   );
-}
+};
+
+export default ImageCarousel;

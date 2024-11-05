@@ -41,7 +41,7 @@ export default function NavDesktop() {
   return (
     <>
       <div className={isNavVisible?styles.wrap1:styles.wrap}>
-        <div className={styles.container}>
+        <div className={styles.container }>
           <div className={styles.logo}>
             <a href="../home">
               <Logo type={1} />
