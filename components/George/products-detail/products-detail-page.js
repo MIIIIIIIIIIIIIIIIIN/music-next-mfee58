@@ -34,7 +34,6 @@ export default function ProductsDetailPage() {
             <span className={style.contentTitles}>
               <ul>
                 <li>價格</li>
-                <li>會員折扣</li>
                 <li>上架日期</li>
                 <li>運送類型</li>
                 <li>運送方式</li>
@@ -46,7 +45,6 @@ export default function ProductsDetailPage() {
             <span className={style.contentDetails}>
               <ul>
                 <li>$200</li>
-                <li>8折</li>
                 <li>2024/10/29</li>
                 <li>International Shipping</li>
                 <li>宅配(新竹物流、Fedex)、超商(全家、7-11)</li>

@@ -92,22 +92,23 @@ export default function ProductsCheckout(props) {
                     </ul>
                     <ul className={style.padirectory}>
                       <li>
-                        <input type="text" />
+                        <input type="text" placeholder="請填入中文姓名"/>
                       </li>
                       <li>
-                        <input type="text" />
+                        <input type="text" placeholder="請輸入連絡電話"/>
                       </li>
                       <li>
-                        <input type="text" />
+                        <input type="text" placeholder="請輸入電子郵件"/>
                       </li>
                       <li>
-                        <select name="address" id="">
+                        {/* <select name="address" id="">
                           <option value="" disabled selected>
                             請選擇
                           </option>
                           <option value="delivery">宅配</option>
                           <option value="convenienstore">7-11 取貨</option>
-                        </select>
+                        </select> */}
+                        宅配
                       </li>
                       <li>
                         <select name="payment" id="">
