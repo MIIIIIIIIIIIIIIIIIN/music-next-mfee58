@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
-import Button from "@/components/public/buttons";
-import Heart from "@/components/public/hearts";
-import WhiteWBtns from "@/components/public/white_wbtns";
+import Button from "@/components/George/george-components/buttons";
+import Heart from "@/components/George/george-components/hearts";
+import WhiteWBtns from "@/components/George/george-components/white_wbtns";
 import styles from "./cate.module.css";
-import PlayButton from "../../play-button";
+import PlayButton from "@/components/George/george-components/play-button";
 
-export default function Commodity1({ images = [] }) {
+export default function ProductsGenres({ images = [] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [position, setPosition] = useState(0);
   const carouselRef = useRef(null);
