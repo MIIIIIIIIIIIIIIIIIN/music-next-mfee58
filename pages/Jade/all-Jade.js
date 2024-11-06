@@ -12,7 +12,7 @@ import Mp3Uploader from "@/components/public/mp3-uploader";
 import FormInputM from "@/components/member/form-input";
 import Button from "@/components/public/buttons";
 import ButtonToggleM from "@/components/member/button-show";
-import InfoNav from "@/components/member/info-nav";
+import InfoNav from "@/components/member/info-nav-liam";
 import MemIcons from "@/components/member/mem-icons";
 
 // import styles from "../styles/Home.module.css";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./mem-fav.module.css";
 import Nav from "@/components/public/nav";
-import InfoNav from "../info-nav";
+import InfoNav from "../info-nav-liam";
 import Heart from "@/components/public/hearts";
 
 const initialFavorites = [

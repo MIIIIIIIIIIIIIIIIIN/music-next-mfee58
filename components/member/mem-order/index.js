@@ -1,6 +1,6 @@
 import styles from "./SectionOrder.module.css";
 import Nav from "@/components/public/nav";
-import InfoNav from "../info-nav";
+import InfoNav from "../info-nav-liam";
 
 const MemberOrder = () => {
   return (

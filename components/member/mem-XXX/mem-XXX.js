@@ -6,7 +6,7 @@ import FormOption from "../form-option";
 import FormInput from "../form-input";
 import ButtonToggleM from "../button-show";
 import Dropdown from "../form-option";
-import InfoNav from "../info-nav";
+import InfoNav from "../info-nav-liam";
 import FooterDeskTop from "@/components/public/footer/desktop";
 
 const MemberTest = () => {

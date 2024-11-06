@@ -6,7 +6,7 @@ import FormOption from "../form-option";
 import FormInputM from "../form-input";
 import ButtonToggleM from "../button-show";
 import Dropdown from "../form-option";
-import InfoNav from "../info-nav";
+import InfoNav from "../info-nav-liam";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import MemIcons from "../mem-icons";
 import { useState } from "react";

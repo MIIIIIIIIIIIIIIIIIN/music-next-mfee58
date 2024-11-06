@@ -1,5 +1,5 @@
 import styles from "./mem-password.module.css";
-import InfoNav from "../info-nav";
+import InfoNav from "../info-nav-liam";
 import Nav from "@/components/public/nav";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import PasswordInput from "@/components/public/PasswordInput";
