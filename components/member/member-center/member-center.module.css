@@ -74,7 +74,9 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
 
 /* 右邊內容區域 */
 .rightContent {
-  
+  overflow-y: auto;
+
+  height: 500px;
   width: 70%; /* 右側占 container 的 80% */
   /* background-color: #e0e0e0; */
   /* padding: 20px; */
