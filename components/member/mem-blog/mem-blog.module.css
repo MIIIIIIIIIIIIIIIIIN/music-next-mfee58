@@ -4,7 +4,7 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  background-image: url("/image/img-Jade/mem-bgImg.png");
+  /* background-image: url("/image/img-Jade/mem-bgImg.png"); */
   position: relative;
   background-repeat: no-repeat;
   background-position: 100% 100%;
@@ -25,7 +25,7 @@
 
 .settingIcon {
   position: absolute;
-  right: 20%; /* 距離右側 */
+  right: 15%; /* 距離右側 */
   top: 15%;
   width: 30px; /* 設置圖標寬度 */
   height: 30px; /* 設置圖標高度 */
@@ -39,7 +39,7 @@
   padding-top: 80px;
   padding-bottom: 100px;
   overflow-y: auto;
-  background-color: #fff;
+  /* background-color: #fff; */
   display: flex;
   flex-direction: row;
   gap: 20px;
@@ -57,7 +57,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -159,11 +159,17 @@
     width: 100%; /* 讓右側內容佔滿可用寬度 */
     margin-left: 0; /* 移除左側空白 */
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 兩列佈局，讓每個項目自適應寬度 */
     gap: 15px; /* 調整間距以適應小螢幕 */
     padding: 20px;
     justify-items: center; /* 水平置中所有網格項目 */
     align-items: center; /* 垂直置中所有網格項目 */
+  }
+
+  .albumSec {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr); /* 兩列佈局，讓每個項目自適應寬度 */
+    
+
   }
 
   .album {
@@ -171,10 +177,14 @@
     height: 150px; /* 調整方形高度 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* 降低陰影效果 */
     border-radius: 5px;
+    
   }
 
   .footer {
-    height: 80px; /* 調整 footer 高度 */
+    height: 66px; /* 調整 footer 高度 */
     font-size: 0.9em; /* 調整文字大小 */
+    position: relative;
+    top: 0;
+    left: 0;
   }
 }
