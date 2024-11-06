@@ -88,3 +88,29 @@
 .indicator:hover {
   background-color: var(--basecolor);
 }
+
+@media screen and (max-width: 375px){
+  .carousel{
+    height: 320px;
+    padding-bottom: 70px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+
+  }
+  .carouselInner{
+    height: 300px;
+  }
+  .carouselImage{
+    border-radius: 0;
+
+  }
+  .arrowImage {
+    width: 50px;
+    /* left: 10px; */
+  }
+
+  .indicator{
+    width: 13px;
+    height: 13px;
+  }
+}

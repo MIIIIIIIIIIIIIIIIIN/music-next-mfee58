@@ -62,7 +62,7 @@ export default function NavHome() {
               //     e.currentTarget.style.backgroundColor = '#fff';  // 還原背景顏色
               // }}
             >
-              <a href="#">
+         <a href="/George/products-page">
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>商城</h6>
@@ -96,7 +96,7 @@ export default function NavHome() {
                 backgroundColor: activeIndex === 1 ? "#14ff00" : "#fff",
               }}
             >
-              <a href="#">
+            <a href="/Liam/Fundraising-list">
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>募資</h6>
@@ -121,14 +121,16 @@ export default function NavHome() {
                 backgroundColor: activeIndex === 2 ? "#14ff00" : "#fff",
               }}
             >
+             <a href="/Allen/forum">
               <div className={styles.top}></div>
               <div className={styles.bottom}>
                 <h6>論壇</h6>
               </div>
+              </a>
             </li>
             {displayForum && <Forum />}
             <li className={styles.item}>
-              <a href="#">
+            <a href="/Allen/stream">
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>直播</h6>

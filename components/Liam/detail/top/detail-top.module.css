@@ -109,6 +109,7 @@
 @media screen and (max-width: 375px) {
   .container {
     flex-direction: column;
+    height: 550px;
   }
   .top {
     height: 150px;
@@ -126,6 +127,8 @@
   }
   .right {
     width: 100%;
+    display: flex;
+    justify-content: center;
     margin: 10px 0;
   }
   .rightConttainer{

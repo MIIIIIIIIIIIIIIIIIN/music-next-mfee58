@@ -24,7 +24,7 @@ export default function Home() {
     <>
     <div>
 
-      <Nav />
+      <NavHome />
       <WaveVideo />
     
       <Title num={1} text="每日推薦"/>
