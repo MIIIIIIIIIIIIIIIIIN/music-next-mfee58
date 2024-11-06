@@ -27,7 +27,9 @@ const Login = () => {
         localStorage.setItem("userId", id);
         localStorage.setItem("nickname", nickname);
         localStorage.setItem("account", account);
-        alert("Login successful!");
+        alert("登入成功! 歡迎回來!");
+        window.location.href='/member-blog';
+
         // Redirect or update the UI as needed
       } else {
         setErrorMessage(response.data.error);
