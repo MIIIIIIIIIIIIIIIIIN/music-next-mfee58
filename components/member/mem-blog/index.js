@@ -11,7 +11,7 @@ const MemBlog = () => {
       <div className={styles["wrapper"]}>
         <Nav className={styles["nav"]} />
         {/* 設定圖標，放置在右上角 */}
-        <a href="/Jade/MemberCenter">
+        <a href="/Jade/member-center">
           <img
             src="/icons/icon-setting.svg"
             alt="設定"

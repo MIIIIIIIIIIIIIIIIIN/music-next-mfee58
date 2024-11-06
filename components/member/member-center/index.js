@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./MemberCenter.module.css";
+import styles from "./member-center.module.css";
 import Nav from "@/components/public/nav";
 import InfoNav from "../info-nav";
 import MemberInfo from "../mem-info/member-info";
