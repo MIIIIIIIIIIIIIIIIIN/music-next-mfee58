@@ -8,13 +8,20 @@ import ButtonToggleM from "../button-show";
 import Dropdown from "../form-option";
 import InfoNav from "../info-nav-liam";
 import FooterDeskTop from "@/components/public/footer/desktop";
+import { useEffect, useState } from "react";
 
 const MemberInfo = () => {
   const router = useRouter();
+  const [name, setName] = useState("");
 
   const handleClick = () => {
     router.push("/");
   };
+
+  useEffect(() => {
+    setName(localStorage.getItem("nickname"));
+    console.log(name);
+  }, []);
 
   return (
     <>
@@ -22,7 +29,7 @@ const MemberInfo = () => {
 
       <div className={styles["member-info"]}>
         <div className={styles.container}>
-        {/* <div className={styles["info-nav"]}>
+          {/* <div className={styles["info-nav"]}>
             <InfoNav />
           </div> */}
           <div className={styles["info-main"]}>
@@ -31,13 +38,13 @@ const MemberInfo = () => {
             <div className={styles["main-body"]}>
               <div className={styles["body-icon"]}>
                 <UserIcon />
-            
               </div>
               <h6 className={styles["icon-title"]}>
-                  上傳頭像建議尺寸： 140x140px 以內，圖片檔案大小不可超過 2MB
-                </h6>
-                <h6 className={styles["input-top"]}>簡介 <FormInput />
-                </h6>
+                上傳頭像建議尺寸： 140x140px 以內，圖片檔案大小不可超過 2MB
+              </h6>
+              <h6 className={styles["input-top"]}>
+                簡介 <FormInput />
+              </h6>
 
               <div className={styles["body-input"]}>
                 <div className={styles["input-left"]}>
@@ -46,7 +53,7 @@ const MemberInfo = () => {
                   <h6 className={styles["left-title"]}>暱稱(顯示名稱)</h6>
 
                   <div className={styles["left-text"]}>
-                    <FormInput />
+                    <FormInput value={name} />
                   </div>
 
                   <h6 className={styles["left-title"]}>生日</h6>

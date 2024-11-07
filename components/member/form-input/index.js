@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./form-inputM.module.css";
 
-const FormInputM = ({ size = "medium", value, onChange, isEmail = false, isPhone = false }) => {
-  const [inputValue, setInputValue] = useState(""); // 保存輸入的內容
+const FormInputM = ({ size = "medium", value='', onChange, isEmail = false, isPhone = false }) => {
+  const [inputValue, setInputValue] = useState(value); // 保存輸入的內容
   const [isValid, setIsValid] = useState(true); // 驗證狀態
   const [isEditing, setIsEditing] = useState(true); // 是否正在編輯
   const sizeClass =
@@ -11,6 +11,10 @@ const FormInputM = ({ size = "medium", value, onChange, isEmail = false, isPhone
       : size === "large"
       ? styles.large
       : styles.medium;
+
+      useEffect(() => {
+        setInputValue(value);
+      }, [value]);
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
