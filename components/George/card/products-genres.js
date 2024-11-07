@@ -4,12 +4,13 @@ import Heart from "@/components/George/george-components/hearts";
 import WhiteWBtns from "@/components/George/george-components/white_wbtns";
 import styles from "./cate.module.css";
 import PlayButton from "@/components/George/george-components/play-button";
+import Link from "next/link";
 
-export default function ProductsGenres({ images = [] }) {
+export default function ProductsGenres({listData}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [position, setPosition] = useState(0);
   const carouselRef = useRef(null);
-  const thumbnailsToShow = images.length * 50;
+  const thumbnailsToShow = listData..length * 50;
   const carouse = useRef();
 
   const handleThumbnailClick = (index) => {
@@ -42,11 +43,14 @@ export default function ProductsGenres({ images = [] }) {
     <div className={styles.container}>
       <div className={styles.left}>
         <ul>
-          {images.map((item, index) => (
-            <li key={index}>
-              <div className={styles.link} onClick={() => handleThumbnailClick(index)}>
+          {images.map((listData) => (
+            <li key={listData.id}>
+              <div
+                className={styles.link}
+                onClick={() => handleThumbnailClick(listData.id)}
+              >
                 <div className={styles.crossImg}>
-                  <img className={styles.cursorPointer} src={item.url}/>
+                  <img className={styles.cursorPointer} src={item.url} />
                 </div>
                 <div className={styles.bottom}>
                   <h3>xxxxx</h3>
@@ -91,14 +95,16 @@ export default function ProductsGenres({ images = [] }) {
               +
             </button>
           </div>
-          <button className={styles.buttonBig}>
-            <p>前往專輯</p>
-          </button>
+          <Link href={"/George/products-detail"}>
+            <button className={styles.buttonBig}>
+              <p>前往專輯</p>
+            </button>
+          </Link>
           <button className={styles.buttonBig}>
             <p>我的最愛</p>
           </button>
           <div className={styles.PlayButton}>
-           <PlayButton />
+            <PlayButton />
           </div>
         </div>
       </div>
