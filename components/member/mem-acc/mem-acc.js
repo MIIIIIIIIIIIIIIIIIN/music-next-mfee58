@@ -20,8 +20,25 @@ const MemberACC = () => {
   const [account, setAccount] = useState("");
 
   useEffect(() => {
-    const account = localStorage.getItem("account");
-    setAccount(account);
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/try-sess", {
+          credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
+        });
+        const data = await response.json();
+        console.log(data);
+  
+        // setBirth(data.admin?.birth);
+
+        setAccount(data.admin?.account);
+        setPhone(data.admin?.phone);
+        setEmail(data.admin?.email);
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
   }, []);
 
 
