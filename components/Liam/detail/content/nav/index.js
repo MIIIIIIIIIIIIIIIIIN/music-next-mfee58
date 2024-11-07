@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './detail-nav.module.css';
 import DetailMain from '../main';
 import QuestionAccordion from '../../question/question-item';
@@ -102,9 +102,10 @@ const newsItems = [
 ];
 
 
+
 export default function DetailNav() {
   const [activeTab, setActiveTab] = useState('content');
-
+ 
   const renderContent = () => {
     switch (activeTab) {
       case 'content':
@@ -119,7 +120,7 @@ export default function DetailNav() {
       case 'news':
         return <NewsCard newsItems={newsItems}/>;
       case 'comments':
-        return <Message comments={comment}/>;
+        return <Message comments={comment} />;
       default:
         return <DetailMain />;
     }
@@ -148,7 +149,11 @@ export default function DetailNav() {
         </li>
         <li 
           className={`${styles.item} ${activeTab === 'comments' ? styles.active : ''}`}
-          onClick={() => setActiveTab('comments')}
+          onClick={() => setActiveTab('comments')
+
+            
+          }
+
         >
           <h6>留言</h6>
         </li>

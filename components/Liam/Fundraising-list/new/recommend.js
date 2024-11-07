@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './list.module.css';
 
-const ImageCarousel = () => {
+const ImageRecommendCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
   const [projects, setProjects] = useState([]);
@@ -53,10 +53,8 @@ const ImageCarousel = () => {
   useEffect(() => {
     const fetchNew=async()=>{
       try {
-        const response = await fetch("http://localhost:3005/fundraiser/projectsNew");
+        const response = await fetch("http://localhost:3005/fundraiser/projectsRecommend");
         const data = await response.json();
-        console.log(data);
-        
       
         setProjects(data.rows)
       } catch (error) {
@@ -112,7 +110,7 @@ const ImageCarousel = () => {
                     <span className={styles.tag}>
                       {image.f_tag}
                     </span>
-
+   
                   </div>
                 </div>
                 <div className={styles.progressBar}>
@@ -148,4 +146,4 @@ const ImageCarousel = () => {
   );
 };
 
-export default ImageCarousel;
+export default ImageRecommendCarousel;

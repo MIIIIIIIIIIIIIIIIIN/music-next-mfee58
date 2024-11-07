@@ -49,9 +49,10 @@
   
   .productLayout {
     display: flex;
-    flex-direction: column;
+    
     gap: 1rem;
   }
+  
   
   .leftSection {
     width: 100%;
@@ -317,4 +318,10 @@
   
   .checkoutButton:active {
     background-color: #d97706;
+  }
+
+  @media screen and (max-width: 375px){
+    .productLayout{
+      flex-direction: column;
+    }
   }

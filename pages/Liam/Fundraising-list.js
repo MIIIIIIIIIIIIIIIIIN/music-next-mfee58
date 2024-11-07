@@ -6,6 +6,8 @@ import ListNewCard from '@/components/Liam/Fundraising-list/new'
 import FundraisingTitle from '@/components/Liam/Fundraising-list/title'
 import Footer from '@/components/public/footer'
 import ListCategory from '@/components/Liam/Fundraising-list/category'
+import ImageRecommendCarousel from '@/components/Liam/Fundraising-list/new/recommend'
+import ImageCarousel from '@/components/Liam/Fundraising-list/new/index'
 
 export default function FundraisingList() {
   const images = [
@@ -24,9 +26,9 @@ export default function FundraisingList() {
       <Kv />
       <ListCategory />
       <FundraisingTitle text='!!(最新募資)'/>
-    <ListNewCard  images={images}/>
+    <ImageCarousel  images={images}/>
     <FundraisingTitle text='<<(推薦募資)'/>
-    <ListNewCard  images={images}/>
+    <ImageRecommendCarousel  images={images}/>
     <Footer />
     </div>
   )

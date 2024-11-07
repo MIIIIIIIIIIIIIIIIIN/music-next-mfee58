@@ -5,6 +5,13 @@
   width: 80%;
   margin: auto;
 }
+.name{
+  color: #fff;
+  transform: translateY(-180px);
+ 
+  text-align: center;
+  margin: auto;
+}
 .top {
   height: 250px;
   background-color: rgb(255, 0, 170);
@@ -55,9 +62,12 @@
   background-color: #fff;
 }
 .barInfo {
-  width: 60%;
+  width: 0;
   height: 20px;
   background-color: rgb(0, 255, 76);
+}
+.animate {
+  transition: width 1s ease-out;
 }
 
 .rightConttainer {
