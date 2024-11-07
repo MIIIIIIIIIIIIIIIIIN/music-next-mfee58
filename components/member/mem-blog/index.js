@@ -20,10 +20,13 @@ const MemBlog = () => {
         </a>
 
         <div className={styles["container"]}>
+        
           <div className={styles["leftContent"]}>
             {/* <InfoNav /> */}
             <BlogNav />
+            <button><a href="./login">Login</a></button>
           </div>
+         
           <div className={styles["rightContent"]}>
             <div className={styles["albumSec"]}>
               <div className={styles["album"]}>
