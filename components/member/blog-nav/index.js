@@ -1,14 +1,22 @@
 import React from "react";
 import styles from "./blog-nav.module.css"; // 引入相應的 CSS 模組
 import UserIcon from "@/components/public/user-icon";
+import { useEffect, useState } from "react";
+
 
 const BlogNav = () => {
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    setName(localStorage.getItem("nickname"));
+    console.log(name);
+  }, []);
   return (
     <div className={styles["blogNav"]}>
       <div className={styles["icon"]}>
         <UserIcon />
       </div>
-      <h4 className={styles["name"]}>Guava</h4>
+      <h4 className={styles["name"]} >{name}</h4>
       <div className={styles["info"]}>
         <div className="gender">其他</div>
         <div className={styles["else"]}>
