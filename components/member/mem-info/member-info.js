@@ -13,15 +13,32 @@ import { useEffect, useState } from "react";
 const MemberInfo = () => {
   const router = useRouter();
   const [name, setName] = useState("");
+  const [birth, setBirth] = useState("");
 
   const handleClick = () => {
     router.push("/");
   };
 
   useEffect(() => {
-    setName(localStorage.getItem("nickname"));
-    console.log(name);
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/try-sess", {
+          credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
+        });
+        const data = await response.json();
+        console.log(data);
+  
+        setName(data.admin?.nickname); // 確保讀取 admin 裡的 nickname
+
+        setBirth(data.admin?.birth);
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
   }, []);
+  
 
   return (
     <>
@@ -59,7 +76,7 @@ const MemberInfo = () => {
                   <h6 className={styles["left-title"]}>生日</h6>
 
                   <div className={styles["left-text"]}>
-                    <FormInput />
+                    <FormInput value={birth}/>
                   </div>
                 </div>
 
