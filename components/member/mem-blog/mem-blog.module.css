@@ -97,7 +97,12 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
+  width: 1000px;
+  /* background-color: var(--gray-2);   */
+  justify-content: center; /* 水平置中 */
+  align-content: center; /* 垂直置中 */
 }
+
 
 .album {
   background-color: var(--gray-2);

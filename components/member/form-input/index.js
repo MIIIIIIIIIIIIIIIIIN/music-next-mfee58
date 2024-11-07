@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./form-inputM.module.css";
 
-const FormInputM = ({ size = "medium", value='', onChange, isEmail = false, isPhone = false }) => {
+const FormInputM = ({ size = "medium", value='', onChange, isEmail = false, isPhone = false, readOnly = false  }) => {
   const [inputValue, setInputValue] = useState(value); // 保存輸入的內容
   const [isValid, setIsValid] = useState(true); // 驗證狀態
   const [isEditing, setIsEditing] = useState(true); // 是否正在編輯
@@ -55,6 +55,7 @@ const FormInputM = ({ size = "medium", value='', onChange, isEmail = false, isPh
           onChange={handleChange}
           onKeyDown={handleKeyDown} // 監聽按下鍵盤事件
           placeholder={isEmail ? "請輸入有效的信箱" : isPhone ? "請輸入有效的手機號碼" : ""}
+          readOnly={readOnly} // 設定為只讀模式
         />
       ) : (
         <span onClick={() => setIsEditing(true)} className={styles.displayText}>

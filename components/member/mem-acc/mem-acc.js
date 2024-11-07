@@ -9,7 +9,7 @@ import Dropdown from "../form-option";
 import InfoNav from "../info-nav-liam";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import MemIcons from "../mem-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MemberACC = () => {
   const router = useRouter();
@@ -17,6 +17,13 @@ const MemberACC = () => {
   const [phone, setPhone] = useState("");
   const [isEmailValid, setEmailValid] = useState(true);
   const [isPhoneValid, setPhoneValid] = useState(true);
+  const [account, setAccount] = useState("");
+
+  useEffect(() => {
+    const account = localStorage.getItem("account");
+    setAccount(account);
+  }, []);
+
 
   const handleClick = () => {
     router.push("/");
@@ -55,10 +62,10 @@ const MemberACC = () => {
             <div className={styles["main-body"]}>
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>帳號(不會顯示於頁面)</h6>
-                <div className={styles["body-input"]}>
+                <div className={styles["body-input"]  }>
                   <MemIcons iconName="icon-user" />
                   {/* 預設 icon-mail, 中尺寸 */}
-                  <FormInputM size="medium" />
+                  <FormInputM size="medium" value={account} readOnly={true} />
                   <ButtonToggleM
                     size="small"
                     className={styles["buttonToggle"]}
