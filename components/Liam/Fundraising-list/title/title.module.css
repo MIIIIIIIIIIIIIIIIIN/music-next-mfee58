@@ -70,3 +70,15 @@
 @keyframes l1 {
   to{background-size: 120% 100%}
 }
+
+@media screen and (max-width: 375px){
+.container{
+  text-align: center;
+  border-bottom: 0;
+}
+  .container h3{
+    width: 200px;
+    font-size: 25px;
+    text-align: center;
+  }
+}

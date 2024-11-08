@@ -5,39 +5,41 @@ import styles from './list.module.css';
 const ImageCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
+  const [projects, setProjects] = useState([]);
+
   const containerRef = useRef(null);
   
   const images = [
     {
-      src: "/01.jpg",
+      src: "/George/products-images-940px/products-(61).jpg",
       title: "Fragments of Youth",
       tag1: "Dreams",
       tag2: "Broken Wings",
       tag3: "Electronic"
     },
     {
-      src: "/01.jpg",
+      src: "/George/products-images-940px/products-(62).jpg",
       title: "Fragments of Youth",
       tag1: "Dreams", 
       tag2: "Broken Wings",
       tag3: "Electronic"
     },
     {
-      src: "/02.jpg",
+      src: "/George/products-images-940px/products-(63).jpg",
       title: "Fragments of Youth",
       tag1: "Dreams",
       tag2: "Broken Wings", 
       tag3: "Electronic"
     },
     {
-      src: "/03.jpg",
+      src: "/George/products-images-940px/products-(64).jpg",
       title: "Fragments of Youth",
       tag1: "Dreams",
       tag2: "Broken Wings",
       tag3: "Electronic"
     },
     {
-      src: "/01.jpg",
+      src: "/George/products-images-940px/products-(65).jpg",
       title: "Fragments of Youth",
       tag1: "Dreams",
       tag2: "Broken Wings",
@@ -45,17 +47,30 @@ const ImageCarousel = () => {
     }
   ];
 
-  const CARD_WIDTH = 256;
-  const CARD_GAP = 16;
+  const CARD_WIDTH = 260;
+  const CARD_GAP = 63;
 
   useEffect(() => {
+    const fetchNew=async()=>{
+      try {
+        const response = await fetch("http://localhost:3005/fundraiser/projectsNew");
+        const data = await response.json();
+        console.log(data);
+        
+      
+        setProjects(data.rows)
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+      }
+    }
     if (containerRef.current) {
       const containerWidth = containerRef.current.clientWidth;
       const visibleCards = Math.floor(containerWidth / (CARD_WIDTH + CARD_GAP));
-      const maxScrollIndex = images.length - visibleCards;
+      const maxScrollIndex = projects.length - visibleCards;
       setMaxScroll(Math.max(0, maxScrollIndex));
     }
-  }, [images.length]);
+    fetchNew()
+  }, [projects.length]);
 
   const nextSlide = () => {
     if (currentIndex < maxScroll) {
@@ -78,31 +93,26 @@ const ImageCarousel = () => {
             transform: `translateX(-${currentIndex * (CARD_WIDTH + CARD_GAP)}px)`,
           }}
         >
-          {images.map((image, index) => (
+          {projects.map((image, index) => (
             <div key={index} className={styles.card}
         
             >
               <div className={styles.cardInner }>
-                <a href='/Liam/detail' className={`card${index}`}
+                <a href={`/Liam/detail?project=${image.f_project_id}`} className={`card${index}`}
                  
                 >
                 <img 
-                  src={image.src} 
+                  src={image.f_project_picture} 
                   alt={image.title}
                   className={styles.image}
                 />
                 <div className={styles.overlay}>
-                  <h3 className={styles.title}>{image.title}</h3>
+                  <h3 className={styles.title}>{image.f_project_title}</h3>
                   <div className={styles.tags}>
                     <span className={styles.tag}>
-                      {image.tag1}
+                      {image.f_tag}
                     </span>
-                    <span className={styles.tag}>
-                      {image.tag2}
-                    </span>
-                    <span className={styles.tag}>
-                      {image.tag3}
-                    </span>
+
                   </div>
                 </div>
                 <div className={styles.progressBar}>

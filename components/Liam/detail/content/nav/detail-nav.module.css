@@ -61,3 +61,23 @@
 .center{
   text-align: center;
 }
+@media screen and (max-width: 375px){
+  .container{
+    width: 90%;
+  }
+  .list{
+    flex-wrap: wrap;
+    gap: 0;
+    
+  }
+  .item{
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .item h6{
+    font-size: 14px;
+    
+  }
+}

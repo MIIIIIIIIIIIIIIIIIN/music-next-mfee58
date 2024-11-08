@@ -4,7 +4,7 @@ import { IoMdArrowDropright } from "react-icons/io";
 export default function FundraisingTitle({text='xxx'}) {
   return (
     <div className={styles.container}>
-      <h3><IoMdArrowDropright></IoMdArrowDropright>{text}</h3>
+      <h3>{text}</h3>
       <div className={styles.tip}>
         <span className={styles.circle1}></span>
         <span className={styles.circle2}></span>

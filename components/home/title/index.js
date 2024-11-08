@@ -10,7 +10,7 @@ const Title = ({num=3,text='xxx'}) => {
         				</div>
         				<div className={styles.div1}>
           					<span>{text}</span>
-          					<span className={styles.span}>{`->`}</span>
+          					<span className={styles.span}>{` >>`}</span>
           					<span>{` `}</span>
         				</div>
         				<div className={styles.new}>!! (new)</div>

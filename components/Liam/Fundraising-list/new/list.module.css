@@ -4,8 +4,8 @@
   max-width: 72rem;  /* 6xl -> 72rem */
   margin: 0 auto;
   padding: 0 2rem;  /* px-8 -> 2rem */
-  margin-bottom: 30px;
-  margin-top: 10px;
+  margin-bottom: 60px;
+  margin-top: 30px;
 }
 /* .container:hover .card {
   transform: scale(1.05);
@@ -29,7 +29,7 @@
 
 .card {
   flex-shrink: 0;
-  width: 16rem;  /* w-64 -> 16rem */
+  width: 30%;
 }
 
 .cardInner {
@@ -122,4 +122,38 @@
 .buttonDisabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+@media screen and (max-width: 375px) {
+  .container{
+    width: 80%;
+    margin-top: 10px;
+  }
+  .slider-container {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .card{
+    width: 100%;
+  }
+  
+  .slider-title {
+    font-size: 24px; /* 縮小標題字體 */
+  }
+  
+  .slider-tags {
+    font-size: 14px; /* 縮小標籤字體 */
+  }
+  
+  .slider-prev,
+  .slider-next {
+    width: 30px;  /* 調整箭頭按鈕大小 */
+    height: 30px;
+  }
+  .buttonRight {
+    right: -10px;
+  }
+  .button:hover {
+    background-color: rgb(255, 255, 255);  /* hover:bg-gray-100 */
+  }
 }

@@ -103,11 +103,12 @@
     padding: 16px;
   }
   
-  .title h2 {
-    font-size: 18px;
+  .content h4{
+    font-size: 20px;
+    font-weight: bold;
   }
   
-  .text {
+  .description {
     font-size: 15px;
   }
 }
