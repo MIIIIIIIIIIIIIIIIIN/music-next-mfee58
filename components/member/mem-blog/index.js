@@ -4,6 +4,7 @@ import Nav from "@/components/public/nav";
 import UserIcon from "@/components/public/user-icon";
 import BlogNav from "../blog-nav";
 import PlayButton from "@/components/public/play-button";
+import Logout from "@/components/public/logout";
 
 const MemBlog = () => {
   const [name, setName] = useState("");
@@ -46,6 +47,8 @@ const MemBlog = () => {
             {/* <InfoNav /> */}
             <BlogNav value={name}/>
             <button><a href="./login">Login</a></button>
+    <Logout />
+    <button>Logout</button>
           </div>
          
           <div className={styles["rightContent"]}>

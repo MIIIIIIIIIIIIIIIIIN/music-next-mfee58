@@ -5,6 +5,7 @@
   border: 1px solid;
   border-color: #000000;
   border-radius: 100px;
+  overflow: hidden;
 }
 
 .profileIcons.lg {
@@ -21,4 +22,9 @@
 .profileIcons.XS {
   height: 48px;
   width: 48px;
+}
+
+.profileIcons img{
+  object-fit: cover;
+  width: 100%;
 }

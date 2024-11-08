@@ -23,9 +23,29 @@ export default function NavDesktop() {
   let hoverTimeout = useRef(null);
 
   const [isNavVisible, setIsNavVisible] = useState(false);
+  const [member, setMember] = useState("");
+
 
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/mem-data", {
+          credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
+        });
+        const data = await response.json();
+        // console.log(data);
+        
+        setMember(data.admin)
+        // console.log(data);
+  
+    set
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
     
     const handleScroll = () => {
       setIsNavVisible(window.scrollY > 1); // 當滾動超過 30px 時顯示 nav
@@ -36,6 +56,8 @@ export default function NavDesktop() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+    
+
   }, []);
 
   return (
@@ -180,7 +202,8 @@ export default function NavDesktop() {
 
           <div className={styles.iconsContainer}>
             <a href="/member-blog">
-              <ProfileIcons property1="XS" className={styles.header} />
+              <ProfileIcons property1="XS" className={styles.header} img={member.icon
+}/> 
             </a>
 
             <div className={styles.icon}>

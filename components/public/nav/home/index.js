@@ -162,7 +162,7 @@ export default function NavHome() {
 
           <div className={styles.iconsContainer}>
             <a href="#">
-              <ProfileIcons property1="XS" className={styles.header} />
+              <ProfileIcons property1="XS" className={styles.header} img={'../public/header.jpg'}/>
             </a>
 
             <div className={styles.icon}>
