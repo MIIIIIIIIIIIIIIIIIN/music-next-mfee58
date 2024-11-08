@@ -5,7 +5,7 @@ import { FiSearch } from "react-icons/fi";
 import { FaAngleRight } from "react-icons/fa6";
 import { FiCornerRightDown } from "react-icons/fi";
 
-import { ProfileIcons } from "../../profileIcons/ProfileIcons"; 
+import { ProfileIcons } from "../../profileIcons/ProfileIcons";
 import MallList from "./system-list/mall";
 import FundraisingList from "./system-list/fundraising";
 import MemberList from "./system-list/member";
@@ -29,21 +29,21 @@ export default function NavMobile() {
 
   return (
     <>
-    <div className={styles.wrap}>
-      <div className={styles.container}>
-        <div className={styles.containerTop}>
-          <div className={styles.logo}>
-            <a href="#">
-              <Logo type={1} />
-            </a>
-          </div>
-          <div className={styles.iconsContainer}>
-            <a href="#">
-              <ProfileIcons property1="XS" className={styles.header} />{" "}
-              {/* 小尺寸圖示 */}
-            </a>
+      <div className={styles.wrap}>
+        <div className={styles.container}>
+          <div className={styles.containerTop}>
+            <div className={styles.logo}>
+              <a href="#">
+                <Logo type={1} />
+              </a>
+            </div>
+            <div className={styles.iconsContainer}>
+              <a href="#">
+                <ProfileIcons property1="XS" className={styles.header} />{" "}
+                {/* 小尺寸圖示 */}
+              </a>
 
-            {/* <div className={styles.icon}>
+              {/* <div className={styles.icon}>
               <a href="#">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -62,100 +62,104 @@ export default function NavMobile() {
                 </svg>
               </a>
             </div> */}
-            <div className={styles.icon}>
+              <div className={styles.icon}>
+                <a href="#">
+                  <svg
+                    className={styles.iconCart}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                  >
+                    <path
+                      d="M15.9999 8H17.1596C18.1998 8 19.0663 8.79732 19.1527 9.83391L19.8194 17.8339C19.9165 18.9999 18.9964 20 17.8263 20H6.17348C5.0034 20 4.08322 18.9999 4.18039 17.8339L4.84705 9.83391C4.93344 8.79732 5.79997 8 6.84014 8H7.99988M15.9999 8H7.99988M15.9999 8L15.9999 7C15.9999 5.93913 15.5784 4.92172 14.8283 4.17157C14.0782 3.42143 13.0607 3 11.9999 3C10.939 3 9.9216 3.42143 9.17145 4.17157C8.42131 4.92172 7.99988 5.93913 7.99988 7L7.99988 8M15.9999 8L15.9999 12M7.99988 8L7.99988 12"
+                      stroke="black"
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+              </div>
               <a href="#">
-                <svg
-                className={styles.iconCart}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="30"
-                  height="30"
-                  viewBox="0 0 24 24"
-                  fill="white"
-                >
-                  <path
-                    d="M15.9999 8H17.1596C18.1998 8 19.0663 8.79732 19.1527 9.83391L19.8194 17.8339C19.9165 18.9999 18.9964 20 17.8263 20H6.17348C5.0034 20 4.08322 18.9999 4.18039 17.8339L4.84705 9.83391C4.93344 8.79732 5.79997 8 6.84014 8H7.99988M15.9999 8H7.99988M15.9999 8L15.9999 7C15.9999 5.93913 15.5784 4.92172 14.8283 4.17157C14.0782 3.42143 13.0607 3 11.9999 3C10.939 3 9.9216 3.42143 9.17145 4.17157C8.42131 4.92172 7.99988 5.93913 7.99988 7L7.99988 8M15.9999 8L15.9999 12M7.99988 8L7.99988 12"
-                    stroke="black"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+                <FaBars
+                  className={styles.icon}
+                  style={{
+                    transform: display ? "rotate(90deg)" : "rotate(0deg)",
+                  }}
+                  onClick={() => {
+                    setDislay(!display);
+                  }}
+                />
               </a>
             </div>
-            <a href="#">
-              <FaBars
-                className={styles.icon}
-                style={{
-                  transform: display ? "rotate(90deg)" : "rotate(0deg)",
-                }}
-                onClick={() => {
-                  setDislay(!display);
-                }}
-              />
-            </a>
           </div>
-        </div>
-        <div className={styles.containerbottom}>
-          <ul style={{ display: display ? "block" : "none" }}>
-            <li>
-              <div className={styles.search}>
-                <input type="text" ref={input} />
-                <span
-                  className={styles.right}
-                >
-                  <FiSearch />
-                </span>
-              </div>
-            </li>
-            <li
-              onClick={() => {
-                setDisplayMember(!displayMember);
-                if (activeIndex === 4) {
-                  setActiveIndex(null);
-                } 
-                else {
-                  setDisplayMall(false);
-                  setDisplayFundraising(false);
-                  setDisplayForum(false);
-                  setDisplayLive(false);
-                  setActiveIndex(4);
-                }
-              }}
-              style={{
-                backgroundColor: activeIndex === 4 ? "#14ff00" : "#fff",
-              }}
-            >
-              <a href="#">
-                <h6>會員<span>{displayMember?<FiCornerRightDown />:<FaAngleRight />} </span></h6>
-              </a>
-             
-            </li>
-            {displayMember && <MemberList />}
-            <li
-              onClick={() => {
-                setDisplayMall(!displayMall);
-                if (activeIndex === 0) {
-                  setActiveIndex(null);
-                } 
-                else {
-                  setDisplayFundraising(false);
-                  setDisplayMember(false);
-                  setDisplayForum(false);
-                  setDisplayLive(false);
-                  setActiveIndex(0);
-                }
-              }}
-              style={{
-                backgroundColor: activeIndex === 0 ? "#14ff00" : "#fff",
-              }}
-            >
-              <a href="#">
-                <h6>商城<span>{displayMall?<FiCornerRightDown />:<FaAngleRight />} </span></h6>
-              </a>
-             
-            </li>
-            {displayMall && <MallList />}
-            <li
+          <div className={styles.containerbottom}>
+            <ul style={{ display: display ? "block" : "none" }}>
+              <li>
+                <div className={styles.search}>
+                  <input type="text" ref={input} />
+                  <span className={styles.right}>
+                    <FiSearch />
+                  </span>
+                </div>
+              </li>
+              <li
+                onClick={() => {
+                  setDisplayMember(!displayMember);
+                  if (activeIndex === 4) {
+                    setActiveIndex(null);
+                  } else {
+                    setDisplayMall(false);
+                    setDisplayFundraising(false);
+                    setDisplayForum(false);
+                    setDisplayLive(false);
+                    setActiveIndex(4);
+                  }
+                }}
+                style={{
+                  backgroundColor: activeIndex === 4 ? "#14ff00" : "#fff",
+                }}
+              >
+                <a href="#">
+                  <h6>
+                    會員
+                    <span>
+                      {displayMember ? <FiCornerRightDown /> : <FaAngleRight />}{" "}
+                    </span>
+                  </h6>
+                </a>
+              </li>
+              {displayMember && <MemberList />}
+              <li
+                onClick={() => {
+                  setDisplayMall(!displayMall);
+                  if (activeIndex === 0) {
+                    setActiveIndex(null);
+                  } else {
+                    setDisplayFundraising(false);
+                    setDisplayMember(false);
+                    setDisplayForum(false);
+                    setDisplayLive(false);
+                    setActiveIndex(0);
+                  }
+                }}
+                style={{
+                  backgroundColor: activeIndex === 0 ? "#14ff00" : "#fff",
+                }}
+              >
+                <a href="#">
+                  <h6>
+                    商城
+                    <span>
+                      {displayMall ? <FiCornerRightDown /> : <FaAngleRight />}{" "}
+                    </span>
+                  </h6>
+                </a>
+              </li>
+              {displayMall && <MallList />}
+              <li
                 onClick={() => {
                   setDisplayFundraising(!displayFundraising);
                   if (activeIndex === 1) {
@@ -171,14 +175,22 @@ export default function NavMobile() {
                 style={{
                   backgroundColor: activeIndex === 1 ? "#14ff00" : "#fff",
                 }}
-            
-            >
-              <a href="#">
-                <h6>募資<span>{displayFundraising?<FiCornerRightDown />:<FaAngleRight />} </span></h6>
-              </a>
-            </li>
-            {displayFundraising && <FundraisingList />}
-            <li
+              >
+                <a href="#">
+                  <h6>
+                    募資
+                    <span>
+                      {displayFundraising ? (
+                        <FiCornerRightDown />
+                      ) : (
+                        <FaAngleRight />
+                      )}{" "}
+                    </span>
+                  </h6>
+                </a>
+              </li>
+              {displayFundraising && <FundraisingList />}
+              <li
                 onClick={() => {
                   setDisplayForum(!displayForum);
                   if (activeIndex === 2) {
@@ -194,13 +206,17 @@ export default function NavMobile() {
                 style={{
                   backgroundColor: activeIndex === 2 ? "#14ff00" : "#fff",
                 }}
-            
-            >
-              <a href="#">
-                <h6>論壇<span>{displayForum?<FiCornerRightDown />:<FaAngleRight />} </span></h6>
-              </a>
-            </li>
-            <li
+              >
+                <a href="#">
+                  <h6>
+                    論壇
+                    <span>
+                      {displayForum ? <FiCornerRightDown /> : <FaAngleRight />}{" "}
+                    </span>
+                  </h6>
+                </a>
+              </li>
+              <li
                 onClick={() => {
                   setDisplayLive(!displayLive);
                   if (activeIndex === 3) {
@@ -216,16 +232,19 @@ export default function NavMobile() {
                 style={{
                   backgroundColor: activeIndex === 3 ? "#14ff00" : "#fff",
                 }}
-            
-            >
-              <a href="#">
-                <h6>直播<span>{displayLive?<FiCornerRightDown />:<FaAngleRight />} </span></h6>
-              </a>
-            </li>
-
-          </ul>
+              >
+                <a href="#">
+                  <h6>
+                    直播
+                    <span>
+                      {displayLive ? <FiCornerRightDown /> : <FaAngleRight />}{" "}
+                    </span>
+                  </h6>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
       </div>
       <style jsx>{``}</style>
     </>

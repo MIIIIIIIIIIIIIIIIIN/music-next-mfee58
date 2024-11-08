@@ -10,7 +10,11 @@ import Nav from "@/components/public/nav";
 export default function ProductsFilter() {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
+  const [listData, setListData] = useState({ rows: [] });
+  const [albumsimg, setAlbumsImg] = useState({});
+  const router = useRouter();
 
+  // 處理螢幕寬度變化
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
     const handleResize = () => {
@@ -28,17 +32,6 @@ export default function ProductsFilter() {
     };
   }, []);
 
-  const router = useRouter();
-  const [listData, setListData] = useState({
-    totalPages: 0,
-    totalRows: 0,
-    page: 0,
-    rows: [],
-  });
-  const [albumsimg, setAlbumsImg] = useState({
-    rowss: [],
-  })
-
   // Delete
   const delItem = (p_albums_id) => {
     console.log({ p_albums_id });
@@ -55,7 +48,7 @@ export default function ProductsFilter() {
       });
   };
 
-  // 從後端抓資料
+  // 抓抓資料
   useEffect(() => {
     if (!router.isReady) return;
     const controller = new AbortController();
@@ -63,51 +56,63 @@ export default function ProductsFilter() {
     fetch(`${AB_LIST}${location.search}`, { signal })
       .then((r) => r.json())
       .then((obj) => {
-        console.log("我是物件: ", obj);
-        if (obj.success) {
+        if (obj) {
           setListData(obj);
         } else if (obj.redirect) {
           router.push(obj.redirect);
         }
       })
-      .catch((ex) => {
-        console.log(ex);
+      .catch((error) => {
+        if (error.name === "AbortError") {
+          console.log("Fetch aborted");
+        } else {
+          console.error("Fetch error:", error);
+        }
       });
     return () => {
       controller.abort();
     };
   }, [router]);
 
-    // 從後端抓圖片
-    useEffect(() => {
-      if (!router.isReady) return;
-      const controller = new AbortController();
-      const signal = controller.signal;
-      fetch(`${AB_LIST}${location.search}`, { signal })
-        .then((r) => r.json())
-        .then((obj) => {
-          console.log("我是物件: ", obj);
-          if (obj.success) {
-            setListData(obj);
-          } else if (obj.redirect) {
-            router.push(obj.redirect);
-          }
+  // 抓圖片唷
+  useEffect(() => {
+    if (listData.rows.length === 0) return;
+    const controller = new AbortController();
+    const signal = controller.signal;
+    const getImages = async () => {
+      await Promise.all(
+        listData.rows.map((album) => {
+          fetch(`${AB_LIST}/${album.p_albums_id}`, { signal }).then((r) => {
+            r.json()
+              .then((imgObj) => {
+                if (imgObj) {
+                  setAlbumsImg((abimg) => ({
+                    ...abimg,
+                    [album.p_albums_id]: imgObj.images,
+                  }));
+                }
+              })
+              .catch((error) => {
+                if (error.name === "AbortError") {
+                  console.log("Fetch aborted");
+                } else {
+                  console.error("Fetch error:", error);
+                }
+              });
+          });
         })
-        .catch((ex) => {
-          console.log(ex);
-        });
-      return () => {
-        controller.abort();
-      };
-    }, [router]);
-
-  console.log(listData);
-   // render 時就會執行
+      );
+    };
+    getImages();
+    return () => {
+      controller.abort();
+    };
+  }, [listData]);
 
   return (
     <>
       <Nav />
-      <ProductsGenres listData={listData}/>
+      <ProductsGenres listData={listData} albumsimg={albumsimg} />
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );
