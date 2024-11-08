@@ -5,19 +5,41 @@ import ChatRoom from "@/components/stream/chat";
 import MoreLikeThis from "@/components/stream/more-like-this";
 import NavBar from "@/components/public/nav";
 
-export default function test() {
+export default function Stream() {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Add event listener
+    window.addEventListener("resize", checkMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const styles = {
+    container: {
+      margin: isMobile ? "0px" : "15px",
+      display: "flex",
+      justifyContent: "space-between",
+      flexDirection: isMobile ? "column" : "row",
+    },
+    sideBar: {
+      marginTop: isMobile ? "0rem" : "4rem",
+    },
+  };
+
   return (
     <>
       <NavBar />
-      <div
-        style={{ margin: "15px", justify: "space-between", display: "flex" }}
-      >
-        <div>
-          <FollowingStream />
-          <FollowingStream />
-          <FollowingStream />
-          <FollowingStream />
-          <FollowingStream />
+      <div style={styles.container}>
+        <div style={styles.sideBar}>
           <FollowingStream />
         </div>
         <LiveStream streamerName="ちちのムスメ" />

@@ -121,7 +121,7 @@ const ForumPost = ({
         ...baseStyles,
         container: {
           ...baseStyles.container,
-          width: "calc(50% - 2rem)",
+          width: "calc(100% - 2rem)",
           display: "inline-block",
           verticalAlign: "top",
         },

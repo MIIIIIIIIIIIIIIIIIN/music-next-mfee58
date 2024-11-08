@@ -5,9 +5,9 @@
 }
 
 .spacedContainer {
-  width: 50%;
+  width: 80%;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 
 .title {
@@ -40,7 +40,7 @@
 }
 
 .overlay {
-  position: absolute;
+  position: relative;
   inset: 0;
   /* background-color: rgba(0, 0, 0, 0.4); */
   /* opacity: 0; */
@@ -55,9 +55,9 @@
 }
 
 .overlayText {
-  margin-top: 67%;
+  margin-top: 1%;
   color: rgb(70, 70, 70);
-  font-size: 0.875rem;
+  font-size: 1rem;
   padding: 0.5rem;
   text-align: center;
 }

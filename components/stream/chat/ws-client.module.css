@@ -1,7 +1,7 @@
+/* Desktop Styles - Original Design */
 .container {
   width: 300px;
-  height: 600px;
-  border: 1px solid #ccc;
+  height: 700px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -22,7 +22,6 @@
 }
 
 .header {
-  border-bottom: 1px solid #ccc;
   padding: 10px;
 }
 
@@ -34,6 +33,7 @@
   flex-direction: column;
   gap: 10px;
   background-color: #fff;
+  border: 1px solid #000000;
   scroll-behavior: smooth;
 }
 
@@ -52,7 +52,6 @@
 .message {
   background-color: #f0f0f0;
   padding: 8px 12px;
-  border-radius: 4px;
   max-width: 80%;
   word-break: break-word;
 }
@@ -60,7 +59,6 @@
 .systemMessage {
   background-color: #e8f4f8;
   padding: 8px 12px;
-  border-radius: 4px;
   max-width: 80%;
   margin: 0 auto;
   font-size: 12px;
@@ -70,7 +68,6 @@
 
 .inputContainer {
   display: flex;
-  border-top: 1px solid #ccc;
   padding: 10px;
   background-color: #fff;
 }
@@ -78,33 +75,98 @@
 .input {
   flex: 1;
   padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #000000;
   margin-right: 8px;
 }
 
 .sendButton {
   padding: 8px 16px;
-  background-color: #2ecc71;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  background-color: rgba(20, 255, 0, 1);
+  color: rgb(0, 0, 0);
+  border: 1px solid black;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
 
 .loginInput {
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
   width: 100%;
   margin-bottom: 10px;
 }
 
 .loginButton {
   padding: 8px;
-  background-color: #2ecc71;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  background-color: rgba(20, 255, 0, 1);
+  color: rgb(0, 0, 0);
+  border: 1px solid black;
   cursor: pointer;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    z-index: 1000;
+    background: white;
+    transition: transform 0.3s ease;
+  }
+
+  .containerCollapsed {
+    transform: translateY(calc(100% - 40px));
+  }
+
+  .chatToggle {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .chatToggleTitle {
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header {
+    display: none;
+  }
+
+  .messageArea {
+    height: calc(60vh - 100px);
+  }
+
+  .chatContainer {
+    height: 60vh;
+  }
+
+  .toggleIcon {
+    transition: transform 0.3s ease;
+  }
+
+  .toggleIconOpen {
+    transform: rotate(180deg);
+  }
+
+  .messageCounter {
+    background: #cc0000;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 12px;
+  }
 }
