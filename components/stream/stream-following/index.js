@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import styles from "@/components/stream/stream-following/s_following.module.css";
 import ViewerCount from "@/components/public/icons/viewer_count";
+import { SquareMenu, X } from "lucide-react"; // Import icons from lucide-react
 
 const FollowingStream = () => {
   const [streams, setStreams] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Placeholder data to simulate database response
   const mockStreamData = [
@@ -47,16 +49,9 @@ const FollowingStream = () => {
   ];
 
   useEffect(() => {
-    // Simulate fetching data from MySQL database
     const fetchStreams = async () => {
       try {
-        // In real implementation, this would be an API call to your backend
-        // const response = await fetch('/api/streams');
-        // const data = await response.json();
-
-        // Simulating network delay
         await new Promise((resolve) => setTimeout(resolve, 1000));
-
         setStreams(mockStreamData);
         setIsLoading(false);
       } catch (err) {
@@ -68,6 +63,34 @@ const FollowingStream = () => {
     fetchStreams();
   }, []);
 
+  // Close sidebar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isSidebarOpen &&
+        !event.target.closest(`.${styles.sidebar}`) &&
+        !event.target.closest(`.${styles.mobileToggle}`)
+      ) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isSidebarOpen]);
+
+  // Prevent body scroll when sidebar is open
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isSidebarOpen]);
+
   if (isLoading) {
     return <div className="text-center p-4">Loading streams...</div>;
   }
@@ -76,9 +99,9 @@ const FollowingStream = () => {
     return <div className="text-center text-red-500 p-4">{error}</div>;
   }
 
-  return (
-    <div className="space-y-3">
-      <p>追隨中</p>
+  const StreamList = () => (
+    <>
+      <p className={styles.p}>追隨中</p>
       {streams.map((stream) => (
         <div key={stream.id} className={styles.followingStream}>
           <img
@@ -95,6 +118,50 @@ const FollowingStream = () => {
           </div>
         </div>
       ))}
+    </>
+  );
+
+  return (
+    <div className={styles.container}>
+      {/* Desktop View */}
+      <div className={styles.desktopView}>
+        <StreamList />
+      </div>
+
+      {/* Mobile View */}
+      <button
+        className={styles.mobileToggle}
+        onClick={() => setIsSidebarOpen(true)}
+        aria-label="Open following streams"
+      >
+        <SquareMenu size={24} />
+      </button>
+
+      {/* Overlay */}
+      <div
+        className={`${styles.overlay} ${
+          isSidebarOpen ? styles.overlayVisible : ""
+        }`}
+        onClick={() => setIsSidebarOpen(false)}
+      />
+
+      {/* Sidebar */}
+      <div
+        className={`${styles.sidebar} ${
+          isSidebarOpen ? styles.sidebarOpen : ""
+        }`}
+      >
+        <div className={styles.sidebarHeader}>
+          <button
+            className={styles.closeButton}
+            onClick={() => setIsSidebarOpen(false)}
+            aria-label="Close following streams"
+          >
+            <X size={24} />
+          </button>
+        </div>
+        <StreamList />
+      </div>
     </div>
   );
 };

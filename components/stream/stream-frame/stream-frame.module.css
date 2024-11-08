@@ -1,9 +1,15 @@
 .container {
+  width: 100%;
   max-width: 70rem;
   margin: 0 auto;
-  padding: 1rem;
-  display: inline-block;
-  flex: 1.5;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
 }
 
 .header {
@@ -11,6 +17,13 @@
   align-items: center;
   margin-bottom: 1rem;
   gap: 1rem;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .header {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .profilePic {
@@ -18,6 +31,13 @@
   height: 48px;
   border-radius: 50%;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .profilePic {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .profilePic img {
@@ -28,6 +48,7 @@
 
 .streamInfo {
   flex: 1;
+  min-width: 0;
 }
 
 .streamerName {
@@ -36,6 +57,15 @@
   color: #7f8792;
   margin: 0;
   padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .streamerName {
+    font-size: 0.8rem;
+  }
 }
 
 .decorativeLine {
@@ -48,33 +78,64 @@
   font-size: 0.9rem;
   color: #a0aec0;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+@media (max-width: 768px) {
+  .streamTitle {
+    font-size: 0.8rem;
+  }
 }
 
 .videoContainer {
   position: relative;
   width: 100%;
-  /* background-color: #000; */
-  /* border-radius: 4px; */
+  background-color: #000;
   overflow: hidden;
-  margin-bottom: 1rem;
 }
 
 .videoFrame {
   width: 100%;
   aspect-ratio: 16 / 9;
   border: none;
+  display: block;
+}
+
+.fullscreen {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 9999;
+  background: #000;
+}
+
+.fullscreen .videoFrame {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: unset;
 }
 
 .statsContainer {
-  position: relative;
-  right: -53rem;
-  top: 0.5rem;
-  display: inline-flex;
+  display: flex;
   gap: 1rem;
   align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.7); */
   padding: 0.5rem 1rem;
-  /* color: #fff; */
+  flex-wrap: wrap;
+}
+
+@media (min-width: 769px) {
+  .statsContainer {
+    position: relative;
+    right: -53rem;
+    top: 0.5rem;
+    display: inline-flex;
+  }
 }
 
 .viewerCount {
@@ -127,4 +188,22 @@
 .loadingText {
   color: #718096;
   text-align: center;
+  padding: 1rem;
+}
+
+@media screen and (orientation: landscape) and (max-width: 920px) {
+  .videoContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+  }
+
+  .videoFrame {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: unset;
+  }
 }

@@ -14,6 +14,7 @@ const LiveStream = ({
   });
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     if (!videoId) {
@@ -35,11 +36,7 @@ const LiveStream = ({
           }
         );
 
-        // Log the raw response for debugging
         const responseText = await response.text();
-        console.log("Raw response:", responseText);
-
-        // Try to parse the response as JSON
         let data;
         try {
           data = JSON.parse(responseText);
@@ -71,7 +68,38 @@ const LiveStream = ({
     return () => clearInterval(pollInterval);
   }, [videoId]);
 
-  // Rest of the component remains the same...
+  // Handle screen orientation changes
+  useEffect(() => {
+    const handleOrientationChange = () => {
+      if (
+        window.matchMedia("(orientation: landscape)").matches &&
+        window.innerWidth <= 920
+      ) {
+        setIsFullscreen(true);
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        }
+      } else {
+        setIsFullscreen(false);
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    };
+
+    // Initial check
+    handleOrientationChange();
+
+    // Add event listeners
+    window.addEventListener("resize", handleOrientationChange);
+    window.addEventListener("orientationchange", handleOrientationChange);
+
+    return () => {
+      window.removeEventListener("resize", handleOrientationChange);
+      window.removeEventListener("orientationchange", handleOrientationChange);
+    };
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -87,12 +115,16 @@ const LiveStream = ({
         </div>
       </div>
 
-      <div className={styles.videoContainer}>
+      <div
+        className={`${styles.videoContainer} ${
+          isFullscreen ? styles.fullscreen : ""
+        }`}
+      >
         <iframe
           className={styles.videoFrame}
           src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
           title={streamData.title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
           allowFullScreen
         />
       </div>
