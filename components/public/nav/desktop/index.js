@@ -1,14 +1,12 @@
-import { CiBellOn, } from "react-icons/ci";
+import React, { useRef, useState, useEffect } from "react";
+import { CiBellOn } from "react-icons/ci";
 import { FiSearch } from "react-icons/fi";
-// import { Link } from "react-router-dom";
-
 import { ProfileIcons } from "../../profileIcons/ProfileIcons";
 import Mall from "../checklist/mall";
 import Fundraising from "../checklist/fundraising";
 import Forum from "../checklist/forum";
 import Logo from "../../logo";
-import React, { useRef, useState, useEffect } from "react";
-import styles from "./nav.module.css"
+import styles from "./nav.module.css";
 
 export default function NavDesktop() {
   const [display, setDislay] = useState(false);
@@ -18,52 +16,42 @@ export default function NavDesktop() {
   const [displayMall, setDisplayMall] = useState(false);
   const [displayFundraising, setDisplayFundraising] = useState(false);
   const [displayForum, setDisplayForum] = useState(false);
-
   const [activeIndex, setActiveIndex] = useState(null);
   let hoverTimeout = useRef(null);
 
   const [isNavVisible, setIsNavVisible] = useState(false);
-  const [member, setMember] = useState("");
-
-
+  const [member, setMember] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:3001/mem-data", {
-          credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
+          credentials: "include",
         });
         const data = await response.json();
-        // console.log(data);
-        
-        setMember(data.admin)
-        // console.log(data);
-  
-    set
-
+        setMember(data.admin); // 更新 member 狀態
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
+
     fetchData();
-    
+
     const handleScroll = () => {
-      setIsNavVisible(window.scrollY > 1); // 當滾動超過 30px 時顯示 nav
+      setIsNavVisible(window.scrollY > 1); // 當滾動超過 1px 時顯示 nav
     };
     window.addEventListener("scroll", handleScroll);
 
-    // 移除事件監聽器以避免內存洩漏
+    // 移除事件監聽器
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-    
-
   }, []);
 
   return (
     <>
-      <div className={isNavVisible?styles.wrap1:styles.wrap}>
-        <div className={styles.container }>
+      <div className={isNavVisible ? styles.wrap1 : styles.wrap}>
+        <div className={styles.container}>
           <div className={styles.logo}>
             <a href="../home">
               <Logo type={1} />
@@ -72,33 +60,22 @@ export default function NavDesktop() {
           <ul ref={items} className={styles.nav}>
             <li
               className={styles.item}
-              onMouseEnter={(e) => {
-                if (hoverTimeout.current) {
-                  clearTimeout(hoverTimeout.current); // 清除之前的 timeout，防止过早隐藏
-                }
+              onMouseEnter={() => {
+                if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
                 setDisplayMall(true);
-                if (displayFundraising) {
-                  setDisplayFundraising(false);
-                }
-                if (displayForum) {
-                  setDisplayForum(false);
-                }
+                setDisplayFundraising(false);
+                setDisplayForum(false);
                 setActiveIndex(0);
               }}
-              onMouseLeave={(e) => {
+              onMouseLeave={() => {
                 hoverTimeout.current = setTimeout(() => {
-                  setDisplayMall(false); // 延迟隐藏 Mall
+                  setDisplayMall(false);
                   setActiveIndex(null);
-                }, 200); // 延迟 200ms 后隐藏 Mall
+                }, 200);
               }}
               style={{
                 backgroundColor: activeIndex === 0 ? "#14ff00" : "#fff",
               }}
-
-              // onMouseLeave={(e) => {
-              //     setDisplayMall(false);  // 隱藏 Mall
-              //     e.currentTarget.style.backgroundColor = '#fff';  // 還原背景顏色
-              // }}
             >
               <a href="/George/products-page">
                 <div className={styles.top}></div>
@@ -111,24 +88,18 @@ export default function NavDesktop() {
 
             <li
               className={styles.item}
-              onMouseEnter={(e) => {
-                if (hoverTimeout.current) {
-                  clearTimeout(hoverTimeout.current); // 清除之前的 timeout，防止过早隐藏
-                }
+              onMouseEnter={() => {
+                if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
                 setDisplayFundraising(true);
-                if (displayMall) {
-                  setDisplayMall(false);
-                }
-                if (displayForum) {
-                  setDisplayForum(false);
-                }
+                setDisplayMall(false);
+                setDisplayForum(false);
                 setActiveIndex(1);
               }}
-              onMouseLeave={(e) => {
+              onMouseLeave={() => {
                 hoverTimeout.current = setTimeout(() => {
-                  setDisplayFundraising(false); // 延迟隐藏 Mall
+                  setDisplayFundraising(false);
                   setActiveIndex(null);
-                }, 200); // 延迟 200ms 后隐藏 Mall
+                }, 200);
               }}
               style={{
                 backgroundColor: activeIndex === 1 ? "#14ff00" : "#fff",
@@ -145,14 +116,10 @@ export default function NavDesktop() {
 
             <li
               className={styles.item}
-              onClick={(e) => {
+              onClick={() => {
                 setDisplayForum(!displayForum);
-                if (displayMall) {
-                  setDisplayMall(false);
-                }
-                if (displayFundraising) {
-                  setDisplayFundraising(false);
-                }
+                setDisplayMall(false);
+                setDisplayFundraising(false);
                 setActiveIndex(2);
               }}
               style={{
@@ -160,10 +127,10 @@ export default function NavDesktop() {
               }}
             >
               <a href="/Allen/forum">
-              <div className={styles.top}></div>
-              <div className={styles.bottom}>
-                <h6>論壇</h6>
-              </div>
+                <div className={styles.top}></div>
+                <div className={styles.bottom}>
+                  <h6>論壇</h6>
+                </div>
               </a>
             </li>
             {displayForum && <Forum />}
@@ -183,7 +150,6 @@ export default function NavDesktop() {
               onClick={() => {
                 setDislay(!display);
                 if (!display) {
-                  // items.current.style.display='none';
                   input.current.style.flexGrow = "1";
                   setTimeout(() => {
                     input.current.style.width = "100px";
@@ -192,7 +158,6 @@ export default function NavDesktop() {
                 } else if (display) {
                   input.current.style.padding = "5px 0px";
                   input.current.style.width = "0px";
-                  // items.current.style.display='block'
                 }
               }}
             >
@@ -202,7 +167,11 @@ export default function NavDesktop() {
 
           <div className={styles.iconsContainer}>
             <a href="/member-blog">
-              <ProfileIcons property1="XS" className={styles.header} img={member.icon}/> 
+              {member && member.icon ? (
+                <ProfileIcons property1="XS" className={styles.header} img={member.icon} />
+              ) : (
+                <ProfileIcons property1="XS" className={styles.header} img="/image/img-Jade/default.jpg" />
+              )}
             </a>
 
             <div className={styles.icon}>
@@ -233,7 +202,8 @@ export default function NavDesktop() {
                   viewBox="0 0 24 24"
                   fill="white"
                 >
-                  <path
+           
+           <path
                     d="M15.9999 8H17.1596C18.1998 8 19.0663 8.79732 19.1527 9.83391L19.8194 17.8339C19.9165 18.9999 18.9964 20 17.8263 20H6.17348C5.0034 20 4.08322 18.9999 4.18039 17.8339L4.84705 9.83391C4.93344 8.79732 5.79997 8 6.84014 8H7.99988M15.9999 8H7.99988M15.9999 8L15.9999 7C15.9999 5.93913 15.5784 4.92172 14.8283 4.17157C14.0782 3.42143 13.0607 3 11.9999 3C10.939 3 9.9216 3.42143 9.17145 4.17157C8.42131 4.92172 7.99988 5.93913 7.99988 7L7.99988 8M15.9999 8L15.9999 12M7.99988 8L7.99988 12"
                     stroke="black"
                     strokeWidth="1"
@@ -248,6 +218,7 @@ export default function NavDesktop() {
       </div>
       <style jsx>
         {`
+          /* Custom styles can be added here */
         `}
       </style>
     </>

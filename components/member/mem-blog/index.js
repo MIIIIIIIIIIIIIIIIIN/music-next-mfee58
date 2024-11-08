@@ -1,4 +1,4 @@
-import React,  { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./mem-blog.module.css"; // 引入相應的 CSS 模組
 import Nav from "@/components/public/nav";
 import UserIcon from "@/components/public/user-icon";
@@ -17,17 +17,16 @@ const MemBlog = () => {
         });
         const data = await response.json();
         console.log(data);
-  
+
         setName(data.admin?.nickname); // 確保讀取 admin 裡的 nickname
         setBirth(data.admin?.birth);
-
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
   }, []);
-  
+
   return (
     <>
       <div className={styles["wrapper"]}>
@@ -42,15 +41,18 @@ const MemBlog = () => {
         </a>
 
         <div className={styles["container"]}>
-        
           <div className={styles["leftContent"]}>
             {/* <InfoNav /> */}
-            <BlogNav value={name}/>
-            <button><a href="./login">Login</a></button>
-    <Logout />
-    <button>Logout</button>
+            <BlogNav value={name} />
+            <button>
+              <a href="./login">Login</a>
+            </button>
+
+            <button>
+              <a href="/home"><Logout /></a>
+            </button>
           </div>
-         
+
           <div className={styles["rightContent"]}>
             <div className={styles["albumSec"]}>
               <div className={styles["album"]}>
