@@ -30,7 +30,13 @@ const MemberInfo = () => {
   
         setName(data.admin?.nickname); // 確保讀取 admin 裡的 nickname
 
-        setBirth(data.admin?.birth);
+        // 格式化 birth 只顯示 MM-DD
+        if (data.admin?.birth) {
+          const birthDate = new Date(data.admin.birth);
+          const formattedBirth = `${birthDate.getFullYear()}-${String(birthDate.getMonth() + 1).padStart(2, "0")}-${String(birthDate.getDate()).padStart(2, "0")}`;
+          setBirth(formattedBirth);
+        }
+        
 
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -38,7 +44,7 @@ const MemberInfo = () => {
     };
     fetchData();
   }, []);
-  
+
 
   return (
     <>

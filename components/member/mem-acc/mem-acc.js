@@ -83,10 +83,10 @@ const MemberACC = () => {
                   <MemIcons iconName="icon-user" />
                   {/* 預設 icon-mail, 中尺寸 */}
                   <FormInputM size="medium" value={account} readOnly={true} />
-                  <ButtonToggleM
+                  {/* <ButtonToggleM
                     size="small"
                     className={styles["buttonToggle"]}
-                  />
+                  /> */}
                 </div>
               </div>
               <div className={styles["body-sec"]}>
@@ -99,7 +99,7 @@ const MemberACC = () => {
                     onChange={handlePhoneChange}
                     isPhone={true} // 啟用手機格式驗證
                   />
-                  <ButtonToggleM size="small" />
+                  {/* <ButtonToggleM size="small" /> */}
                 </div>
                 {!isPhoneValid && (
                   <div className={styles["error-text"]}>
@@ -117,7 +117,7 @@ const MemberACC = () => {
                     onChange={handleEmailChange}
                     isEmail={true} // 啟用信箱格式驗證
                   />
-                  <ButtonToggleM size="small" />
+                  {/* <ButtonToggleM size="small" /> */}
                 </div>
                 {!isEmailValid && (
                   <div className={styles["error-text"]}>
