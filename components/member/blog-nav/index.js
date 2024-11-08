@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./blog-nav.module.css"; // 引入相應的 CSS 模組
 import UserIcon from "@/components/public/user-icon";
-import { useEffect, useState } from "react";
 
 
-const BlogNav = () => {
+const BlogNav = ({value=''}) => {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    setName(localStorage.getItem("nickname"));
-    console.log(name);
-  }, []);
+    setName(value);
+  }, [value]);
+
+
+  // useEffect(() => {
+  //   setName(localStorage.getItem("nickname"));
+  //   console.log(name);
+  // }, []);
   return (
     <div className={styles["blogNav"]}>
       <div className={styles["icon"]}>
