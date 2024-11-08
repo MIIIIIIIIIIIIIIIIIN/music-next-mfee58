@@ -52,8 +52,7 @@ const MemberInfo = () => {
             <div className={styles["main-body"]}>
               <div className={styles["body-icon"]}>
                 {/* <UserIcon /> */}
-                <ProfileIcons property1="lg" className={styles.header} img={member.icon
-}/> 
+                <ProfileIcons property1="lg" className={styles.header} img={member.icon}/> 
               </div>
               <h6 className={styles["icon-title"]}>
                 上傳頭像建議尺寸： 140x140px 以內，圖片檔案大小不可超過 2MB

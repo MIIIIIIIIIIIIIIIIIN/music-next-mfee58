@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./blog-nav.module.css"; // 引入相應的 CSS 模組
 import UserIcon from "@/components/public/user-icon";
+import { ProfileIcons } from "@/components/public/profileIcons/ProfileIcons";
 
 const BlogNav = () => {
+  const [member,setMember] = useState({})
   const [name, setName] = useState("");
   const [birth, setBirth] = useState("");
   const [location, setLocation] = useState("");
@@ -16,6 +18,7 @@ const BlogNav = () => {
         });
         const data = await response.json();
         console.log(data);
+        setMember(data.admin)
 
         if (data.admin) {
           // 確保讀取 admin 裡的 nickname
@@ -44,7 +47,8 @@ const BlogNav = () => {
   return (
     <div className={styles["blogNav"]}>
       <div className={styles["icon"]}>
-        <UserIcon />
+        {/* <UserIcon /> */}
+        <ProfileIcons property1="lg" className={styles.header} img={member.icon}/>
       </div>
       <h4 className={styles["name"]}>{name}</h4>
       <div className={styles["info"]}>
