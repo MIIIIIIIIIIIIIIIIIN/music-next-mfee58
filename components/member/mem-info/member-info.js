@@ -18,7 +18,7 @@ const MemberInfo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/mem-data", {
+        const response = await fetch("http://localhost:3005/mem-data", {
           credentials: "include",
         });
         const data = await response.json();

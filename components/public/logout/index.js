@@ -8,7 +8,7 @@ const Logout = () => {
   const handleLogout = async () => {
     try {
       // Call your server's logout endpoint to clear session on the server-side
-      await axios.get("http://localhost:3001/logout", { withCredentials: true });
+      await axios.get("http://localhost:3005/logout", { withCredentials: true });
 
       // Remove any client-side session storage data, such as localStorage or cookies
       localStorage.removeItem("token");
