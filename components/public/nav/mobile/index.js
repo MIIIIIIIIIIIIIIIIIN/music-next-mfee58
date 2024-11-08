@@ -24,8 +24,28 @@ export default function NavMobile() {
 
   const [activeIndex, setActiveIndex] = useState(null);
   let hoverTimeout = useRef(null);
+  
+  const [member, setMember] = useState("");
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/mem-data", {
+          credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
+        });
+        const data = await response.json();
+        // console.log(data);
+        
+        setMember(data.admin)
+        // console.log(data);
+  
+    setMember(data.admin)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -39,8 +59,7 @@ export default function NavMobile() {
           </div>
           <div className={styles.iconsContainer}>
             <a href="#">
-              <ProfileIcons property1="XS" className={styles.header} />{" "}
-              {/* 小尺寸圖示 */}
+            <ProfileIcons property1="XS" className={styles.header} img={member.icon}/> 
             </a>
 
             {/* <div className={styles.icon}>

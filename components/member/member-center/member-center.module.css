@@ -4,7 +4,7 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-    background-image: url("/image/img-Jade/mem-bgImg.png");
+    /* background-image: url("/image/img-Jade/mem-bgImg.png"); */
   position: relative;
   background-repeat: no-repeat;
   background-position: 100% 100%;
@@ -89,9 +89,9 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 可選，陰影效果讓玻璃更�
 
 /* 11.03 新增 */
 /* 當螢幕寬度小於 400px 時隱藏 nav 並顯示 menu-button */
-@media (max-width: 400px) {
+@media (max-width: 375px) {
   .nav {
-    display: none; /* 隱藏 nav */
+    /* display: none; */
   }
 
   .leftContent {
