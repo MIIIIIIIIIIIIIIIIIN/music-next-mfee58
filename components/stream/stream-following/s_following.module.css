@@ -1,3 +1,7 @@
+.p {
+  padding-bottom: 1rem;
+}
+
 .followingStreamChild {
   width: 88px;
   position: relative;

@@ -77,25 +77,25 @@ const ChatRoom = () => {
   };
 
   return (
-    <div style={{verticalAlign:"top"}}>
+    <div style={{ verticalAlign: "top", marginTop: "3rem" }}>
       <div className={styles.container}>
         {!isLoggedIn ? (
           <div className={styles.loginContainer}>
             <input
               type="text"
-              placeholder="Enter your nickname"
+              placeholder="請問怎麼稱呼"
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
               className={styles.loginInput}
               onKeyDown={(e) => e.key === "Enter" && handleLogin()}
             />
             <button onClick={handleLogin} className={styles.loginButton}>
-              Join Chat
+              加入聊天室
             </button>
           </div>
         ) : (
           <div className={styles.chatContainer}>
-            <div className={styles.header}>Chat Room</div>
+            <div className={styles.header}>聊天室</div>
             <div ref={messageAreaRef} className={styles.messageArea}>
               {messages.map((msg, index) => (
                 <div key={`${msg.userId || "system"}-${index}`}>
@@ -115,14 +115,14 @@ const ChatRoom = () => {
             <div className={styles.inputContainer}>
               <input
                 type="text"
-                placeholder="Type a message"
+                placeholder="輸入聊天訊息"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                 className={styles.input}
               />
               <button onClick={sendMessage} className={styles.sendButton}>
-                Send
+                送出
               </button>
             </div>
           </div>

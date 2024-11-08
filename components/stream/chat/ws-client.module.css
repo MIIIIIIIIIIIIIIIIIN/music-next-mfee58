@@ -1,7 +1,6 @@
 .container {
   width: 300px;
-  height: 600px;
-  border: 1px solid #ccc;
+  height: 700px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -22,7 +21,6 @@
 }
 
 .header {
-  border-bottom: 1px solid #ccc;
   padding: 10px;
 }
 
@@ -34,6 +32,7 @@
   flex-direction: column;
   gap: 10px;
   background-color: #fff;
+  border: 1px solid #000000;
   scroll-behavior: smooth;
 }
 
@@ -68,7 +67,6 @@
 
 .inputContainer {
   display: flex;
-  border-top: 1px solid #ccc;
   padding: 10px;
   background-color: #fff;
 }
@@ -76,15 +74,15 @@
 .input {
   flex: 1;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   margin-right: 8px;
 }
 
 .sendButton {
   padding: 8px 16px;
   background-color: rgba(20, 255, 0, 1);
-  color: white;
-  border: 1px solid;
+  color: rgb(0, 0, 0);
+  border: 1px solid black;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
@@ -99,7 +97,7 @@
 .loginButton {
   padding: 8px;
   background-color: rgba(20, 255, 0, 1);
-  color: white;
-  border: 1px solid;
+  color: rgb(0, 0, 0);
+  border: 1px solid black;
   cursor: pointer;
 }

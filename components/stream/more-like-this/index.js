@@ -2,52 +2,40 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent, CircularProgress } from "@mui/material";
 import styles from "@/components/stream/more-like-this/more-loke-this.module.css";
 
-const MoreLikeThis = ({ apiKey }) => {
+const MoreLikeThis = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        // When you have your API key, you would make the actual API call here
-        // For now, we'll use placeholder data
-        const mockVideos = [
+        const response = await fetch(
+          "http://192.168.37.184:3006/api/music-recommendations",
           {
-            id: "1",
-            thumbnail:
-              "https://yume-muso.com/wp-content/uploads/2020/06/%E7%9C%9F%E7%94%B0%E4%B8%B8%E3%80%8024.jpg",
-            title: "Stream Highlight",
-          },
-          {
-            id: "2",
-            thumbnail:
-              "https://blog.zh-hant.playstation.com/tachyon/sites/8/2024/05/45f2bc21fc735dc3dc38a547722009ef94f80c4e.jpg",
-            title: "Monster Hunter",
-          },
-          {
-            id: "3",
-            thumbnail:
-              "https://clan.akamai.steamstatic.com/images/43315296/274ea568ec2da6c61e5f3abae6ad7b8abeb12076.png",
-            title: "Epic Battle Scene",
-          },
-          {
-            id: "4",
-            thumbnail:
-              "https://www-static.warframe.com/images/longlanding/warframe-metacard.png",
-            title: "Space Exploration",
-          },
-        ];
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-        setVideos(mockVideos);
+        if (!response.ok) {
+          throw new Error("Failed to fetch recommendations");
+        }
+
+        const data = await response.json();
+        setVideos(data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching videos:", error);
+        setError(error.message);
         setLoading(false);
       }
     };
 
     fetchVideos();
-  }, [apiKey]);
+  }, []);
 
   if (loading) {
     return (
@@ -57,10 +45,18 @@ const MoreLikeThis = ({ apiKey }) => {
     );
   }
 
+  if (error) {
+    return (
+      <div className={styles.error}>
+        <p>Failed to load recommendations. Please try again later.</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.spacedContainer}>
-        <h3 className={styles.title}>看更多...</h3>
+        <h3 className={styles.title}>熱門推薦</h3>
         <div className={styles.grid}>
           {videos.map((video) => (
             <Card
@@ -68,15 +64,25 @@ const MoreLikeThis = ({ apiKey }) => {
               sx={{
                 cursor: "pointer",
                 transition: "transform 0.2s",
+                borderRadius: "0px",
+                border: "solid 1px black",
                 "&:hover": {
                   transform: "scale(1.05)",
+                  borderRadius: "0px",
                 },
               }}
+              onClick={() =>
+                window.open(
+                  `https://www.youtube.com/watch?v=${video.id}`,
+                  "_blank"
+                )
+              }
             >
-              <CardContent sx={{ padding: 0 }}>
+              <CardContent sx={{ padding: 0, borderRadius: "0px" }}>
                 <div className={styles.imageContainer}>
                   <img
                     src={video.thumbnail}
+                    alt={video.title}
                     className={styles.image}
                   />
                   <div className={styles.overlay}>

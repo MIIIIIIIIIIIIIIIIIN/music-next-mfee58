@@ -11,7 +11,7 @@ const FollowingStream = () => {
   const mockStreamData = [
     {
       id: 1,
-      streamerName: "Jimmy55555555555555",
+      streamerName: "Jimmy55",
       viewerCount: 5000,
       profileImage: "/s_img/test.jpg",
       isLive: true,
@@ -28,6 +28,20 @@ const FollowingStream = () => {
       streamerName: "ProGamer789",
       viewerCount: 1500,
       profileImage: "/s_img/streamer1.jpg",
+      isLive: true,
+    },
+    {
+      id: 4,
+      streamerName: "Tanuki88",
+      viewerCount: 1500,
+      profileImage: "/s_img/streamer2.jpg",
+      isLive: true,
+    },
+    {
+      id: 5,
+      streamerName: "CafeYa",
+      viewerCount: 1500,
+      profileImage: "/s_img/streamer3.jpg",
       isLive: true,
     },
   ];
@@ -64,6 +78,7 @@ const FollowingStream = () => {
 
   return (
     <div className="space-y-3">
+      <p>追隨中</p>
       {streams.map((stream) => (
         <div key={stream.id} className={styles.followingStream}>
           <img

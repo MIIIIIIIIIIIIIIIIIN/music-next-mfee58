@@ -10,11 +10,17 @@ export default function test() {
     <>
       <NavBar />
       <div
-        style={{ margin: "15px", justify: "space-between", display: "flex" }}
+        style={{
+          margin: "15px",
+          justify: "space-between",
+          display: "flex",
+        }}
       >
-        <div>
-          <FollowingStream />
-          <FollowingStream />
+        <div
+          style={{
+            marginTop: "4rem",
+          }}
+        >
           <FollowingStream />
         </div>
         <LiveStream streamerName="ちちのムスメ" />
