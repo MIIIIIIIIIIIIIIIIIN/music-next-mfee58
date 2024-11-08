@@ -4,45 +4,13 @@ import styles from "./login.module.css";
 import MemIcons from "@/components/member/mem-icons";
 import LoginStatusChecker from "../LoginStatusChecker";
 
+axios.defaults.withCredentials = true; // 全局攜帶 cookie
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-// 暫時註解 11.07
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   // console.log('email',email);
-  //   // console.log('password',password);
-    
-  //   try {
-  //     const response = await axios.post("http://localhost:3001/login", {
-  //       email,
-  //       password,
-  //     });
-  //     // console.log("Login response:", response.data);
-      
-  //     if (response.data.success) {
-        
-  //       const { token, id, nickname,account } = response.data.bodyData;
-  //       localStorage.setItem("token", token); // Store token for authentication
-  //       localStorage.setItem("userId", id);
-  //       localStorage.setItem("nickname", nickname);
-  //       localStorage.setItem("account", account);
-  //       alert("登入成功! 歡迎回來!");
-  //       window.location.href='/member-blog';
-
-  //       // Redirect or update the UI as needed
-  //     } else {
-  //       setErrorMessage(response.data.error);
-  //     }
-  //   } catch (error) {
-  //     setErrorMessage("An error occurred during login.");
-  //     console.error("Login error:", error);
-  //   }
-  // };
-
-  // 暫時新增 11.07
   const handleLogin = async (e) => {
     e.preventDefault();
   
@@ -50,7 +18,6 @@ const Login = () => {
       const response = await axios.post("http://localhost:3001/login", {
         email,
         password,
-        withCredentials: true, // 設置為 true 以便發送 cookie
       });
   
       if (response.data.success) {
@@ -65,13 +32,12 @@ const Login = () => {
     }
   };
 
-  
   return (
     <div className={styles.container}>
-        <div>
-      <h1>Welcome to the App</h1>
-      <LoginStatusChecker />
-    </div>
+      <div>
+        <h1>Welcome to the App</h1>
+        <LoginStatusChecker />
+      </div>
       <div className={styles.loginBox}>
         <img
           src="/image/img-Jade/user-2.png"
