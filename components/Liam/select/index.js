@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { ChevronDown, ChevronUp, ShoppingCart, ArrowLeft } from "lucide-react";
 import styles from "./product-selector.module.css";
 
-// Constants
 const INITIAL_ALBUM_INFO = {
   title: "[音樂創作 x 夢研]",
   subtitle: "unlized",
@@ -26,9 +25,7 @@ const INITIAL_FAQS = [
   },
 ];
 
-// Component
-export const ProductSelector = ({ selectedPlan,setShowProductSelector }) => {
-  // State
+export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane }) => {
   const [albumInfo] = useState(INITIAL_ALBUM_INFO);
   const [products, setProducts] = useState([]);
   const [faqs] = useState(INITIAL_FAQS);
@@ -37,48 +34,48 @@ export const ProductSelector = ({ selectedPlan,setShowProductSelector }) => {
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [showFaqs, setShowFaqs] = useState(false);
 
-  // Effects
+  // 初始化商品資料
   useEffect(() => {
-    if (selectedPlan) {
-      initializeProducts(selectedPlan);
+    if (plane && plane.length > 0) {
+      const productList = plane.map(plan => ({
+        id: plan.f_plan_id,
+        type: "優惠方案",
+        name: plan.f_plan_title,
+        price: plan.f_plan_amount,
+        imageUrl: plan.f_plan_picture || "/01.jpg",
+        description: plan.f_plan_content,
+        people: plan.f_plan_people
+      }));
+
+      productList.push({
+        id: 'addon-1',
+        type: "加購方案",
+        name: "黃金一年會員資格請訂閱",
+        price: 1300,
+        imageUrl: "/01.jpg",
+      });
+
+      setProducts(productList);
+
+      // 初始化商品數量
+      const initialQuantities = {};
+      productList.forEach(product => {
+        initialQuantities[product.id] = product.id === selectedPlan?.f_plan_id ? 1 : 0;
+      });
+      setQuantities(initialQuantities);
     }
-  }, [selectedPlan]);
+  }, [plane, selectedPlan]);
 
-  // Handlers
-  const initializeProducts = (plan) => {
-    setProducts((prev) => {
-      const hasPromotion = prev.some((p) => p.type === "優惠方案");
-      if (!hasPromotion) {
-        const promotionProduct = {
-          id: 1,
-          ...plan,
-          imageUrl: "/01.jpg",
-        };
-        const addOnProduct = {
-          id: 2,
-          type: "加購方案",
-          name: "黃金一年會員資格請訂閱",
-          price: 1300,
-          imageUrl: "/01.jpg",
-        };
-        return [promotionProduct, addOnProduct];
-      }
-      return prev;
-    });
-
-    setQuantities({
-      1: 1, // 優惠方案初始數量
-      2: 0, // 加購方案初始數量
-    });
-  };
-
+  // 處理數量改變 - 移除限制條件
   const handleQuantityChange = (productId, change) => {
-    setQuantities((prev) => {
-      const newQuantity = Math.max(0, (prev[productId] || 0) + change);
+    setQuantities(prev => {
+      const currentQuantity = prev[productId] || 0;
+      const newQuantity = Math.max(0, currentQuantity + change);
       return { ...prev, [productId]: newQuantity };
     });
   };
 
+  // 計算總金額
   const calculateTotal = () => {
     return products.reduce(
       (total, product) => total + product.price * (quantities[product.id] || 0),
@@ -86,60 +83,10 @@ export const ProductSelector = ({ selectedPlan,setShowProductSelector }) => {
     );
   };
 
+  // FAQ 相關功能
   const toggleFaq = (faqId) => {
     setExpandedFaq(expandedFaq === faqId ? null : faqId);
   };
-
-  // Derived state
-  const cartItems = products
-    .filter((product) => quantities[product.id] > 0)
-    .map((product) => ({
-      ...product,
-      quantity: quantities[product.id],
-    }));
-
-  const hasItems = products.some((product) => quantities[product.id] > 0);
-
-  // Render methods
-  const renderProductItem = (product) => (
-    <div key={product.id} className={styles.productItem}>
-      <div className={styles.productContent}>
-        <img
-          src={product.imageUrl}
-          alt={product.name}
-          className={styles.productImage}
-        />
-
-        <div className={styles.productDetails}>
-          <div>
-            <div className={styles.productName}>{product.name}</div>
-            <div className={styles.priceText}>
-              ${product.price.toLocaleString()}
-            </div>
-          </div>
-          <div className={styles.priceSection}>
-            <div className={styles.quantityControls}>
-              <button
-                onClick={() => handleQuantityChange(product.id, -1)}
-                className={styles.quantityButton}
-              >
-                -
-              </button>
-              <span className={styles.quantityText}>
-                {quantities[product.id] || 0}
-              </span>
-              <button
-                onClick={() => handleQuantityChange(product.id, 1)}
-                className={styles.quantityButton}
-              >
-                +
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 
   const renderFaqs = () => (
     <div className={styles.faqSection}>
@@ -176,7 +123,65 @@ export const ProductSelector = ({ selectedPlan,setShowProductSelector }) => {
     </div>
   );
 
-  // Cart View
+  // 購物車項目處理
+  const cartItems = products
+    .filter((product) => quantities[product.id] > 0)
+    .map((product) => ({
+      ...product,
+      quantity: quantities[product.id],
+    }));
+
+  const hasItems = cartItems.length > 0;
+
+  // 渲染商品項目
+  const renderProductItem = (product) => (
+    <div key={product.id} className={styles.productItem}>
+      <div className={styles.productContent}>
+        <img
+          src={product.imageUrl}
+          alt={product.name}
+          className={styles.productImage}
+        />
+        <div className={styles.productDetails}>
+          <div>
+            <div className={styles.productType}>{product.type}</div>
+            <div className={styles.productName}>{product.name}</div>
+            {product.description && (
+              <div className={styles.productDescription}>{product.description}</div>
+            )}
+            <div className={styles.priceText}>
+              ${product.price.toLocaleString()}
+            </div>
+            {product.people !== undefined && (
+              <div className={styles.peopleCount}>已有 {product.people} 人贊助</div>
+            )}
+          </div>
+          <div className={styles.priceSection}>
+            <div className={styles.quantityControls}>
+              <button
+                onClick={() => handleQuantityChange(product.id, -1)}
+                className={styles.quantityButton}
+                disabled={quantities[product.id] <= 0}
+              >
+                -
+              </button>
+              <span className={styles.quantityText}>
+                {quantities[product.id] || 0}
+              </span>
+              <button
+                onClick={() => handleQuantityChange(product.id, 1)}
+                className={styles.quantityButton}
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  // 購物車視圖
   if (showCart) {
     return (
       <div className={styles.wrapper}>
@@ -232,16 +237,21 @@ export const ProductSelector = ({ selectedPlan,setShowProductSelector }) => {
     );
   }
 
-  // Main View
+  // 主視圖
   return (
     <div className={styles.wrapper}>
       <div className={styles.albumHeader}>
         <div className={styles.albumTitle}>
-          <button className={styles.back} onClick={()=>{
-            setShowProductSelector(false)
-          }}><ArrowLeft size={20} />返回</button>
-          <h5 className={styles.title}>{albumInfo.title}<span className={styles.albumSubtitle}>{albumInfo.subtitle}</span></h5>
-          
+          <button 
+            className={styles.back}
+            onClick={() => setShowProductSelector(false)}
+          >
+            <ArrowLeft size={20} />返回
+          </button>
+          <h5 className={styles.title}>
+            {albumInfo.title}
+            <span className={styles.albumSubtitle}>{albumInfo.subtitle}</span>
+          </h5>
         </div>
       </div>
 

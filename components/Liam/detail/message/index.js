@@ -1,127 +1,213 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import styles from "./message.module.css";
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const CommentItem = () => {
-  const [messages, setMessages] = useState([]);
+  const router = useRouter();
+  const [comments, setComments] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const itemsPerPage = 5;
 
-  // 將留言資料轉換為樹狀結構
-  const buildMessageTree = (messages) => {
-    const messageMap = {};
-    const rootMessages = [];
+  const organizeByFloor = (messages) => {
+    const sortedMessages = [...messages].sort((a, b) => 
+      a.f_message_floor - b.f_message_floor
+    );
 
-    // 先建立所有留言的映射
-    messages.forEach(message => {
-      messageMap[message.f_message_id] = {
-        ...message,
-        replies: []
-      };
-    });
+    const floorGroups = {};
+    
+    sortedMessages.forEach(message => {
+      const floor = message.f_message_floor;
+      if (!floorGroups[floor]) {
+        floorGroups[floor] = {
+          userMessage: null,
+          sellerResponse: null
+        };
+      }
 
-    // 建立樹狀結構
-    messages.forEach(message => {
-      if (message.reply_to) {
-        // 如果是回覆，加入父留言的replies陣列
-        const parentMessage = messageMap[message.reply_to];
-        if (parentMessage) {
-          parentMessage.replies.push(messageMap[message.f_message_id]);
-        }
+      if (message.f_sale === 1) {
+        floorGroups[floor].sellerResponse = message;
       } else {
-        // 如果是主留言，加入根留言陣列
-        rootMessages.push(messageMap[message.f_message_id]);
+        floorGroups[floor].userMessage = message;
       }
     });
 
-    return rootMessages;
+    return Object.entries(floorGroups)
+      .sort(([floorA], [floorB]) => Number(floorA) - Number(floorB));
   };
 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await fetch("http://localhost:3005/fundraiser/message");
-        const data = await response.json();
-        
-        // 假設 API 返回的數據需要添加 reply_to 欄位來表示回覆關係
-        const processedData = data.rows.map(message => {
-          // 根據 f_message_id 判斷是否為回覆
-          // 假設 id 為 1 的是主留言，2和3是對1的回覆
-          if (message.f_message_id === 2 ) {
-            return { ...message, reply_to: 1 };
-          }
-          return message;
-        });
+        if (!router.isReady) return;
 
-        const treeStructure = buildMessageTree(processedData);
-        setMessages(treeStructure);
+        const { project } = router.query;
+        setIsLoading(true);
+
+        const response = await fetch(`http://localhost:3005/fundraiser/message/${project}`);
+        const data = await response.json();
+        const organizedComments = organizeByFloor(data.rows);
+        setComments(organizedComments);
       } catch (error) {
         console.error("Error fetching messages:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchMessages();
-  }, []);
+  }, [router.isReady]);
 
-  const Message = ({ message, isReply = false }) => {
-    const [isExpanded, setIsExpanded] = useState(true);
+  const FloorMessage = ({ floorNumber, userMessage, sellerResponse }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-      <div className={`${styles.messageCard} ${isReply ? styles.replyCard : ''}`}>
-        <div className={styles.messageContent}>
-          <div className={styles.avatar}>
-            {message.f_member_id === 2 ? '客服' : `用戶`}
-          </div>
-          <div className={styles.mainContent}>
-            <div className={styles.userInfo}>
-              <span className={styles.userName}>
-                {message.f_member_id === 2 ? (
-                  <span className={styles.customerService}>【客服回覆】</span>
-                ) : (
-                  `用戶 ${message.f_member_id}`
-                )}
-              </span>
-              <span className={styles.messageTime}>
-                {new Date(message.f_message_current).toLocaleString()}
-              </span>
+      <div className={styles.floorContainer}>
+        {userMessage && (
+          <div className={styles.messageCard}>
+            <div className={styles.messageContent}>
+              <div className={styles.avatar}>
+                用戶
+              </div>
+              <div className={styles.mainContent}>
+                <div className={styles.userInfo}>
+                  <span className={styles.userName}>
+                    用戶 {userMessage.f_member_id}
+                  </span>
+                  <span className={styles.messageTime}>
+                    {new Date(userMessage.f_message_current).toLocaleString()}
+                  </span>
+                </div>
+                <div className={styles.messageBody}>
+                  <h4 className={styles.messageTitle}>{userMessage.f_message_title}</h4>
+                  <p className={styles.messageText}>{userMessage.f_message_content}</p>
+                </div>
+              </div>
             </div>
-            <div className={styles.messageBody}>
-              <h4 className={styles.messageTitle}>{message.f_message_title}</h4>
-              <p className={styles.messageText}>{message.f_message_content}</p>
-            </div>
           </div>
-        </div>
+        )}
 
-        {message.replies && message.replies.length > 0 && (
+        {sellerResponse && (
           <div className={styles.toggleReplies}>
             <button 
               onClick={() => setIsExpanded(!isExpanded)}
               className={styles.toggleButton}
             >
-              {isExpanded ? <ChevronUp /> : <ChevronDown />}
-              {message.replies.length} 則回覆
+              {isExpanded ? (
+                <>
+                  <ChevronUp className="mr-1" />
+                  收起賣家回覆
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="mr-1" />
+                  查看賣家回覆
+                </>
+              )}
             </button>
           </div>
         )}
 
-        {isExpanded && message.replies && message.replies.length > 0 && (
-          <div className={styles.repliesContainer}>
-            {message.replies.map(reply => (
-              <Message 
-                key={reply.f_message_id} 
-                message={reply} 
-                isReply={true}
-              />
-            ))}
+        {isExpanded && sellerResponse && (
+          <div className={`${styles.messageCard} ${styles.replyCard} ${styles.sellerResponse}`}>
+            <div className={styles.messageContent}>
+              <div className={styles.avatar}>
+                賣家
+              </div>
+              <div className={styles.mainContent}>
+                <div className={styles.userInfo}>
+                  <span className={styles.userName}>
+                    <span className={styles.customerService}>【賣家回覆】</span>
+                  </span>
+                  <span className={styles.messageTime}>
+                    {new Date(sellerResponse.f_message_current).toLocaleString()}
+                  </span>
+                </div>
+                <div className={styles.messageBody}>
+                  <h4 className={styles.messageTitle}>{sellerResponse.f_message_title}</h4>
+                  <p className={styles.messageText}>{sellerResponse.f_message_content}</p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
     );
   };
 
+  // 計算總頁數
+  const totalPages = Math.ceil(comments.length / itemsPerPage);
+
+  // 獲取當前頁面的留言
+  const getCurrentPageComments = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return comments.slice(startIndex, endIndex);
+  };
+
+  // 處理頁面變更
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // 載入中狀態
+  if (isLoading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.loadingSpinner}></div>
+        <p>載入中...</p>
+      </div>
+    );
+  }
+
+  // 無資料狀態
+  if (!comments.length) {
+    return <div className={styles.emptyContainer}>暫無留言</div>;
+  }
+
   return (
     <div className={styles.messageContainer}>
-      {messages.map(message => (
-        <Message key={message.f_message_id} message={message} />
+      {getCurrentPageComments().map(([floor, { userMessage, sellerResponse }]) => (
+        <FloorMessage
+          key={floor}
+          floorNumber={floor}
+          userMessage={userMessage}
+          sellerResponse={sellerResponse}
+        />
       ))}
+
+      {totalPages > 1 && (
+        <div className={styles.pagination}>
+          <button 
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={styles.pageButton}
+          >
+            <ChevronLeft size={16} />
+          </button>
+          
+          {[...Array(totalPages)].map((_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => handlePageChange(index + 1)}
+              className={`${styles.pageButton} ${
+                currentPage === index + 1 ? styles.activePage : ''
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+
+          <button 
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={styles.pageButton}
+          >
+            <ChevronRight size={16} />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

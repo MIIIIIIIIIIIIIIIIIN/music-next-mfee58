@@ -1,17 +1,24 @@
 import React from 'react';
 import styles from './card.module.css';
 
-const PlaneCard = ({ onSelect,e }) => {
+const PlaneCard = ({ 
+  onSelect = () => {}, 
+  e = {
+    f_plan_amount: 0,
+    f_plan_picture: '',
+    f_plan_title: '',
+    f_plan_content: '',
+    f_plan_people: 0
+  }
+}) => {
   
   const handleSelect = () => {
-    if (typeof onSelect === 'function') {
-      const planData = {
-        type: '優惠方案',
-        name: '第一包! 優先購票資格最划算！',
-        price: 1590
-      };
-      onSelect(planData);
-    }
+    const planData = {
+      type: '優惠方案',
+      name: e.f_plan_title,
+      price: e.f_plan_amount
+    };
+    onSelect(planData);
   };
 
   return (
@@ -23,7 +30,7 @@ const PlaneCard = ({ onSelect,e }) => {
       <div className={styles.imageContainer}>
         <img
           src={e.f_plan_picture}
-          alt="Promotion"
+          alt={e.f_plan_title}
           className={styles.image}
         />
       </div>
@@ -32,10 +39,8 @@ const PlaneCard = ({ onSelect,e }) => {
         <h3 className={styles.title}>{e.f_plan_title}</h3>
 
         <div className={styles.description}>
-          {/* <p>未來市價 $1,490 → 現省 $1,610</p> */}
           <ul className={styles.list}>
             <li className={styles.info}>{e.f_plan_content}</li>
-            {/* <li>演唱會早鳥證明 × 1</li> */}
           </ul>
         </div>
         <div className={styles.footer}>
@@ -50,10 +55,6 @@ const PlaneCard = ({ onSelect,e }) => {
       </div>
     </div>
   );
-};
-
-PlaneCard.defaultProps = {
-  onSelect: () => {}
 };
 
 export default PlaneCard;
