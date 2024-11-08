@@ -22,7 +22,7 @@ const MemberInfo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/try-sess", {
+        const response = await fetch("http://localhost:3001/mem-data", {
           credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
         });
         const data = await response.json();
