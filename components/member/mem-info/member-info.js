@@ -5,6 +5,7 @@ import FormInput from "../form-input";
 import ButtonToggleM from "../button-show";
 import Dropdown from "../form-option";
 import { useEffect, useState } from "react";
+import { ProfileIcons } from "@/components/public/profileIcons/ProfileIcons";
 
 const MemberInfo = () => {
   const router = useRouter();
@@ -12,6 +13,7 @@ const MemberInfo = () => {
   const [birth, setBirth] = useState("");
   const [gender, setGender] = useState("");
   const [region, setRegion] = useState("");
+  const [member, setMember] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +23,7 @@ const MemberInfo = () => {
         });
         const data = await response.json();
         console.log(data);
-
+        setMember(data.admin)
         setName(data.admin?.nickname);
 
         if (data.admin?.birth) {
@@ -49,7 +51,9 @@ const MemberInfo = () => {
             <h5 className={styles["main-title"]}>基本資料</h5>
             <div className={styles["main-body"]}>
               <div className={styles["body-icon"]}>
-                <UserIcon />
+                {/* <UserIcon /> */}
+                <ProfileIcons property1="lg" className={styles.header} img={member.icon
+}/> 
               </div>
               <h6 className={styles["icon-title"]}>
                 上傳頭像建議尺寸： 140x140px 以內，圖片檔案大小不可超過 2MB
