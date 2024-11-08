@@ -48,9 +48,7 @@ const MemBlog = () => {
               <a href="./login">Login</a>
             </button>
 
-            <button>
               <a href="/home"><Logout /></a>
-            </button>
           </div>
 
           <div className={styles["rightContent"]}>

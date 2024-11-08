@@ -58,8 +58,12 @@ export default function NavMobile() {
             </a>
           </div>
           <div className={styles.iconsContainer}>
-            <a href="#">
-            <ProfileIcons property1="XS" className={styles.header} img={member.icon}/> 
+          <a href="/member-blog">
+              {member && member.icon ? (
+                <ProfileIcons property1="XS" className={styles.header} img={member.icon} />
+              ) : (
+                <ProfileIcons property1="XS" className={styles.header} img="/image/img-Jade/default.jpg" />
+              )}
             </a>
 
             {/* <div className={styles.icon}>
