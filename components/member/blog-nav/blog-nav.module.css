@@ -29,6 +29,10 @@
   align-items: center;
 }
 
+.birth,
+.location{
+  margin: 10px;
+}
 .status {
   display: flex;
   flex-direction: column;

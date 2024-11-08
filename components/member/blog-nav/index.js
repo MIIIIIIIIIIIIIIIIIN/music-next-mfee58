@@ -6,6 +6,7 @@ const BlogNav = () => {
   const [name, setName] = useState("");
   const [birth, setBirth] = useState("");
   const [location, setLocation] = useState("");
+  const [gender, setGender] = useState("");
 
   useEffect(() => {
     const fetchSessionData = async () => {
@@ -17,13 +18,19 @@ const BlogNav = () => {
         console.log(data);
 
         if (data.admin) {
+          // 確保讀取 admin 裡的 nickname
           setName(data.admin.nickname || "");
+
+          // 設置性別
+          setGender(data.admin.gender || "");
+
 
           // 格式化 birth 只顯示 MM-DD
           const birthDate = new Date(data.admin.birth);
           const formattedBirth = `${String(birthDate.getMonth() + 1).padStart(2, "0")}-${String(birthDate.getDate()).padStart(2, "0")}`;
           setBirth(formattedBirth);
 
+          // 設置地區
           setLocation(data.admin.location || "");
         }
       } catch (error) {
@@ -41,9 +48,9 @@ const BlogNav = () => {
       </div>
       <h4 className={styles["name"]}>{name}</h4>
       <div className={styles["info"]}>
-        <div className="gender">其他</div>
+        <div className="gender">{gender}</div>
         <div className={styles["else"]}>
-          <div className="birth">{birth}</div>
+          <div className={styles["birth"]}>{birth}</div>
           <div className="location">{location}</div>
         </div>
       </div>
