@@ -21,7 +21,7 @@
 .errorText {
   padding: 1rem;
   text-align: center;
-  color: #ef4444; /* Tailwind's red-500 */
+  color: #ef4444;
 }
 
 .loadMoreContainer {
@@ -32,17 +32,17 @@
 
 .loadMoreButton {
   padding: 0.5rem 1.5rem;
-  background-color: #3b82f6; /* Tailwind's blue-500 */
+  background-color: #3b82f6;
   color: white;
   border-radius: 0.25rem;
   transition: background-color 0.2s;
 }
 
 .loadMoreButton:hover {
-  background-color: #2563eb; /* Tailwind's blue-600 */
+  background-color: #2563eb;
 }
 
 .loadMoreButton:disabled {
-  background-color: #93c5fd; /* Tailwind's blue-300 */
+  background-color: #93c5fd;
   cursor: not-allowed;
 }
