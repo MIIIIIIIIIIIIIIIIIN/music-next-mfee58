@@ -1,17 +1,7 @@
 {
   "workbench.colorCustomizations": {
-<<<<<<< HEAD
     "activityBar.background": "#77ff00",
     "titleBar.activeBackground": "#77ff00",
     "titleBar.activeForeground": "#000000"
-=======
-      "activityBar.background":"#c69ceed3",        //側邊欄的背景
-      "activityBar.activeBackground":"#c69ceed3",    //側邊欄的背景（正在選取的）
-      "activityBar.activeBorder":"#ffffff",        //側邊欄邊框（正在選取的）
-      "activityBar.foreground":"#000000",          //側邊欄的字（正在選取的）
-      "activityBar.inactiveForeground":"#06060a99",//側邊欄的字（沒被選取的）
-      "activityBarBadge.background":"#f7910d",     //側邊欄變動標示的背景
-      "activityBarBadge.foreground":"#2a07f0",     //側邊欄變動標示的文字
->>>>>>> origin/George1
   }
 }
