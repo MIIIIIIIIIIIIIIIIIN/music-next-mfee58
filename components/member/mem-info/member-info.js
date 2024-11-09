@@ -1,6 +1,5 @@
 import styles from "./member-info.module.css";
 import { useRouter } from "next/router";
-import UserIcon from "../../public/user-icon";
 import FormInput from "../form-input";
 import ButtonToggleM from "../button-show";
 import Dropdown from "../form-option";
@@ -23,8 +22,8 @@ const MemberInfo = () => {
         });
         const data = await response.json();
         console.log(data);
-        setMember(data.admin)
-        setName(data.admin?.nickname);
+        setMember(data.admin || {}); // 確保 member 不為 undefined
+        setName(data.admin?.nickname || "");
 
         if (data.admin?.birth) {
           const birthDate = new Date(data.admin.birth);
@@ -32,7 +31,6 @@ const MemberInfo = () => {
           setBirth(formattedBirth);
         }
 
-        // 設置性別和地區的初始值
         setGender(data.admin?.gender || "");
         setRegion(data.admin?.location || "");
 
@@ -51,8 +49,11 @@ const MemberInfo = () => {
             <h5 className={styles["main-title"]}>基本資料</h5>
             <div className={styles["main-body"]}>
               <div className={styles["body-icon"]}>
-                {/* <UserIcon /> */}
-                <ProfileIcons property1="lg" className={styles.header} img={member.icon}/> 
+                <ProfileIcons 
+                  property1="lg" 
+                  className={styles.header} 
+                  img={member.icon || "/image/img-Jade/default.jpg"} // 設置預設圖片
+                /> 
               </div>
               <h6 className={styles["icon-title"]}>
                 上傳頭像建議尺寸： 140x140px 以內，圖片檔案大小不可超過 2MB
