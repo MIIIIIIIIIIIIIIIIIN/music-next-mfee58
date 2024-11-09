@@ -52,7 +52,7 @@ const Login = () => {
             </span>
             <input
               type="text"
-              placeholder="帳號"
+              placeholder="帳號或信箱"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={styles.inputField}

@@ -3,28 +3,34 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('/path/to/your/background.jpg'); /* 修改為您的背景圖片路徑 */
+  background-image: url('/image/img-Jade/005album.jpg'); /* 修改為您的背景圖片路徑 */
   background-size: cover;
   background-position: center;
 }
 
 .container {
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 30px;
-  width: 350px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 40px;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
   margin-bottom: 20px;
+  object-fit: cover;
+  /* border: 1px solid #333; */
 }
 
 .title {
   font-size: 24px;
+  font-weight: bold;
+  color: #333;
   margin-bottom: 20px;
 }
 
@@ -34,7 +40,12 @@
 }
 
 .inputGroup {
+  display: flex;
+  align-items: center;
+  background-color: #f1f1f1;
+  border-radius: 25px;
   margin-bottom: 15px;
+  padding: 10px 15px;
 }
 
 .label {
@@ -44,30 +55,33 @@
 }
 
 .input {
+  border: none;
+  outline: none;
+  background: transparent;
   width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
   font-size: 16px;
+  color: #333;
+  margin: 0 10px;
 }
 
 .button {
   width: 100%;
-  padding: 10px;
-  background-color: #000;
+  padding: 15px;
+  background-color: #333;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
+  margin-top: 10px;}
 
 .button:hover {
-  background-color: #333;
+  background-color: var(--basecolor);
+  color: black;
 }
 
 .message {
   margin-top: 15px;
-  color: red;
+  ;
 }
