@@ -15,18 +15,16 @@ const MUSIC_CATEGORIES = [
 
 const PRICE_RANGES = [
   { id: "all", label: "全部", min: 0, max: Infinity },
-  { id: "under-500", label: "50000 以下", min: 0, max: 500 },
-  { id: "50001-100000", label: "50001-100000", min: 501, max: 1000 },
-  { id: "above-100000", label: "100000 以上", min: 1001, max: Infinity },
+  { id: "under-5000", label: "5,000 以下", min: 0, max: 5000 },
+  { id: "5001-50000", label: "5,001-50,000", min: 5001, max: 50000 },
+  { id: "above-50000", label: "50,000 以上", min: 50001, max: Infinity },
 ];
-
 const TIME_RANGES = [
   { id: "all", label: "全部" },
   { id: "latest", label: "由新到舊" },
   { id: "oldest", label: "由舊到新" },
 ];
 
-// 日期格式化
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -48,18 +46,56 @@ const WaterfallLayout = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [plane, setPlane] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [itemsPerPage] = useState(6);
+  const [projectsData, setProjectsData] = useState([]);
+
+  // 計算專案總金額
+  const calculateProjectTotals = (planes, projectId) => {
+    if (!planes?.length || !projectId) return 0;
+
+    // 使用 f_project_list 匹配 f_project_id
+    const projectPlanes = planes.filter(
+      (p) => Number(p.f_project_list) === projectId
+    );
+
+    return projectPlanes.reduce((sum, plane) => {
+      const planAmount = Number(plane.f_plan_amount) || 0;
+      const planPeople = Number(plane.f_plan_people) || 0;
+      return sum + planAmount * planPeople;
+    }, 0);
+  };
+
+  // 計算專案總人數
+  const calculateProjectPeople = (planes, projectId) => {
+    if (!planes?.length || !projectId) return 0;
+
+    // 使用 f_project_list 匹配 f_project_id
+    const projectPlanes = planes.filter(
+      (p) => Number(p.f_project_list) === projectId
+    );
+
+    return projectPlanes.reduce(
+      (sum, plane) => sum + (Number(plane.f_plan_people) || 0),
+      0
+    );
+  };
 
   // 資料獲取
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
+        if (!router.isReady) return;
         const response = await fetch("http://localhost:3005/fundraiser/list");
         const data = await response.json();
         if (data.rows) {
-          setItems(data.rows);
-          setFilteredItems(data.rows);
+          const processedData = data.rows.map((item) => ({
+            ...item,
+            f_project_id: Number(item.f_project_id),
+          }));
+          setItems(processedData);
+
+          setFilteredItems(processedData);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -69,54 +105,55 @@ const WaterfallLayout = () => {
     };
     const fetchPlane = async () => {
       try {
-        // 發送請求
         if (!router.isReady) return;
-
-        const { project } = router.query;
-
-        const response = await fetch(
-          `http://localhost:3005/fundraiser/plane/${project}`
-        );
+        const response = await fetch(`http://localhost:3005/fundraiser/plane`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
 
         const result = await response.json();
-        if (result.data && Array.isArray(result.data)) {
-          setPlane(result.data);
+
+        if (result.rows && Array.isArray(result.rows)) {
+          // 處理數據，確保 f_project_list 是數字類型
+          const processedPlanes = result.rows.map((plane) => ({
+            ...plane,
+            f_project_list: Number(plane.f_project_list),
+          }));
+          setPlane(processedPlanes); // 設置處理後的數據
+          console.log("Processed planes:", processedPlanes);
         }
       } catch (error) {
         console.error("Error fetching plane data:", error);
       }
     };
+
     fetchPlane();
     fetchData();
-  }, []);
+  }, [router.isReady]);
 
   // 篩選邏輯
+
   useEffect(() => {
     let result = [...items];
 
-    // 類別篩選
     if (filters.category !== "all") {
       result = result.filter((item) => item.f_tag === filters.category);
     }
 
-    // 價格篩選
     if (filters.price !== "all") {
       const priceRange = PRICE_RANGES.find(
         (range) => range.id === filters.price
       );
       if (priceRange) {
-        result = result.filter(
-          (item) =>
-            item.f_project_amount >= priceRange.min &&
-            item.f_project_amount <= priceRange.max
-        );
+        result = result.filter((item) => {
+          const projectTotal = calculateProjectTotals(plane, item.f_project_id);
+          return (
+            projectTotal >= priceRange.min && projectTotal <= priceRange.max
+          );
+        });
       }
     }
 
-    // 時間排序
     if (filters.time !== "all") {
       result.sort((a, b) => {
         const timeA = new Date(a.f_project_current).getTime();
@@ -126,34 +163,47 @@ const WaterfallLayout = () => {
     }
 
     setFilteredItems(result);
-  }, [filters, items]);
+  }, [filters, items, plane]);
 
-  // 重置篩選
+  useEffect(() => {
+    if (items.length && plane.length) {
+      const mappedData = items.map((item) => {
+        const matchingPlanes = plane.filter(
+          (p) => Number(p.f_project_list) === Number(item.f_project_id)
+        );
+
+        const projectTotal = matchingPlanes.reduce(
+          (sum, p) => sum + Number(p.f_plan_amount) * Number(p.f_plan_people),
+          0
+        );
+
+        const projectPeople = matchingPlanes.reduce(
+          (sum, p) => sum + Number(p.f_plan_people),
+          0
+        );
+
+        return {
+          project_id: item.f_project_id,
+          project_name: item.f_project_name,
+          total_amount: projectTotal,
+          total_people: projectPeople,
+          planes: matchingPlanes,
+        };
+      });
+
+      setProjectsData(mappedData);
+    }
+  }, [items, plane]);
+
   const resetFilters = () => {
     setFilters({
       category: "all",
       price: "all",
       time: "all",
     });
-    setCurrentPage(1); // 重置頁碼
+    setCurrentPage(1);
   };
 
-  const totalPeople = plane.reduce(
-    (sum, element) => sum + Number(element.f_plan_people),
-    0
-  );
-
-  const totalMoney = plane.reduce(
-    (sum, element) =>
-      sum + Number(element.f_plan_people) * Number(element.f_plan_amount),
-    0
-  );
-
-  const progressPercentage = items
-    ? Math.min((totalMoney / items.f_project_amount) * 100, 100)
-    : 0;
-
-  // 分頁邏輯
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -163,20 +213,11 @@ const WaterfallLayout = () => {
     setCurrentPage(pageNumber);
   };
 
-  // 篩選面板
   const FilterPanel = () => (
     <div className={styles.filterPanel}>
-      {/* 音樂類別篩選 */}
       <div className={styles.filterGroup}>
         <h3>音樂類別</h3>
         <div className={styles.filterButtonsContainer}>
-          {/* <button 
-            onClick={() => paginate(currentPage - 1)}
-            disabled={currentPage === 1}
-            className={`${styles.filterButton} ${styles.prevButton} ${currentPage === 1 ? styles.disabled : ''}`}
-          >
-            <ChevronLeft size={16} />
-          </button> */}
           {MUSIC_CATEGORIES.map((category) => (
             <button
               key={category.id}
@@ -185,37 +226,18 @@ const WaterfallLayout = () => {
               }`}
               onClick={() => {
                 setFilters((prev) => ({ ...prev, category: category.id }));
-                setCurrentPage(1); // 更新頁碼為第一頁
+                setCurrentPage(1);
               }}
             >
               {category.name}
             </button>
           ))}
-          {/* <button
-            onClick={() => paginate(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className={`${styles.filterButton} ${styles.nextButton} ${
-              currentPage === totalPages ? styles.disabled : ""
-            }`}
-          >
-            <ChevronRight size={16} />
-          </button> */}
         </div>
       </div>
 
-      {/* 價格範圍篩選 */}
       <div className={styles.filterGroup}>
         <h3>價格範圍</h3>
         <div className={styles.filterButtonsContainer}>
-          {/* <button
-            onClick={() => paginate(currentPage - 1)}
-            disabled={currentPage === 1}
-            className={`${styles.filterButton} ${styles.prevButton} ${
-              currentPage === 1 ? styles.disabled : ""
-            }`}
-          >
-            <ChevronLeft size={16} />
-          </button> */}
           {PRICE_RANGES.map((range) => (
             <button
               key={range.id}
@@ -224,37 +246,18 @@ const WaterfallLayout = () => {
               }`}
               onClick={() => {
                 setFilters((prev) => ({ ...prev, price: range.id }));
-                setCurrentPage(1); // 更新頁碼為第一頁
+                setCurrentPage(1);
               }}
             >
               {range.label}
             </button>
           ))}
-          {/* <button
-            onClick={() => paginate(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className={`${styles.filterButton} ${styles.nextButton} ${
-              currentPage === totalPages ? styles.disabled : ""
-            }`}
-          >
-            <ChevronRight size={16} />
-          </button> */}
         </div>
       </div>
 
-      {/* 時間排序 */}
       <div className={styles.filterGroup}>
         <h3>上架時間</h3>
         <div className={styles.filterButtonsContainer}>
-          {/* <button
-            onClick={() => paginate(currentPage - 1)}
-            disabled={currentPage === 1}
-            className={`${styles.filterButton} ${styles.prevButton} ${
-              currentPage === 1 ? styles.disabled : ""
-            }`}
-          >
-            <ChevronLeft size={16} />
-          </button> */}
           {TIME_RANGES.map((range) => (
             <button
               key={range.id}
@@ -263,27 +266,17 @@ const WaterfallLayout = () => {
               }`}
               onClick={() => {
                 setFilters((prev) => ({ ...prev, time: range.id }));
-                setCurrentPage(1); // 更新頁碼為第一頁
+                setCurrentPage(1);
               }}
             >
               {range.label}
             </button>
           ))}
-          {/* <button
-            onClick={() => paginate(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className={`${styles.filterButton} ${styles.nextButton} ${
-              currentPage === totalPages ? styles.disabled : ""
-            }`}
-          >
-            <ChevronRight size={16} />
-          </button> */}
         </div>
       </div>
     </div>
   );
 
-  // 載入中狀態
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
@@ -294,7 +287,6 @@ const WaterfallLayout = () => {
 
   return (
     <div className={styles.container}>
-      {/* 篩選控制區 */}
       <div className={styles.filterControl}>
         <button
           className={styles.filterToggle}
@@ -307,7 +299,6 @@ const WaterfallLayout = () => {
           )}
         </button>
 
-        {/* 已選擇的篩選條件 */}
         {Object.values(filters).some((value) => value !== "all") && (
           <div className={styles.activeFilters}>
             {filters.category !== "all" && (
@@ -338,32 +329,90 @@ const WaterfallLayout = () => {
         )}
       </div>
 
-      {/* 篩選面板 */}
       {showFilter && <FilterPanel />}
 
-      {/* 商品列表 */}
       <div className={styles.waterfallContainer}>
         {currentItems.length > 0 ? (
-          currentItems.map((item) => (
-            <div key={item.f_project_id} className={styles.waterfallItem}>
-              <div className={styles.itemImageContainer}>
-                <img
-                  src={item.f_project_picture}
-                  alt={item.f_project_name}
-                  className={styles.itemImage}
-                  loading="lazy"
-                />
-              </div>
-              <div className={styles.itemInfo}>
-                <span className={styles.itemCategory}>{item.f_tag}</span>
-                <h3 className={styles.itemTitle}>{item.f_project_name}</h3>
-                <p className={styles.itemPrice}>${totalMoney}</p>
-                <span className={styles.itemDate}>
-                  {formatDate(item.f_project_current)}
-                </span>
-              </div>
-            </div>
-          ))
+          currentItems.map((item) => {
+            // 使用數字類型的 f_project_id
+            const projectTotal = calculateProjectTotals(
+              plane,
+              item.f_project_id
+            );
+            const projectPeople = calculateProjectPeople(
+              plane,
+              item.f_project_id
+            );
+            const progressPercentage = Math.min(
+              (projectTotal / Number(item.f_project_amount)) * 100,
+              100
+            );
+
+            return (
+              <a href={`/Liam/detail?project=${item.f_project_id}`} key={item.f_project_id}>
+                <div  className={styles.waterfallItem}>
+                  <div className={styles.itemImageContainer}>
+                    <img
+                      src={item.f_project_picture}
+                      alt={item.f_project_name}
+                      className={styles.itemImage}
+                      loading="lazy"
+                    />
+                    <div className={styles.imageProgressBar}>
+                      <div
+                        className={styles.imageProgressFill}
+                        style={{ width: `${progressPercentage}%` }}
+                      />
+                    </div>
+                  </div>
+                  <div className={styles.itemInfo}>
+                    <span className={styles.itemCategory}>{item.f_tag}</span>
+                    <h3
+                      className={styles.itemTitle}
+                    >{`${item.f_project_name}+++`}</h3>
+                    <div className={styles.progressBar}>
+                      <div
+                        className={styles.progressFill}
+                        style={{ width: `${progressPercentage}%` }}
+                      />
+                    </div>
+                    <div className={styles.statsContainer}>
+                      <div className={styles.statItem}>
+                        <span className={styles.statLabel}>募資金額</span>
+                        <span className={styles.statValue}>
+                          $
+                          {projectsData
+                            .find((p) => p.project_id === item.f_project_id)
+                            ?.total_amount.toLocaleString() || "0"}
+                        </span>
+                      </div>
+                      <div className={styles.statItem}>
+                        <span className={styles.statLabel}>目標金額</span>
+                        <span className={styles.statValue}>
+                          ${Number(item.f_project_amount).toLocaleString()}
+                        </span>
+                      </div>
+                      <div className={styles.statItem}>
+                        <span className={styles.statLabel}>贊助人數</span>
+                        <span className={styles.statValue}>
+                          {projectPeople}人
+                        </span>
+                      </div>
+                      <div className={styles.statItem}>
+                        <span className={styles.statLabel}>達成率</span>
+                        <span className={styles.statValue}>
+                          {progressPercentage.toFixed(1)}%
+                        </span>
+                      </div>
+                    </div>
+                    <span className={styles.itemDate}>
+                      {formatDate(item.f_project_current)}
+                    </span>
+                  </div>
+                </div>
+              </a>
+            );
+          })
         ) : (
           <div className={styles.noResults}>
             <p>沒有符合條件的商品</p>
@@ -376,10 +425,12 @@ const WaterfallLayout = () => {
 
       {filteredItems.length > itemsPerPage && (
         <div className={styles.pagination}>
-            <button 
+          <button
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
-            className={`${styles.filterButton} ${styles.prevButton} ${currentPage === 1 ? styles.disabled : ''}`}
+            className={`${styles.filterButton} ${styles.prevButton} ${
+              currentPage === 1 ? styles.disabled : ""
+            }`}
           >
             <ChevronLeft size={16} />
           </button>

@@ -4,6 +4,7 @@
   margin: 0 auto;
 }
 
+/* 篩選控制區域 */
 .filterControl {
   margin-bottom: 20px;
 }
@@ -27,6 +28,7 @@
   border-radius: 50%;
 }
 
+/* 篩選面板 */
 .filterPanel {
   background: white;
   border: 1px solid #e2e8f0;
@@ -45,7 +47,7 @@
   color: #333;
 }
 
-.filterButtons {
+.filterButtonsContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -70,6 +72,7 @@
   border-color: #14FF00;
 }
 
+/* 活動篩選標籤 */
 .activeFilters {
   display: flex;
   flex-wrap: wrap;
@@ -92,6 +95,7 @@
   cursor: pointer;
 }
 
+/* 瀑布流容器 */
 .waterfallContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -99,44 +103,49 @@
 }
 
 .waterfallItem {
-  border-radius: 8px;
+  /* border-radius: 8px; */
   overflow: hidden;
-  /* box-shadow: 0 2px 8px rgba(0,0,0,0.1); */
   transition: transform 0.3s ease;
   border: 1px solid #fff;
   cursor: pointer;
+  border:1px solid #333
 }
 
 .waterfallItem:hover {
   transform: translateY(-4px);
-  border:1px solid #14FF00;
+  border: 1px solid #14FF00;
+}
+
+/* 項目圖片 */
+.itemImageContainer {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
 }
 
 .itemImage {
   width: 100%;
-  aspect-ratio: 1;
+  height: 100%;
   object-fit: cover;
 }
 
+/* 項目信息 */
 .itemInfo {
   padding: 16px;
 }
 
 .itemCategory {
   font-size: 12px;
-  color: #666;
+  color: #000000;
   text-transform: uppercase;
+  background-color: #e6e6e6;
+  padding: 5px;
 }
 
 .itemTitle {
   margin: 8px 0;
   font-size: 16px;
-}
-
-.itemPrice {
-  font-size: 18px;
-  font-weight: bold;
-  color: #14FF00;
+  color: #333;
 }
 
 .itemDate {
@@ -146,7 +155,136 @@
   margin-top: 8px;
 }
 
-@media (max-width: 768px) {
+/* 統計數據 */
+.statsContainer {
+  margin: 12px 0;
+}
+
+.statItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  font-size: 14px;
+  color: #666;
+}
+
+.statValue {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 無結果提示 */
+.noResults {
+  text-align: center;
+  padding: 40px;
+  grid-column: 1 / -1;
+}
+
+.resetButton {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+}
+
+/* 分頁控制 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.pageButton {
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+}
+
+.activePage {
+  background: #14FF00;
+  color: white;
+  border-color: #14FF00;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Loading 狀態 */
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #14FF00;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.itemImageContainer {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.itemImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.imageProgressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: rgb(255, 255, 255);
+  border: 1px solid #333;
+}
+
+.imageProgressFill {
+  height: 100%;
+  background: #14FF00;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(20, 255, 0, 0.5);
+}
+
+/* 更新原有的進度條樣式，讓它可以隱藏 */
+.progressBar {
+  display: none;
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+
+/* 響應式設計 */
+@media (max-width: 375px) {
   .filterPanel {
     position: fixed;
     bottom: 0;
@@ -161,7 +299,7 @@
   }
   
   .waterfallContainer {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 12px;
   }
 }
