@@ -34,17 +34,17 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      <div>
+      {/* <div>
         <h1>Welcome to the App</h1>
         <LoginStatusChecker />
-      </div>
+      </div> */}
       <div className={styles.loginBox}>
         <img
           src="/image/img-Jade/user-2.png"
           alt="Profile"
           className={styles.profileImage}
         />
-        <h2 className={styles.welcomeText}>Welcome Back!</h2>
+        <h2 className={styles.welcomeText}>歡迎回來!</h2>
         <form onSubmit={handleLogin}>
           <div className={styles.inputGroup}>
             <span className={styles.icon}>
@@ -52,7 +52,7 @@ const Login = () => {
             </span>
             <input
               type="text"
-              placeholder="Username or Email"
+              placeholder="帳號"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={styles.inputField}
@@ -64,7 +64,7 @@ const Login = () => {
             </span>
             <input
               type="password"
-              placeholder="Password"
+              placeholder="密碼"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={styles.inputField}
@@ -72,16 +72,15 @@ const Login = () => {
           </div>
           {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
           <button type="submit" className={styles.loginButton}>
-            LOGIN
+            登入
           </button>
         </form>
         <div className={styles.links}>
-          <a href="#" className={styles.forgotPassword}>
+          {/* <a href="#" className={styles.forgotPassword}>
             Forgot Username or Password?
-          </a>
-          <a href="#" className={styles.createAccount}>
-            Create new account
-          </a>
+          </a> */}
+          <a href="./register" className={styles.createAccount}>
+建立帳號          </a>
         </div>
       </div>
       <button onClick={() => {
