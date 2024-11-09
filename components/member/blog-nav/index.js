@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "./blog-nav.module.css"; // 引入相應的 CSS 模組
-import UserIcon from "@/components/public/user-icon";
 import { ProfileIcons } from "@/components/public/profileIcons/ProfileIcons";
 
 const BlogNav = () => {
-  const [member,setMember] = useState({})
+  const [member, setMember] = useState({});
   const [name, setName] = useState("");
   const [birth, setBirth] = useState("");
   const [location, setLocation] = useState("");
@@ -18,7 +17,7 @@ const BlogNav = () => {
         });
         const data = await response.json();
         console.log(data);
-        setMember(data.admin)
+        setMember(data.admin || {}); // 如果 data.admin 為 undefined，設為空物件
 
         if (data.admin) {
           // 確保讀取 admin 裡的 nickname
@@ -26,7 +25,6 @@ const BlogNav = () => {
 
           // 設置性別
           setGender(data.admin.gender || "");
-
 
           // 格式化 birth 只顯示 MM-DD
           const birthDate = new Date(data.admin.birth);
@@ -47,8 +45,11 @@ const BlogNav = () => {
   return (
     <div className={styles["blogNav"]}>
       <div className={styles["icon"]}>
-        {/* <UserIcon /> */}
-        <ProfileIcons property1="lg" className={styles.header} img={member.icon}/>
+        <ProfileIcons
+          property1="lg"
+          className={styles.header}
+          img={member.icon || "/image/img-Jade/default.jpg"} // 預設圖示
+        />
       </div>
       <h4 className={styles["name"]}>{name}</h4>
       <div className={styles["info"]}>
