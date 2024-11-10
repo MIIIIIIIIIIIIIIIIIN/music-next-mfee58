@@ -3,20 +3,20 @@ import axios from "axios";
 import styles from "./login.module.css";
 import MemIcons from "@/components/member/mem-icons";
 
-axios.defaults.withCredentials = true; // 全局攜帶 cookie
+axios.defaults.withCredentials = true;
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false); // 新增一個狀態來控制成功提示框
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3005/login", {
+      const response = await axios.post("http://localhost:3005/member/login", {
         email,
         password,
       });
