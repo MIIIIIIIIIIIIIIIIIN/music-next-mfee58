@@ -8,6 +8,7 @@ import DetailNav from '@/components/Liam/detail/content/nav'
 import GroupPlaneCard from '@/components/Liam/detail/content/group-plane-card'
 import QuestionAccordion from '@/components/Liam/detail/question/question-item'
 import Footer from '@/components/public/footer'
+import Chat from '@/components/Liam/chat/chat';
 
 export default function ProjectDetail() {
   
@@ -18,6 +19,7 @@ export default function ProjectDetail() {
       
       <DetailNav />
       <Footer />
+      <Chat />
     </div>
   )
 }
