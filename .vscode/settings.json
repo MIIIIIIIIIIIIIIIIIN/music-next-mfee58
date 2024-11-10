@@ -1,7 +1,35 @@
 {
   "workbench.colorCustomizations": {
-    "activityBar.background": "#88a172",
-    "titleBar.activeBackground": "#88a172",
-    "titleBar.activeForeground": "#000000"
+    // 左側 Activity Bar 顏色
+    "activityBar.background": "#fff8d3", // 背景色
+    "activityBar.foreground": "#f55c5c", // 圖示顏色
+    "activityBar.inactiveForeground": "#f55c5c", // 非活動圖示顏色
+    "activityBarBadge.background": "#ec9d0b", // Activity Bar 上的徽章背景色
+    "activityBarBadge.foreground": "#fff8d3", // Activity Bar 上的徽章文字色
+
+    // 上方 Title Bar 顏色
+    "titleBar.activeBackground": "#fff8d3", // 活動視窗背景色
+    "titleBar.activeForeground": "#f55c5c", // 活動視窗文字顏色
+    "titleBar.inactiveBackground": "#ec9d0b", // 非活動視窗背景色
+    "titleBar.inactiveForeground": "#fff8d3", // 非活動視窗文字顏色
+
+    // 右鍵或三個點點的小視窗（Dropdown 和 List）
+    "dropdown.background": "#ec9d0b", // 下拉選單背景色
+    "dropdown.foreground": "#fff8d3", // 下拉選單文字顏色
+    "dropdown.border": "#e45a5a", // 下拉選單邊框顏色
+    "dropdown.listBackground": "#fff8d3", // 下拉選單列表背景色
+
+    // 右鍵或清單視窗的項目背景與文字顏色
+    "list.activeSelectionBackground": "#fff8d3", // 選中項目背景色
+    "list.activeSelectionForeground": "#694500", // 選中項目文字顏色
+    "list.hoverBackground": "#fff8d3", // 滑鼠懸停背景色
+    "list.hoverForeground": "#694500", // 滑鼠懸停文字顏色
+
+    // Status Bar 顏色
+    "statusBar.background": "#fff8d3",
+    "statusBar.foreground": "#e45a5a",
+    "statusBar.noFolderBackground": "#fff8d3",
+    "statusBar.debuggingBackground": "#ffcc00",
+    "statusBar.debuggingForeground": "#fff8d3"
   }
 }

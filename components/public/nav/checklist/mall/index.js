@@ -1,31 +1,30 @@
-import React from 'react'
+import React from "react";
+import Link from "next/link";
 
 export default function Mall() {
   return (
     <>
-      <div className='container display'>
-        <div className='triangle'></div>
-        <ul >
-          <li className='item'>
-
-            <div className="info">
-              <p>Pop</p>
-            </div>
+      <div className="container display">
+        <div className="triangle"></div>
+        <ul>
+          <li className="item">
+            <Link href="/George/products-filter">
+              <div className="info">
+                <p>Pop</p>
+              </div>
+            </Link>
           </li>
-          <li className='item'>
-
+          <li className="item">
             <div className="info">
               <p>Rock</p>
             </div>
           </li>
-          <li className='item'>
-
+          <li className="item">
             <div className="info">
               <p>Blue</p>
             </div>
           </li>
-          <li className='item'>
-
+          <li className="item">
             <div className="info">
               <p>Soul</p>
             </div>
@@ -34,50 +33,44 @@ export default function Mall() {
       </div>
       <style jsx>
         {`
-          {/* .display{
+           {
+            /* .display{
                     display:block
-          } */}
-          .container{
-            position:absolute;
-            z-index:10;
-            left:0;
-            top:100px;
-            
+          } */
           }
-          ul{
-            display:flex;
+          .container {
+            position: absolute;
+            z-index: 10;
+            left: 0;
+            top: 100px;
           }
-          .item{
-            border:1px solid #111;
-            display:inline-block;
-            position:relative;
-            padding:10px 5px;
-            background-color:#fff
-            
+          ul {
+            display: flex;
+          }
+          .item {
+            border: 1px solid #111;
+            display: inline-block;
+            position: relative;
+            padding: 10px 5px;
+            background-color: #fff;
           }
           .item:hover {
-          background-color:#14ff00;
-          cursor:pointer
+            background-color: #14ff00;
+            cursor: pointer;
           }
-          
+
           .triangle {
-           
             width: 0;
             height: 0;
             border-style: solid;
             border-width: 0 10px 10px 10px;
             border-color: transparent transparent black transparent;
-            position:absolute;
-            top:-10px;
-            left:10px
-          
-
+            position: absolute;
+            top: -10px;
+            left: 10px;
           }
-          
         `}
       </style>
-
     </>
-
-  )
+  );
 }

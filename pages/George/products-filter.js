@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 import { AB_LIST, AB_DEL_DELETE } from "@/config/api-path";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import ProductsGenres from "@/components/George/card/products-genres";
+import ProductsGenres from "@/components/George/cate/products-genres";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import FooterMobile from "@/components/public/footer/mobile";
 import Nav from "@/components/public/nav";
+import axios from "axios";
 
 export default function ProductsFilter() {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
   const [listData, setListData] = useState({ rows: [] });
   const [albumsimg, setAlbumsImg] = useState({});
+  const [genres, setGenres] = useState([]);
   const router = useRouter();
 
   // 處理螢幕寬度變化
@@ -74,6 +76,19 @@ export default function ProductsFilter() {
     };
   }, [router]);
 
+  // 抓抓分類
+  useEffect(()=>{
+    const fetchGenres = async ()=>{
+      try{
+        const response = await axios.get("http://localhost:3005/api/getGenres"); //ask back-end
+        setGenres(response.data) // put the data in the status
+      } catch(error) {
+        console.error("Error fetching genres: ", error);
+      }
+    }
+    fetchGenres();    
+  }, [genres])
+
   // 抓圖片唷
   useEffect(() => {
     if (listData.rows.length === 0) return;
@@ -112,7 +127,7 @@ export default function ProductsFilter() {
   return (
     <>
       <Nav />
-      <ProductsGenres listData={listData} albumsimg={albumsimg} />
+      <ProductsGenres listData={listData} albumsimg={albumsimg} genres={genres}/>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );
