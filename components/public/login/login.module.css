@@ -5,13 +5,13 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-image: url("/image/img-Jade/005album.jpg"); /* 替換為您的背景圖片 */
+  background-image: url("/image/img-mem/bg001.jpg"); /* 替換為您的背景圖片 */
   background-size: cover;
   background-position: center;
 }
 
 .loginBox {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(178, 201, 196, 0.8);
   padding: 40px;
   border-radius: 10px;
   max-width: 400px;
@@ -44,6 +44,7 @@
   border-radius: 25px;
   margin-bottom: 15px;
   padding: 10px 20px;
+  
 }
 
 .icon {

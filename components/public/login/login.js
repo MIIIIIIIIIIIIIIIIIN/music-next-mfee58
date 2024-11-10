@@ -13,16 +13,16 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axios.post("http://localhost:3005/login", {
         email,
         password,
       });
-  
+
       if (response.data.success) {
         alert("登入成功! 歡迎回來!");
-        window.location.href = '/member-blog';
+        window.location.href = "/member-blog";
       } else {
         setErrorMessage(response.data.error);
       }
@@ -33,6 +33,8 @@ const Login = () => {
   };
 
   return (
+    <>
+
     <div className={styles.container}>
       {/* <div>
         <h1>Welcome to the App</h1>
@@ -40,7 +42,7 @@ const Login = () => {
       </div> */}
       <div className={styles.loginBox}>
         <img
-          src="/image/img-Jade/user-2.png"
+          src="/image/img-mem/user-logo000.jpg"
           alt="Profile"
           className={styles.profileImage}
         />
@@ -80,17 +82,25 @@ const Login = () => {
             Forgot Username or Password?
           </a> */}
           <a href="./register" className={styles.createAccount}>
-建立帳號          </a>
+            建立帳號{" "}
+          </a>
+          <br />
+
+          <a href="/" className={styles.createAccount}>
+          <MemIcons iconName="icons-home" size="medium" />
+
+
+          </a>
         </div>
       </div>
-      <button onClick={() => {
+      {/* <button onClick={() => {
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
         localStorage.removeItem("nickname");
         localStorage.removeItem("account");
         window.location.href='/';
-      }} >登出</button>
-    </div>
+      }} >登出</button> */}
+    </div></>
   );
 };
 
