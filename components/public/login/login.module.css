@@ -12,6 +12,7 @@
 
 .loginBox {
   background: rgba(178, 201, 196, 0.8);
+  /* background-color:  rgba(21, 255, 0, 0.721); */
   padding: 40px;
   border-radius: 10px;
   max-width: 400px;
@@ -26,7 +27,7 @@
   border-radius: 50%;
   margin-bottom: 20px;
   object-fit: cover;
-  border: 2px solid #333;
+  /* border: 2px solid #333; */
  
 }
 
@@ -62,9 +63,14 @@
   color: #333;
 }
 
+.errorText{
+  color: red;
+  font-size: 0.9em;
+}
+
 .loginButton {
-  width: 100%;
-  padding: 15px;
+  width: 90%;
+  padding: 10px;
   background-color: #333;
   color: #fff;
   border: none;
@@ -102,5 +108,13 @@
   .loginBox{
     width: 80%;
   }
+  .loginButton{
+    padding: 10px;
+    width: 90%;
+margin:auto;
+margin-top: 10px;
+  }
+
   
 }
+

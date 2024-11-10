@@ -3,13 +3,14 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('/image/img-Jade/005album.jpg'); /* 修改為您的背景圖片路徑 */
+  background-image: url("/image/img-mem/bg001.jpg"); /* 替換為您的背景圖片 */
   background-size: cover;
   background-position: center;
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(178, 201, 196, 0.8);
+
   padding: 40px;
   border-radius: 10px;
   max-width: 400px;
@@ -44,8 +45,25 @@
   align-items: center;
   background-color: #f1f1f1;
   border-radius: 25px;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   padding: 10px 15px;
+  position: relative;
+  margin: 10px;
+  /* margin-bottom: 1rem; */
+}
+
+
+
+.error {
+  color: red;
+  
+  /* background-color: black; */
+  width: 50%;
+  font-size: 0.9rem;
+  margin-top: 0;
+  margin-left: 15%;
+text-align: left;
+/* align-items: center; */
 }
 
 .label {
@@ -65,8 +83,8 @@
 }
 
 .button {
-  width: 100%;
-  padding: 15px;
+  width: 90%;
+  padding: 10px;
   background-color: #333;
   color: #fff;
   border: none;
@@ -74,6 +92,7 @@
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
+  margin: auto;
   margin-top: 10px;}
 
 .button:hover {
@@ -84,4 +103,28 @@
 .message {
   margin-top: 15px;
   ;
+}
+
+@media screen and (max-width: 375px) {
+  .container {
+    width: 80%;
+  }
+  
+  .error {
+    color: red;
+    
+    /* background-color: black; */
+    width: 70%;
+    font-size: 0.9rem;
+    margin-top: 0;
+    margin-left: 15%;
+  text-align: left;
+  /* align-items: center; */
+  }
+  .button{
+    padding: 10px;
+    width: 90%;
+margin:auto;
+margin-top: 10px;
+  }
 }
