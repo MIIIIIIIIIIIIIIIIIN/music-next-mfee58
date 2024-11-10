@@ -12,7 +12,6 @@ const Register = () => {
   const [accountError, setAccountError] = useState("");
   const [emailError, setEmailError] = useState("");
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false); // 狀態來控制密碼可見性
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -35,20 +34,29 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3005/auth/register", {
+      const response = await axios.post("http://localhost:3005/member/register", {
         account,
         password,
         email,
       });
       setMessage(response.data.message);
 
-      if (response.data.message === "註冊成功") {
+      if (response.data.success) {
         setTimeout(() => {
-          router.push("/");
-        }, 1000);
+          router.push("/login");
+        }, 5000);
+      } else {
+        // 根據後端錯誤訊息顯示相應的錯誤提示
+        if (response.data.error === "帳號已被使用") {
+          setAccountError("此帳號已被註冊");
+        } else if (response.data.error === "信箱已被使用") {
+          setEmailError("此信箱已被註冊");
+        } else {
+          setMessage(response.data.message || "註冊失敗，請重試");
+        }
       }
     } catch (error) {
-      if (error.response) {
+      if (error.response && error.response.data.message) {
         setMessage(error.response.data.message);
       } else {
         setMessage("註冊失敗，請重試");
@@ -106,21 +114,14 @@ const Register = () => {
             <div className={styles.inputGroup}>
               <MemIcons iconName="icons-lock-2" size="medium" />
               <input
-                type={showPassword ? "text" : "password"} // 動態設置 input 類型
+                type="password"
                 placeholder="密碼"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className={styles.input}
                 required
               />
-              <span
-                className={styles.eyeIcon}
-                onClick={() => setShowPassword(!showPassword)} // 點擊切換 showPassword 狀態
-              >
-                <MemIcons iconName={showPassword ? "icons-eye-off" : "icons-eye"} size="medium" />
-              </span>
             </div>
-
             <div className={styles.inputGroup}>
               <MemIcons iconName="icon-mail" size="medium" />
               <input
@@ -133,7 +134,6 @@ const Register = () => {
               />
             </div>
             {emailError && <p className={styles.error}>{emailError}</p>}
-            <br />
 
             <button type="submit" className={styles.button}>
               註冊
