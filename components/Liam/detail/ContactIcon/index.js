@@ -115,7 +115,7 @@ const CommentModal = ({ authorInfo }) => {
             <div className={styles.authorSection}>
               <div className={styles.authorInfo}>
                 <img 
-                  src={authorInfo?.avatar || '/01.JPG'} 
+                  src={authorInfo?.avatar || '/s_img/streamer2.jpg'} 
                   alt="作者頭像"
                   className={styles.authorAvatar}
                 />

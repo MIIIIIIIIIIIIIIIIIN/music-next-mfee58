@@ -64,21 +64,29 @@ export default function DetailTop({}) {
   // LINE 分享功能
   const shareToLine = () => {
     if (!projectData) return;
-
+  
     const shareText = `${projectData.f_project_name}\n${
       projectData.f_project_description || ""
     }`;
-
-    if (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      )
-    ) {
-      window.location.href = `line://msg/text/${encodeURIComponent(shareText)}`;
+    
+    // 取得目前網頁的完整URL
+    const currentUrl = window.location.href;
+    
+    // 組合分享內容與URL
+    const shareContent = `${shareText}\n${currentUrl}`;
+  
+    // 檢測裝置類型並使用適當的分享方式
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      // iOS設備
+      window.location.href = `line://msg/text/${encodeURIComponent(shareContent)}`;
+    } else if (/Android/i.test(navigator.userAgent)) {
+      // Android設備
+      window.location.href = `intent://msg/text/${encodeURIComponent(shareContent)}/#Intent;scheme=line;package=jp.naver.line.android;end`;
     } else {
+      // 桌面版 - 使用LINE官方分享API
       window.open(
-        `https://line.me/R/share?text=${encodeURIComponent(shareText)}`,
-        "_blank"
+        `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`,
+        '_blank'
       );
     }
   };
@@ -261,8 +269,8 @@ export default function DetailTop({}) {
               <ChatModal
               authorInfo={{
                 name: "SaSa",
-                title: "音樂者",
-                avatar: "/day.jpg"
+                title: "音樂創作者",
+                // avatar: "/day.jpg"
               }}
                
               />
