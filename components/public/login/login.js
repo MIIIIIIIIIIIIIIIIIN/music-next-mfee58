@@ -9,7 +9,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // 新增一個狀態來控制密碼可見性
+  const [showPassword, setShowPassword] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false); // 新增一個狀態來控制成功提示框
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,8 +22,10 @@ const Login = () => {
       });
 
       if (response.data.success) {
-        alert("登入成功! 歡迎回來!");
-        window.location.href = "/member-blog";
+        setShowSuccess(true); // 登入成功時顯示提示框
+        setTimeout(() => {
+          window.location.href = "/member-blog";
+        }, 2000); // 延遲兩秒後跳轉頁面
       } else {
         setErrorMessage(response.data.error);
       }
@@ -59,7 +62,7 @@ const Login = () => {
               <MemIcons iconName="icons-lock-2" size="medium" />
             </span>
             <input
-              type={showPassword ? "text" : "password"} // 根據狀態動態設置 input 類型
+              type={showPassword ? "text" : "password"}
               placeholder="密碼"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -67,21 +70,19 @@ const Login = () => {
             />
             <span
               className={styles.eyeIcon}
-              onClick={() => setShowPassword(!showPassword)} // 點擊切換 showPassword 狀態
+              onClick={() => setShowPassword(!showPassword)}
             >
-              <MemIcons iconName={showPassword ? "icons-eye-off" : "icons-eye"} size="medium" /> {/* 切換圖標 */}
+              <MemIcons iconName={showPassword ? "icons-eye-off" : "icons-eye"} size="medium" />
             </span>
           </div>
           {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
-          <br />
-          
           <button type="submit" className={styles.loginButton}>
             登入
           </button>
         </form>
         <div className={styles.links}>
           <a href="./register" className={styles.createAccount}>
-            建立帳號{" "}
+            建立帳號
           </a>
           <br />
           <a href="/" className={styles.createAccount}>
@@ -89,6 +90,15 @@ const Login = () => {
           </a>
         </div>
       </div>
+
+      {/* 自訂成功提示框 */}
+      {showSuccess && (
+        <div className={styles.successOverlay}>
+          <div className={styles.successMessage}>
+            <p>登入成功！歡迎回來！</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

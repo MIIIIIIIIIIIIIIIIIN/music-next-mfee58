@@ -104,6 +104,47 @@
   text-decoration: underline;
 }
 
+.successOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 保證提示框在最上層 */
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8); /* 縮小 */
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1); /* 略微放大 */
+  }
+  100% {
+    transform: scale(1); /* 回到正常大小 */
+  }
+}
+
+.successMessage {
+  background: #000;
+  color: var(--basecolor);
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeInScale 0.6s ease; /* 添加動畫 */
+}
+
+
+
 @media screen and (max-width: 375px) {
   .loginBox{
     width: 80%;
