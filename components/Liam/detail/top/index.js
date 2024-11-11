@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import styles from "./detail-top.module.css";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -6,16 +6,17 @@ import { CiChat1 } from "react-icons/ci";
 import Heart from "@/components/public/hearts";
 import ChatModal from "../ContactIcon";
 import { Plane } from "lucide-react";
-
+import { useTab } from "./tab-Context";
 export default function DetailTop({}) {
   const router = useRouter();
   const [projectData, setProjectData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [plane, setPlane] = useState([]);
-  const [currentTime, setCurrentTime] = useState(new Date()); // 新增當前時間狀態
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const { setActiveTab, activeTab } = useTab(); // 同時獲取 activeTab
+  const scrollRequested = useRef(false); // 用來追蹤是否需要捲動
 
-  // 更新當前時間
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -24,7 +25,6 @@ export default function DetailTop({}) {
     return () => clearInterval(timer);
   }, []);
 
-  // 計算剩餘時間
   const calculateTimeRemaining = (createDate) => {
     if (!createDate) {
       return "載入中...";
@@ -50,7 +50,7 @@ export default function DetailTop({}) {
       if (days > 0) {
         timeString += `${days}天 `;
       }
-      if (hours > 0 || days > 0) {  // 如果有天數，也要顯示小時
+      if (hours > 0 || days > 0) {
         timeString += `${hours}小時 `;
       }
       timeString += `${minutes}分`;
@@ -61,7 +61,7 @@ export default function DetailTop({}) {
       return "計算錯誤";
     }
   };
-  // LINE 分享功能
+
   const shareToLine = () => {
     if (!projectData) return;
   
@@ -69,21 +69,14 @@ export default function DetailTop({}) {
       projectData.f_project_description || ""
     }`;
     
-    // 取得目前網頁的完整URL
     const currentUrl = window.location.href;
-    
-    // 組合分享內容與URL
     const shareContent = `${shareText}\n${currentUrl}`;
   
-    // 檢測裝置類型並使用適當的分享方式
     if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      // iOS設備
       window.location.href = `line://msg/text/${encodeURIComponent(shareContent)}`;
     } else if (/Android/i.test(navigator.userAgent)) {
-      // Android設備
       window.location.href = `intent://msg/text/${encodeURIComponent(shareContent)}/#Intent;scheme=line;package=jp.naver.line.android;end`;
     } else {
-      // 桌面版 - 使用LINE官方分享API
       window.open(
         `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`,
         '_blank'
@@ -142,11 +135,25 @@ export default function DetailTop({}) {
     fetchPlane();
   }, [router.isReady]);
 
-  const scrollToSection = (sectionId, offset = 0) => {
-    window.scrollTo({
-      top: 1000,
-      behavior: "smooth",
-    });
+  const scrollToSection = (sectionId) => {
+    // const { setActiveTab } = useTab();
+    
+    // 找到目標元素
+    const targetElement = document.querySelector('#content-section'); // 需要在你的內容區域添加這個 id
+    
+    if (targetElement) {
+      // 計算元素到頂部的距離
+      const yOffset = -80; // 可以調整這個值來控制最終停留位置的偏移量
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset + yOffset;
+  
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+    
+    setActiveTab('content');
   };
 
   const totalPeople = plane.reduce(
@@ -262,17 +269,15 @@ export default function DetailTop({}) {
                 <FaArrowRightLong />
               </span>
               <h6 className={styles.targetPresentMount}>
-                !!{calculateTimeRemaining(projectData.f_project_current)}
+                {calculateTimeRemaining(projectData.f_project_current)}
               </h6>
             </div>
             <div className={styles.rightBottom}>
               <ChatModal
-              authorInfo={{
-                name: "SaSa",
-                title: "音樂創作者",
-                // avatar: "/day.jpg"
-              }}
-               
+                authorInfo={{
+                  name: "SaSa",
+                  title: "音樂創作者",
+                }}
               />
               <Heart />
               <button onClick={() => scrollToSection("planSection", 80)}>
