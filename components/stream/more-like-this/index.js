@@ -34,8 +34,15 @@ const MoreLikeThis = () => {
       }
     };
 
+    // Fetch initially
     fetchVideos();
-  }, []);
+
+    // Set up polling every 30 seconds
+    const pollInterval = setInterval(fetchVideos, 30000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(pollInterval);
+  }, []); // Keep empty dependency array but add polling
 
   if (loading) {
     return (
