@@ -10,8 +10,10 @@ import MallList from "./system-list/mall";
 import FundraisingList from "./system-list/fundraising";
 import MemberList from "./system-list/member";
 import Logo from "../../logo";
+import { useRouter } from "next/router";
 
 export default function NavMobile() {
+  const router = useRouter();
   const [display, setDislay] = useState(false);
   const items = useRef(null);
   const input = useRef(null);
@@ -24,22 +26,22 @@ export default function NavMobile() {
 
   const [activeIndex, setActiveIndex] = useState(null);
   let hoverTimeout = useRef(null);
-  
+
   const [member, setMember] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/mem-data", {
+        const response = await fetch("http://localhost:3005/mem-data", {
           credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
         });
         const data = await response.json();
         // console.log(data);
-        
-        setMember(data.admin)
+
+        setMember(data.admin);
         // console.log(data);
-  
-    setMember(data.admin)
+
+        setMember(data.admin);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -49,22 +51,50 @@ export default function NavMobile() {
 
   return (
     <>
-    <div className={styles.wrap}>
-      <div className={styles.container}>
-        <div className={styles.containerTop}>
-          <div className={styles.logo}>
-            <a href="#">
-              <Logo type={1} />
-            </a>
-          </div>
-          <div className={styles.iconsContainer}>
-          <a href="/member-blog">
-              {member && member.icon ? (
-                <ProfileIcons property1="XS" className={styles.header} img={member.icon} />
-              ) : (
-                <ProfileIcons property1="XS" className={styles.header} img="/image/img-Jade/default.jpg" />
-              )}
-            </a>
+      <div className={styles.wrap}>
+        <div className={styles.container}>
+          <div className={styles.containerTop}>
+            <div className={styles.logo}>
+              {/* <a href="#"> */}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/");
+                }}
+              >
+                <Logo type={1} />
+              </a>
+            </div>
+            <div className={styles.iconsContainer}>
+              {/* <a href="/member-blog"> */}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (member) {
+                    // 如果會員已登入，跳轉到 /member-blog
+                    router.push("/member-blog");
+                  } else {
+                    // 如果會員未登入，跳轉到 /login
+                    router.push("/login");
+                  }
+                }}
+              >
+                {member && member.icon ? (
+                  <ProfileIcons
+                    property1="XXS"
+                    className={styles.header}
+                    img={member.icon}
+                  />
+                ) : (
+                  <ProfileIcons
+                    property1="XXS"
+                    className={styles.header}
+                    img="/icons/icon-user.svg"
+                  />
+                )}
+              </a>
 
               {/* <div className={styles.icon}>
               <a href="#">
@@ -105,7 +135,14 @@ export default function NavMobile() {
                   </svg>
                 </a>
               </div>
-              <a href="#">
+              {/* <a href="#"> */}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/");
+                }}
+              >
                 <FaBars
                   className={styles.icon}
                   style={{
@@ -212,7 +249,7 @@ export default function NavMobile() {
                   </h6>
                 </a>
               </li>
-              {displayFundraising && <FundraisingList />}
+              {/* {displayFundraising && <FundraisingList />} */}
               <li
                 onClick={() => {
                   setDisplayForum(!displayForum);

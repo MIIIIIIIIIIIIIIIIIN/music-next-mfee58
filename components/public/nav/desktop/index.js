@@ -27,7 +27,7 @@ export default function NavDesktop() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/mem-data", {
+        const response = await fetch("http://localhost:3005/mem-data", {
           credentials: "include",
         });
         const data = await response.json();
@@ -119,7 +119,7 @@ export default function NavDesktop() {
                   <h6>募資</h6>
                 </div>
               </a>
-              {displayFundraising && <Fundraising />}
+              {/* {displayFundraising && <Fundraising />} */}
             </li>
 
             <li
@@ -174,21 +174,37 @@ export default function NavDesktop() {
           </div>
 
           <div className={styles.iconsContainer}>
-            <a href="/member-blog">
-              {member && member.icon ? (
-                <ProfileIcons
-                  property1="XS"
-                  className={styles.header}
-                  img={member.icon}
-                />
-              ) : (
-                <ProfileIcons
-                  property1="XS"
-                  className={styles.header}
-                  img="/image/img-Jade/default.jpg"
-                />
-              )}
-            </a>
+          <a
+  href="#"
+  onClick={(e) => {
+    e.preventDefault();
+    if (member) {
+      // 如果會員已登入，跳轉到 /member-blog
+      router.push("/member-blog");
+    } else {
+      // 如果會員未登入，跳轉到 /login
+      router.push("/login");
+    }
+  }}
+>
+  {member && member.icon ? (
+    <ProfileIcons
+      property1="XXS"
+      className={styles.header}
+      img={member.icon}
+    />
+  ) : (
+    <ProfileIcons
+      property1="XXS"
+      className={styles.header}
+      img="/icons/icon-user.svg"
+    />
+  )}
+</a>
+
+            {/* <a href="/member-blog"> */}
+
+            {/* </a> */}
 
             <div className={styles.icon}>
               <a href="#">

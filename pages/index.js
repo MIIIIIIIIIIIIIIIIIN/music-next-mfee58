@@ -13,9 +13,9 @@ import Nav from "@/components/public/nav/index";
 import NavHomePage from "@/components/public/nav/home";
 import ListNewCard from "@/components/Liam/Fundraising-list/new";
 import Footer from "@/components/public/footer";
-import MusicPlayer from '@/components/Liam/test'
+import MusicPlayer from "@/components/Liam/test";
+import AudioPlayer from "@/components/Liam/music";
 
-import AudioPlayer from '@/components/Liam/music'
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(false);
@@ -23,30 +23,23 @@ export default function Home() {
 
   return (
     <>
-    <div>
+      <div>
+        <NavHome />
+        <WaveVideo />
 
-      <NavHome />
-      <WaveVideo />
-    
-      <Title num={1} text="每日推薦"/>
-      <Carousel images={images} interval={2000} />
+        <Title num={1} text="每日推薦" />
+        <Carousel images={images} interval={2000} />
 
-      <Title num={2} text="每日一曲"/>
-      <MusicPlayer />
-      {/* <Daily /> */}
-      <Title num={3} text="最新募資"  className='ma'/>
-      
-      <ListNewCard />
-      
-      <Footer />
+        <Title num={2} text="每日一曲" />
+        <MusicPlayer />
+        {/* <Daily /> */}
+        <Title num={3} text="最新募資" className="ma" />
 
-      
-    </div>
-    <style jsx>
-      {`
-       
-      `}
-    </style>
+        <ListNewCard />
+
+        <Footer />
+      </div>
+      <style jsx>{``}</style>
     </>
   );
 }

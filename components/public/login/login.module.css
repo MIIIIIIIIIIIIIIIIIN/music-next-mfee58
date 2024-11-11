@@ -99,6 +99,34 @@
   margin: 5px 0;
 }
 
+.quickLoginButton {
+  width: 90%;
+  padding: 10px;
+  background-color: transparent;
+  color: transparent;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+.quickLoginButton:hover{
+  width: 90%;
+  padding: 10px;
+  background-color: #333;
+  color: var(--basecolor);
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  
+}
+
 .forgotPassword:hover,
 .createAccount:hover {
   text-decoration: underline;

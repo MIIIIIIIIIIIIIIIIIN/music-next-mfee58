@@ -7,8 +7,10 @@ import Mall from "../checklist/mall";
 import Fundraising from "../checklist/fundraising";
 import Forum from "../checklist/forum";
 import Logo from "../../logo";
+import { useRouter } from "next/router";
 
 export default function NavHome() {
+  const router = useRouter();
   const [display, setDislay] = useState(false);
   const items = useRef(null);
   const input = useRef(null);
@@ -20,14 +22,47 @@ export default function NavHome() {
   const [activeIndex, setActiveIndex] = useState(null);
   let hoverTimeout = useRef(null);
 
-  useEffect(() => {}, []);
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  const [member, setMember] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3005/mem-data", {
+          credentials: "include",
+        });
+        const data = await response.json();
+        setMember(data.admin); // 更新 member 狀態
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+
+    const handleScroll = () => {
+      setIsNavVisible(window.scrollY > 1); // 當滾動超過 1px 時顯示 nav
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    // 移除事件監聽器
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <>
       <div className={styles.wrap}>
         <div className={styles.container}>
           <div className={styles.logo}>
-            <a href="#">
+          <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/");
+              }}
+            >
               <Logo type={1} />
             </a>
           </div>
@@ -62,7 +97,13 @@ export default function NavHome() {
               //     e.currentTarget.style.backgroundColor = '#fff';  // 還原背景顏色
               // }}
             >
-         <a href="/George/products-page">
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/George/products-page");
+              }}
+            >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>商城</h6>
@@ -96,13 +137,20 @@ export default function NavHome() {
                 backgroundColor: activeIndex === 1 ? "#14ff00" : "#fff",
               }}
             >
-            <a href="/Liam/Fundraising-list">
+
+              <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/Liam/Fundraising-list");
+              }}
+            >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>募資</h6>
                 </div>
               </a>
-              {displayFundraising && <Fundraising />}
+              {/* {displayFundraising && <Fundraising />} */}
             </li>
 
             <li
@@ -121,16 +169,31 @@ export default function NavHome() {
                 backgroundColor: activeIndex === 2 ? "#14ff00" : "#fff",
               }}
             >
-             <a href="/Allen/forum">
-              <div className={styles.top}></div>
-              <div className={styles.bottom}>
-                <h6>論壇</h6>
-              </div>
+              {/* <a href="/Allen/forum"> */}
+
+              <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/Allen/forum");
+              }}
+            >
+                <div className={styles.top}></div>
+                <div className={styles.bottom}>
+                  <h6>論壇</h6>
+                </div>
               </a>
             </li>
             {displayForum && <Forum />}
             <li className={styles.item}>
-            <a href="/Allen/stream">
+              {/* <a href="/Allen/stream"> */}
+              <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/Allen/stream");
+              }}
+            >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>直播</h6>
@@ -163,9 +226,36 @@ export default function NavHome() {
           </div>
 
           <div className={styles.iconsContainer}>
-            <a href="#">
-              <ProfileIcons property1="XS" className={styles.header} img={'../public/header.jpg'}/>
-            </a>
+            {/* <a href="/login"> */}
+
+            <a
+  href="#"
+  onClick={(e) => {
+    e.preventDefault();
+    if (member) {
+      // 如果會員已登入，跳轉到 /member-blog
+      router.push("/member-blog");
+    } else {
+      // 如果會員未登入，跳轉到 /login
+      router.push("/login");
+    }
+  }}
+>
+  {member && member.icon ? (
+    <ProfileIcons
+      property1="XXS"
+      className={styles.header}
+      img={member.icon}
+    />
+  ) : (
+    <ProfileIcons
+      property1="XXS"
+      className={styles.header}
+      img="/icons/icon-user.svg"
+    />
+  )}
+</a>
+
 
             <div className={styles.icon}>
               <a href="#">
@@ -208,10 +298,7 @@ export default function NavHome() {
           </div>
         </div>
       </div>
-      <style jsx>
-        {`
-        `}
-      </style>
+      <style jsx>{``}</style>
     </>
   );
 }

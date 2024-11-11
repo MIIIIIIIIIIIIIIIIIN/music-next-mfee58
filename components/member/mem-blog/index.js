@@ -12,7 +12,7 @@ const MemBlog = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/mem-data", {
+        const response = await fetch("http://localhost:3005/mem-data", {
           credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
         });
         const data = await response.json();
@@ -30,7 +30,8 @@ const MemBlog = () => {
   return (
     <>
       <div className={styles["wrapper"]}>
-        <Nav className={styles["nav"]} />
+        {/* <Nav className={styles["nav"]} /> */}
+        <Nav />
         {/* 設定圖標，放置在右上角 */}
         <a href="/Jade/member-center">
           <img
@@ -48,7 +49,9 @@ const MemBlog = () => {
               <a href="./login">Login</a>
             </button>
 
-              <a href="http://localhost:3005/logout"><Logout /></a>
+            <a href="/login">
+              <Logout />
+            </a>
           </div>
 
           <div className={styles["rightContent"]}>

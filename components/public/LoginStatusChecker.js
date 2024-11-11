@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 const LoginStatusChecker = () => {
   const checkLoginStatus = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/check-login");
+      const response = await axios.get("http://localhost:3005/api/check-login");
       console.log("Login Status:", response.data);
       alert(response.data.loggedIn ? "已登入" : "尚未登入");
     } catch (error) {

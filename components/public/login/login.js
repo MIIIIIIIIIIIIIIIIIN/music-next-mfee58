@@ -12,13 +12,14 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  // 通用的登入函數
+  const handleLogin = async (e, loginEmail = email, loginPassword = password) => {
+    if (e) e.preventDefault();
 
     try {
       const response = await axios.post("http://localhost:3005/member/login", {
-        email,
-        password,
+        email: loginEmail,
+        password: loginPassword,
       });
 
       if (response.data.success) {
@@ -30,9 +31,16 @@ const Login = () => {
         setErrorMessage(response.data.error);
       }
     } catch (error) {
-      setErrorMessage("An error occurred during login.");
+      setErrorMessage("登入失敗");
       console.error("Login error:", error);
     }
+  };
+
+  // 快速登入的功能，使用測試帳號和密碼
+  const quickLogin = () => {
+    setEmail("test001");
+    setPassword("tt001");
+    handleLogin(null, "test001", "tt001");
   };
 
   return (
@@ -79,7 +87,11 @@ const Login = () => {
           <button type="submit" className={styles.loginButton}>
             登入
           </button>
+          
         </form>
+        
+
+
         <div className={styles.links}>
           <a href="./register" className={styles.createAccount}>
             建立帳號
@@ -89,13 +101,17 @@ const Login = () => {
             <MemIcons iconName="icons-home" size="medium" />
           </a>
         </div>
+                {/* 快速登入按鈕 */}
+                <button onClick={quickLogin} className={styles.quickLoginButton}>
+          快速登入
+        </button>
       </div>
 
       {/* 自訂成功提示框 */}
       {showSuccess && (
         <div className={styles.successOverlay}>
           <div className={styles.successMessage}>
-            <p>登入成功！歡迎回來！</p>
+            <p>登入成功!歡迎回來!</p>
           </div>
         </div>
       )}
