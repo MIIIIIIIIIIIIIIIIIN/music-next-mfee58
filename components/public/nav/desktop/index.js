@@ -189,9 +189,9 @@ export default function NavDesktop() {
                 />
               ) : (
                 <ProfileIcons
-                  property1="XS"
+                  property1="XXS"
                   className={styles.header}
-                  img="/image/img-Jade/default.jpg"
+                  img="/icons/icon-user.svg"
                 />
               )}
             </a>
