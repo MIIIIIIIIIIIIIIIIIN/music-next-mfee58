@@ -56,7 +56,7 @@ export default function NavHome() {
       <div className={styles.wrap}>
         <div className={styles.container}>
           <div className={styles.logo}>
-          <a
+            <a
               href="#"
               onClick={(e) => {
                 e.preventDefault();
@@ -69,49 +69,31 @@ export default function NavHome() {
           <ul ref={items} className={styles.nav}>
             <li
               className={styles.item}
-              onMouseEnter={(e) => {
-                if (hoverTimeout.current) {
-                  clearTimeout(hoverTimeout.current); // 清除之前的 timeout，防止过早隐藏
-                }
+              onMouseEnter={() => {
+                if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
                 setDisplayMall(true);
-                if (displayFundraising) {
-                  setDisplayFundraising(false);
-                }
-                if (displayForum) {
-                  setDisplayForum(false);
-                }
+                setDisplayFundraising(false);
+                setDisplayForum(false);
                 setActiveIndex(0);
               }}
-              onMouseLeave={(e) => {
+              onMouseLeave={() => {
                 hoverTimeout.current = setTimeout(() => {
-                  setDisplayMall(false); // 延迟隐藏 Mall
+                  setDisplayMall(false);
                   setActiveIndex(null);
-                }, 200); // 延迟 200ms 后隐藏 Mall
+                }, 200);
               }}
               style={{
                 backgroundColor: activeIndex === 0 ? "#14ff00" : "#fff",
               }}
-
-              // onMouseLeave={(e) => {
-              //     setDisplayMall(false);  // 隱藏 Mall
-              //     e.currentTarget.style.backgroundColor = '#fff';  // 還原背景顏色
-              // }}
+              onClick={() => router.push("/George/products-page")} // 用 onClick 來處理導航
             >
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                router.push("/George/products-page");
-              }}
-            >
-                <div className={styles.top}></div>
-                <div className={styles.bottom}>
-                  <h6>商城</h6>
-                </div>
-                {displayMall && <Mall />}
-              </a>
+              <div className={styles.top}></div>
+              <div className={styles.bottom}>
+                <h6>商城</h6>
+              </div>
+              {displayMall && <Mall />}
             </li>
-
+            
             <li
               className={styles.item}
               onMouseEnter={(e) => {
@@ -137,14 +119,13 @@ export default function NavHome() {
                 backgroundColor: activeIndex === 1 ? "#14ff00" : "#fff",
               }}
             >
-
               <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                router.push("/Liam/Fundraising-list");
-              }}
-            >
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/Liam/Fundraising-list");
+                }}
+              >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>募資</h6>
@@ -152,7 +133,6 @@ export default function NavHome() {
               </a>
               {/* {displayFundraising && <Fundraising />} */}
             </li>
-
             <li
               className={styles.item}
               onClick={(e) => {
@@ -172,12 +152,12 @@ export default function NavHome() {
               {/* <a href="/Allen/forum"> */}
 
               <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                router.push("/Allen/forum");
-              }}
-            >
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/Allen/forum");
+                }}
+              >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>論壇</h6>
@@ -188,12 +168,12 @@ export default function NavHome() {
             <li className={styles.item}>
               {/* <a href="/Allen/stream"> */}
               <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                router.push("/Allen/stream");
-              }}
-            >
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/Allen/stream");
+                }}
+              >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>直播</h6>
@@ -229,33 +209,32 @@ export default function NavHome() {
             {/* <a href="/login"> */}
 
             <a
-  href="#"
-  onClick={(e) => {
-    e.preventDefault();
-    if (member) {
-      // 如果會員已登入，跳轉到 /member-blog
-      router.push("/member-blog");
-    } else {
-      // 如果會員未登入，跳轉到 /login
-      router.push("/login");
-    }
-  }}
->
-  {member && member.icon ? (
-    <ProfileIcons
-      property1="XXS"
-      className={styles.header}
-      img={member.icon}
-    />
-  ) : (
-    <ProfileIcons
-      property1="XXS"
-      className={styles.header}
-      img="/icons/icon-user.svg"
-    />
-  )}
-</a>
-
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (member) {
+                  // 如果會員已登入，跳轉到 /member-blog
+                  router.push("/member-blog");
+                } else {
+                  // 如果會員未登入，跳轉到 /login
+                  router.push("/login");
+                }
+              }}
+            >
+              {member && member.icon ? (
+                <ProfileIcons
+                  property1="XXS"
+                  className={styles.header}
+                  img={member.icon}
+                />
+              ) : (
+                <ProfileIcons
+                  property1="XXS"
+                  className={styles.header}
+                  img="/icons/icon-user.svg"
+                />
+              )}
+            </a>
 
             <div className={styles.icon}>
               <a href="#">
@@ -269,9 +248,9 @@ export default function NavHome() {
                   <path
                     d="M9 17V18C9 18.394 9.0776 18.7841 9.22836 19.1481C9.37913 19.512 9.6001 19.8427 9.87868 20.1213C10.1573 20.3999 10.488 20.6209 10.8519 20.7716C11.2159 20.9224 11.606 21 12 21C12.394 21 12.7841 20.9224 13.1481 20.7716C13.512 20.6209 13.8427 20.3999 14.1213 20.1213C14.3999 19.8427 14.6209 19.512 14.7716 19.1481C14.9224 18.7841 15 18.394 15 18V17M18 9C18 12 20 17 20 17H4C4 17 6 13 6 9C6 5.732 8.732 3 12 3C15.268 3 18 5.732 18 9Z"
                     stroke="black"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               </a>
@@ -288,9 +267,9 @@ export default function NavHome() {
                   <path
                     d="M15.9999 8H17.1596C18.1998 8 19.0663 8.79732 19.1527 9.83391L19.8194 17.8339C19.9165 18.9999 18.9964 20 17.8263 20H6.17348C5.0034 20 4.08322 18.9999 4.18039 17.8339L4.84705 9.83391C4.93344 8.79732 5.79997 8 6.84014 8H7.99988M15.9999 8H7.99988M15.9999 8L15.9999 7C15.9999 5.93913 15.5784 4.92172 14.8283 4.17157C14.0782 3.42143 13.0607 3 11.9999 3C10.939 3 9.9216 3.42143 9.17145 4.17157C8.42131 4.92172 7.99988 5.93913 7.99988 7L7.99988 8M15.9999 8L15.9999 12M7.99988 8L7.99988 12"
                     stroke="black"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               </a>
