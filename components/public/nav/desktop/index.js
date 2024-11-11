@@ -141,7 +141,7 @@ export default function NavDesktop() {
                 </div>
               </a>
             </li>
-            {displayForum && <Forum />}
+            {/* {displayForum && <Forum />} */}
             <li className={styles.item}>
               <a href="/Allen/stream">
                 <div className={styles.top}></div>
