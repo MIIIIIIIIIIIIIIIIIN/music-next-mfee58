@@ -30,7 +30,7 @@ const Login = () => {
         setErrorMessage(response.data.error);
       }
     } catch (error) {
-      setErrorMessage("An error occurred during login.");
+      setErrorMessage("登入失敗");
       console.error("Login error:", error);
     }
   };

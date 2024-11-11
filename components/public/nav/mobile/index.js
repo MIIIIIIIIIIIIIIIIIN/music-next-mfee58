@@ -212,7 +212,7 @@ export default function NavMobile() {
                   </h6>
                 </a>
               </li>
-              {displayFundraising && <FundraisingList />}
+              {/* {displayFundraising && <FundraisingList />} */}
               <li
                 onClick={() => {
                   setDisplayForum(!displayForum);
