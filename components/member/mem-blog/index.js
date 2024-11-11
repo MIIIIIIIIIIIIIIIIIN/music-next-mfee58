@@ -8,6 +8,7 @@ import Logout from "@/components/public/logout";
 
 const MemBlog = () => {
   const [name, setName] = useState("");
+  const [birth, setBirth] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
