@@ -134,7 +134,7 @@
 
 .left img {
   width: 100%;
-  height: 150px;
+  height: 250px;
   background-color: #ccc;
   object-fit: cover;
 }
@@ -203,12 +203,14 @@
 }
 
 .right .sm img {
-  object-fit: cover;
   background-color: #ccc;
   max-width: 100%;
   width: 100px;
   height: 100px;
 }
+
+
+
 
 /* Right Section Button (播放器控制按鈕) */
 .carouse .button {
@@ -265,6 +267,10 @@
 
 .cursorPointer {
   cursor: pointer;
+  object-fit: cover;
+  max-width: 100%;
+  width: 100px;
+  height: 100px;
 }
 
 .combo {
