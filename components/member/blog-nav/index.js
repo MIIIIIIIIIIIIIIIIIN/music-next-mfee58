@@ -48,7 +48,7 @@ const BlogNav = () => {
         <ProfileIcons
           property1="lg"
           className={styles.header}
-          img={member.icon || "/image/img-Jade/default.jpg"} // 預設圖示
+          img={member.icon || "/image/img-mem/user-logo000.jpg"}  // 預設圖示
         />
       </div>
       <h4 className={styles["name"]}>{name}</h4>

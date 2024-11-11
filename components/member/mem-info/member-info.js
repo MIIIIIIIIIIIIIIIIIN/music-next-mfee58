@@ -52,7 +52,7 @@ const MemberInfo = () => {
                 <ProfileIcons 
                   property1="lg" 
                   className={styles.header} 
-                  img={member.icon || "/image/img-Jade/default.jpg"} // 設置預設圖片
+                  img={member.icon || "/image/img-mem/user-logo000.jpg"} // 設置預設圖片
                 /> 
               </div>
               <h6 className={styles["icon-title"]}>

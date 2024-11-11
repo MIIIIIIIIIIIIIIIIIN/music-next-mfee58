@@ -23,7 +23,7 @@ const UserIcon = () => {
       ) : (
         // 使用預設圖片
         
-        <img src="/image/img-Jade/user.png" alt="Default User Icon" className={styles.avatarImage} />
+        <img src="/image/img-mem/user-logo000.jpg" alt="Default User Icon" className={styles.avatarImage} />
 
       )}
 
