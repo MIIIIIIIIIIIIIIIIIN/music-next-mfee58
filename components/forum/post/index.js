@@ -24,13 +24,14 @@ const useWindowWidth = () => {
 };
 
 const ForumPost = ({
-  userImage = "/api/placeholder/40/40",
-  username = "Username",
-  title = "P-離別對於愛情",
-  content = "P-離別對於愛情，就像風對於火一樣",
-  coverImage = "/api/placeholder/120/120",
-  likes = 100,
-  reposts = 100,
+  id = 4,
+  userImage = "/s_img/forum.jpg",
+  username = "NatureLover",
+  title = "大自然的啟示",
+  content = "在繁忙的都市生活中，我們常常忽略了大自然的智慧。每一片樹葉的脈絡、每一朵花的綻放都蘊含著生命的奧秘。當我們駐足觀察，會發現自然界中存在著最完美的設計。這些啟示不僅能幫助我們更好地理解世界，也能指導我們如何更和諧地生活。",
+  coverImage = "/s_img/forum-album.jpg",
+  likes = 654,
+  reposts = 92,
   timeStamp = new Date().toISOString().slice(0, 19).replace("T", " "),
 }) => {
   const windowWidth = useWindowWidth();

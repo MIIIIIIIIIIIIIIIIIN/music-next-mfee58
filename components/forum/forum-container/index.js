@@ -2,29 +2,43 @@ import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
 import ForumPost from "../post";
 import styles from "@/components/forum/forum-container/forum-cotainer.module.css";
+import SortingButton from "../sorting-button";
+import { Clock, Flame } from "lucide-react";
+import placeholderPosts from "../forum-placeholder";
 
 const ForumContainer = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(placeholderPosts);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
+  const [sortBy, setSortBy] = useState("latest");
 
   const breakpointColumns = {
-    default: 3, // 3 columns for large screens
-    1024: 2, // 2 columns for medium screens
-    768: 1, // 1 column for mobile
+    default: 3,
+    1024: 2,
+    768: 1,
+  };
+
+  const sortByLatest = () => {
+    const sortedPosts = [...posts].sort(
+      (a, b) => new Date(b.timeStamp) - new Date(a.timeStamp)
+    );
+    setPosts(sortedPosts);
+    setSortBy("latest");
+  };
+
+  const sortByPopular = () => {
+    const sortedPosts = [...posts].sort((a, b) => b.likes - a.likes);
+    setPosts(sortedPosts);
+    setSortBy("popular");
   };
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // Using the full URL including port number
         const response = await fetch(
           `http://localhost:3005/api/forum/posts?page=${page}&perpage=12`
         );
-
-        // Log for debugging
-        console.log("Response status:", response.status);
 
         if (!response.ok) {
           const errorData = await response.json();
@@ -32,7 +46,6 @@ const ForumContainer = () => {
         }
 
         const data = await response.json();
-        console.log("Fetched data:", data); // Log for debugging
 
         if (data.status === "success") {
           setPosts((prevPosts) =>
@@ -40,7 +53,7 @@ const ForumContainer = () => {
           );
         }
       } catch (err) {
-        console.error("Fetch error:", err); // Log for debugging
+        console.error("Fetch error:", err);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -60,6 +73,18 @@ const ForumContainer = () => {
 
   return (
     <div className={styles.container}>
+      <div className="mb-4 flex items-center">
+        <SortingButton active={sortBy === "latest"} onClick={sortByLatest}>
+          <Clock size={18} />
+          Latest
+        </SortingButton>
+
+        <SortingButton active={sortBy === "popular"} onClick={sortByPopular}>
+          <Flame size={18} />
+          Popular
+        </SortingButton>
+      </div>
+
       <Masonry
         breakpointCols={breakpointColumns}
         className={styles.masonryGrid}
