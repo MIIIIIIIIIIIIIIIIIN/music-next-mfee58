@@ -229,26 +229,33 @@ export default function NavHome() {
             {/* <a href="/login"> */}
 
             <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                router.push("/login");
-              }}
-            >
-              {member && member.icon ? (
-                <ProfileIcons
-                  property1="XXS"
-                  className={styles.header}
-                  img={member.icon}
-                />
-              ) : (
-                <ProfileIcons
-                  property1="XXS"
-                  className={styles.header}
-                  img="/icons/icon-user.svg"
-                />
-              )}
-            </a>
+  href="#"
+  onClick={(e) => {
+    e.preventDefault();
+    if (member) {
+      // 如果會員已登入，跳轉到 /member-blog
+      router.push("/member-blog");
+    } else {
+      // 如果會員未登入，跳轉到 /login
+      router.push("/login");
+    }
+  }}
+>
+  {member && member.icon ? (
+    <ProfileIcons
+      property1="XXS"
+      className={styles.header}
+      img={member.icon}
+    />
+  ) : (
+    <ProfileIcons
+      property1="XXS"
+      className={styles.header}
+      img="/icons/icon-user.svg"
+    />
+  )}
+</a>
+
 
             <div className={styles.icon}>
               <a href="#">
