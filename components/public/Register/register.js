@@ -8,15 +8,15 @@ const Register = () => {
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
   const [accountError, setAccountError] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false); // 控制成功提示框顯示
   const router = useRouter();
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // 驗證帳號長度是否至少6碼
+    // 驗證帳號長度
     if (account.length < 6) {
       setAccountError("帳號需至少6碼");
       return;
@@ -24,7 +24,7 @@ const Register = () => {
       setAccountError("");
     }
 
-    // 驗證信箱格式是否包含 @ 和 .
+    // 驗證信箱格式
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       setEmailError("請輸入有效的信箱格式");
@@ -39,25 +39,37 @@ const Register = () => {
         password,
         email,
       });
-      setMessage(response.data.message);
 
-      if (response.data.success) {
+      if (response.data.message === "註冊成功") {
+        setShowSuccess(true); // 顯示成功提示框
         setTimeout(() => {
+          setShowSuccess(false);
           router.push("/login");
-        }, 5000);
+        }, 5000); // 5秒後跳轉頁面
       } else {
-        // 根據後端錯誤訊息顯示相應的錯誤提示
-        if (response.data.error === "帳號已被使用") {
+        // 顯示錯誤訊息
+        if (response.data.message === "該帳號已被註冊") {
           setAccountError("此帳號已被註冊");
-        } else if (response.data.error === "信箱已被使用") {
+          setEmailError(""); // 清除信箱錯誤
+        } else if (response.data.message === "該信箱已被註冊") {
           setEmailError("此信箱已被註冊");
-        } else {
-          setMessage(response.data.message || "註冊失敗，請重試");
+          setAccountError(""); // 清除帳號錯誤
         }
       }
     } catch (error) {
       if (error.response && error.response.data.message) {
-        setMessage(error.response.data.message);
+        // 根據後端錯誤訊息顯示相應的錯誤提示
+        if (error.response.data.message === "該帳號已被註冊") {
+          setAccountError("此帳號已被註冊");
+          setEmailError(""); // 清除信箱錯誤
+        } else if (error.response.data.message === "該信箱已被註冊") {
+          setEmailError("此信箱已被註冊");
+          setAccountError(""); // 清除帳號錯誤
+        } else {
+          setAccountError("");
+          setEmailError("");
+          setMessage("註冊失敗，請重試");
+        }
       } else {
         setMessage("註冊失敗，請重試");
       }
@@ -143,9 +155,17 @@ const Register = () => {
               <MemIcons iconName="icons-home" size="medium" />
             </a>
           </form>
-          {message && <p className={styles.message}>{message}</p>}
         </div>
       </div>
+
+      {/* 註冊成功提示框 */}
+      {showSuccess && (
+        <div className={styles.successOverlay}>
+          <div className={styles.successMessage}>
+            <p>註冊成功!</p>
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -95,7 +95,7 @@ const Login = () => {
       {showSuccess && (
         <div className={styles.successOverlay}>
           <div className={styles.successMessage}>
-            <p>登入成功！歡迎回來！</p>
+            <p>登入成功!歡迎回來!</p>
           </div>
         </div>
       )}
