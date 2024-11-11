@@ -5,11 +5,27 @@ import UserIcon from "@/components/public/user-icon";
 import BlogNav from "../blog-nav";
 import PlayButton from "@/components/public/play-button";
 import Logout from "@/components/public/logout";
+import Link from "next/link";
+import axios from "axios";
 
 const MemBlog = () => {
   const [name, setName] = useState("");
   const [birth, setBirth] = useState("");
 
+
+
+const handleLogout = async () => {
+  try {
+    const response = await axios.post("http://localhost:3005/member/logout", {}, { withCredentials: true });
+    if (response.data.success) {
+      alert(response.data.message);
+      // 跳轉到登入頁面或首頁
+      window.location.href = "/login";
+    }
+  } catch (error) {
+    console.error("登出失敗:", error);
+  }
+};
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,13 +62,16 @@ const MemBlog = () => {
           <div className={styles["leftContent"]}>
             {/* <InfoNav /> */}
             <BlogNav value={name} />
-            <button>
+            {/* <button>
               <a href="./login">Login</a>
-            </button>
+            </button> */}
+            <br />
 
-            <a href="/login">
-              <Logout />
-            </a>
+            <Link href="/login" passHref>
+              <div className={styles.logoutButton}>
+                登出
+              </div>
+            </Link>
           </div>
 
           <div className={styles["rightContent"]}>
