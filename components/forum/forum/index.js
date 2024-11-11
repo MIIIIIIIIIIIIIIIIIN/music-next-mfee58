@@ -5,6 +5,7 @@ import { Clock, Flame, Flag } from "lucide-react";
 import styles from "./forum.module.css";
 import Heart from "@/components/public/hearts";
 import ShareIcon from "@/components/public/icons/share_icon";
+import { Fade } from "react-awesome-reveal";
 
 // SortingButton Component
 const SortingButton = ({ active, onClick, children }) => (
@@ -33,10 +34,10 @@ const ForumPost = ({
 
   const handleLike = () => {
     if (isLiked) {
-      setLikes(prev => prev - 1);
+      setLikes((prev) => prev - 1);
       setIsLiked(false);
     } else {
-      setLikes(prev => prev + 1);
+      setLikes((prev) => prev + 1);
       setIsLiked(true);
     }
   };
@@ -62,38 +63,40 @@ const ForumPost = ({
   };
 
   return (
-    <div className={styles.postContainer}>
-      <div className={styles.userSection}>
-        <img src={userImage} alt={username} className={styles.userImage} />
-        <div className={styles.userInfo}>
-          <h3 className={styles.title}>{title}</h3>
-          <div className={styles.timestamp}>{formatTimeStamp(timeStamp)}</div>
-        </div>
-      </div>
-
-      <div className={styles.mainContent}>
-        <div className={styles.textContent}>
-          <p className={styles.text}>{content}</p>
-          <div className={styles.interactionButtons}>
-            <button 
-              className={`${styles.button} ${isLiked ? styles.liked : ''}`}
-              onClick={handleLike}
-            >
-              <Heart size={18} fill={isLiked ? "#ef4444" : "none"} />
-              <span className={styles.buttonCount}>{likes}</span>
-            </button>
-            <button className={styles.button}>
-              <ShareIcon size={18} />
-              <span className={styles.buttonCount}>{reposts}</span>
-            </button>
-            <button className={styles.button}>
-              <Flag size={18} />
-            </button>
+    <Fade delay={1e1} cascade damping={1e-1}>
+      <div className={styles.postContainer}>
+        <div className={styles.userSection}>
+          <img src={userImage} alt={username} className={styles.userImage} />
+          <div className={styles.userInfo}>
+            <h3 className={styles.title}>{title}</h3>
+            <div className={styles.timestamp}>{formatTimeStamp(timeStamp)}</div>
           </div>
         </div>
-        <img src={coverImage} alt="Cover" className={styles.coverImage} />
+
+        <div className={styles.mainContent}>
+          <div className={styles.textContent}>
+            <p className={styles.text}>{content}</p>
+            <div className={styles.interactionButtons}>
+              <button
+                className={`${styles.button} ${isLiked ? styles.liked : ""}`}
+                onClick={handleLike}
+              >
+                <Heart size={18} fill={isLiked ? "#ef4444" : "none"} />
+                <span className={styles.buttonCount}>{likes}</span>
+              </button>
+              <button className={styles.button}>
+                <ShareIcon size={18} />
+                <span className={styles.buttonCount}>{reposts}</span>
+              </button>
+              <button className={styles.button}>
+                <Flag size={18} />
+              </button>
+            </div>
+          </div>
+          <img src={coverImage} alt="Cover" className={styles.coverImage} />
+        </div>
       </div>
-    </div>
+    </Fade>
   );
 };
 
@@ -158,7 +161,7 @@ const ForumContainer = () => {
   const [sortBy, setSortBy] = useState("latest");
 
   const breakpointColumns = {
-    default: 2,
+    default: 3,
     1024: 2,
     768: 1,
   };

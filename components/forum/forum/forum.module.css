@@ -20,11 +20,11 @@
 .masonryGrid {
   display: flex;
   width: auto;
-  margin-left: -1rem;
+  /* margin-left: -1rem; */
 }
 
 .masonryColumn {
-  padding-left: 1rem;
+  /* padding-left: 1rem; */
   background-clip: padding-box;
 }
 
@@ -47,14 +47,15 @@
 
 .loadMoreButton {
   padding: 0.5rem 1.5rem;
-  background-color: #3b82f6;
-  color: white;
+  background-color: rgba(20, 255, 0, 1);
+  color: black;
   border-radius: 0.25rem;
   transition: background-color 0.2s;
+  cursor: pointer;
 }
 
 .loadMoreButton:hover {
-  background-color: #2563eb;
+  background-color: rgba(20, 255, 0, 1);
 }
 
 .loadMoreButton:disabled {
@@ -73,7 +74,8 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   border: 1px solid black;
-  margin-right: 8px;
+  margin-left: 16px;
+  margin-bottom: 16px;
   position: relative;
 }
 
@@ -114,7 +116,7 @@
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border: solid 1px black;
-  padding: 1.5rem;
+  padding: 1rem;
   margin: 1rem;
   transition: all 0.2s ease-in-out;
 }
