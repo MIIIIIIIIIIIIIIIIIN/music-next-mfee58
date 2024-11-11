@@ -60,7 +60,7 @@ const BlogNav = () => {
         </div>
       </div>
       <div className={styles["status"]}>
-        <h7>Love & Peace</h7>
+        <h6>Love & Peace</h6>
       </div>
     </div>
   );
