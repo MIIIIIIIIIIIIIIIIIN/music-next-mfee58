@@ -30,7 +30,8 @@ const MemBlog = () => {
   return (
     <>
       <div className={styles["wrapper"]}>
-        <Nav className={styles["nav"]} />
+        {/* <Nav className={styles["nav"]} /> */}
+        <Nav />
         {/* 設定圖標，放置在右上角 */}
         <a href="/Jade/member-center">
           <img

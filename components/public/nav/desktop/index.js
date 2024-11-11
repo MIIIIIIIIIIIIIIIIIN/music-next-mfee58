@@ -168,9 +168,9 @@ export default function NavDesktop() {
           <div className={styles.iconsContainer}>
             <a href="/member-blog">
               {member && member.icon ? (
-                <ProfileIcons property1="XS" className={styles.header} img={member.icon} />
+                <ProfileIcons property1="XXS" className={styles.header} img={member.icon} />
               ) : (
-                <ProfileIcons property1="XS" className={styles.header} img="/image/img-Jade/default.jpg" />
+                <ProfileIcons property1="XXS" className={styles.header} img="/image/img-Jade/default.jpg" />
               )}
             </a>
 

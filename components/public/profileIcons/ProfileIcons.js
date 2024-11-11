@@ -13,7 +13,7 @@ export const ProfileIcons = ({ property1, className, img }) => {
 };
 
 ProfileIcons.propTypes = {
-  property1: PropTypes.oneOf(["md", "lg", "XS"]),
+  property1: PropTypes.oneOf(["md", "lg", "XS", "XXS"]),
   className: PropTypes.string,
   img: PropTypes.string,
 };

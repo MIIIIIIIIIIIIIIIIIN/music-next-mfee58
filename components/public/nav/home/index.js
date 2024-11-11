@@ -20,7 +20,34 @@ export default function NavHome() {
   const [activeIndex, setActiveIndex] = useState(null);
   let hoverTimeout = useRef(null);
 
-  useEffect(() => {}, []);
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  const [member, setMember] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3005/mem-data", {
+          credentials: "include",
+        });
+        const data = await response.json();
+        setMember(data.admin); // 更新 member 狀態
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+
+    const handleScroll = () => {
+      setIsNavVisible(window.scrollY > 1); // 當滾動超過 1px 時顯示 nav
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    // 移除事件監聽器
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <>
@@ -163,8 +190,12 @@ export default function NavHome() {
           </div>
 
           <div className={styles.iconsContainer}>
-            <a href="#">
-              <ProfileIcons property1="XS" className={styles.header} img={'../public/header.jpg'}/>
+            <a href="/login">
+            {member && member.icon ? (
+                <ProfileIcons property1="XXS" className={styles.header} img={member.icon} />
+              ) : (
+                <ProfileIcons property1="XXS" className={styles.header} img="/image/img-Jade/default.jpg" />
+              )}
             </a>
 
             <div className={styles.icon}>

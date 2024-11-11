@@ -31,6 +31,12 @@
   width: 48px;
 }
 
+.profileIcons.XXS {
+  height: 30px;
+  width: 30px;
+}
+
+
 .profileIcons img{
   object-fit: cover;
   width: 100%;
