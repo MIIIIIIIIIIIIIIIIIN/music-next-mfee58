@@ -2,27 +2,30 @@ import React, { useState } from "react";
 import axios from "axios";
 import styles from "./login.module.css";
 import MemIcons from "@/components/member/mem-icons";
-import LoginStatusChecker from "../LoginStatusChecker";
 
-axios.defaults.withCredentials = true; // 全局攜帶 cookie
+axios.defaults.withCredentials = true;
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     try {
-      const response = await axios.post("http://localhost:3001/login", {
+      const response = await axios.post("http://localhost:3005/member/login", {
         email,
         password,
       });
-  
+
       if (response.data.success) {
-        alert("登入成功! 歡迎回來!");
-        window.location.href = '/member-blog';
+        setShowSuccess(true); // 登入成功時顯示提示框
+        setTimeout(() => {
+          window.location.href = "/member-blog";
+        }, 2000); // 延遲兩秒後跳轉頁面
       } else {
         setErrorMessage(response.data.error);
       }
@@ -34,25 +37,21 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      <div>
-        <h1>Welcome to the App</h1>
-        <LoginStatusChecker />
-      </div>
       <div className={styles.loginBox}>
         <img
-          src="/image/img-Jade/user-2.png"
+          src="/image/img-mem/user-logo000.jpg"
           alt="Profile"
           className={styles.profileImage}
         />
-        <h2 className={styles.welcomeText}>Welcome Back!</h2>
+        <h2 className={styles.welcomeText}>歡迎回來</h2>
         <form onSubmit={handleLogin}>
           <div className={styles.inputGroup}>
             <span className={styles.icon}>
-              <MemIcons iconName="icon-user-2" size="medium" />
+              <MemIcons iconName="icon-user" size="medium" />
             </span>
             <input
               type="text"
-              placeholder="Username or Email"
+              placeholder="帳號或信箱"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={styles.inputField}
@@ -60,37 +59,46 @@ const Login = () => {
           </div>
           <div className={styles.inputGroup}>
             <span className={styles.icon}>
-              <MemIcons iconName="icon-lock" size="medium" />
+              <MemIcons iconName="icons-lock-2" size="medium" />
             </span>
             <input
-              type="password"
-              placeholder="Password"
+              type={showPassword ? "text" : "password"}
+              placeholder="密碼"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={styles.inputField}
             />
+            <span
+              className={styles.eyeIcon}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <MemIcons iconName={showPassword ? "icons-eye-off" : "icons-eye"} size="medium" />
+            </span>
           </div>
           {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
           <button type="submit" className={styles.loginButton}>
-            LOGIN
+            登入
           </button>
         </form>
         <div className={styles.links}>
-          <a href="#" className={styles.forgotPassword}>
-            Forgot Username or Password?
+          <a href="./register" className={styles.createAccount}>
+            建立帳號
           </a>
-          <a href="#" className={styles.createAccount}>
-            Create new account
+          <br />
+          <a href="/" className={styles.createAccount}>
+            <MemIcons iconName="icons-home" size="medium" />
           </a>
         </div>
       </div>
-      <button onClick={() => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("nickname");
-        localStorage.removeItem("account");
-        window.location.href='/';
-      }} >登出</button>
+
+      {/* 自訂成功提示框 */}
+      {showSuccess && (
+        <div className={styles.successOverlay}>
+          <div className={styles.successMessage}>
+            <p>登入成功！歡迎回來！</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
