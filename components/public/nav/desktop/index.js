@@ -66,6 +66,8 @@ export default function NavDesktop() {
             </a>
           </div>
           <ul ref={items} className={styles.nav}>
+            {/* 原先版本會跳錯誤訊息 
+            
             <li
               className={styles.item}
               onMouseEnter={() => {
@@ -98,6 +100,32 @@ export default function NavDesktop() {
                 </div>
                 {displayMall && <Mall />}
               </a>
+            </li> */}
+            <li
+              className={styles.item}
+              onMouseEnter={() => {
+                if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+                setDisplayMall(true);
+                setDisplayFundraising(false);
+                setDisplayForum(false);
+                setActiveIndex(0);
+              }}
+              onMouseLeave={() => {
+                hoverTimeout.current = setTimeout(() => {
+                  setDisplayMall(false);
+                  setActiveIndex(null);
+                }, 200);
+              }}
+              style={{
+                backgroundColor: activeIndex === 0 ? "#14ff00" : "#fff",
+              }}
+              onClick={() => router.push("/George/products-page")} // 用 onClick 來處理導航
+            >
+              <div className={styles.top}></div>
+              <div className={styles.bottom}>
+                <h6>商城</h6>
+              </div>
+              {displayMall && <Mall />}
             </li>
 
             <li
