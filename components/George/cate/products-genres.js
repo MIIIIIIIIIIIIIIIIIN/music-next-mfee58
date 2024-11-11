@@ -8,6 +8,9 @@ import Link from "next/link";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaArrowRight } from "react-icons/fa";
+import axios from "axios";
+import { AB_Genres_POST } from "@/config/api-path";
+import { useRouter } from "next/router";
 
 export default function ProductsGenres({ listData, albumsimg, genres }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,9 +26,7 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
   const [rightDes, setRightDes] = useState([]);
   const [albumData, setAlbumData] = useState([]);
   const [loading, setLoading] = useState(false);
-
-
-  
+  const router = useRouter();
 
   const handleLoadMore = () => {
     setVisibleItems(visibleItems + 8);
@@ -36,10 +37,15 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
     setRightPicsController(false);
   };
 
-  const handleCategoryClick = async (category) => {
+  const handleCategoryClick = async (genres) => {
     setLoading(true); // 顯示 loading 狀態
     try {
-      const response = await axios.post("/api/postGenres", { category });
+      console.log("Sending genres:", genres);
+      const response = await axios.post(
+        "http://localhost:3005/api/postGenres",
+        { genres }
+      );
+      console.log("Response received:", response.data);
       setAlbumData(response.data); // 設定接收到的專輯資料
     } catch (error) {
       console.error("Error fetching albums:", error);
@@ -47,8 +53,6 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
       setLoading(false); // 隱藏 loading 狀態
     }
   };
-
-
 
   const handleAlterRight = (albumId) => {
     // const imagesgroup = listData.rows.find((album) => album.p_albums_id === albumId);
@@ -121,7 +125,13 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
         </div>
         <div>
           {genres.map((v, i) => (
-            <button key={i} className={styles.genresBts}>
+            <button
+              key={i}
+              className={styles.genresBts}
+              onClick={() => {
+                handleCategoryClick(v.p_genres_name);
+              }}
+            >
               {v.p_genres_name}
             </button>
           ))}
@@ -137,45 +147,51 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
                 : styles.albumList
             }
           >
-            {listData.rows.slice(0, visibleItems).map((album) => (
-              <li
-                key={album.p_albums_id}
-                className={
-                  rightVisibleController ? styles.Helloli : styles.Byeli
-                }
-              >
-                <div className={styles.link}>
-                  {/* images */}
-                  <div
-                    className={styles.crossImg}
-                    onClick={() => {
-                      handleAlterRight(album.p_albums_id);
-                    }}
-                  >
-                    {albumsimg[album.p_albums_id] &&
-                      albumsimg[album.p_albums_id][0] && (
-                        <img
-                          key={albumsimg[album.p_albums_id][0].p_productsimg_id}
-                          className={styles.cursorPointer}
-                          src={
-                            albumsimg[album.p_albums_id][0]
-                              .p_productsimg_filename
-                          }
-                          alt={
-                            albumsimg[album.p_albums_id][0]
-                              .p_productsimg_filename
-                          }
-                        />
-                      )}
-                  </div>
-                  <div className={styles.imgdes}>
-                    <h3>{album.p_albums_title}</h3>
-                    <p>{album.p_albums_description}</p>
-                  </div>
-                  <div className={styles.bottom}></div>
-                </div>
-              </li>
-            ))}
+           {albumData && albumData.length > 0
+  ? albumData.slice(0, visibleItems).map((album) => (
+      <li key={album.p_albums_id} className={rightVisibleController ? styles.Helloli : styles.Byeli}>
+        <div className={styles.link}>
+          {/* images */}
+          <div className={styles.crossImg} onClick={() => handleAlterRight(album.p_albums_id)}>
+            {albumsimg[album.p_albums_id] && albumsimg[album.p_albums_id][0] && (
+              <img
+                key={albumsimg[album.p_albums_id][0].p_productsimg_id}
+                className={styles.cursorPointer}
+                src={albumsimg[album.p_albums_id][0].p_productsimg_filename}
+                alt={albumsimg[album.p_albums_id][0].p_productsimg_filename}
+              />
+            )}
+          </div>
+          <div className={styles.imgdes}>
+            <h3>{album.p_albums_title}</h3>
+            <p>{album.p_albums_description}</p>
+          </div>
+          <div className={styles.bottom}></div>
+        </div>
+      </li>
+    ))
+  : listData.rows.slice(0, visibleItems).map((album) => (
+      <li key={album.p_albums_id} className={rightVisibleController ? styles.Helloli : styles.Byeli}>
+        <div className={styles.link}>
+          {/* images */}
+          <div className={styles.crossImg} onClick={() => handleAlterRight(album.p_albums_id)}>
+            {albumsimg[album.p_albums_id] && albumsimg[album.p_albums_id][0] && (
+              <img
+                key={albumsimg[album.p_albums_id][0].p_productsimg_id}
+                className={styles.cursorPointer}
+                src={albumsimg[album.p_albums_id][0].p_productsimg_filename}
+                alt={albumsimg[album.p_albums_id][0].p_productsimg_filename}
+              />
+            )}
+          </div>
+          <div className={styles.imgdes}>
+            <h3>{album.p_albums_title}</h3>
+            <p>{album.p_albums_description}</p>
+          </div>
+          <div className={styles.bottom}></div>
+        </div>
+      </li>
+    ))}
           </ul>
           <div className={styles.morecontroller}>
             {visibleItems < listData.rows.length && (

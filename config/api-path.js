@@ -5,6 +5,9 @@ export const AB_LIST = `${API_SERVER}/api/albums`;
 
 // Add Data method: POST
 export const AB_ADD_POST = `${API_SERVER}/api/albums`;
+export const AB_Genres_POST = `${API_SERVER}/api/postGenres`;
+
+
 
 // Delete Data method:DELETE
 // `${API_SERVER}/albums/api/${ab_id}`
