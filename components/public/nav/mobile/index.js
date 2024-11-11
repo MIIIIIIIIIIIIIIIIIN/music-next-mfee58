@@ -10,8 +10,10 @@ import MallList from "./system-list/mall";
 import FundraisingList from "./system-list/fundraising";
 import MemberList from "./system-list/member";
 import Logo from "../../logo";
+import { useRouter } from "next/router";
 
 export default function NavMobile() {
+  const router = useRouter();
   const [display, setDislay] = useState(false);
   const items = useRef(null);
   const input = useRef(null);
@@ -53,12 +55,26 @@ export default function NavMobile() {
       <div className={styles.container}>
         <div className={styles.containerTop}>
           <div className={styles.logo}>
-            <a href="#">
+            {/* <a href="#"> */}
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/");
+              }}
+            >
               <Logo type={1} />
             </a>
           </div>
           <div className={styles.iconsContainer}>
-          <a href="/member-blog">
+          {/* <a href="/member-blog"> */}
+          <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/member-blog");
+              }}
+            >
               {member && member.icon ? (
                 <ProfileIcons property1="XS" className={styles.header} img={member.icon} />
               ) : (
@@ -105,7 +121,14 @@ export default function NavMobile() {
                   </svg>
                 </a>
               </div>
-              <a href="#">
+              {/* <a href="#"> */}
+              <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/");
+              }}
+            >
                 <FaBars
                   className={styles.icon}
                   style={{
