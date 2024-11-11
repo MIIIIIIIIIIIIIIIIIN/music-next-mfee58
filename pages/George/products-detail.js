@@ -8,10 +8,37 @@ import ProductsListen from "@/components/George/products-detail/products-listen"
 import ProductsDescription from "@/components/George/products-detail/products-description";
 import ProductsMore from "@/components/George/products-detail/products-more";
 import OthersYouLike from "@/components/George/products-detail/products-othersYouLike";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function ProductsDetail() {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
+  const [albumDetail, setAlbumDetail] = useState(null);
+  const [albumImages, setAlbumImages] = useState([]);
+  const router = useRouter();
+  const { albumId } = router.query;
+
+  useEffect(() => {
+    if (!albumId) return;
+    const fetchAlbumIdData = async () => {
+      try {
+        const responseAlbumsData = await axios.get(
+          `http://localhost:3005/api/albums/${albumId}`
+        );
+        setAlbumDetail(responseAlbumsData);
+
+        const responseAlbumsImage = await axios.get(
+          `http://localhost:3005/api/albums/${albumId}/images`
+        );
+        setAlbumImages(responseAlbumsImage);
+      } catch (error) {
+        console.error("Error fetching genres: ", error);
+      }
+    };
+
+    fetchAlbumIdData();
+  }, [albumId]);
 
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
@@ -36,6 +63,7 @@ export default function ProductsDetail() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <>
       <Nav />
@@ -44,7 +72,7 @@ export default function ProductsDetail() {
       <ProductsDescription />
       <ProductsMore />
       <OthersYouLike />
-      <AddToCartBar/>
+      <AddToCartBar />
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

@@ -72,7 +72,7 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
       const response = await axios.get(
         `http://localhost:3005/api/getKeyWord?keyword=${searchTerm}`
       );
-      console.log("Recived Keyword: ", response.data);
+      // console.log("Recived Keyword: ", response.data);
       setKeyWord(response.data);
     } catch (error) {
       console.error("Error fetching keywords: ", error);
@@ -92,8 +92,8 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
     );
     const imagesDes = imagesDescription.p_albums_description;
 
-    console.log(imagesDes);
-    console.log(albumId);
+    // console.log(imagesDes);
+    // console.log(albumId);
 
     setRightSidePic(imageFilenames);
     setRightPicsController(true);

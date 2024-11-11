@@ -86,7 +86,7 @@ export default function ProductsFilter() {
         console.error("Error fetching genres: ", error);
       }
     }
-    fetchGenres();
+    fetchGenres();    
   }, [genres])
 
   // 抓圖片唷
@@ -97,7 +97,7 @@ export default function ProductsFilter() {
     const getImages = async () => {
       await Promise.all(
         listData.rows.map((album) => {
-          fetch(`${AB_LIST}/${album.p_albums_id}`, { signal }).then((r) => {
+          fetch(`${AB_LIST}/${album.p_albums_id}/images`, { signal }).then((r) => {
             r.json()
               .then((imgObj) => {
                 if (imgObj) {
