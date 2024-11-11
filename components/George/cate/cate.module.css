@@ -2,19 +2,10 @@
 .container {
   width: 80%;
   display: flex;
-  margin: auto;
+  margin: 0px auto;
   margin-top: 60px;
   align-items: start;
 }
-/* .containerWithPlayer{
-  width: 80%;
-  display: flex;
-  margin: auto;
-  margin-top: 60px;
-  align-items: start;
-  padding-right: 200px;
-  transition: all ease 0.5s;
-} */
 
 .left {
   /* flex-grow: 1; */
@@ -25,16 +16,29 @@
 }
 
 .right {
-  width: 40%;
+  position: fixed;
+  width: 18%;
   background-color: #f8f9fa;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
+  right: 80px;
+}
+
+.rightRolled {
+  position: fixed;
+  width: 18%;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  right: 80px;
+  top: 110px;
+  
 }
 
 /* searchingBar */
 .searchingBarContainer {
   width: 80%;
-  margin: auto;
+  margin: 50px auto;
 }
 .searchingToolsBox {
   position: relative;
@@ -270,7 +274,7 @@
 }
 
 .rightDescription {
-  margin: 20px;
+  margin: 10px;
   display: -webkit-box;
   -webkit-line-clamp: 3; /* 顯示三行 */
   -webkit-box-orient: vertical;
@@ -279,8 +283,24 @@
 }
 
 .PlayButton {
-  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media(max-width: 375px){
+  .searchingBarContainer {
+    width: 80%;
+    margin: 0px auto;
+  }
+  .searchingBar {
+    width: 300px;
+    padding: 20px;
+  }
+  .toGoBts {
+    left: 250px;
+  }
+  .genresBts {
+    width: 80px;
+  }
 }

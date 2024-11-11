@@ -27,6 +27,7 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
   const [keyWord, setKeyWord] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchStatus, setSearchStatus] = useState(false);
+  const [playerFixed, setPlayerFixed] = useState(false)
 
   const handleLoadMore = () => {
     setVisibleItems(visibleItems + 8);
@@ -133,6 +134,17 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
       carouselRef.current.style.left = `${position}px`;
     }
   }, [position]);
+
+  useEffect(()=>{
+    const handleScroll = () => {
+      setPlayerFixed(window.scrollY > 1);
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [])
 
   return (
     <>
@@ -302,11 +314,10 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
             )}
           </div>
         </div>
-
         {/* right */}
         {rightVisibleController ? (
-          <div className={styles.right}>
-            <div className={styles.img}>
+          <div className={playerFixed?styles.rightRolled:styles.right}>
+            <div className={styles.imggg}>
               <div className={styles.bg}>
                 {rightPicsController ? (
                   <img src={rightSidePic[0]} className={styles.cursorPointer} />
