@@ -7,10 +7,11 @@ import { AnimatedBackground } from "animated-backgrounds";
 import Loading from "@/components/forum/loading";
 
 export default function Forum() {
+  //想使用 loading screen 的人請複製這段，由此開始
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Set to 2.5s (2100ms + 400ms buffer) as that's when the last animation finishes
+    //2500ms 為動畫結束時間，可自行調整
     const timer = setTimeout(() => setLoading(false), 2500);
     return () => clearTimeout(timer);
   }, []);
@@ -18,6 +19,7 @@ export default function Forum() {
   if (loading) {
     return <Loading />;
   }
+  //到這裡
 
   return (
     <div className="min-h-screen">
