@@ -9,8 +9,6 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaArrowRight } from "react-icons/fa";
 import axios from "axios";
-import { AB_Genres_POST } from "@/config/api-path";
-import { useRouter } from "next/router";
 
 export default function ProductsGenres({ listData, albumsimg, genres }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,7 +24,9 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
   const [rightDes, setRightDes] = useState([]);
   const [albumData, setAlbumData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const [keyWord, setKeyWord] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchStatus, setSearchStatus] = useState(false);
 
   const handleLoadMore = () => {
     setVisibleItems(visibleItems + 8);
@@ -38,24 +38,49 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
   };
 
   const handleCategoryClick = async (genres) => {
-    setLoading(true); // 顯示 loading 狀態
+    setLoading(true);
+    setKeyWord([]);
+    setSearchStatus(false);
+    setVisibleItems(8);
     try {
-      console.log("Sending genres:", genres);
+      // console.log("Sending genres:", genres);
       const response = await axios.post(
         "http://localhost:3005/api/postGenres",
         { genres }
       );
-      console.log("Response received:", response.data);
+      // console.log("Response received:", response.data);
       setAlbumData(response.data); // 設定接收到的專輯資料
     } catch (error) {
       console.error("Error fetching albums:", error);
     } finally {
-      setLoading(false); // 隱藏 loading 狀態
+      setLoading(false);
+    }
+  };
+
+  // search keywords
+  const inputValue = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearchClick = async () => {
+    setLoading(true);
+    setVisibleItems(8);
+
+    try {
+      console.log("Sending keyword: ", searchTerm);
+      const response = await axios.get(
+        `http://localhost:3005/api/getKeyWord?keyword=${searchTerm}`
+      );
+      console.log("Recived Keyword: ", response.data);
+      setKeyWord(response.data);
+    } catch (error) {
+      console.error("Error fetching keywords: ", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleAlterRight = (albumId) => {
-    // const imagesgroup = listData.rows.find((album) => album.p_albums_id === albumId);
     const albumImages = albumsimg[albumId] || [];
     const imageFilenames = albumImages.map(
       (image) => image.p_productsimg_filename
@@ -117,9 +142,11 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
             type="text"
             name="searchingBar"
             className={styles.searchingBar}
-            placeholder="搜尋"
+            placeholder="請輸入關鍵字搜尋"
+            value={searchTerm}
+            onChange={inputValue}
           />
-          <button className={styles.toGoBts}>
+          <button className={styles.toGoBts} onClick={handleSearchClick}>
             <FaArrowRight />
           </button>
         </div>
@@ -147,51 +174,125 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
                 : styles.albumList
             }
           >
-           {albumData && albumData.length > 0
-  ? albumData.slice(0, visibleItems).map((album) => (
-      <li key={album.p_albums_id} className={rightVisibleController ? styles.Helloli : styles.Byeli}>
-        <div className={styles.link}>
-          {/* images */}
-          <div className={styles.crossImg} onClick={() => handleAlterRight(album.p_albums_id)}>
-            {albumsimg[album.p_albums_id] && albumsimg[album.p_albums_id][0] && (
-              <img
-                key={albumsimg[album.p_albums_id][0].p_productsimg_id}
-                className={styles.cursorPointer}
-                src={albumsimg[album.p_albums_id][0].p_productsimg_filename}
-                alt={albumsimg[album.p_albums_id][0].p_productsimg_filename}
-              />
-            )}
-          </div>
-          <div className={styles.imgdes}>
-            <h3>{album.p_albums_title}</h3>
-            <p>{album.p_albums_description}</p>
-          </div>
-          <div className={styles.bottom}></div>
-        </div>
-      </li>
-    ))
-  : listData.rows.slice(0, visibleItems).map((album) => (
-      <li key={album.p_albums_id} className={rightVisibleController ? styles.Helloli : styles.Byeli}>
-        <div className={styles.link}>
-          {/* images */}
-          <div className={styles.crossImg} onClick={() => handleAlterRight(album.p_albums_id)}>
-            {albumsimg[album.p_albums_id] && albumsimg[album.p_albums_id][0] && (
-              <img
-                key={albumsimg[album.p_albums_id][0].p_productsimg_id}
-                className={styles.cursorPointer}
-                src={albumsimg[album.p_albums_id][0].p_productsimg_filename}
-                alt={albumsimg[album.p_albums_id][0].p_productsimg_filename}
-              />
-            )}
-          </div>
-          <div className={styles.imgdes}>
-            <h3>{album.p_albums_title}</h3>
-            <p>{album.p_albums_description}</p>
-          </div>
-          <div className={styles.bottom}></div>
-        </div>
-      </li>
-    ))}
+            {keyWord && keyWord.length > 0
+              ? keyWord.slice(0, visibleItems).map((album) => (
+                  <li
+                    key={album.p_albums_id}
+                    className={
+                      rightVisibleController ? styles.Helloli : styles.Byeli
+                    }
+                  >
+                    <div className={styles.link}>
+                      {/* images */}
+                      <div
+                        className={styles.crossImg}
+                        onClick={() => handleAlterRight(album.p_albums_id)}
+                      >
+                        {albumsimg[album.p_albums_id] &&
+                          albumsimg[album.p_albums_id][0] && (
+                            <img
+                              key={
+                                albumsimg[album.p_albums_id][0].p_productsimg_id
+                              }
+                              className={styles.cursorPointer}
+                              src={
+                                albumsimg[album.p_albums_id][0]
+                                  .p_productsimg_filename
+                              }
+                              alt={
+                                albumsimg[album.p_albums_id][0]
+                                  .p_productsimg_filename
+                              }
+                            />
+                          )}
+                      </div>
+                      <div className={styles.imgdes}>
+                        <h3>{album.p_albums_title}</h3>
+                        <p>{album.p_albums_description}</p>
+                      </div>
+                      <div className={styles.bottom}></div>
+                    </div>
+                  </li>
+                ))
+              : albumData && albumData.length > 0
+              ? albumData.slice(0, visibleItems).map((album) => (
+                  <li
+                    key={album.p_albums_id}
+                    className={
+                      rightVisibleController ? styles.Helloli : styles.Byeli
+                    }
+                  >
+                    <div className={styles.link}>
+                      {/* images */}
+                      <div
+                        className={styles.crossImg}
+                        onClick={() => handleAlterRight(album.p_albums_id)}
+                      >
+                        {albumsimg[album.p_albums_id] &&
+                          albumsimg[album.p_albums_id][0] && (
+                            <img
+                              key={
+                                albumsimg[album.p_albums_id][0].p_productsimg_id
+                              }
+                              className={styles.cursorPointer}
+                              src={
+                                albumsimg[album.p_albums_id][0]
+                                  .p_productsimg_filename
+                              }
+                              alt={
+                                albumsimg[album.p_albums_id][0]
+                                  .p_productsimg_filename
+                              }
+                            />
+                          )}
+                      </div>
+                      <div className={styles.imgdes}>
+                        <h3>{album.p_albums_title}</h3>
+                        <p>{album.p_albums_description}</p>
+                      </div>
+                      <div className={styles.bottom}></div>
+                    </div>
+                  </li>
+                ))
+              : listData.rows.slice(0, visibleItems).map((album) => (
+                  <li
+                    key={album.p_albums_id}
+                    className={
+                      rightVisibleController ? styles.Helloli : styles.Byeli
+                    }
+                  >
+                    <div className={styles.link}>
+                      {/* images */}
+                      <div
+                        className={styles.crossImg}
+                        onClick={() => handleAlterRight(album.p_albums_id)}
+                      >
+                        {albumsimg[album.p_albums_id] &&
+                          albumsimg[album.p_albums_id][0] && (
+                            <img
+                              key={
+                                albumsimg[album.p_albums_id][0].p_productsimg_id
+                              }
+                              className={styles.cursorPointer}
+                              src={
+                                albumsimg[album.p_albums_id][0]
+                                  .p_productsimg_filename
+                              }
+                              alt={
+                                albumsimg[album.p_albums_id][0]
+                                  .p_productsimg_filename
+                              }
+                            />
+                          )}
+                      </div>
+                      <div className={styles.imgdes}>
+                        <h3>{album.p_albums_title}</h3>
+                        <p>{album.p_albums_description}</p>
+                      </div>
+                      <div className={styles.bottom}></div>
+                    </div>
+                  </li>
+                ))}
           </ul>
           <div className={styles.morecontroller}>
             {visibleItems < listData.rows.length && (

@@ -86,7 +86,7 @@ export default function ProductsFilter() {
         console.error("Error fetching genres: ", error);
       }
     }
-    fetchGenres();    
+    fetchGenres();
   }, [genres])
 
   // 抓圖片唷
