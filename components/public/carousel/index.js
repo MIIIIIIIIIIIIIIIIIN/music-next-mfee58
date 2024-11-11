@@ -61,14 +61,7 @@ const Carousel = ({ images, interval = 3000 }) => {
           className={styles.arrowImage}
         /> */}
       </button>
-      <button className={styles.rightArrow} onClick={goToNext}>
-        {/* <img
-          src="/arrow-right.png"
-          alt="Left Arrow"
-          className={styles.arrowImage}
-        /> */}
-        {/* >>>>>>>> Liam:components/public/Carousel/index.js */}
-      </button>
+  
 
       {/* 幻燈片指示器 */}
       <div className={styles.indicators}>

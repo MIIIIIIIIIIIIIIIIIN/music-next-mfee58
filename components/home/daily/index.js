@@ -23,9 +23,9 @@ const generateDailyData = () => {
           : `./George/products-images-250px/products-(${i}).jpg`,
       title: i === 0 ? "RUNAWAY" : `DAY ${6 - i}`,
       subtitle: i === 0 ? "JEANS" : `STYLE ${6 - i}`,
-      content: i === 0 ? "今天的內容" : `${i}天前的內容`,
+      content: i === 0 ? "今天的內容" : `${i}天前`,
       description:
-        i === 0 ? "這是今天的詳細內容描述" : `這是${i}天前的詳細內容描述`,
+        i === 0 ? "這是今天的詳細內容描述" : `這是${i}天前的推薦專輯`,
     });
   }
 
@@ -51,7 +51,6 @@ const Daily = () => {
   return (
     <div className={styles.frameParent}>
       <div className={styles.frameGroup}>
-        <a href="#">
           <div className={styles.rectangleWrapper}>
             <img className={styles.frameChild} alt="" src={currentData.image} />
           </div>
@@ -62,7 +61,7 @@ const Daily = () => {
               <div className={styles.jeans}>{currentData.subtitle}</div>
             </div>
           </div>
-        </a>
+    
       </div>
       <div className={styles.frameContainer}>
         <TimelineComponent

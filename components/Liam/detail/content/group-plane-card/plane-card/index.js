@@ -9,15 +9,26 @@ const PlaneCard = ({
     f_plan_title: '',
     f_plan_content: '',
     f_plan_people: 0
-  }
+  },
+  member = null
+
 }) => {
   
   const handleSelect = () => {
+    console.log(member);
+    
+    if (!member ) {
+      alert('請先登入會員才能進行贊助！');
+      window.location='http://localhost:3000/login'
+      return;
+    }
+
     const planData = {
       type: '優惠方案',
       name: e.f_plan_title,
       price: e.f_plan_amount
     };
+    
     onSelect(planData);
   };
 

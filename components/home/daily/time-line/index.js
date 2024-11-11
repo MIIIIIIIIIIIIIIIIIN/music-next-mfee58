@@ -93,6 +93,9 @@ const TimelineComponent = ({ data, onDataChange, currentData }) => {
             </div>
           </div>
         )}
+        <div className={styles.detail}>
+          <a href="#" >詳細內容</a>
+        </div>
       </div>
     </div>
   );

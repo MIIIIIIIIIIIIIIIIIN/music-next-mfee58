@@ -48,7 +48,7 @@ const MemBlog = () => {
               <a href="./login">Login</a>
             </button>
 
-              <a href="/home"><Logout /></a>
+              <a href="http://localhost:3005/logout"><Logout /></a>
           </div>
 
           <div className={styles["rightContent"]}>

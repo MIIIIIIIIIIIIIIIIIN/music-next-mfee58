@@ -9,6 +9,7 @@ export default function GroupPlaneCard() {
   const [showProductSelector, setShowProductSelector] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [plane, setPlane] = useState([]);
+  const [member, setMember] = useState()
 
   const handlePlanSelect = (planData) => {
     setSelectedPlan(plane);
@@ -40,7 +41,30 @@ export default function GroupPlaneCard() {
         console.error("Error fetching plane data:", error);
       }
     };
+    const fetchMemberData = async () => {
+      try {
+        const response = await fetch("http://localhost:3005/mem-data", {
+          credentials: "include",
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch member data");
+        }
+        const data = await response.json();
+        // console.log(data);
+        
+        // 確保設置的值不是 undefined
+        setMember(data.admin || null);
+        console.log(member);
+
+      } catch (error) {
+        console.error("Error fetching member data:", error);
+        setMember(null); // 發生錯誤時設置為 null
+      }
+    };
     fetchPlane();
+    fetchMemberData()
+   
+    
   }, [router.isReady]);
 
   if (showProductSelector) {
@@ -64,7 +88,7 @@ export default function GroupPlaneCard() {
         {plane.map((e, i) => {
           return (
             <li key={i} className={styles.item}>
-              <PlaneCard onSelect={handlePlanSelect} e={e} />
+              <PlaneCard onSelect={handlePlanSelect} e={e} member={member}/>
             </li>
           );
         })}

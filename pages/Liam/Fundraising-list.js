@@ -8,6 +8,8 @@ import Footer from '@/components/public/footer'
 import ImageRecommendCarousel from '@/components/Liam/Fundraising-list/new/recommend'
 import ImageCarousel from '@/components/Liam/Fundraising-list/new/index'
 import WaterfallLayout from '@/components/Liam/Fundraising-list/water-layout'
+import Chat from '@/components/Liam/chat/chat';
+
 
 export default function FundraisingList() {
   const images = [
@@ -29,6 +31,7 @@ export default function FundraisingList() {
     <ImageRecommendCarousel  images={images}/>
     <WaterfallLayout />
     <Footer />
+    <Chat />
     </div>
   )
 }
