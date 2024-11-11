@@ -7,8 +7,10 @@ import Fundraising from "../checklist/fundraising";
 import Forum from "../checklist/forum";
 import Logo from "../../logo";
 import styles from "./nav.module.css";
+import { useRouter } from "next/router";
 
 export default function NavDesktop() {
+  const router = useRouter();
   const [display, setDislay] = useState(false);
   const items = useRef(null);
   const input = useRef(null);
@@ -53,7 +55,13 @@ export default function NavDesktop() {
       <div className={isNavVisible ? styles.wrap1 : styles.wrap}>
         <div className={styles.container}>
           <div className={styles.logo}>
-            <a href="../home">
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/");
+              }}
+            >
               <Logo type={1} />
             </a>
           </div>
@@ -168,9 +176,17 @@ export default function NavDesktop() {
           <div className={styles.iconsContainer}>
             <a href="/member-blog">
               {member && member.icon ? (
-                <ProfileIcons property1="XS" className={styles.header} img={member.icon} />
+                <ProfileIcons
+                  property1="XS"
+                  className={styles.header}
+                  img={member.icon}
+                />
               ) : (
-                <ProfileIcons property1="XS" className={styles.header} img="/image/img-Jade/default.jpg" />
+                <ProfileIcons
+                  property1="XS"
+                  className={styles.header}
+                  img="/image/img-Jade/default.jpg"
+                />
               )}
             </a>
 
@@ -202,8 +218,7 @@ export default function NavDesktop() {
                   viewBox="0 0 24 24"
                   fill="white"
                 >
-           
-           <path
+                  <path
                     d="M15.9999 8H17.1596C18.1998 8 19.0663 8.79732 19.1527 9.83391L19.8194 17.8339C19.9165 18.9999 18.9964 20 17.8263 20H6.17348C5.0034 20 4.08322 18.9999 4.18039 17.8339L4.84705 9.83391C4.93344 8.79732 5.79997 8 6.84014 8H7.99988M15.9999 8H7.99988M15.9999 8L15.9999 7C15.9999 5.93913 15.5784 4.92172 14.8283 4.17157C14.0782 3.42143 13.0607 3 11.9999 3C10.939 3 9.9216 3.42143 9.17145 4.17157C8.42131 4.92172 7.99988 5.93913 7.99988 7L7.99988 8M15.9999 8L15.9999 12M7.99988 8L7.99988 12"
                     stroke="black"
                     strokeWidth="1"
