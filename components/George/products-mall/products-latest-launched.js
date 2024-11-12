@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Items1 from "./items1";
 import styles from "./products-latest-launched.module.css";
 import { MdArrowForwardIos } from "react-icons/md";
+import useFetchDB from "../hooks/usefetchDB";
 
 export default function ProductsLatestLaunched() {
+  const { listData, albumsimg, genres } = useFetchDB();
+
   const products = [
     {
       description:
@@ -149,6 +152,12 @@ export default function ProductsLatestLaunched() {
     },
   ];
 
+  useEffect(() => {
+    console.log(listData);
+    console.log(albumsimg);
+    console.log(genres);
+  }, []);
+
   return (
     <>
       <div className={styles["carousel-container"]}>
@@ -217,13 +226,19 @@ export default function ProductsLatestLaunched() {
           slidesToSlide={1}
           swipeable
         >
-          {products.map((v, i) => {
+          {listData.rows.map((v, i) => {
+            const albumImages = albumsimg[v.p_albums_id];
             return (
               <Items1
                 key={i}
-                description={v.description}
-                headline={v.headline}
-                image={v.image}
+                description={v.p_albums_description}
+                headline={v.p_albums_title}
+                image={
+                  albumImages && albumImages[0]
+                    ? albumImages[0].p_productsimg_filename
+                    : ""
+                }
+                albumsid={v.p_albums_id}
               />
             );
           })}

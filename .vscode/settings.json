@@ -1,31 +1,31 @@
 {
   "workbench.colorCustomizations": {
     // 活動欄（Activity Bar）設定
-    "activityBar.background": "#c69ceed3",
-    "activityBar.activeBackground": "#c69ceed3",
+    "activityBar.background": "#dad6d3d3",
+    "activityBar.activeBackground": "#dad6d3d3",
     "activityBar.activeBorder": "#ffffff",
     "activityBar.foreground": "#06060a99",
     "activityBar.inactiveForeground": "#06060a99",
-    "activityBarBadge.background": "#f7910d",
+    "activityBarBadge.background": "#ffc57a",
     "activityBarBadge.foreground": "#2a07f0",
 
     // 標題列（Title Bar）設定
-    "titleBar.activeBackground": "#c69ceed3", // 當前選取的標題列背景色
+    "titleBar.activeBackground": "#fff6fbd3", // 當前選取的標題列背景色
     "titleBar.activeForeground": "#000000", // 當前選取的標題列文字色
     "titleBar.inactiveBackground": "#c69ceed3", // 未選取的標題列背景色
     "titleBar.inactiveForeground": "#000000", // 未選取的標題列文字色
 
     // 菜單列（Menu Bar）設定（可選）
-    "menu.background": "#c69ceed3",
+    "menu.background": "#eecd9cd3",
     "menu.foreground": "#06060a99",
     "menu.selectionBackground": "#f7910d",
     "menu.selectionForeground": "#2a07f0",
 
     // Status Bar 顏色
-    "statusBar.background": "#c69ceed3",
+    "statusBar.background": "#dad6d3d3",
     "statusBar.foreground": "#06060a99",
-    "statusBar.noFolderBackground": "#c69ceed3",
+    "statusBar.noFolderBackground": "#dad6d3d3",
     "statusBar.debuggingBackground": "#ffcc00",
-    "statusBar.debuggingForeground": "#c69ceed3"
+    "statusBar.debuggingForeground": "#dad6d3d3"
   }
 }

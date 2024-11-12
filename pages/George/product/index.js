@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 import ProductsLatestLaunched from "@/components/George/products-mall/products-latest-launched";
 import ProductsRecommendation from "@/components/George/products-mall/products-recommendation";
 import ProductsActivities from "@/components/George/products-mall/products-activities";
+import ProductsGenres from "@/components/George/cate/products-genres";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import FooterMobile from "@/components/public/footer/mobile";
 import Nav from "@/components/public/nav";
 import { AddToCartBar } from "@/components/public/addtocart-bar/add-to-cart";
 
+
 export default function ProductsPage() {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(false);
+  
 
-  // const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
     const handleResize = () => {
@@ -35,6 +37,7 @@ export default function ProductsPage() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <>
       <Nav />

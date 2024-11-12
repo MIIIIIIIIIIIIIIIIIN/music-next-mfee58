@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./products-detail.module.css";
 import WhiteWBtns from "../george-components/white_wbtns";
 import BlackWBtns from "../george-components/black_wbtns";
@@ -8,28 +8,33 @@ import { FaLine } from "react-icons/fa6";
 import { FaSquareInstagram } from "react-icons/fa6";
 import Link from "next/link";
 
-export default function ProductsDetailPage() {
-
+export default function ProductsDetailPage({ albumDetail, albumImages, pid }) {
   const handleClick = () => {
     "";
   };
+
+  useEffect(()=>{
+    console.log("test: ", albumImages);
+    
+  }, [albumImages])
+
   return (
     <>
       <div className={style.containBox}>
         <div>
           <img
-            src="/George/products-images-350px/products-(94).jpg"
-            alt="alubumpic"
+            src={`/${albumImages?.images?.[0]?.p_productsimg_filename}`}
+            alt="kmn"
             className={style.albumpic}
           />
-          <div className={style.albumName}>Whispers of Solitude</div>
+          {/* <div className={style.albumName}>{albumDetail?.p_albums_title}</div>
           <div className={style.albumDescription}>
-            在孤獨的呢喃中尋找心靈的平靜，這張專輯融合了民謠與電子元素。
-          </div>
+          {albumDetail?.p_albums_description}
+          </div> */}
         </div>
         <div className="containContent">
           {/* Title */}
-          <div className={style.albumName}>Whispers of Solitude</div>
+          <div className={style.albumName}>{albumDetail?.p_albums_title}</div>
           {/* 商品詳細資料 */}
           <div className={style.cotent}>
             <span className={style.contentTitles}>
@@ -45,11 +50,11 @@ export default function ProductsDetailPage() {
             </span>
             <span className={style.contentDetails}>
               <ul>
-                <li>$200</li>
-                <li>2024/10/29</li>
-                <li>International Shipping</li>
+                <li>${parseInt(albumDetail?.p_albums_price)}</li>
+                <li>{albumDetail?.p_albums_release_date.split("T")[0]}</li>
+                <li>{albumDetail?.p_albums_delivery_methods}</li>
                 <li>宅配(新竹物流、Fedex)、超商(全家、7-11)</li>
-                <li>不是周杰倫</li>
+                <li>{albumDetail?.p_albums_artist}</li>
                 <li>{<Quantity />}</li>
                 <li>
                   <FaFacebookSquare size={30} className={style.icons} />
@@ -62,7 +67,7 @@ export default function ProductsDetailPage() {
 
           {/* 放線線 */}
           <div className={style.seperationLine}></div>
-          <div className={style.totalAmount}>Total Purchase Amount $200</div>
+          <div className={style.totalAmount}>Total Purchase Amount ${parseInt(albumDetail?.p_albums_price)}</div>
           <div className={style.btns}>
             <Link href={"/George/products-cart-page"}>
               <BlackWBtns

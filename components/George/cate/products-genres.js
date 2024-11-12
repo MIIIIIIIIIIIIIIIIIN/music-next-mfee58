@@ -9,8 +9,10 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaArrowRight } from "react-icons/fa";
 import axios from "axios";
+import useFetchDB from "../hooks/usefetchDB";
 
-export default function ProductsGenres({ listData, albumsimg, genres }) {
+export default function ProductsGenres() {
+  const { listData, albumsimg, genres } = useFetchDB();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [position, setPosition] = useState(0);
   const carouselRef = useRef(null);
@@ -27,7 +29,7 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
   const [keyWord, setKeyWord] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchStatus, setSearchStatus] = useState(false);
-  const [playerFixed, setPlayerFixed] = useState(false)
+  const [playerFixed, setPlayerFixed] = useState(false);
 
   const handleLoadMore = () => {
     setVisibleItems(visibleItems + 8);
@@ -135,7 +137,7 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
     }
   }, [position]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const handleScroll = () => {
       setPlayerFixed(window.scrollY > 1);
     };
@@ -144,7 +146,7 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [])
+  }, []);
 
   return (
     <>
@@ -163,17 +165,19 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
           </button>
         </div>
         <div>
-          {genres.map((v, i) => (
-            <button
-              key={i}
-              className={styles.genresBts}
-              onClick={() => {
-                handleCategoryClick(v.p_genres_name);
-              }}
-            >
-              {v.p_genres_name}
-            </button>
-          ))}
+          {genres && genres.map((v, i) => {
+            return (
+              <button
+                key={i}
+                className={styles.genresBts}
+                onClick={() => {
+                  handleCategoryClick(v.p_genres_name);
+                }}
+              >
+                {v.p_genres_name}
+              </button>
+            );
+          })}
         </div>
       </div>
       {/* 分類詳細資料 */}
@@ -266,7 +270,7 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
                     </div>
                   </li>
                 ))
-              : listData.rows.slice(0, visibleItems).map((album) => (
+              : listData && listData.rows && listData.rows.slice(0, visibleItems).map((album) => (
                   <li
                     key={album.p_albums_id}
                     className={
@@ -307,7 +311,7 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
                 ))}
           </ul>
           <div className={styles.morecontroller}>
-            {visibleItems < listData.rows.length && (
+            {listData && visibleItems < listData.rows.length && (
               <button className={styles.moreButton} onClick={handleLoadMore}>
                 MORE
               </button>
@@ -316,7 +320,7 @@ export default function ProductsGenres({ listData, albumsimg, genres }) {
         </div>
         {/* right */}
         {rightVisibleController ? (
-          <div className={playerFixed?styles.rightRolled:styles.right}>
+          <div className={playerFixed ? styles.rightRolled : styles.right}>
             <div className={styles.imggg}>
               <div className={styles.bg}>
                 {rightPicsController ? (

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { MdArrowForwardIos } from "react-icons/md";
 import Items2 from "./items2";
 import style from "./products-recommendation.module.css";
+import useFetchDB from "../hooks/usefetchDB";
 
 export default function ProductsRecommendation() {
+  const { listData, albumsimg, genres } = useFetchDB();
+
   const products = [
     {
       description:
@@ -148,6 +151,11 @@ export default function ProductsRecommendation() {
       singer: "周杰倫 (Jay Chou)",
     },
   ];
+  useEffect(() => {
+    console.log(listData);
+    console.log(albumsimg);
+    console.log(genres);
+  }, []);
 
   return (
     <>
@@ -208,14 +216,20 @@ export default function ProductsRecommendation() {
           slidesToSlide={1}
           swipeable
         >
-          {products.map((v, i) => {
+          {listData.rows.map((album, i) => {
+            const albumImages = albumsimg[album.p_albums_id];
             return (
               <Items2
-                key={i}
-                description={v.description}
-                headline={v.headline}
-                image={v.image}
-                singer={v.singer}
+                key={album.p_albums_id}
+                description={album.p_albums_description}
+                headline={album.p_albums_title}
+                image={
+                  albumImages && albumImages[0]
+                    ? albumImages[0].p_productsimg_filename
+                    : ""
+                }
+                albumsid={album.p_albums_id}
+                singer={album.p_albums_artist}
               />
             );
           })}

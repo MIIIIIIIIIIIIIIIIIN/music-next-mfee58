@@ -85,7 +85,7 @@ export default function NavDesktop() {
                 backgroundColor: activeIndex === 0 ? "#14ff00" : "#fff",
               }}
             >
-              <a href="/George/products-page">
+              <a href="/George/product">
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>商城</h6>
