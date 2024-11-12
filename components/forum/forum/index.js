@@ -28,30 +28,55 @@ const SortingButton = ({ active, onClick, children }) => (
 
 // ForumPost Component
 const ForumPost = ({
+  id, // Make sure to pass message_id as id prop
   userImage,
   username,
   title,
   content,
   coverImage,
   likes: initialLikes,
-  reposts,
+  shares,
   timeStamp,
 }) => {
   const [likes, setLikes] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(false);
+  const [isLiking, setIsLiking] = useState(false);
+
+  const handleLike = async () => {
+    if (isLiking) return; // Prevent multiple clicks
+
+    try {
+      setIsLiking(true);
+
+      const response = await fetch("http://localhost:3005/api/forum/like", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message_id: id,
+          member_id: 51,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.status === "success") {
+        setLikes(data.likes);
+        setIsLiked(data.action === "liked");
+      } else {
+        console.error("Failed to process like");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsLiking(false);
+    }
+  };
 
   const [showShareMenu, setShowShareMenu] = useState(false);
   const shareButtonRef = useRef(null);
 
-  const handleLike = () => {
-    if (isLiked) {
-      setLikes((prev) => prev - 1);
-      setIsLiked(false);
-    } else {
-      setLikes((prev) => prev + 1);
-      setIsLiked(true);
-    }
-  };
   // for share dropdown menu
   const handleClickOutside = (event) => {
     if (
@@ -121,7 +146,7 @@ const ForumPost = ({
                   onClick={() => setShowShareMenu(!showShareMenu)}
                 >
                   <Share2 size={18} />
-                  <span className={styles.buttonCount}>{reposts}</span>
+                  <span className={styles.buttonCount}>{shares}</span>
                 </button>
 
                 {showShareMenu && (
@@ -216,18 +241,6 @@ const placeholderPosts = [
     likes: 876,
     reposts: 156,
     timeStamp: "2024-11-09 18:45:00",
-  },
-  {
-    id: 4,
-    userImage: "/s_img/forum.jpg",
-    username: "NatureLover",
-    title: "大自然的啟示",
-    content:
-      "在繁忙的都市生活中，我們常常忽略了大自然的智慧。每一片樹葉的脈絡、每一朵花的綻放都蘊含著生命的奧秘。當我們駐足觀察，會發現自然界中存在著最完美的設計。這些啟示不僅能幫助我們更好地理解世界，也能指導我們如何更和諧地生活。",
-    coverImage: "/s_img/forum-album.jpg",
-    likes: 654,
-    reposts: 92,
-    timeStamp: "2024-11-11 11:20:00",
   },
 ];
 
