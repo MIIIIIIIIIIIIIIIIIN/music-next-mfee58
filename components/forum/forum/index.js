@@ -1,10 +1,18 @@
 // components/forum/index.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Masonry from "react-masonry-css";
 import { Clock, Flame, Flag } from "lucide-react";
 import styles from "./forum.module.css";
 import Heart from "@/components/public/hearts";
-import ShareIcon from "@/components/public/icons/share_icon";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LineShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LineIcon,
+} from "react-share";
+import { Share2 } from "lucide-react";
 import { Fade } from "react-awesome-reveal";
 
 // SortingButton Component
@@ -32,6 +40,9 @@ const ForumPost = ({
   const [likes, setLikes] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(false);
 
+  const [showShareMenu, setShowShareMenu] = useState(false);
+  const shareButtonRef = useRef(null);
+
   const handleLike = () => {
     if (isLiked) {
       setLikes((prev) => prev - 1);
@@ -39,6 +50,15 @@ const ForumPost = ({
     } else {
       setLikes((prev) => prev + 1);
       setIsLiked(true);
+    }
+  };
+  // for share dropdown menu
+  const handleClickOutside = (event) => {
+    if (
+      shareButtonRef.current &&
+      !shareButtonRef.current.contains(event.target)
+    ) {
+      setShowShareMenu(false);
     }
   };
 
@@ -61,6 +81,13 @@ const ForumPost = ({
       day: "numeric",
     });
   };
+  // click outside to close dropdown menu
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <Fade delay={1e1} cascade damping={1e-1}>
@@ -84,10 +111,62 @@ const ForumPost = ({
                 <Heart size={18} fill={isLiked ? "#ef4444" : "none"} />
                 <span className={styles.buttonCount}>{likes}</span>
               </button>
-              <button className={styles.button}>
-                <ShareIcon size={18} />
-                <span className={styles.buttonCount}>{reposts}</span>
-              </button>
+              <div
+                className={styles.button}
+                ref={shareButtonRef}
+                style={{ position: "relative" }}
+              >
+                <button
+                  className={styles.button}
+                  onClick={() => setShowShareMenu(!showShareMenu)}
+                >
+                  <Share2 size={18} />
+                  <span className={styles.buttonCount}>{reposts}</span>
+                </button>
+
+                {showShareMenu && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "100%",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      backgroundColor: "white",
+                      padding: "0.5rem",
+                      borderRadius: "0.5rem",
+                      boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+                      border: "1px solid black",
+                      display: "flex",
+                      gap: "0.5rem",
+                      zIndex: 10,
+                    }}
+                  >
+                    <FacebookShareButton
+                      url={window.location.href}
+                      quote={title}
+                      className={styles.shareButton}
+                    >
+                      <FacebookIcon size={32} round />
+                    </FacebookShareButton>
+
+                    <TwitterShareButton
+                      url={window.location.href}
+                      title={title}
+                      className={styles.shareButton}
+                    >
+                      <TwitterIcon size={32} round />
+                    </TwitterShareButton>
+
+                    <LineShareButton
+                      url={window.location.href}
+                      title={title}
+                      className={styles.shareButton}
+                    >
+                      <LineIcon size={32} round />
+                    </LineShareButton>
+                  </div>
+                )}
+              </div>
               <button className={styles.button}>
                 <Flag size={18} />
               </button>
