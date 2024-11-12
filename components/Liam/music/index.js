@@ -14,13 +14,13 @@ const AudioPlayer = () => {
     {
       title: "夜曲",
       artist: "周杰倫",
-      url: "/Liam/music/01.mp3",
+      url: "/Liam/music/04.wav",
       cover: "/Liam/01/01.jpg"
     },
     {
       title: "告白氣球",
       artist: "周杰倫",
-      url: "/path/to/song2.mp3",
+      url: "/Liam/music/04.wav",
       cover: "/Liam/01/02.jpg"
     },
     {

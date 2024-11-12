@@ -113,7 +113,7 @@
 
 .waterfallItem:hover {
   transform: translateY(-4px);
-  border: 1px solid #14FF00;
+  border: 3px solid #14FF00;
 }
 
 /* 項目圖片 */

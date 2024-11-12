@@ -1,13 +1,23 @@
 
-.wrap{
-  width: 100% ;
+.navWrapper {
   position: relative;
+  width: 100%;
+}
 
-  top:0;
-  z-index: 9999;
-  
+.navSpacer {
+  width: 100%;
+}
 
+.wrap {
   background: linear-gradient(0deg, rgba(255,255,255,0) 41%, rgba(20,255,0,1) 100%);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  /* will-change: transform; */
 }
 .wrap1{
   width: 100% ;
@@ -114,3 +124,12 @@
 .display {
   display: none;
 }
+
+
+
+/* .navWrapper {
+  width: 100%;
+  position: relative;
+  z-index: 1000;
+}
+ */

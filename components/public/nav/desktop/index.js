@@ -1,10 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
-import { CiBellOn } from "react-icons/ci";
 import { FiSearch } from "react-icons/fi";
 import { ProfileIcons } from "../../profileIcons/ProfileIcons";
 import Mall from "../checklist/mall";
-import Fundraising from "../checklist/fundraising";
-import Forum from "../checklist/forum";
 import Logo from "../../logo";
 import styles from "./nav.module.css";
 import { useRouter } from "next/router";
@@ -14,16 +11,81 @@ export default function NavDesktop() {
   const [display, setDislay] = useState(false);
   const items = useRef(null);
   const input = useRef(null);
+  const navRef = useRef(null);
 
+  // 導航狀態管理
   const [displayMall, setDisplayMall] = useState(false);
   const [displayFundraising, setDisplayFundraising] = useState(false);
   const [displayForum, setDisplayForum] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
-  let hoverTimeout = useRef(null);
+  const [navHeight, setNavHeight] = useState(0);
+  const hoverTimeout = useRef(null);
 
-  const [isNavVisible, setIsNavVisible] = useState(false);
+  // 滾動狀態管理
+  const [scrolling, setScrolling] = useState(false);
+  const [scrollTop, setScrollTop] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  
+  // 會員狀態管理
   const [member, setMember] = useState(null);
 
+  // 初始化導航欄高度
+  useEffect(() => {
+    const updateNavHeight = () => {
+      if (navRef.current) {
+        const height = navRef.current.offsetHeight;
+        setNavHeight(height);
+      }
+    };
+
+    updateNavHeight();
+    window.addEventListener("resize", updateNavHeight);
+    return () => window.removeEventListener("resize", updateNavHeight);
+  }, []);
+
+  // 統一的滾動處理邏輯
+  useEffect(() => {
+    let lastScroll = 0;
+    let ticking = false;
+
+    const handleScroll = () => {
+      const currentScroll = window.pageYOffset;
+      
+      // 更新滾動狀態
+      setScrolling(currentScroll > 0);
+      setScrollTop(currentScroll);
+
+      // 導航欄顯示/隱藏邏輯
+      if (currentScroll <= 0) {
+        // 在頂部時顯示
+        setIsVisible(true);
+      } else if (currentScroll > lastScroll && currentScroll > 50) {
+        // 向下滾動且超過50px時隱藏
+        setIsVisible(false);
+      } else if (currentScroll < lastScroll) {
+        // 向上滾動時顯示
+        setIsVisible(true);
+      }
+
+      lastScroll = currentScroll;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // 獲取會員數據
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,29 +93,33 @@ export default function NavDesktop() {
           credentials: "include",
         });
         const data = await response.json();
-        setMember(data.admin); // 更新 member 狀態
+        setMember(data.admin);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-
-    const handleScroll = () => {
-      setIsNavVisible(window.scrollY > 1); // 當滾動超過 1px 時顯示 nav
-    };
-    window.addEventListener("scroll", handleScroll);
-
-    // 移除事件監聽器
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
   }, []);
 
+  // 計算導航欄樣式
+  const navStyle = {
+    transform: `translateY(${isVisible ? '0' : '-100%'})`,
+    transition: 'transform 0.3s ease',
+    background: `linear-gradient(0deg, rgba(255,255,255,0) 41%, rgba(20,255,0,1) 100%)`,
+    // backdropFilter: `blur(${scrolling ? "8px" : "0px"})`,
+    // boxShadow: scrolling ? "0 2px 8px rgba(0,0,0,0.1)" : "none",
+  };
+
   return (
-    <>
-      <div className={isNavVisible ? styles.wrap1 : styles.wrap}>
+    <div className={styles.navWrapper}>
+      {/* 占位元素 */}
+      <div className={styles.navSpacer} style={{ height: `${navHeight}px` }} />
+
+      {/* 導航欄 */}
+      <div ref={navRef} className={styles.wrap} style={navStyle}>
         <div className={styles.container}>
+          {/* Logo 區域 */}
           <div className={styles.logo}>
             <a
               href="#"
@@ -65,7 +131,10 @@ export default function NavDesktop() {
               <Logo type={1} />
             </a>
           </div>
+
+          {/* 導航選單 */}
           <ul ref={items} className={styles.nav}>
+            {/* 商城選項 */}
             <li
               className={styles.item}
               onMouseEnter={() => {
@@ -81,11 +150,15 @@ export default function NavDesktop() {
                   setActiveIndex(null);
                 }, 200);
               }}
-              style={{
-                backgroundColor: activeIndex === 0 ? "#14ff00" : "#fff",
-              }}
+  
             >
-              <a href="/George/products-page">
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/George/products-page");
+                }}
+              >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>商城</h6>
@@ -94,6 +167,7 @@ export default function NavDesktop() {
               </a>
             </li>
 
+            {/* 募資選項 */}
             <li
               className={styles.item}
               onMouseEnter={() => {
@@ -109,41 +183,50 @@ export default function NavDesktop() {
                   setActiveIndex(null);
                 }, 200);
               }}
-              style={{
-                backgroundColor: activeIndex === 1 ? "#14ff00" : "#fff",
-              }}
+            
             >
-              <a href="/Liam/Fundraising-list">
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/Liam/Fundraising-list");
+                }}
+              >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>募資</h6>
                 </div>
               </a>
-              {/* {displayFundraising && <Fundraising />} */}
             </li>
 
+            {/* 論壇選項 */}
             <li
               className={styles.item}
-              onClick={() => {
-                setDisplayForum(!displayForum);
-                setDisplayMall(false);
-                setDisplayFundraising(false);
-                setActiveIndex(2);
-              }}
-              style={{
-                backgroundColor: activeIndex === 2 ? "#14ff00" : "#fff",
-              }}
+            
             >
-              <a href="/Allen/forum">
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/Allen/forum");
+                }}
+              >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>論壇</h6>
                 </div>
               </a>
             </li>
-            {displayForum && <Forum />}
+
+            {/* 直播選項 */}
             <li className={styles.item}>
-              <a href="/Allen/stream">
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/Allen/stream");
+                }}
+              >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>直播</h6>
@@ -151,6 +234,8 @@ export default function NavDesktop() {
               </a>
             </li>
           </ul>
+
+          {/* 搜尋欄 */}
           <div className={styles.search}>
             <input type="text" ref={input} />
             <span
@@ -163,7 +248,7 @@ export default function NavDesktop() {
                     input.current.style.width = "100px";
                     input.current.style.padding = "5px 5px";
                   }, 10);
-                } else if (display) {
+                } else {
                   input.current.style.padding = "5px 0px";
                   input.current.style.width = "0px";
                 }
@@ -173,39 +258,24 @@ export default function NavDesktop() {
             </span>
           </div>
 
+          {/* 用戶圖示區 */}
           <div className={styles.iconsContainer}>
-          <a
-  href="#"
-  onClick={(e) => {
-    e.preventDefault();
-    if (member) {
-      // 如果會員已登入，跳轉到 /member-blog
-      router.push("/member-blog");
-    } else {
-      // 如果會員未登入，跳轉到 /login
-      router.push("/login");
-    }
-  }}
->
-  {member && member.icon ? (
-    <ProfileIcons
-      property1="XXS"
-      className={styles.header}
-      img={member.icon}
-    />
-  ) : (
-    <ProfileIcons
-      property1="XXS"
-      className={styles.header}
-      img="/icons/icon-user.svg"
-    />
-  )}
-</a>
+            {/* 用戶頭像 */}
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push(member ? "/member-blog" : "/login");
+              }}
+            >
+              <ProfileIcons
+                property1="XXS"
+                className={styles.header}
+                img={member?.icon || "/icons/icon-user.svg"}
+              />
+            </a>
 
-            {/* <a href="/member-blog"> */}
-
-            {/* </a> */}
-
+            {/* 通知圖示 */}
             <div className={styles.icon}>
               <a href="#">
                 <svg
@@ -225,6 +295,8 @@ export default function NavDesktop() {
                 </svg>
               </a>
             </div>
+
+            {/* 購物車圖示 */}
             <div className={styles.icon}>
               <a href="#">
                 <svg
@@ -247,11 +319,6 @@ export default function NavDesktop() {
           </div>
         </div>
       </div>
-      <style jsx>
-        {`
-          /* Custom styles can be added here */
-        `}
-      </style>
-    </>
+    </div>
   );
 }
