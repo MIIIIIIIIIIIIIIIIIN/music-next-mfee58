@@ -225,7 +225,11 @@ export default function NavHome() {
                 <ProfileIcons
                   property1="XXS"
                   className={styles.header}
-                  img={member.icon}
+                  img={
+                  member.icon
+                    ? `http://localhost:3005${member.icon}`
+                    : "/image/img-mem/user-logo000.jpg"
+                }
                 />
               ) : (
                 <ProfileIcons
