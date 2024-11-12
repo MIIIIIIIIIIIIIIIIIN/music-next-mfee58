@@ -4,6 +4,7 @@ import LiveStream from "@/components/stream/stream-frame";
 import ChatRoom from "@/components/stream/chat";
 import MoreLikeThis from "@/components/stream/more-like-this";
 import NavBar from "@/components/public/nav";
+import DarkModeToggle from "@/components/stream/dark-mode";
 
 export default function Stream() {
   const [isMobile, setIsMobile] = React.useState(false);
@@ -27,11 +28,15 @@ export default function Stream() {
     container: {
       margin: isMobile ? "0px" : "15px",
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent:isMobile ? "start": "space-between",
       flexDirection: isMobile ? "column" : "row",
+      backgroundColor: "var(--background-color)",
+      color: "var(--text-color)",
+      minHeight: "100vh",
+      transition: "all 1s ease",
     },
     sideBar: {
-      marginTop: isMobile ? "0rem" : "4rem",
+      marginTop: isMobile ? "2rem" : "4rem",
     },
   };
 
@@ -40,6 +45,7 @@ export default function Stream() {
       <NavBar />
       <div style={styles.container}>
         <div style={styles.sideBar}>
+          <DarkModeToggle />
           <FollowingStream />
         </div>
         <LiveStream streamerName="ちちのムスメ" />

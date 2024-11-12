@@ -4,6 +4,7 @@
   margin: 0 auto;
   padding: 0.5rem;
   box-sizing: border-box;
+  transition: all 1.8s ease;
 }
 
 @media (max-width: 768px) {
@@ -153,10 +154,18 @@
   font-size: 0.9rem;
 }
 
+:global([data-theme="dark"]) .elapsedTime {
+  color: white;
+}
+
 .statusIndicator {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+:global([data-theme="dark"]) .statusIndicator {
+  color: white;
 }
 
 .statusDot {
