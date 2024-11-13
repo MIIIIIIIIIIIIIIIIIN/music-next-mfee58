@@ -6,6 +6,31 @@ const MoreLikeThis = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check for dark mode
+    const checkDarkMode = () => {
+      const theme = document.documentElement.getAttribute("data-theme");
+      setIsDarkMode(theme === "dark");
+    };
+
+    checkDarkMode();
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "data-theme") {
+          checkDarkMode();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -34,15 +59,10 @@ const MoreLikeThis = () => {
       }
     };
 
-    // Fetch initially
     fetchVideos();
-
-    // Set up polling every 30 seconds
     const pollInterval = setInterval(fetchVideos, 30000);
-
-    // Cleanup interval on component unmount
     return () => clearInterval(pollInterval);
-  }, []); // Keep empty dependency array but add polling
+  }, []);
 
   if (loading) {
     return (
@@ -60,6 +80,18 @@ const MoreLikeThis = () => {
     );
   }
 
+  const cardStyle = {
+    cursor: "pointer",
+    transition: "transform 0.2s",
+    borderRadius: "0px",
+    border: `solid 1px ${isDarkMode ? "#333" : "black"}`,
+    backgroundColor: isDarkMode ? "#1a1a1a" : "white",
+    "&:hover": {
+      transform: "scale(1.05)",
+      borderRadius: "0px",
+    },
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.spacedContainer}>
@@ -68,16 +100,7 @@ const MoreLikeThis = () => {
           {videos.map((video) => (
             <Card
               key={video.id}
-              sx={{
-                cursor: "pointer",
-                transition: "transform 0.2s",
-                borderRadius: "0px",
-                border: "solid 1px black",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                  borderRadius: "0px",
-                },
-              }}
+              sx={cardStyle}
               onClick={() =>
                 window.open(
                   `https://www.youtube.com/watch?v=${video.id}`,

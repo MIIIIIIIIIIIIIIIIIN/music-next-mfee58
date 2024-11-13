@@ -7,6 +7,10 @@
   padding-bottom: 1rem;
 }
 
+:global([data-theme="dark"]) .p {
+  color: #fff;
+}
+
 .followingStreamChild {
   width: 88px;
   position: relative;
@@ -65,6 +69,14 @@
   background: white;
 }
 
+/* Dark mode styles */
+:global([data-theme="dark"]) .followingStream {
+  background: #1a1a1a;
+  border-color: #333;
+  color: #fff;
+  transition: all 1.8s ease;
+}
+
 .followingStream:hover {
   transform: scale(1.02);
 }
@@ -113,6 +125,12 @@
     overflow-y: auto;
   }
 
+  /* Dark mode styles for sidebar */
+  :global([data-theme="dark"]) .sidebar {
+    background: rgba(26, 26, 26, 0.95);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  }
+
   .sidebarOpen {
     transform: translateX(0);
   }
@@ -128,6 +146,12 @@
     visibility: hidden;
     transition: opacity 0.3s ease;
     z-index: 998;
+  }
+
+  /* Dark mode styles for overlay */
+  :global([data-theme="dark"]) .overlay {
+    background: rgba(0, 0, 0, 0.7);
+    transition: all 1s ease;
   }
 
   .overlayVisible {
@@ -149,6 +173,12 @@
     font-size: 24px;
     cursor: pointer;
     color: #666;
+  }
+
+  /* Dark mode styles for close button */
+  :global([data-theme="dark"]) .closeButton {
+    color: #999;
+    transition: all 1.8s ease;
   }
 }
 
