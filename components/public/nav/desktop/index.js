@@ -156,43 +156,18 @@ export default function NavDesktop() {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  router.push("/George/products-page");
+                  router.push("/George/product");
                 }}
               >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>商城</h6>
                 </div>
-                {displayMall && <Mall />}
+                
               </a>
-            </li> 
-            <li
-              className={styles.item}
-              onMouseEnter={() => {
-                if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
-                setDisplayMall(true);
-                setDisplayFundraising(false);
-                setDisplayForum(false);
-                setActiveIndex(0);
-              }}
-              onMouseLeave={() => {
-                hoverTimeout.current = setTimeout(() => {
-                  setDisplayMall(false);
-                  setActiveIndex(null);
-                }, 200);
-              }}
-              style={{
-                backgroundColor: activeIndex === 0 ? "#14ff00" : "#fff",
-              }}
-              onClick={() => router.push("/George/products-page")} // 用 onClick 來處理導航
-            >
-              <div className={styles.top}></div>
-              <div className={styles.bottom}>
-                <h6>商城</h6>
-              </div>
               {displayMall && <Mall />}
-            </li>
-
+            </li> 
+      
             {/* 募資選項 */}
             <li
               className={styles.item}

@@ -36,7 +36,7 @@ const MoreLikeThis = () => {
     const fetchVideos = async () => {
       try {
         const response = await fetch(
-          "http://192.168.37.184:3006/api/music-recommendations",
+          "http://localhost:3007/api/music-recommendations",
           {
             headers: {
               Accept: "application/json",

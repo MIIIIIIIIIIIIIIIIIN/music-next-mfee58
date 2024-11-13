@@ -27,7 +27,7 @@ const LiveStream = ({
       try {
         setIsLoading(true);
         const response = await fetch(
-          `http://192.168.37.184:3006/api/live-stream-details/${videoId}`,
+          `http://localhost:3007/api/live-stream-details/${videoId}`,
           {
             headers: {
               Accept: "application/json",
