@@ -29,6 +29,9 @@ const MemberInfo = () => {
         const data = await response.json();
         if (data.admin) {
           setMember(data.admin); // 用戶已登入，設置 member 狀態
+          setGender(data.admin.m_gender); // 設置性別狀態
+        setBirth(data.admin.m_birth); // 假設還有生日資料
+        setRegion(data.admin.m_location); // 假設還有所在地資料
         } else {
           console.log("用戶尚未登入");
           router.push("/login"); // 如果尚未登入，跳轉到登入頁
@@ -193,7 +196,7 @@ const MemberInfo = () => {
                 <div className={styles["right-text"]}>
                   <Dropdown
                     type="gender"
-                    initialValue={gender}
+                    initialValue={member.gender}
                     onChange={setGender}
                   />
                   {/* <ButtonToggleM size="small" /> */}
@@ -202,7 +205,8 @@ const MemberInfo = () => {
                 <div className={styles["right-text"]}>
                   <Dropdown
                     type="region"
-                    initialValue={region}
+                    // initialValue={member.region}
+                    initialValue={member.location}
                     onChange={setRegion}
                   />
                   {/* <ButtonToggleM size="small" /> */}
