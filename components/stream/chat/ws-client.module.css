@@ -152,6 +152,8 @@
   cursor: pointer;
 }
 
+/* Previous styles remain the same until mobile styles */
+
 /* Mobile Styles */
 @media (max-width: 768px) {
   .container {
@@ -231,5 +233,39 @@
     padding: 2px 6px;
     border-radius: 12px;
     font-size: 12px;
+  }
+
+  /* Mobile-specific login container styles */
+  .loginContainer {
+    height: 60vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    gap: 15px;
+  }
+
+  /* Dark mode styles for mobile login container */
+  :global([data-theme="dark"]) .loginContainer {
+    background: #1a1a1a;
+    transition: all 1.8s ease;
+  }
+
+  .loginInput {
+    width: 90%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-bottom: 0;
+  }
+
+  .loginButton {
+    width: 90%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.15);
   }
 }

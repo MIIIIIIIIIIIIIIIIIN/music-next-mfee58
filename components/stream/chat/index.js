@@ -95,7 +95,8 @@ const ChatRoom = () => {
         nickname,
         timestamp: new Date().toISOString(),
       });
-      if (isMobile) setIsChatExpanded(true);
+      // Don't automatically expand chat after login
+      // Let user click toggle to expand
     }
   };
 
@@ -186,12 +187,11 @@ const ChatRoom = () => {
       className={`${styles.container} ${
         !isChatExpanded ? styles.containerCollapsed : ""
       }`}
-      style={{ display: !isLoggedIn && !isChatExpanded ? "none" : "flex" }}
     >
       <div className={styles.chatToggle} onClick={toggleChat}>
         <div className={styles.chatToggleTitle}>
           聊天室
-          {!isChatExpanded && unreadCount > 0 && (
+          {!isChatExpanded && unreadCount > 0 && isLoggedIn && (
             <span className={styles.messageCounter}>{unreadCount}</span>
           )}
         </div>
@@ -203,23 +203,24 @@ const ChatRoom = () => {
         />
       </div>
 
-      {!isLoggedIn ? (
-        <div className={styles.loginContainer}>
-          <input
-            type="text"
-            placeholder="請問怎麼稱呼"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            className={styles.loginInput}
-            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-          />
-          <button onClick={handleLogin} className={styles.loginButton}>
-            加入聊天室
-          </button>
-        </div>
-      ) : (
-        renderChatContent()
-      )}
+      {isChatExpanded &&
+        (!isLoggedIn ? (
+          <div className={styles.loginContainer}>
+            <input
+              type="text"
+              placeholder="請問怎麼稱呼"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+              className={styles.loginInput}
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+            />
+            <button onClick={handleLogin} className={styles.loginButton}>
+              加入聊天室
+            </button>
+          </div>
+        ) : (
+          renderChatContent()
+        ))}
     </div>
   );
 };
