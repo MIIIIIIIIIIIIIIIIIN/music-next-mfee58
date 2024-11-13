@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import styles from "./mem-blog.module.css"; // 引入相應的 CSS 模組
 import Nav from "@/components/public/nav";
 import UserIcon from "@/components/public/user-icon";
@@ -9,6 +10,8 @@ import Link from "next/link";
 import axios from "axios";
 
 const MemBlog = () => {
+  const router = useRouter();
+  const { memberId } = router.query; // 使用 useRouter 取得 memberId
   const [name, setName] = useState("");
   const [birth, setBirth] = useState("");
 
@@ -29,7 +32,7 @@ const handleLogout = async () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3005/mem-data", {
+        const response = await fetch("http://localhost:3005/mem-data/${memberId}", {
           credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
         });
         const data = await response.json();
@@ -42,7 +45,7 @@ const handleLogout = async () => {
       }
     };
     fetchData();
-  }, []);
+  }, [memberId]); // 監聽 memberId 變化
 
   return (
     <>
