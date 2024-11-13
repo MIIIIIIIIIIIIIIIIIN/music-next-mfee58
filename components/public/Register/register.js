@@ -5,18 +5,20 @@ import styles from "./register.module.css";
 import MemIcons from "@/components/member/mem-icons";
 
 const Register = () => {
+  const [nickname, setNickname] = useState("");
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [location, setLocation] = useState(""); // 更新 location 狀態
   const [accountError, setAccountError] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [showSuccess, setShowSuccess] = useState(false); // 控制成功提示框顯示
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [message, setMessage] = useState("");
   const router = useRouter();
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // 驗證帳號長度
     if (account.length < 6) {
       setAccountError("帳號需至少6碼");
       return;
@@ -24,7 +26,6 @@ const Register = () => {
       setAccountError("");
     }
 
-    // 驗證信箱格式
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       setEmailError("請輸入有效的信箱格式");
@@ -34,37 +35,40 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3005/member/register", {
-        account,
-        password,
-        email,
-      });
+      const response = await axios.post(
+        "http://localhost:3005/member/register",
+        {
+          account,
+          password,
+          email,
+          nickname,
+          location, // 傳送所在地
+        }
+      );
 
       if (response.data.message === "註冊成功") {
-        setShowSuccess(true); // 顯示成功提示框
+        setShowSuccess(true);
         setTimeout(() => {
           setShowSuccess(false);
-          router.push("/login");
-        }, 5000); // 5秒後跳轉頁面
+          router.push("/member-blog");
+        }, 5000);
       } else {
-        // 顯示錯誤訊息
         if (response.data.message === "該帳號已被註冊") {
           setAccountError("此帳號已被註冊");
-          setEmailError(""); // 清除信箱錯誤
+          setEmailError("");
         } else if (response.data.message === "該信箱已被註冊") {
           setEmailError("此信箱已被註冊");
-          setAccountError(""); // 清除帳號錯誤
+          setAccountError("");
         }
       }
     } catch (error) {
       if (error.response && error.response.data.message) {
-        // 根據後端錯誤訊息顯示相應的錯誤提示
         if (error.response.data.message === "該帳號已被註冊") {
           setAccountError("此帳號已被註冊");
-          setEmailError(""); // 清除信箱錯誤
+          setEmailError("");
         } else if (error.response.data.message === "該信箱已被註冊") {
           setEmailError("此信箱已被註冊");
-          setAccountError(""); // 清除帳號錯誤
+          setAccountError("");
         } else {
           setAccountError("");
           setEmailError("");
@@ -76,7 +80,6 @@ const Register = () => {
     }
   };
 
-  // 即時驗證帳號
   const handleAccountChange = (e) => {
     const value = e.target.value;
     setAccount(value);
@@ -87,7 +90,6 @@ const Register = () => {
     }
   };
 
-  // 即時驗證信箱
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -110,6 +112,17 @@ const Register = () => {
           />
           <h2 className={styles.title}>會員註冊</h2>
           <form onSubmit={handleRegister} className={styles.form}>
+            <div className={styles.inputGroup}>
+              <MemIcons iconName="icon-user" size="medium" />
+              <input
+                type="text"
+                placeholder="暱稱(之後可做修改)"
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+                className={styles.input}
+                required
+              />
+            </div>
             <div className={styles.inputGroup}>
               <MemIcons iconName="icon-user" size="medium" />
               <input
@@ -146,10 +159,32 @@ const Register = () => {
               />
             </div>
             {emailError && <p className={styles.error}>{emailError}</p>}
+            <div className={styles.inputGroup}>
+              <MemIcons iconName="icon-user" size="medium" />
+              <select
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className={styles.input}
+                required
+              >
+                <option value="">選擇所在地</option>
+                <option value="北部">北部</option>
+                <option value="中部">中部</option>
+                <option value="南部">南部</option>
+                <option value="東部">東部</option>
+                <option value="離島">離島</option>
+              </select>
+            </div>
 
             <button type="submit" className={styles.button}>
               註冊
             </button>
+            <br />
+
+            <br />
+            <a href="/login">
+              <p>已有帳號? 前往登入</p>
+            </a>
             <br />
             <a href="/" className={styles.createAccount}>
               <MemIcons iconName="icons-home" size="medium" />
@@ -158,7 +193,6 @@ const Register = () => {
         </div>
       </div>
 
-      {/* 註冊成功提示框 */}
       {showSuccess && (
         <div className={styles.successOverlay}>
           <div className={styles.successMessage}>
