@@ -1,0 +1,149 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.showButton {
+  width: 100%;
+  padding: 12px 10px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: 1px solid #333;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.showButton:hover {
+  background-color: #00ff0d;
+}
+
+.buttonIcon {
+  font-size: 18px;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+}
+
+.content {
+  height: 400px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.terms {
+  color: #374151;
+  line-height: 1.6;
+}
+
+.terms p {
+  margin-bottom: 1rem;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.button {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.agreeButton {
+  background-color: #fff;
+  border: 1px solid #555555;
+  color: #374151;
+}
+
+.agreeButton:not(:disabled):hover {
+  background-color: #242424;
+  color: #ffffff;
+
+}
+
+.agreed {
+  border-color: #09ff00;
+  color: #1eff00;
+}
+
+.submitButton {
+  background-color: #181818;
+  color: white;
+}
+
+.submitButton:not(:disabled):hover {
+  background-color: #00ff0d;
+}
+
+/* 自訂滾動條樣式 */
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* 響應式設計 */
+@media (max-width: 640px) {
+  .container {
+    padding: 12px;
+  }
+  
+  .card {
+    padding: 16px;
+  }
+  
+  .content {
+    height: 300px;
+    padding: 16px;
+  }
+}
