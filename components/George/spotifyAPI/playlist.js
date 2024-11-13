@@ -1,17 +1,20 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
 import styles from "./playlist.module.css";
-import { useRouter } from "next/router"; 
+import { useRouter } from "next/router";
+import MySpotifyPlayer from "./pv1";
 
 export default function SpotifyPlaylist() {
   const [accessToken, setAccessToken] = useState("");
   const [playlist, setPlaylist] = useState(null);
   const [error, setError] = useState(null);
   const router = useRouter();
-  const { pid } = router.query;
+  const { pid } = router.query; // 產品資料庫 ID
+
+  // 直接定義 playlistId
+  const playlistId = "3Mk6qmUSVeeF5CLqkrkmTP";
 
   useEffect(() => {
-    // 從 URL 中解析 access token
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("access_token");
     setAccessToken(token);
@@ -21,7 +24,24 @@ export default function SpotifyPlaylist() {
     }
   }, [pid]);
 
-  // 抓取播放清單資料
+  useEffect(() => {
+    const fetchPlaylist = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3005/api/playlist/${playlistId}`, {
+          params: { access_token: accessToken },
+        });
+        setPlaylist(response.data);
+      } catch (error) {
+        console.error("Error fetching playlist:", error);
+        setError("Failed to fetch playlist data.");
+      }
+    };
+
+    if (playlistId && accessToken) {
+      fetchPlaylist();
+    }
+  }, [playlistId, accessToken]);
+
   async function fetchPlaylistData(token, pid) {
     try {
       const response = await axios.get(
@@ -33,12 +53,13 @@ export default function SpotifyPlaylist() {
       setError("Failed to fetch playlist data.");
     }
   }
+
   if (!accessToken) {
     return (
-    <button>
-    <a href={`http://localhost:3005/api/logintospotify?pid=${pid}`}>確認試聽</a>
-    </button>
-  )
+      <button>
+        <a href={`http://localhost:3005/api/logintospotify?pid=${pid}`}>確認試聽</a>
+      </button>
+    );
   }
 
   return (
@@ -64,6 +85,7 @@ export default function SpotifyPlaylist() {
       ) : (
         <p>Loading playlist...</p>
       )}
+      <MySpotifyPlayer accessToken={accessToken} playlistId={playlistId}/>
     </div>
   );
 }

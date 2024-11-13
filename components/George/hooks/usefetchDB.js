@@ -39,11 +39,7 @@ const useFetchDB = () => {
         }
       })
       .catch((error) => {
-        if (error.name === "AbortError") {
-          console.log("Fetch aborted");
-        } else {
-          console.error("Fetch error:", error);
-        }
+        console.error("Error fetching data", error);
       });
 
     return () => {
@@ -69,13 +65,15 @@ const useFetchDB = () => {
     if (listData.rows.length === 0) return;
     const controller = new AbortController();
     const signal = controller.signal;
-  
+
     const getImages = async () => {
       try {
         await Promise.all(
           listData.rows.map((album) =>
             axios
-              .get(`http://localhost:3005/api/getImages/${album.p_albums_id}`, { signal })
+              .get(`http://localhost:3005/api/getImages/${album.p_albums_id}`, {
+                signal,
+              })
               .then((response) => {
                 const imgObj = response.data;
                 if (imgObj) {
@@ -98,7 +96,7 @@ const useFetchDB = () => {
         console.error("Error in getImages:", error);
       }
     };
-  
+
     getImages();
     return () => {
       controller.abort();

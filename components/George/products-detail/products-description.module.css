@@ -16,6 +16,7 @@
 .topImage{
   width: 800px;
   height: 300px;
+  object-fit: cover;
 }
 .bottomImagesBox img:nth-child(2){
   margin-left: 20px;

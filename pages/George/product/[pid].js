@@ -9,7 +9,7 @@ import ProductsDescription from "@/components/George/products-detail/products-de
 import ProductsMore from "@/components/George/products-detail/products-more";
 import OthersYouLike from "@/components/George/products-detail/products-othersYouLike";
 import { useRouter } from "next/router";
-import Jamendoapi from "@/components/George/musicAPI/jamendoapi"
+import SpotifyEmbedPlayer from "@/components/George/spotifyAPI/player";
 import axios from "axios";
 
 export default function ProductsDetail() {
@@ -114,7 +114,7 @@ export default function ProductsDetail() {
         }
       }
       fetchYouMayLike();
-  }, [pid])
+  }, [router])
 
   useEffect(()=>{
     console.log("你可能也喜歡: ", pid);
@@ -125,6 +125,7 @@ export default function ProductsDetail() {
     <>
       <Nav />
       <ProductsDetailPage albumDetail={albumDetail} albumImages={albumImages} pid={pid}/>
+      <SpotifyEmbedPlayer />
       <ProductsListen pid={pid}/>
       <ProductsDescription albumDetail={albumDetail} albumImages={albumImages} pid={pid}/>
       <ProductsMore albumDetail={albumDetail} albumImages={albumImages} otherAlbums={otherAlbums} otherImages={otherImages}/>
