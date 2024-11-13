@@ -16,6 +16,11 @@
   margin-bottom: 1rem;
 }
 
+/* Dark mode for title */
+:global([data-theme="dark"]) .title {
+  color: #ffffff;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -42,8 +47,6 @@
 .overlay {
   position: relative;
   inset: 0;
-  /* background-color: rgba(0, 0, 0, 0.4); */
-  /* opacity: 0; */
   transition: opacity 200ms;
   display: flex;
   align-items: center;
@@ -62,11 +65,21 @@
   text-align: center;
 }
 
+/* Dark mode for overlay text */
+:global([data-theme="dark"]) .overlayText {
+  color: rgb(200, 200, 200);
+}
+
 .loading {
   width: 100%;
   height: 12rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: rgb(156, 163, 175);
+}
+
+/* Dark mode for loading text */
+:global([data-theme="dark"]) .loading {
   color: rgb(156, 163, 175);
 }

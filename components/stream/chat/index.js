@@ -29,7 +29,7 @@ const ChatRoom = () => {
 
   useEffect(() => {
     if (!socketRef.current) {
-      socketRef.current = io("http://192.168.37.184:3500", {
+      socketRef.current = io("http://192.168.37.184:3006", {
         reconnection: true,
         reconnectionAttempts: 5,
         reconnectionDelay: 1000,
