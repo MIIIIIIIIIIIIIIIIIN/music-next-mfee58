@@ -8,6 +8,7 @@ export default function SpotifyPlaylist() {
   const [accessToken, setAccessToken] = useState("");
   const [playlist, setPlaylist] = useState(null);
   const [error, setError] = useState(null);
+  
   const router = useRouter();
   const { pid } = router.query; // 產品資料庫 ID
 
