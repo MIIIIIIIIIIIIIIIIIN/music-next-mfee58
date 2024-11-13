@@ -45,7 +45,6 @@ export default function Stream() {
       <NavBar />
       <div style={styles.container}>
         <div style={styles.sideBar}>
-          <DarkModeToggle />
           <FollowingStream />
         </div>
         <LiveStream streamerName="ちちのムスメ" />

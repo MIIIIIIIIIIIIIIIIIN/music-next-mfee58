@@ -7,6 +7,10 @@
   padding-bottom: 1rem;
 }
 
+:global([data-theme="dark"]) .p {
+  color: #fff;
+}
+
 .followingStreamChild {
   width: 88px;
   position: relative;

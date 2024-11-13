@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import styles from "@/components/stream/stream-following/s_following.module.css";
 import ViewerCount from "@/components/public/icons/viewer_count";
-import { SquareMenu, X } from "lucide-react"; // Import icons from lucide-react
+import { SquareMenu, X } from "lucide-react";
+import DarkModeToggle from "@/components/stream/dark-mode";
 
 const FollowingStream = () => {
   const [streams, setStreams] = useState([]);
@@ -101,6 +102,7 @@ const FollowingStream = () => {
 
   const StreamList = () => (
     <>
+      <DarkModeToggle />
       <p className={styles.p}>追隨中</p>
       {streams.map((stream) => (
         <div key={stream.id} className={styles.followingStream}>

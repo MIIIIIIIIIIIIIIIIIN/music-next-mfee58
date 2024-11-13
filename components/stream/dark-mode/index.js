@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { Sun, Moon } from "lucide-react";
 
-const DarkModeToggle = () => {
+const MobileDarkModeToggle = () => {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
   useEffect(() => {
     // Check if there's a saved theme preference
@@ -18,6 +19,15 @@ const DarkModeToggle = () => {
       setIsDarkMode(true);
       document.documentElement.setAttribute("data-theme", "dark");
     }
+
+    // Handle responsive layout
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const toggleDarkMode = () => {
@@ -30,13 +40,9 @@ const DarkModeToggle = () => {
     localStorage.setItem("theme", newMode ? "dark" : "light");
   };
 
-  const buttonStyle = {
+  const baseButtonStyle = {
     position: "fixed",
-    top: "100px",
-    left: "20px",
     zIndex: 1001,
-    padding: "8px",
-    borderRadius: "50%",
     border: "none",
     cursor: "pointer",
     display: "flex",
@@ -45,7 +51,30 @@ const DarkModeToggle = () => {
     backgroundColor: isDarkMode ? "#333" : "#fff",
     color: isDarkMode ? "#fff" : "#000",
     boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
-    transition: "all 0.3s ease",
+    borderRadius: "50%",
+  };
+
+  const mobileStyle = {
+    ...baseButtonStyle,
+    top: "50px",
+    right: "20px",
+    width: "48px", // Larger touch target for mobile
+    height: "48px",
+  };
+
+  const desktopStyle = {
+    ...baseButtonStyle,
+    top: "100px",
+    left: "20px",
+    width: "40px",
+    height: "40px",
+  };
+
+  const buttonStyle = isMobile ? mobileStyle : desktopStyle;
+
+  const iconStyle = {
+    width: isMobile ? "24px" : "20px",
+    height: isMobile ? "24px" : "20px",
   };
 
   return (
@@ -54,9 +83,9 @@ const DarkModeToggle = () => {
       style={buttonStyle}
       aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
     >
-      {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
+      {isDarkMode ? <Sun style={iconStyle} /> : <Moon style={iconStyle} />}
     </button>
   );
 };
 
-export default DarkModeToggle;
+export default MobileDarkModeToggle;
