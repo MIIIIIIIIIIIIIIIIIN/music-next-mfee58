@@ -115,6 +115,26 @@
   border-radius: 8px;
 }
 
+.logoutButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  color: #333; /* 按鈕文字顏色 */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: var(--gray-2); /* 滑過效果 */
+}
+
+.logoutButton:active {
+  background-color: black; /* 點擊效果 */
+  color: var(--basecolor);
+}
+
 @media (max-width: 375px) {
   .leftContent {
     display: flex; /* 使用 flex 以居中內容 */

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./form-inputM.module.css";
 
 const FormInputM = ({ size = "medium", value='', onChange, isEmail = false, isPhone = false, readOnly = false  }) => {
-  const [inputValue, setInputValue] = useState(value); // 保存輸入的內容
+  const [inputValue, setInputValue] = useState(value||""); 
   const [isValid, setIsValid] = useState(true); // 驗證狀態
   const [isEditing, setIsEditing] = useState(true); // 是否正在編輯
   const sizeClass =
@@ -13,7 +13,7 @@ const FormInputM = ({ size = "medium", value='', onChange, isEmail = false, isPh
       : styles.medium;
 
       useEffect(() => {
-        setInputValue(value);
+        setInputValue(value||"");
       }, [value]);
 
   const handleChange = (e) => {

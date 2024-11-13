@@ -66,6 +66,8 @@ export default function NavDesktop() {
             </a>
           </div>
           <ul ref={items} className={styles.nav}>
+            {/* 原先版本會跳錯誤訊息 
+            
             <li
               className={styles.item}
               onMouseEnter={() => {
@@ -85,13 +87,45 @@ export default function NavDesktop() {
                 backgroundColor: activeIndex === 0 ? "#14ff00" : "#fff",
               }}
             >
-              <a href="/George/products-page">
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/George/products-page");
+                }}
+              >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>商城</h6>
                 </div>
                 {displayMall && <Mall />}
               </a>
+            </li> */}
+            <li
+              className={styles.item}
+              onMouseEnter={() => {
+                if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+                setDisplayMall(true);
+                setDisplayFundraising(false);
+                setDisplayForum(false);
+                setActiveIndex(0);
+              }}
+              onMouseLeave={() => {
+                hoverTimeout.current = setTimeout(() => {
+                  setDisplayMall(false);
+                  setActiveIndex(null);
+                }, 200);
+              }}
+              style={{
+                backgroundColor: activeIndex === 0 ? "#14ff00" : "#fff",
+              }}
+              onClick={() => router.push("/George/products-page")} // 用 onClick 來處理導航
+            >
+              <div className={styles.top}></div>
+              <div className={styles.bottom}>
+                <h6>商城</h6>
+              </div>
+              {displayMall && <Mall />}
             </li>
 
             <li
@@ -113,12 +147,19 @@ export default function NavDesktop() {
                 backgroundColor: activeIndex === 1 ? "#14ff00" : "#fff",
               }}
             >
-              <a href="/Liam/Fundraising-list">
+
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/Liam/Fundraising-list");
+                }}
+              >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>募資</h6>
                 </div>
-              </a>
+              </a>      
               {/* {displayFundraising && <Fundraising />} */}
             </li>
 
@@ -134,16 +175,31 @@ export default function NavDesktop() {
                 backgroundColor: activeIndex === 2 ? "#14ff00" : "#fff",
               }}
             >
-              <a href="/Allen/forum">
+              {/* <a href="/Allen/forum"> */}
+
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/Allen/forum");
+                }}
+              >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>論壇</h6>
                 </div>
               </a>
             </li>
-            {displayForum && <Forum />}
+            {/* {displayForum && <Forum />} */}
             <li className={styles.item}>
-              <a href="/Allen/stream">
+              {/* <a href="/Allen/stream"> */}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/Allen/stream");
+                }}
+              >
                 <div className={styles.top}></div>
                 <div className={styles.bottom}>
                   <h6>直播</h6>
@@ -174,33 +230,37 @@ export default function NavDesktop() {
           </div>
 
           <div className={styles.iconsContainer}>
-          <a
-  href="#"
-  onClick={(e) => {
-    e.preventDefault();
-    if (member) {
-      // 如果會員已登入，跳轉到 /member-blog
-      router.push("/member-blog");
-    } else {
-      // 如果會員未登入，跳轉到 /login
-      router.push("/login");
-    }
-  }}
->
-  {member && member.icon ? (
-    <ProfileIcons
-      property1="XXS"
-      className={styles.header}
-      img={member.icon}
-    />
-  ) : (
-    <ProfileIcons
-      property1="XXS"
-      className={styles.header}
-      img="/icons/icon-user.svg"
-    />
-  )}
-</a>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (member) {
+                  // 如果會員已登入，跳轉到 /member-blog
+                  router.push("/member-blog");
+                } else {
+                  // 如果會員未登入，跳轉到 /login
+                  router.push("/login");
+                }
+              }}
+            >
+              {member && member.icon ? (
+                <ProfileIcons
+                  property1="XXS"
+                  className={styles.header}
+                  img={
+                  member.icon
+                    ? `http://localhost:3005${member.icon}`
+                    : "/image/img-mem/user-logo000.jpg"
+                }
+                />
+              ) : (
+                <ProfileIcons
+                  property1="XXS"
+                  className={styles.header}
+                  img="/icons/icon-user.svg"
+                />
+              )}
+            </a>
 
             {/* <a href="/member-blog"> */}
 

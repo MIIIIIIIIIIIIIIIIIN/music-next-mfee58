@@ -5,7 +5,7 @@ export default function MemberList() {
         <div className="triangle"></div>
         <ul>
           <li className="item">
-            <a href="#">
+            <a href="/Jade/member-center">
             <div className="info">
               <p>基本資料</p>
             </div>
