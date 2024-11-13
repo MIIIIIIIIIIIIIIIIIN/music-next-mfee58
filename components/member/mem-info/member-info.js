@@ -1,9 +1,9 @@
-import styles from "./member-info.module.css";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import styles from "./member-info.module.css";
 import FormInput from "../form-input";
 import ButtonToggleM from "../button-show";
 import Dropdown from "../form-option";
-import { useEffect, useState } from "react";
 import { ProfileIcons } from "@/components/public/profileIcons/ProfileIcons";
 import axios from "axios";
 
@@ -16,6 +16,7 @@ const MemberInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null); // 用於儲存選擇的圖片文件
+  const [bio, setBio] = useState(""); // 新增簡介的狀態
 
   // 位於前端文件：member-info.js
   useEffect(() => {
@@ -35,6 +36,14 @@ const MemberInfo = () => {
         console.error("Error fetching data:", error);
       }
     };
+
+
+    // 讀取 Local Storage 中的簡介資料
+    const savedBio = localStorage.getItem("bio");
+    if (savedBio) {
+      setBio(savedBio);
+    }
+
     fetchData();
   }, []);
 
@@ -88,6 +97,12 @@ const MemberInfo = () => {
       setMessage("圖片上傳失敗，請重試");
     }
   };
+    // 更新簡介的函數，並保存到 Local Storage
+    const handleBioChange = (e) => {
+      const newBio = e.target.value;
+      setBio(newBio);
+      localStorage.setItem("bio", newBio);
+    };
 
   return (
     <div className={styles["member-info"]}>
@@ -124,7 +139,7 @@ const MemberInfo = () => {
               上傳頭像建議尺寸： 140x140px 以內，圖片檔案大小不可超過 2MB
             </h6>
             <h6 className={styles["input-top"]}>
-              簡介 <FormInput />
+              簡介 <FormInput value={bio} onChange={handleBioChange} />
             </h6>
 
             <div className={styles["body-input"]}>
