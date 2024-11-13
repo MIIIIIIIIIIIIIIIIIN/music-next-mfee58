@@ -29,7 +29,7 @@ export default function ProductsDetail() {
         setAlbumDetail(responseAlbumsData);
 
         const responseAlbumsImage = await axios.get(
-          `http://localhost:3005/api/albums/${albumId}/images`
+          `http://localhost:3005/api/getImages/${albumId}/`
         );
         setAlbumImages(responseAlbumsImage);
       } catch (error) {

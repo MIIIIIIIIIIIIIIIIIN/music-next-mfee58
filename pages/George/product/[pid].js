@@ -16,6 +16,9 @@ export default function ProductsDetail() {
   const [isNavMobile, setIsNavVisible] = useState(false);
   const [albumDetail, setAlbumDetail] = useState(null);
   const [albumImages, setAlbumImages] = useState([]);
+  const [otherAlbums, setOtherAlbums] = useState([]);
+  const [otherImages, setOtherImages] = useState([]);
+  const [youMayLike, setYouMayLike] = useState([]);
   const router = useRouter();
   const { pid } = router.query;
   
@@ -30,7 +33,7 @@ export default function ProductsDetail() {
         // console.log("Album Data:", responseAlbumsData.data);
         setAlbumDetail(responseAlbumsData.data);
         const responseAlbumsImage = await axios.get(
-          `http://localhost:3005/api/albums/images/${pid}`
+          `http://localhost:3005/api/getImages/${pid}`
         );
         // console.log("Album Images:", responseAlbumsImage.data);
         setAlbumImages(responseAlbumsImage.data);
@@ -67,9 +70,55 @@ export default function ProductsDetail() {
   }, []);
 
   useEffect(() => {
-    console.log("Album Detail after fetch:", albumDetail);
-    console.log("Album Images after fetch:", albumImages);
-  }, [albumDetail, albumImages]);
+    const fetchOtherAlbums = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3005/api/otheralbums/${albumDetail.p_albums_artist}/${albumDetail.p_albums_id}`
+        );
+        setOtherAlbums(response.data);
+      } catch (error) {
+        console.error("無法取得同歌手的專輯", error);
+      }
+    };
+
+    if (albumDetail) {
+      fetchOtherAlbums();
+    }
+  }, [albumDetail]);
+
+  useEffect(() => {
+    if (albumDetail?.p_albums_artist) {
+      const fetchOtherImages = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3005/api/getImages/${albumDetail.p_albums_artist}/${albumDetail.p_albums_id}`
+          );
+          setOtherImages(response.data);
+        } catch (error) {
+          console.error("Error fetching other images:", error);
+        }
+      };
+
+      fetchOtherImages();
+    }
+  }, [albumDetail]);
+
+  useEffect(()=>{
+      const fetchYouMayLike = async () => {
+        try{
+          const response = await axios.get(`http://localhost:3005/api/youmaylike/${pid}`);
+          setYouMayLike(response.data)
+        } catch (error) {
+          console.error("無法取得你可能也喜歡的其他專輯", error);
+        }
+      }
+      fetchYouMayLike();
+  }, [pid])
+
+  useEffect(()=>{
+    console.log("你可能也喜歡: ", youMayLike);
+    
+  }, [youMayLike])
 
   return (
     <>
@@ -77,8 +126,8 @@ export default function ProductsDetail() {
       <ProductsDetailPage albumDetail={albumDetail} albumImages={albumImages} pid={pid}/>
       <ProductsListen />
       <ProductsDescription albumDetail={albumDetail} albumImages={albumImages} pid={pid}/>
-      <ProductsMore />
-      <OthersYouLike albumDetail={albumDetail} albumImages={albumImages} pid={pid}/>
+      <ProductsMore albumDetail={albumDetail} albumImages={albumImages} otherAlbums={otherAlbums} otherImages={otherImages}/>
+      <OthersYouLike albumDetail={albumDetail} albumImages={albumImages} youMayLike={youMayLike}/>
       <AddToCartBar albumDetail={albumDetail} pid={pid}/>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>

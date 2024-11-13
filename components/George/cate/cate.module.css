@@ -107,27 +107,20 @@
 
 .Helloli {
   border: 1px solid #ccc;
-  width: 31%; /* 每行顯示 5 個圖卡 */
+  width: 31%;
   margin: 0 10px 30px;
 }
 .Byeli {
   border: 1px solid #ccc;
-  width: 23%; /* 每行顯示 5 個圖卡 */
+  width: 23%;
   margin: 0 10px 30px;
 }
 
-.left .bottom {
-  padding: 10px;
-}
 
 .left .bottom h3 {
   margin: 0;
 }
 
-.left .bottom p {
-  margin: 0;
-  word-wrap: break-word;
-}
 
 .crossImg {
   width: 100%;
@@ -262,8 +255,13 @@
 }
 
 .imgdes {
-  padding: 10px;
+  margin: 10px;
   text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cursorPointer {

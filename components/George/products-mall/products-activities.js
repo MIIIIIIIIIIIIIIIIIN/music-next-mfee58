@@ -52,7 +52,7 @@ export default function ProductsActivities({ accessToken }) {
           </div>
           <div className={style["right-side"]}>
             {listData &&
-              listData.rows.slice(1, 4).map((v, i) => (
+              listData.rows.sort(() => Math.random() - 0.5).slice(1, 4).map((v, i) => (
                 <div key={v.p_albums_id} className={style["album-container"]}>
                   <Link
                     href={`/George/product/${v.p_albums_id}`}

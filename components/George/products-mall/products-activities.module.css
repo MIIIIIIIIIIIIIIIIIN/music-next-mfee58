@@ -14,9 +14,13 @@
   width: 100%;
 }
 .left-side img {
-  height: 48em;
+  aspect-ratio: 16/9;
+  height: auto;
+  width: 1200px;
   margin-right: 1em;
+  object-fit: cover;
 }
+
 .right-side {
   display: flex;
   flex-direction: column;
@@ -63,6 +67,7 @@
   position: absolute;
   left: 1em;
   bottom: 2em;
+  right: 2em;
 }
 .text-title {
   color: white;
@@ -71,6 +76,11 @@
 .text-description {
   color: white;
   font-size: 16px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
 }
 .leftSideImageContainer::after {
   content: ""; /* 必須添加 */

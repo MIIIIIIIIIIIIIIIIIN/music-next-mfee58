@@ -12,7 +12,7 @@
     // 標題列（Title Bar）設定
     "titleBar.activeBackground": "#fff6fbd3", // 當前選取的標題列背景色
     "titleBar.activeForeground": "#000000", // 當前選取的標題列文字色
-    "titleBar.inactiveBackground": "#c69ceed3", // 未選取的標題列背景色
+    "titleBar.inactiveBackground": "#fff6fbd3", // 未選取的標題列背景色
     "titleBar.inactiveForeground": "#000000", // 未選取的標題列文字色
 
     // 菜單列（Menu Bar）設定（可選）

@@ -226,7 +226,6 @@ export default function ProductsGenres() {
                         <h3>{album.p_albums_title}</h3>
                         <p>{album.p_albums_description}</p>
                       </div>
-                      <div className={styles.bottom}></div>
                     </div>
                   </li>
                 ))
@@ -266,7 +265,6 @@ export default function ProductsGenres() {
                         <h3>{album.p_albums_title}</h3>
                         <p>{album.p_albums_description}</p>
                       </div>
-                      <div className={styles.bottom}></div>
                     </div>
                   </li>
                 ))
@@ -305,7 +303,6 @@ export default function ProductsGenres() {
                         <h3>{album.p_albums_title}</h3>
                         <p>{album.p_albums_description}</p>
                       </div>
-                      <div className={styles.bottom}></div>
                     </div>
                   </li>
                 ))}

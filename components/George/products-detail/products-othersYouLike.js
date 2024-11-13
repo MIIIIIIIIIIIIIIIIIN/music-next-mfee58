@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Items1 from "./items2";
 import styles from "./products-othersYouLike.module.css";
 import { MdArrowForwardIos } from "react-icons/md";
 
-export default function OthersYouLike() {
+export default function OthersYouLike({youMayLike}) {
   const products = [
     {
       description:
@@ -149,6 +149,8 @@ export default function OthersYouLike() {
     },
   ];
 
+
+
   return (
     <>
       <div className={styles["carousel-container"]}>
@@ -217,9 +219,17 @@ export default function OthersYouLike() {
           slidesToSlide={1}
           swipeable
         >
-          {products.map((v, i) => {
-            return <Items1 key={i} image={v.image} singer={v.singer} headline={v.headline}/>;
-          })}
+          {youMayLike?.filter((v, index) => index % 4 === 0).map((album, i)=>{
+              return (
+                <Items1
+                  key={i}
+                  image={album.p_productsimg_filename}
+                  singer={album.p_albums_artist}
+                  headline={album.p_albums_title}
+                  
+                />
+              );
+            })}
         </Carousel>
       </div>
     </>

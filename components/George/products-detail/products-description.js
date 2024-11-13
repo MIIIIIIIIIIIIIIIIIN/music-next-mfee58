@@ -1,7 +1,10 @@
 import React from "react";
 import style from "./products-description.module.css";
 
-export default function ProductsDescription() {
+
+export default function ProductsDescription({ albumDetail, albumImages, pid }) {
+
+
   return (
     <>
       <div className={style.containDescription}>
@@ -9,19 +12,19 @@ export default function ProductsDescription() {
         <div className={style.imgBox}>
           <div className={style.topImageBox}>
             <img
-              src="/George/products-images-350px/products-(98).jpg"
+              src={`/${albumImages?.images?.[1]?.p_productsimg_filename}`}
               alt=""
               className={style.topImage}
             />
           </div>
           <div className={style.bottomImagesBox}>
             <img
-              src="/George/products-images-350px/products-(102).jpg"
+              src={`/${albumImages?.images?.[2]?.p_productsimg_filename}`}
               alt=""
               className={style.bottomImages}
             />
             <img
-              src="/George/products-images-350px/products-(101).jpg"
+              src={`/${albumImages?.images?.[3]?.p_productsimg_filename}`}
               alt=""
               className={style.bottomImages}
             />
@@ -31,42 +34,11 @@ export default function ProductsDescription() {
         <div className={style.desBox}>
           <h2>Description</h2>
           <p>
-            {" "}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum impedit
-            consequatur officiis cumque amet quo quia? Velit cupiditate aperiam
-            laborum labore in itaque obcaecati vero, corporis, nihil inventore
-            magni hic?
+          {albumDetail?.p_albums_description}
           </p>
           <p>
             {" "}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum impedit
-            consequatur officiis cumque amet quo quia? Velit cupiditate aperiam
-            laborum labore in itaque obcaecati vero, corporis, nihil inventore
-            magni hic?
-          </p>
-          <p>
-            {" "}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum impedit
-            consequatur officiis cumque amet quo quia? Velit cupiditate aperiam
-            laborum labore in itaque obcaecati vero, corporis, nihil inventore
-            magni hic?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum impedit
-            consequatur officiis cumque amet quo quia? Velit cupiditate aperiam
-            laborum labore in itaque obcaecati vero, corporis, nihil inventore
-            magni hic?
-          </p>
-          <p>
-            {" "}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum impedit
-            consequatur officiis cumque amet quo quia? Velit cupiditate aperiam
-            laborum labore in itaque obcaecati vero, corporis, nihil inventore
-            magni hic?            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum impedit
-            consequatur officiis cumque amet quo quia? Velit cupiditate aperiam
-            laborum labore in itaque obcaecati vero, corporis, nihil inventore
-            magni hic?            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum impedit
-            consequatur officiis cumque amet quo quia? Velit cupiditate aperiam
-            laborum labore in itaque obcaecati vero, corporis, nihil inventore
-            magni hic?
+            {albumDetail?.p_albums_engdescription}
           </p>
         </div>
       </div>

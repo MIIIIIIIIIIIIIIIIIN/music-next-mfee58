@@ -75,7 +75,7 @@ const useFetchDB = () => {
         await Promise.all(
           listData.rows.map((album) =>
             axios
-              .get(`${AB_LIST}/images/${album.p_albums_id}`, { signal })
+              .get(`http://localhost:3005/api/getImages/${album.p_albums_id}`, { signal })
               .then((response) => {
                 const imgObj = response.data;
                 if (imgObj) {

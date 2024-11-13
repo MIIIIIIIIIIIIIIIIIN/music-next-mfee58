@@ -1,5 +1,6 @@
 .containDescription{
   width: 80vw;
+  height: 700px;
   margin: auto;
   display: flex;
 }
@@ -25,12 +26,15 @@
   height: 390px;
 }
 .desBox{
+  margin-top: 15px;
   margin-left: 50px;
 }
 .desBox p{
   margin: 20px 20px;
   font-size: 18px;
 }
+
+
 
 @media(max-width: 375px){
   .containDescription{
