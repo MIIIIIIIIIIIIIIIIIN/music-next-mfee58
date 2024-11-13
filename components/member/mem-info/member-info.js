@@ -17,6 +17,7 @@ const MemberInfo = () => {
   const [message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null); // 用於儲存選擇的圖片文件
   const [bio, setBio] = useState(""); // 新增簡介的狀態
+  const [showImageUploadSuccess, setShowImageUploadSuccess] = useState(false); // Success overlay for image upload
 
   // 位於前端文件：member-info.js
   useEffect(() => {
@@ -36,7 +37,6 @@ const MemberInfo = () => {
         console.error("Error fetching data:", error);
       }
     };
-
 
     // 讀取 Local Storage 中的簡介資料
     const savedBio = localStorage.getItem("bio");
@@ -92,17 +92,20 @@ const MemberInfo = () => {
       );
       setMessage(response.data.message || "圖片已更新");
       setMember((prev) => ({ ...prev, icon: response.data.icon })); // 更新顯示的圖片
+      // Show success notification
+      setShowImageUploadSuccess(true);
+      setTimeout(() => setShowImageUploadSuccess(false), 1000); // Hide after 5 seconds
     } catch (error) {
       console.error("Error uploading image:", error);
       setMessage("圖片上傳失敗，請重試");
     }
   };
-    // 更新簡介的函數，並保存到 Local Storage
-    const handleBioChange = (e) => {
-      const newBio = e.target.value;
-      setBio(newBio);
-      localStorage.setItem("bio", newBio);
-    };
+  // 更新簡介的函數，並保存到 Local Storage
+  const handleBioChange = (e) => {
+    const newBio = e.target.value;
+    setBio(newBio);
+    localStorage.setItem("bio", newBio);
+  };
 
   return (
     <div className={styles["member-info"]}>
@@ -125,14 +128,14 @@ const MemberInfo = () => {
                     : "/image/img-mem/user-logo000.jpg"
                 }
               />
-
-
-
-              <input
-                type="file"
-                onChange={(e) => setSelectedFile(e.target.files[0])}
-                accept="image/*" // 限制只能上傳圖片
-              />
+              <div className={styles["file-input-container"]}>
+                <input
+                  type="file"
+                  onChange={(e) => setSelectedFile(e.target.files[0])}
+                  accept="image/*" // 限制只能上傳圖片
+                  className={styles["file-input"]}
+                />
+              </div>
               <button onClick={handleImageUpload}>上傳圖片</button>
             </div>
             <h6 className={styles["icon-title"]}>
@@ -194,7 +197,13 @@ const MemberInfo = () => {
                 </div>
               </div>
             </div>
-
+            {showImageUploadSuccess && (
+              <div className={styles.successOverlay}>
+                <div className={styles.successMessage}>
+                  <p>圖片已更新!</p>
+                </div>
+              </div>
+            )}
             {/* 提示訊息 */}
             {message && <p className={styles["message"]}>{message}</p>}
           </div>

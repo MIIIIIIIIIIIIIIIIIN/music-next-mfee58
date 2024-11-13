@@ -14,6 +14,7 @@
   justify-content: center;
   align-items: flex-start;
   text-align: center;
+  position: relative;
 
 }
 .b {
@@ -141,7 +142,54 @@ padding-bottom: 10px;}
   
 }
 
+/* 成功提示框 */
+.successOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 保證提示框在最上層 */
+}
 
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8); /* 縮小 */
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1); /* 略微放大 */
+  }
+  100% {
+    transform: scale(1); /* 回到正常大小 */
+  }
+}
+
+.successMessage {
+  background: #000;
+  color: var(--basecolor);
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeInScale 0.6s ease; /* 添加動畫 */
+}
+.file-input-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.file-input{
+  margin-left: 65px;
+  display: flex;
+  justify-content: center;
+}
 /* END */
 @media (max-width: 375px) {
   .member-info {
@@ -186,11 +234,21 @@ padding-bottom: 10px;}
   }
 
   .body-icon {
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     padding: 5px;
     margin: 30px;
     gap: 5px; /* 減少間距 */
+    display: flex;
+    align-items: center;
+  }
+
+
+  .file-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Set this to the width you need */
   }
 
   .icon-title {
