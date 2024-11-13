@@ -8,7 +8,7 @@ export default function Mall() {
         <div className="triangle"></div>
         <ul>
           <li className="item">
-            <a href="/George/products-filter">
+            <a href="/George/category">
               <div className="info">
                 <p>Pop</p>
               </div>

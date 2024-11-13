@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
+import ProductsLatestLaunched from "@/components/George/products-mall/products-latest-launched";
+import ProductsRecommendation from "@/components/George/products-mall/products-recommendation";
+import ProductsActivities from "@/components/George/products-mall/products-activities";
+import ProductsGenres from "@/components/George/cate/products-genres";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import FooterMobile from "@/components/public/footer/mobile";
 import Nav from "@/components/public/nav";
 import { AddToCartBar } from "@/components/public/addtocart-bar/add-to-cart";
-import ProductsDetailPage from "@/components/George/products-detail/products-detail-page";
-import ProductsListen from "@/components/George/products-detail/products-listen";
-import ProductsDescription from "@/components/George/products-detail/products-description";
-import ProductsMore from "@/components/George/products-detail/products-more";
-import OthersYouLike from "@/components/George/products-detail/products-othersYouLike";
 
-export default function ProductsDetail() {
+
+export default function ProductsPage() {
   const [isMobile, setIsMobile] = useState(false);
-  const [isNavMobile, setIsNavVisible] = useState(false);
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  
 
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
@@ -26,7 +27,7 @@ export default function ProductsDetail() {
     window.addEventListener("resize", handleResize);
 
     const handleScroll = () => {
-      setIsNavVisible(window.scrollY > 30);
+      setIsNavVisible(window.scrollY > 30); // 當滾動超過 100px 時顯示 nav
     };
     window.addEventListener("scroll", handleScroll);
 
@@ -36,15 +37,14 @@ export default function ProductsDetail() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <>
       <Nav />
-      <ProductsDetailPage />
-      <ProductsListen />
-      <ProductsDescription />
-      <ProductsMore />
-      <OthersYouLike />
-      <AddToCartBar/>
+      <ProductsActivities />
+      <ProductsRecommendation />
+      <ProductsLatestLaunched />
+      <AddToCartBar />
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );
