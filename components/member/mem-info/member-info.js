@@ -17,7 +17,7 @@ const MemberInfo = () => {
   const [message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null); // 用於儲存選擇的圖片文件
   const [bio, setBio] = useState(""); // 新增簡介的狀態
-  const [showImageUploadSuccess, setShowImageUploadSuccess] = useState(false); // Success overlay for image upload
+  const [showSuccessOverlay, setShowSuccessOverlay] = useState(false); // Success overlay for both image upload and nickname update
 
   // 位於前端文件：member-info.js
   useEffect(() => {
@@ -55,8 +55,11 @@ const MemberInfo = () => {
         { nickname: member.nickname },
         { withCredentials: true }
       );
-      setMessage(response.data.message || "暱稱已更新");
+      // setMessage(response.data.message || "暱稱已更新");
       setIsEditing(false);
+      // Show success notification
+      setShowSuccessOverlay(true);
+      setTimeout(() => setShowSuccessOverlay(false), 1000); // 隱藏提示框
     } catch (error) {
       console.error("Error updating nickname:", error);
       setMessage("更新暱稱失敗，請重試");
@@ -90,11 +93,11 @@ const MemberInfo = () => {
           },
         }
       );
-      setMessage(response.data.message || "圖片已更新");
+      // setMessage(response.data.message || "圖片已更新");
       setMember((prev) => ({ ...prev, icon: response.data.icon })); // 更新顯示的圖片
       // Show success notification
-      setShowImageUploadSuccess(true);
-      setTimeout(() => setShowImageUploadSuccess(false), 1000); // Hide after 5 seconds
+      setShowSuccessOverlay(true);
+      setTimeout(() => setShowSuccessOverlay(false), 1000);
     } catch (error) {
       console.error("Error uploading image:", error);
       setMessage("圖片上傳失敗，請重試");
@@ -152,6 +155,7 @@ const MemberInfo = () => {
                   {isEditing ? (
                     <>
                       <FormInput
+                      size="small"
                         value={member.nickname}
                         onChange={(e) =>
                           setMember((prevMember) => ({
@@ -160,13 +164,21 @@ const MemberInfo = () => {
                           }))
                         }
                       />
-                      <button onClick={handleSaveName}>保存</button>
-                      <button onClick={() => setIsEditing(false)}>取消</button>
+                      <button onClick={handleSaveName}
+                      className={styles.button1}
+                      >保存</button>
+                      <button onClick={() => setIsEditing(false)}
+                      className={styles.button1}>取消</button>
                     </>
                   ) : (
                     <>
                       <span>{member.nickname || "新增暱稱"}</span>
-                      <button onClick={() => setIsEditing(true)}>編輯</button>
+                      <button
+                        onClick={() => setIsEditing(true)}
+                        className={styles.button}
+                      >
+                        編輯
+                      </button>
                     </>
                   )}
                 </div>
@@ -184,7 +196,7 @@ const MemberInfo = () => {
                     initialValue={gender}
                     onChange={setGender}
                   />
-                  <ButtonToggleM size="small" />
+                  {/* <ButtonToggleM size="small" /> */}
                 </div>
                 <h6 className={styles["right-title"]}>所在地</h6>
                 <div className={styles["right-text"]}>
@@ -193,18 +205,17 @@ const MemberInfo = () => {
                     initialValue={region}
                     onChange={setRegion}
                   />
-                  <ButtonToggleM size="small" />
+                  {/* <ButtonToggleM size="small" /> */}
                 </div>
               </div>
             </div>
-            {showImageUploadSuccess && (
+            {showSuccessOverlay && (
               <div className={styles.successOverlay}>
                 <div className={styles.successMessage}>
-                  <p>圖片已更新!</p>
+                  <p>操作成功!</p>
                 </div>
               </div>
             )}
-            {/* 提示訊息 */}
             {message && <p className={styles["message"]}>{message}</p>}
           </div>
         </div>
