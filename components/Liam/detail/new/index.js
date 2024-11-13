@@ -58,7 +58,7 @@ const NewsCard = ({ newsItems }) => {
   }
 
   if (!news.length) {
-    return <div className={styles.container}>暫無最新消息</div>;
+    return <div className={styles.container} style={{textAlign:'center',height:'50px'}}>暫無最新消息</div>;
   }
 
   // 計算總頁數

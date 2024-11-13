@@ -245,44 +245,53 @@
 }
 
 .submitButton {
-  background-color: #4a90e2;
-  color: white;
-  border: none;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: 1px solid #333;
 }
 
 .submitButton:hover {
-  background-color: #357abd;
+  background-color: #1eff00;
 }
 
 .cancelButton {
   background-color: #fff;
-  color: #666;
-  border: 1px solid #ddd;
+  color: #000000;
+  border: 1px solid #333;
+
 }
 
 
 .cancelButton:hover {
-  background-color: #f5f5f5;
+  background-color: #1eff00;
+
 }
 
 .addCommentButton {
-  background-color: #4a90e2;
-  color: white;
+  /* background-color: #00ff22; */
+  /* color: white; */
+  background-color: #ffffff;
+
   padding: 8px 16px;
-  border: none;
+  border: 1px solid #333;
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 20px;
   font-weight: 500;
+  font-size: 18px;
+
 }
-.deleteButton ,.editButton{
+.deleteButton ,.editButton,.addCommentButton{
   padding: 5px;
-  background-color: #fff;
+  background-color: #ffffff;
+  /* background-color: #fff; */
   border: 1px solid #333;
+  border-radius: 4px;
+
   cursor: pointer;
   margin-right: 5px;
 }
-.deleteButton:hover ,.editButton:hover{
+.deleteButton:hover ,.editButton:hover, .addCommentButton:hover{
   background-color: #15ff00;
 } 
 

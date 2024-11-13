@@ -17,17 +17,13 @@ const CommentItem = () => {
   const [showEditForm, setShowEditForm] = useState(false);
   const [currentEditId, setCurrentEditId] = useState(null);
   const [editingMessageId, setEditingMessageId] = useState(null);
-  const itemsPerPage = 5;
-
-  // 表單狀態
+  const [memberData, setMemberData] = useState({});
   const [formData, setFormData] = useState({
     title: "",
     content: "",
   });
-
-  const isCurrentUser = (memberId) => {
-    return currentEditId === memberId;
-  };
+  const [expandedMessages, setExpandedMessages] = useState({});
+  const itemsPerPage = 5;
 
   const organizeByFloor = (messages) => {
     const sortedMessages = [...messages].sort(
@@ -78,56 +74,52 @@ const CommentItem = () => {
       }
     };
 
-    const isCurrentUser = (memberId) => {
-      // 檢查留言的會員ID是否與當前登入的會員ID相符
-      return parseInt(currentEditId) === parseInt(memberId);
-    };
-
-    // 修改 fetchMemberData 函數
     const fetchMemberData = async () => {
       try {
-        const response = await fetch("http://localhost:3005/mem-data", {
+        // 獲取當前用戶ID
+        const userResponse = await fetch("http://localhost:3005/mem-data", {
           credentials: "include",
         });
-        if (!response.ok) {
+        if (!userResponse.ok) {
           throw new Error("Failed to fetch member data");
         }
-        const data = await response.json();
-        console.log("API response data:", data);
-
-        if (data.admin?.id) {
-          setCurrentEditId(data.admin.id);
-        } else {
-          console.log("User ID not found");
-          setCurrentEditId(null);
+        const userData = await userResponse.json();
+        if (userData.admin?.id) {
+          setCurrentEditId(userData.admin.id);
         }
+
+        // 獲取所有會員資料
+        const memberResponse = await fetch("http://localhost:3005/fundraiser/member", {
+          credentials: "include",
+        });
+        const memberData = await memberResponse.json();
+        console.log(memberData);
+
+        // 將會員資料轉換為以 id 為 key 的物件
+        const memberMap = {};
+        memberData.rows.forEach(member => {
+          memberMap[member.m_member_id] = member;
+        });
+        // console.log(memberMap);
+        
+        setMemberData(memberMap);
+
+
       } catch (error) {
         console.error("Fetch error:", error);
         setCurrentEditId(null);
       }
     };
-
+    
+    
     fetchMemberData();
     fetchMessages();
   }, [router.isReady]);
 
-  useEffect(() => {
-    console.log("currentEditId updated:", currentEditId);
-  }, [currentEditId]);
-
-  // 新增留言
-  const handleAddComment = async (e) => {
-    e.preventDefault();
+  const handleAddComment = async (formData) => {
     try {
       const { project } = router.query;
       
-      console.log('Sending data:', {
-        project,
-        title: formData.title,
-        content: formData.content,
-        member_id: currentEditId,
-      }); // 添加日誌
-  
       const response = await fetch(
         `http://localhost:3005/fundraiser/message/${project}`,
         {
@@ -143,38 +135,20 @@ const CommentItem = () => {
           credentials: "include",
         }
       );
-  
+
       if (response.ok) {
-        // 重新獲取留言列表
-        const updatedResponse = await fetch(
-          `http://localhost:3005/fundraiser/message/${project}`
-        );
-        const data = await updatedResponse.json();
-        const organizedComments = organizeByFloor(data.rows);
-        setComments(organizedComments);
+        await refreshComments();
         setShowAddForm(false);
         setFormData({ title: "", content: "" });
-      } else {
-        const errorData = await response.json();
-        console.error('Error response:', errorData);
       }
     } catch (error) {
       console.error("Error adding comment:", error);
     }
   };
 
-  // 修改留言
-  // 修改留言
-  const handleEditComment = async (e) => {
-    e.preventDefault();
+  const handleEditComment = async (formData) => {
     try {
-      if (!editingMessageId) {
-        console.error("No message ID for editing");
-        return;
-      }
-
-      console.log("Editing message:", editingMessageId);
-      console.log("Form data:", formData);
+      if (!editingMessageId) return;
 
       const response = await fetch(
         `http://localhost:3005/fundraiser/message/${editingMessageId}`,
@@ -183,34 +157,22 @@ const CommentItem = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            title: formData.title,
-            content: formData.content,
-          }),
+          body: JSON.stringify(formData),
           credentials: "include",
         }
       );
 
       if (response.ok) {
-        const { project } = router.query;
-        const updatedResponse = await fetch(
-          `http://localhost:3005/fundraiser/message/${project}`
-        );
-        const data = await updatedResponse.json();
-        const organizedComments = organizeByFloor(data.rows);
-        setComments(organizedComments);
+        await refreshComments();
         setShowEditForm(false);
         setEditingMessageId(null);
         setFormData({ title: "", content: "" });
-      } else {
-        const errorData = await response.json();
-        console.error("Error response:", errorData);
       }
     } catch (error) {
       console.error("Error editing comment:", error);
     }
   };
-  // 刪除留言
+
   const handleDeleteComment = async (messageId) => {
     if (window.confirm("確定要刪除這則留言嗎？")) {
       try {
@@ -222,13 +184,7 @@ const CommentItem = () => {
         );
 
         if (response.ok) {
-          const { project } = router.query;
-          const updatedResponse = await fetch(
-            `http://localhost:3005/fundraiser/message/${project}`
-          );
-          const data = await updatedResponse.json();
-          const organizedComments = organizeByFloor(data.rows);
-          setComments(organizedComments);
+          await refreshComments();
         }
       } catch (error) {
         console.error("Error deleting comment:", error);
@@ -236,9 +192,65 @@ const CommentItem = () => {
     }
   };
 
-  // 表單元件
-  const CommentForm = ({ onSubmit, buttonText }) => (
-    <form onSubmit={onSubmit} className={styles.form}>
+  const handleCancel = () => {
+    setShowAddForm(false);
+    setShowEditForm(false);
+    setEditingMessageId(null);
+    setFormData({ title: "", content: "" });
+  };
+
+  const refreshComments = async () => {
+    try {
+      const { project } = router.query;
+      const response = await fetch(
+        `http://localhost:3005/fundraiser/message/${project}`
+      );
+      const data = await response.json();
+      const organizedComments = organizeByFloor(data.rows);
+      setComments(organizedComments);
+    } catch (error) {
+      console.error("Error refreshing comments:", error);
+    }
+  };
+
+  const handleLocalChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (showAddForm) {
+      handleAddComment(formData);
+    } else if (showEditForm) {
+      handleEditComment(formData);
+    }
+  };
+
+  const totalPages = Math.ceil(comments.length / itemsPerPage);
+
+  const getCurrentPageComments = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return comments.slice(startIndex, endIndex);
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const toggleExpanded = (floor) => {
+    setExpandedMessages(prev => ({
+      ...prev,
+      [floor]: !prev[floor]
+    }));
+  };
+
+  const renderForm = () => (
+    <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.formGroup}>
         <label htmlFor="title" className={styles.label}>
           標題：
@@ -246,8 +258,9 @@ const CommentItem = () => {
         <input
           type="text"
           id="title"
+          name="title"
           value={formData.title}
-          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          onChange={handleLocalChange}
           className={styles.input}
           required
         />
@@ -258,27 +271,20 @@ const CommentItem = () => {
         </label>
         <textarea
           id="content"
+          name="content"
           value={formData.content}
-          onChange={(e) =>
-            setFormData({ ...formData, content: e.target.value })
-          }
+          onChange={handleLocalChange}
           className={styles.textarea}
           required
         />
       </div>
       <div className={styles.formActions}>
         <button type="submit" className={styles.submitButton}>
-          {buttonText}
+          {showAddForm ? "發布留言" : "更新留言"}
         </button>
-
         <button
           type="button"
-          onClick={() => {
-            setShowAddForm(false);
-            setShowEditForm(false);
-            setEditingMessageId(null);
-            setFormData({ title: "", content: "" });
-          }}
+          onClick={handleCancel}
           className={styles.cancelButton}
         >
           取消
@@ -287,25 +293,25 @@ const CommentItem = () => {
     </form>
   );
 
-  const FloorMessage = ({ floorNumber, userMessage, sellerResponse }) => {
-    const [isExpanded, setIsExpanded] = useState(false);
+  const renderMessage = (userMessage, sellerResponse, floor) => {
+    const isExpanded = expandedMessages[floor];
 
     return (
-      <div className={styles.floorContainer}>
+      <div key={floor} className={styles.floorContainer}>
         {userMessage && (
           <div className={styles.messageCard}>
             <div className={styles.messageContent}>
-              <div className={styles.avatar}>用戶</div>
+              <div className={styles.avatar}>會員</div>
               <div className={styles.mainContent}>
                 <div className={styles.userInfo}>
                   <span className={styles.userName}>
-                    用戶 {userMessage.f_member_id}
+                    {memberData[userMessage.f_member_id]?.m_nickname || `會員 ${userMessage.f_member_id}`}
                   </span>
                   <span className={styles.messageTime}>
                     {new Date(userMessage.f_message_current).toLocaleString()}
                   </span>
                   <div className={styles.messageActions}>
-                    {isCurrentUser(userMessage.f_member_id) && (
+                    {currentEditId === userMessage.f_member_id && (
                       <>
                         <button
                           className={styles.editButton}
@@ -314,7 +320,7 @@ const CommentItem = () => {
                               title: userMessage.f_message_title,
                               content: userMessage.f_message_content,
                             });
-                            setEditingMessageId(userMessage.f_message_id); // 設置要編輯的留言ID
+                            setEditingMessageId(userMessage.f_message_id);
                             setShowEditForm(true);
                           }}
                         >
@@ -322,9 +328,7 @@ const CommentItem = () => {
                         </button>
                         <button
                           className={styles.deleteButton}
-                          onClick={() =>
-                            handleDeleteComment(userMessage.f_message_id)
-                          }
+                          onClick={() => handleDeleteComment(userMessage.f_message_id)}
                         >
                           刪除
                         </button>
@@ -346,69 +350,55 @@ const CommentItem = () => {
         )}
 
         {sellerResponse && (
-          <div className={styles.toggleReplies}>
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className={styles.toggleButton}
-            >
-              {isExpanded ? (
-                <>
-                  <ChevronUp className="mr-1" />
-                  收起賣家回覆
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="mr-1" />
-                  查看賣家回覆
-                </>
-              )}
-            </button>
-          </div>
-        )}
+          <>
+            <div className={styles.toggleReplies}>
+              <button
+                onClick={() => toggleExpanded(floor)}
+                className={styles.toggleButton}
+              >
+                {isExpanded ? (
+                  <>
+                    <ChevronUp className="mr-1" />
+                    收起賣家回覆
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="mr-1" />
+                    查看賣家回覆
+                  </>
+                )}
+              </button>
+            </div>
 
-        {isExpanded && sellerResponse && (
-          <div
-            className={`${styles.messageCard} ${styles.replyCard} ${styles.sellerResponse}`}
-          >
-            <div className={styles.messageContent}>
-              <div className={styles.avatar}>賣家</div>
-              <div className={styles.mainContent}>
-                <div className={styles.userInfo}>
-                  <span className={styles.userName}>
-                    <span className={styles.customerService}>【賣家回覆】</span>
-                  </span>
-                  <span className={styles.messageTime}>
-                    {new Date(
-                      sellerResponse.f_message_current
-                    ).toLocaleString()}
-                  </span>
-                </div>
-                <div className={styles.messageBody}>
-                  <h4 className={styles.messageTitle}>
-                    {sellerResponse.f_message_title}
-                  </h4>
-                  <p className={styles.messageText}>
-                    {sellerResponse.f_message_content}
-                  </p>
+            {isExpanded && (
+              <div className={`${styles.messageCard} ${styles.replyCard} ${styles.sellerResponse}`}>
+                <div className={styles.messageContent}>
+                  <div className={styles.avatar}>賣家</div>
+                  <div className={styles.mainContent}>
+                    <div className={styles.userInfo}>
+                      <span className={styles.userName}>
+                        <span className={styles.customerService}>【賣家回覆】</span>
+                      </span>
+                      <span className={styles.messageTime}>
+                        {new Date(sellerResponse.f_message_current).toLocaleString()}
+                      </span>
+                    </div>
+                    <div className={styles.messageBody}>
+                      <h4 className={styles.messageTitle}>
+                        {sellerResponse.f_message_title}
+                      </h4>
+                      <p className={styles.messageText}>
+                        {sellerResponse.f_message_content}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            )}
+          </>
         )}
       </div>
     );
-  };
-
-  const totalPages = Math.ceil(comments.length / itemsPerPage);
-
-  const getCurrentPageComments = () => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return comments.slice(startIndex, endIndex);
-  };
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
   };
 
   if (isLoading) {
@@ -431,33 +421,21 @@ const CommentItem = () => {
         </button>
       )}
 
-      {showAddForm && (
+      {(showAddForm || showEditForm) && (
         <div className={styles.formContainer}>
-          <h3 className={styles.formTitle}>新增留言</h3>
-          <CommentForm onSubmit={handleAddComment} buttonText="發布留言" />
-        </div>
-      )}
-
-      {showEditForm && (
-        <div className={styles.formContainer}>
-          <h3 className={styles.formTitle}>編輯留言</h3>
-          <CommentForm onSubmit={handleEditComment} buttonText="更新留言" />
+          <h3 className={styles.formTitle}>
+            {showAddForm ? "新增留言" : "編輯留言"}
+          </h3>
+          {renderForm()}
         </div>
       )}
 
       {comments.length === 0 ? (
-        <div className={styles.emptyContainer}>暫無留言</div>
+        <div className={styles.emptyContainer} style={{textAlign:'center',height:'50px'}}>暫無留言</div>
       ) : (
         <>
-          {getCurrentPageComments().map(
-            ([floor, { userMessage, sellerResponse }]) => (
-              <FloorMessage
-                key={floor}
-                floorNumber={floor}
-                userMessage={userMessage}
-                sellerResponse={sellerResponse}
-              />
-            )
+          {getCurrentPageComments().map(([floor, { userMessage, sellerResponse }]) => 
+            renderMessage(userMessage, sellerResponse, floor)
           )}
 
           {totalPages > 1 && (

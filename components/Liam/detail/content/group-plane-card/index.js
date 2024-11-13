@@ -54,7 +54,7 @@ export default function GroupPlaneCard() {
         
         // 確保設置的值不是 undefined
         setMember(data.admin || null);
-        console.log(member);
+        // console.log(member);
 
       } catch (error) {
         console.error("Error fetching member data:", error);
@@ -67,6 +67,10 @@ export default function GroupPlaneCard() {
     
   }, [router.isReady]);
 
+  if(plane.length==0){
+    return  <div className={styles.emptyContainer} style={{textAlign:'center',height:'50px'}}>暫無專案</div>
+  }
+
   if (showProductSelector) {
     return (
       <ProductSelector
@@ -76,6 +80,7 @@ export default function GroupPlaneCard() {
       />
     );
   }
+
 
   return (
     <div className={styles.container}>

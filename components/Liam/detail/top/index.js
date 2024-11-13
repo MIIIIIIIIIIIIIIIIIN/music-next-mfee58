@@ -143,8 +143,8 @@ export default function DetailTop({}) {
     
     if (targetElement) {
       // 計算元素到頂部的距離
-      const yOffset = -80; // 可以調整這個值來控制最終停留位置的偏移量
-      const elementPosition = targetElement.getBoundingClientRect().top;
+      const yOffset = -120; // 可以調整這個值來控制最終停留位置的偏移量
+      const elementPosition = targetElement.getBoundingClientRect().top+150;
       const offsetPosition = elementPosition + window.pageYOffset + yOffset;
   
       window.scrollTo({
@@ -178,7 +178,7 @@ export default function DetailTop({}) {
   return (
     <div className={styles.wrap}>
       <div className={styles.top}>
-        <img src="/01.jpg" alt="" />
+        <img src={projectData.top} alt="" />
       </div>
       <h1 className={styles.name}>{projectData.f_project_name}</h1>
       <div className={styles.container}>
@@ -280,7 +280,7 @@ export default function DetailTop({}) {
                 }}
               />
               <Heart />
-              <button onClick={() => scrollToSection("planSection", 80)}>
+              <button onClick={() => scrollToSection("planSection", 90)}>
                 贊助專案
               </button>
               <button onClick={shareToLine} className={styles.lineShareButton}>

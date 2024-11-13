@@ -1,10 +1,16 @@
 
 .container {
-  transform: translateY(-80px);
+  /* border: 1px solid #333; */
+  transform: translateY(-10px);
   top: 80px;
   width: 80%;
+  padding-bottom: 50px;
   margin: auto;;
+  background-image: url('/Liam/detail.jpg');
+  background-size: cover;
+  /* background-repeat: no-repeat; */
 }
+
 .name{
   color: #fff;
   transform: translateY(-180px);
