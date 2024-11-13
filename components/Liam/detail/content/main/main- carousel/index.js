@@ -56,7 +56,7 @@ const DetailMainCarousel = () => {
   }
 
   if (kvData.length === 0) {
-    return <div>No images available</div>;
+    return <div style={{textAlign:'center',height:'50px'}}>暫無廣告</div>;
   }
 
   return (

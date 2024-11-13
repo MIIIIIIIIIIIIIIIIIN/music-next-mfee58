@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/router';
 import { ChevronDown, ChevronUp, ShoppingCart, ArrowLeft } from "lucide-react";
 import styles from "./product-selector.module.css";
 
@@ -26,6 +27,7 @@ const INITIAL_FAQS = [
 ];
 
 export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane }) => {
+  const router = useRouter();
   const [albumInfo] = useState(INITIAL_ALBUM_INFO);
   const [products, setProducts] = useState([]);
   const [faqs] = useState(INITIAL_FAQS);
@@ -66,11 +68,12 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
     }
   }, [plane, selectedPlan]);
 
-  // 處理數量改變 - 移除限制條件
+  // 處理數量改變
   const handleQuantityChange = (productId, change) => {
     setQuantities(prev => {
       const currentQuantity = prev[productId] || 0;
       const newQuantity = Math.max(0, currentQuantity + change);
+      console.log(`商品 ${productId} 數量更新:`, newQuantity);
       return { ...prev, [productId]: newQuantity };
     });
   };
@@ -132,6 +135,35 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
     }));
 
   const hasItems = cartItems.length > 0;
+
+  // 處理加入購物車
+  const handleCartButtonClick = () => {
+    console.log("當前購物車商品:", cartItems.map(item => ({
+      商品名稱: item.name,
+      數量: item.quantity,
+      價格: item.price,
+      總價: item.price * item.quantity
+    })));
+    setShowCart(true);
+  };
+
+  // 處理結帳
+  const handlePayment = () => {
+    const paymentProducts = cartItems.map(item => ({
+      productName: item.name,
+      quantity: item.quantity,
+      price: item.price
+    }));
+
+    console.log("結帳商品資訊:", paymentProducts);
+    
+    const productsParam = encodeURIComponent(JSON.stringify(paymentProducts));
+    
+    router.push({
+      pathname: 'http://localhost:3001/payment',
+      query: { products: productsParam }
+    });
+  };
 
   // 渲染商品項目
   const renderProductItem = (product) => (
@@ -226,7 +258,9 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
                   <span>總計</span>
                   <span>${calculateTotal().toLocaleString()}</span>
                 </div>
-                <button className={styles.checkoutButton}>前往結帳</button>
+                <button onClick={handlePayment} className={styles.checkoutButton}>
+                  前往結帳
+                </button>
               </div>
             </>
           ) : (
@@ -303,7 +337,7 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
             <div className={styles.divider}>
               <button
                 className={styles.cartButton}
-                onClick={() => setShowCart(true)}
+                onClick={handleCartButtonClick}
                 disabled={!hasItems}
               >
                 <ShoppingCart size={20} />

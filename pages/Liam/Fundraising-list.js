@@ -9,7 +9,7 @@ import ImageRecommendCarousel from '@/components/Liam/Fundraising-list/new/recom
 import ImageCarousel from '@/components/Liam/Fundraising-list/new/index'
 import WaterfallLayout from '@/components/Liam/Fundraising-list/water-layout'
 import Chat from '@/components/Liam/chat/chat';
-
+// import ContractAgreement from '@/components/Liam/add-project/ContractAgreement'
 
 export default function FundraisingList() {
   const images = [
@@ -25,6 +25,7 @@ export default function FundraisingList() {
     <div>
       <Nav />
       <Kv />
+      {/* <ContractAgreement /> */}
       <FundraisingTitle text='!!(最新募資)'/>
     <ImageCarousel  images={images}/>
     <FundraisingTitle text='<<(推薦募資)'/>

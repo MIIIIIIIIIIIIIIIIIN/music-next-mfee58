@@ -8,9 +8,11 @@ import Chat from '@/components/Liam/chat/chat';
 import AudioPlayer from '@/components/Liam/music';
 import { TabProvider } from '@/components/Liam/detail/top/tab-Context';
 
+
 export default function ProjectDetail() {
   return (
     <TabProvider>
+      
       <div>
         <Nav />
         <DetailTop />

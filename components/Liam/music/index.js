@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import styles from './music.module.css';
 import { Play, Pause, SkipBack, SkipForward, Mic } from 'lucide-react';
 
 const AudioPlayer = () => {
+  const router = useRouter()
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [music, setMusic] = useState([])
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
   const SONG_LIMIT = 30; // 30 seconds limit
@@ -14,13 +17,13 @@ const AudioPlayer = () => {
     {
       title: "夜曲",
       artist: "周杰倫",
-      url: "/Liam/music/01.mp3",
+      url: "/Liam/music/04.wav",
       cover: "/Liam/01/01.jpg"
     },
     {
       title: "告白氣球",
       artist: "周杰倫",
-      url: "/path/to/song2.mp3",
+      url: "/Liam/music/04.wav",
       cover: "/Liam/01/02.jpg"
     },
     {
@@ -57,6 +60,27 @@ const AudioPlayer = () => {
     }
   }, [currentTime]);
 
+  useEffect(()=>{
+    const fetchMusic = async () => {
+      try {
+        if (!router.isReady) return;
+
+        const { project } = router.query;
+
+        const response = await fetch(
+          `http://localhost:3005/fundraiser/music/${project}`
+        );
+        const data = await response.json();
+        console.log(data);
+        setMusic(data.data||[])
+        
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+      }
+    }
+    fetchMusic()
+  },[router.isReady])
+
   const handlePlayPause = () => {
     if (!isPlaying) {
       audioRef.current.play();
@@ -78,20 +102,18 @@ const AudioPlayer = () => {
     setCurrentTime(0);
   };
 
+  if (!music) {
+    return <div className={styles.loading}>載入中...</div>;
+  }
+
+  if (music.length === 0) {
+    return <div className={styles.noMusic} style={{textAlign:'center',height:'50px'}}>暫無音樂</div>;
+  }
+
   return (
     <div className={styles.playerContainer}>
-      {/* Status Bar */}
-      {/* <div className={styles.statusBar}>
-        <div className={styles.time}>12:30</div>
-        <div className={styles.statusIcons}>
-          <span>📶</span>
-          <span>🔋</span>
-        </div>
-      </div> */}
-
-      {/* Album Cover Carousel */}
       <div className={styles.albumCarousel}>
-        {songs.map((song, index) => {
+        {music.map((song, index) => {
           const offset = index - currentSong;
           const isActive = index === currentSong;
           
@@ -111,15 +133,14 @@ const AudioPlayer = () => {
             >
               <img src={song.cover} alt={song.title} />
             </div>
-          )
+          );
         })}
       </div>
 
-      {/* Track Progress */}
       <div className={styles.trackProgress}>
         <div className={styles.timeDisplay}>
           <span>{formatTime(currentTime)}</span>
-          <span className={styles.trackCount}>{`${currentSong + 1}/${songs.length}`}</span>
+          <span className={styles.trackCount}>{`${currentSong + 1}/${music.length}`}</span>
           <span>{formatTime(Math.min(SONG_LIMIT, duration))}</span>
         </div>
         <div className={styles.progressBar}>
@@ -134,13 +155,14 @@ const AudioPlayer = () => {
             onChange={(e) => {
               const time = parseFloat(e.target.value);
               setCurrentTime(time);
-              audioRef.current.currentTime = time;
+              if (audioRef.current) {
+                audioRef.current.currentTime = time;
+              }
             }}
           />
         </div>
       </div>
 
-      {/* Controls */}
       <div className={styles.controls}>
         <button 
           className={styles.controlButton}
@@ -162,13 +184,15 @@ const AudioPlayer = () => {
         </button>
       </div>
 
-      <audio
-        ref={audioRef}
-        src={songs[currentSong].url}
-        onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
-        onLoadedMetadata={(e) => setDuration(e.target.duration)}
-        onEnded={() => handleSongChange('next')}
-      />
+      {music[currentSong] && (
+        <audio
+          ref={audioRef}
+          src={music[currentSong].url}
+          onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
+          onLoadedMetadata={(e) => setDuration(e.target.duration)}
+          onEnded={() => handleSongChange('next')}
+        />
+      )}
     </div>
   );
 };

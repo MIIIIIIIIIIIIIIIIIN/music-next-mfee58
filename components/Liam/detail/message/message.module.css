@@ -175,6 +175,126 @@
   margin-right: 0.25rem;
 }
 
+
+
+
+
+
+
+
+
+.messageContainer {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.formContainer {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.formTitle {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.input, .textarea {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.formActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.submitButton, .cancelButton {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.submitButton {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: 1px solid #333;
+}
+
+.submitButton:hover {
+  background-color: #1eff00;
+}
+
+.cancelButton {
+  background-color: #fff;
+  color: #000000;
+  border: 1px solid #333;
+
+}
+
+
+.cancelButton:hover {
+  background-color: #1eff00;
+
+}
+
+.addCommentButton {
+  /* background-color: #00ff22; */
+  /* color: white; */
+  background-color: #ffffff;
+
+  padding: 8px 16px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 18px;
+
+}
+.deleteButton ,.editButton,.addCommentButton{
+  padding: 5px;
+  background-color: #ffffff;
+  /* background-color: #fff; */
+  border: 1px solid #333;
+  border-radius: 4px;
+
+  cursor: pointer;
+  margin-right: 5px;
+}
+.deleteButton:hover ,.editButton:hover, .addCommentButton:hover{
+  background-color: #15ff00;
+} 
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -185,3 +305,5 @@
     transform: translateY(0);
   }
 }
+
+

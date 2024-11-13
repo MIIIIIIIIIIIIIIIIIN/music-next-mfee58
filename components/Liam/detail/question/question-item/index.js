@@ -57,7 +57,7 @@ const QuestionAccordion = () => {
   }
 
   if (!question.length) {
-    return <div className={styles.container}>暫無問答資料</div>;
+    return <div className={styles.container} style={{textAlign:'center',height:'50px'}}>暫無問答資料</div>;
   }
 
   // 計算總頁數
