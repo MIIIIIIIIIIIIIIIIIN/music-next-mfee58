@@ -30,8 +30,21 @@ const MemberInfo = () => {
         if (data.admin) {
           setMember(data.admin); // 用戶已登入，設置 member 狀態
           setGender(data.admin.m_gender); // 設置性別狀態
-        setBirth(data.admin.m_birth); // 假設還有生日資料
-        setRegion(data.admin.m_location); // 假設還有所在地資料
+
+          // 格式化 birth 只顯示 MM-DD
+          const birthDate = new Date(data.admin.birth);
+          const formattedBirth = `${String(birthDate.getMonth() + 1).padStart(2, "0")}-${String(birthDate.getDate()).padStart(2, "0")}`;
+          setBirth(formattedBirth);
+
+          setRegion(data.admin.m_location); // 假設還有所在地資料
+                  // 確保日期格式正確並格式化為 YYYY-MM-DD
+
+        if (!isNaN(birthDate)) {
+          setBirth(birthDate.toISOString().split("T")[0]); // 格式化為 YYYY-MM-DD
+        } else {
+          console.error("無法解析的生日日期格式:", data.admin.m_birth);
+          setBirth("日期格式錯誤");
+        }
         } else {
           console.log("用戶尚未登入");
           router.push("/login"); // 如果尚未登入，跳轉到登入頁
@@ -158,7 +171,7 @@ const MemberInfo = () => {
                   {isEditing ? (
                     <>
                       <FormInput
-                      size="small"
+                        size="small"
                         value={member.nickname}
                         onChange={(e) =>
                           setMember((prevMember) => ({
@@ -167,11 +180,18 @@ const MemberInfo = () => {
                           }))
                         }
                       />
-                      <button onClick={handleSaveName}
-                      className={styles.button1}
-                      >保存</button>
-                      <button onClick={() => setIsEditing(false)}
-                      className={styles.button1}>取消</button>
+                      <button
+                        onClick={handleSaveName}
+                        className={styles.button1}
+                      >
+                        保存
+                      </button>
+                      <button
+                        onClick={() => setIsEditing(false)}
+                        className={styles.button1}
+                      >
+                        取消
+                      </button>
                     </>
                   ) : (
                     <>
@@ -186,7 +206,7 @@ const MemberInfo = () => {
                   )}
                 </div>
                 <h6 className={styles["left-title"]}>生日</h6>
-                <div className={styles["left-text"]}>
+                <div className={styles["left-text-birth"]}>
                   <FormInput value={birth} readOnly />
                 </div>
               </div>

@@ -138,6 +138,26 @@
   width: 100%; */
 }
 
+.left-text-birth {
+  background-color: initial; /* 確保背景顏色為默認 */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #000;
+  justify-content: space-around;
+  align-items: center;
+  margin: 5px 0;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: default;
+}
+.left-text-birth input:hover {
+  background-color: initial; 
+  border: none;
+  color: initial;
+  cursor: default;
+}
+
 /* 成功提示框 */
 .successOverlay {
   position: fixed;
