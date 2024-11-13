@@ -226,7 +226,7 @@ export default function OthersYouLike({youMayLike}) {
                   image={album.p_productsimg_filename}
                   singer={album.p_albums_artist}
                   headline={album.p_albums_title}
-                  
+                  likeid={album.p_albums_id}
                 />
               );
             })}

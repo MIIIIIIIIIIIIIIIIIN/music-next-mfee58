@@ -9,6 +9,7 @@ import ProductsDescription from "@/components/George/products-detail/products-de
 import ProductsMore from "@/components/George/products-detail/products-more";
 import OthersYouLike from "@/components/George/products-detail/products-othersYouLike";
 import { useRouter } from "next/router";
+import Jamendoapi from "@/components/George/musicAPI/jamendoapi"
 import axios from "axios";
 
 export default function ProductsDetail() {
@@ -116,15 +117,15 @@ export default function ProductsDetail() {
   }, [pid])
 
   useEffect(()=>{
-    console.log("你可能也喜歡: ", youMayLike);
+    console.log("你可能也喜歡: ", pid);
     
-  }, [youMayLike])
+  }, [pid])
 
   return (
     <>
       <Nav />
       <ProductsDetailPage albumDetail={albumDetail} albumImages={albumImages} pid={pid}/>
-      <ProductsListen />
+      <ProductsListen pid={pid}/>
       <ProductsDescription albumDetail={albumDetail} albumImages={albumImages} pid={pid}/>
       <ProductsMore albumDetail={albumDetail} albumImages={albumImages} otherAlbums={otherAlbums} otherImages={otherImages}/>
       <OthersYouLike albumDetail={albumDetail} albumImages={albumImages} youMayLike={youMayLike}/>

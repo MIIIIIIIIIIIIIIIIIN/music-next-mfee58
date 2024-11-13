@@ -86,6 +86,7 @@
 }
 .iconsContainer  .header{
   margin-right: 10px;
+  border:none;
 }
 .icon {
   /* width: 20px;

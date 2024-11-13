@@ -51,7 +51,7 @@ export default function ProductsDetailPage({ albumDetail, albumImages, pid }) {
             <span className={style.contentDetails}>
               <ul>
                 <li>${parseInt(albumDetail?.p_albums_price)}</li>
-                <li>{albumDetail?.p_albums_release_date.split("T")[0]}</li>
+                <li>{albumDetail?.p_albums_release_date ? albumDetail.p_albums_release_date.split("T")[0] : '未提供'}</li>
                 <li>{albumDetail?.p_albums_delivery_methods}</li>
                 <li>宅配(新竹物流、Fedex)、超商(全家、7-11)</li>
                 <li>{albumDetail?.p_albums_artist}</li>
@@ -69,7 +69,7 @@ export default function ProductsDetailPage({ albumDetail, albumImages, pid }) {
           <div className={style.seperationLine}></div>
           <div className={style.totalAmount}>Total Purchase Amount ${parseInt(albumDetail?.p_albums_price)}</div>
           <div className={style.btns}>
-            <Link href={"/George/products-cart-page"}>
+            <Link href={"/George/cart"}>
               <BlackWBtns
                 type="2"
                 onClick={handleClick}
