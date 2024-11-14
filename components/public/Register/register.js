@@ -5,6 +5,9 @@ import styles from "./register.module.css";
 import MemIcons from "@/components/member/mem-icons";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [gender, setGender] = useState("");
+  const [birth, setBirth] = useState("");
   const [nickname, setNickname] = useState("");
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
@@ -439,6 +442,7 @@ const Register = () => {
       const response = await axios.post(
         "http://localhost:3005/member/register",
         {
+          name,
           account,
           password,
           email,
@@ -521,7 +525,7 @@ const Register = () => {
               <MemIcons iconName="icon-user" size="medium" />
               <input
                 type="text"
-                placeholder="暱稱(之後可做修改)"
+                placeholder="暱稱 (必填*之後可做修改)"
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
                 className={styles.input}
@@ -532,7 +536,7 @@ const Register = () => {
               <MemIcons iconName="icon-user" size="medium" />
               <input
                 type="text"
-                placeholder="帳號 (至少6碼)"
+                placeholder="帳號 (必填*至少6碼)"
                 value={account}
                 onChange={handleAccountChange}
                 className={styles.input}
