@@ -6,17 +6,14 @@ import ProductsCart from "@/components/George/products-cart-checkout/products-ca
 import { QuantityProvider } from "@/components/George/context/quantity-provider";
 import { CartProvider } from "@/components/George/context/cartdetail-provider";
 import useFetchDB from "@/components/George/hooks/usefetchDB";
-import { useRouter } from "next/router";
-
 
 export default function ProductsCartPage(props) {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
-  const { memData } = useFetchDB();
-  const router = useRouter();
-  const { urid } = router.query;
+  const { memData, listData, mdBox } = useFetchDB();
 
 
+  
 
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
@@ -42,13 +39,18 @@ export default function ProductsCartPage(props) {
     };
   }, []);
 
+  useEffect(() => {
+  
+      console.log("urid: ", listData);
+      
+  }, [listData]);  // 這樣只有當 mdBox 更新後才會 log 出來
 
   return (
     <>
       <Nav />
       <QuantityProvider>
         <CartProvider>
-          <ProductsCart />
+          <ProductsCart mdBox={mdBox} listData={listData} />
         </CartProvider>
       </QuantityProvider>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}

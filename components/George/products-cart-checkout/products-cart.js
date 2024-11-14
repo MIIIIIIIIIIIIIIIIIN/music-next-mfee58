@@ -4,7 +4,7 @@ import BlackWBtnsMobile from "../george-components/black_wbtns_mobile";
 import { Quantity } from "../george-components/quantity/quantity";
 import Link from "next/link";
 
-export default function ProductsCart(props) {
+export default function ProductsCart({ mdBox, listData }) {
   const handleClick = () => {
     "";
   };
@@ -34,42 +34,59 @@ export default function ProductsCart(props) {
           </div>
 
           {/* 購買細項 */}
-          <div className={style.checkoutcontainer}>
-            <div className={style.checkoutcontainer1}>
-              <div className={style.checkboxandpic}>
-                <input type="checkbox" name="albumcheck" />
-                <div className={style.albumbox}>
-                  <img
-                    src="/George/products-images-250px/products-(2).jpg"
-                    alt=""
-                    className={style.albumpics}
-                  />
-                </div>
-              </div>
+          {mdBox &&
+            mdBox.map((v, i) => {
+              return (
+                <div className={style.checkoutcontainer} key={i}>
+                  <div className={style.checkoutcontainer1}>
+                    <div className={style.checkboxandpic}>
+                      <input type="checkbox" name="albumcheck" />
+                      <div className={style.albumbox}>
+                        <img
+                          src={`/${v.p_cart_img_filename}`}
+                          alt={v.p_cart_img_filename}
+                          className={style.albumpics}
+                        />
+                      </div>
+                    </div>
 
-              <div className={style.checkoutdescriptions}>
-                <div className={style.mobilecontroller}>
-                  <h4 className={style.descriptionstitle}>七里香</h4>
-                  <div className={style.descriptionsalbumname}>不是周杰倫</div>
-                  <div className={style.descriptionscontent}>
-                    在孤獨的呢喃中尋找心靈的平靜，這張專輯融合了民謠與電子元素。
+                    {Array.isArray(listData.rows) &&
+                      listData.rows
+                        .filter((id) => v.p_albums_id === id.p_albums_id)
+                        .map((album, index) => {
+                          return (
+                            <div className={style.checkoutdescriptions} key={index}>
+                              <div className={style.mobilecontroller}>
+                                <h4 className={style.descriptionstitle}>
+                                  {album.p_albums_title}
+                                </h4>
+                                <div className={style.descriptionsalbumname}>
+                                  {album.p_albums_artist}
+                                </div>
+                              </div>
+                              <div className={style.checkoutqpbox}>
+                                <div className={style.checkoutquantity}>
+                                  <Quantity />
+                                </div>
+                                <div className={style.checkoutprice}>
+                                  ${album.p_albums_price}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                   </div>
                 </div>
-                <div className={style.checkoutqpbox}>
-                  <div className={style.checkoutquantity}>{<Quantity />}</div>
-                  <div className={style.checkoutprice}>$549</div>
-                </div>
-              </div>
-            </div>
-          </div>
+              );
+            })}
 
-          {/* seperation line */}
+          {/* separation line */}
           <div className={style.seperationline}></div>
 
           {/* total + checkout button */}
           <div className={style.totalandcheckoutbutton}>
             <div className={style.totalamount}>總金額(1件商品)：$549</div>
-            <Link href={"/George/products-checkout-page"}>
+            <Link href={"/George/checkout/products-checkout-page"}>
               <BlackWBtnsMobile
                 type="2"
                 onClick={handleClick}

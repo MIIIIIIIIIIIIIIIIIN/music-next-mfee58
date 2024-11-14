@@ -8,7 +8,10 @@ import { MdArrowForwardIos } from "react-icons/md";
 export default function OthersYouLike({youMayLike}) {
 
 
-
+  useEffect(() => {
+    // console.log("albums:", listData);
+    console.log("youMayLike:", youMayLike);
+  }, [youMayLike]);
   return (
     <>
       <div className={styles["carousel-container"]}>

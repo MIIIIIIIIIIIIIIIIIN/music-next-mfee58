@@ -16,8 +16,7 @@ export default function ProductsMore({
 
 useEffect(()=>{
   console.log("more: ", otherImages);
-  
-}, [])
+}, [otherImages])
 
   return (
     <>

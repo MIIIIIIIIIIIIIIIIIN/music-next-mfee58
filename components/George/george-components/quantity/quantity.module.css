@@ -41,9 +41,50 @@
   height: 1.5em;
   width: 1.5em;
   position: relative;
-  padding: 5px 5px;
-  line-height: 1.5em;
-  cursor: pointer;  /* 添加手型光標，表示可點擊 */
+  /* padding: 5px 5px; */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantity .div-wrapper-clicked{
+  background-color: rgba(20, 255, 0, 1);
+  border: 0.5px solid;
+  border-color: #dddddd;
+  height: 1.5em;
+  width: 1.5em;
+  position: relative;
+  /* padding: 5px 5px; */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantity .div-wrapper-plus{
+  background-color: #ffffff;
+  border: 0.5px solid;
+  border-color: #dddddd;
+  height: 1.5em;
+  width: 1.5em;
+  position: relative;
+  /* padding: 5px 5px; */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantity .div-wrapper-plus-clicked{
+  background-color: rgba(20, 255, 0, 1);
+  border: 0.5px solid;
+  border-color: #dddddd;
+  height: 1.5em;
+  width: 1.5em;
+  position: relative;
+  /* padding: 5px 5px; */
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,10 +92,19 @@
 
 .quantity .div {
   color: #000000;
-  font-weight: bold;
+  border: none;
+  background-color: rgb(255,255,255,0);
+  font-size: 22px;
+  padding-top: 4px;
+  cursor: pointer;
 }
 
 .quantity .text-wrapper-2 {
   color: #000000;
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-size: 22px;
+  padding-bottom: 2px;
+  border: none;
+  background-color: rgb(255,255,255,0);
+  cursor: pointer;
 }

@@ -77,7 +77,7 @@ export default function ProductsLatestLaunched() {
           slidesToSlide={1}
           swipeable
         >
-          {listData.rows.map((v, i) => {
+          {listData?.rows?.map((v, i) => {
             const albumImages = albumsimg[v.p_albums_id];
             return (
               <Items1

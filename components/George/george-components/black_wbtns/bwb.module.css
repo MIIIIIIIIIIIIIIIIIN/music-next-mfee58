@@ -38,4 +38,5 @@
   font-weight: var(--primary-300-font-weight);
   letter-spacing: var(--primary-300-letter-spacing);
   line-height: var(--primary-300-line-height);
+  cursor: pointer;
 }

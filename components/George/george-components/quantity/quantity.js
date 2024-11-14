@@ -1,33 +1,49 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import style from "./quantity.module.css";
+import { useQuantity } from "../../context/quantity-provider";
 
 export const Quantity = () => {
-  const [quantity, setQuantity] = useState(1);
+  const {
+    quantity,
+    handleIncrement,
+    handleDecrement,
+    plusIsPressed,
+    deIsPressed,
+    setPlusIsPressed,
+    setDeIsPressed,
+  } = useQuantity();
 
-  const handleIncrement = ()=>{
-    if(quantity > 1 ){
-      setQuantity(quantity + 1)
-    }
-  }
-  const handleDecrement = ()=>{
-    if(quantity > 1 ){
-      setQuantity(quantity - 1)
-    }
-  }
+
 
   return (
     <>
       <div className={style["quantity"]}>
-        <div className={style["div-wrapper"]}>
-          <div className={style["text-wrapper-2"]} onClick={handleDecrement}>–</div>
+        <div
+          className={
+            deIsPressed ? style["div-wrapper-clicked"] : style["div-wrapper"]
+          }
+          onMouseDown={() => setDeIsPressed(true)}
+          onMouseUp={() => setDeIsPressed(false)}
+          onClick={handleDecrement}
+        >
+          <button className={style["text-wrapper-2"]}>–</button>
         </div>
 
         <div className={style["QUTANTITY"]}>
-          <div className={style["text-wrapper"]} >1</div>
+          <div className={style["text-wrapper"]}>{quantity}</div>
         </div>
 
-        <div className={style["div-wrapper"]}>
-          <div className={style["div"]} onClick={handleIncrement}>+</div>
+        <div
+          className={
+            plusIsPressed
+              ? style["div-wrapper-plus-clicked"]
+              : style["div-wrapper-plus"]
+          }
+          onMouseDown={() => setPlusIsPressed(true)}
+          onMouseUp={() => setPlusIsPressed(false)}
+          onClick={handleIncrement}
+        >
+          <button className={style["div"]}>+</button>
         </div>
       </div>
     </>
