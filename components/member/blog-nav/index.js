@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./blog-nav.module.css"; // 引入相應的 CSS 模組
 import { ProfileIcons } from "@/components/public/profileIcons/ProfileIcons";
+import { set } from "lodash";
 
 const BlogNav = () => {
   const [member, setMember] = useState({});
@@ -8,6 +9,7 @@ const BlogNav = () => {
   const [birth, setBirth] = useState("");
   const [location, setLocation] = useState("");
   const [gender, setGender] = useState("");
+  const [bio, setBio] = useState("");
 
   useEffect(() => {
     const fetchSessionData = async () => {
@@ -23,6 +25,7 @@ const BlogNav = () => {
           setName(data.admin.nickname || "");
           setGender(data.admin.gender || "");
           setLocation(data.admin.location || "");
+          setBio(data.admin.bio || "");
 
         // 使用 UTC 解析生日
         const birthDate = new Date(data.admin.birth);
@@ -61,8 +64,8 @@ const BlogNav = () => {
           <div className="location">{location}</div>
         </div>
       </div>
-      <div className={styles["status"]}>
-        <h6>Love & Peace</h6>
+      <div className={styles["bio"]}>
+        <div className={styles["bio"]}>{bio}</div>
       </div>
     </div>
   );

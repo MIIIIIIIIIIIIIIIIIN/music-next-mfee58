@@ -194,7 +194,7 @@ const MemberInfo = () => {
                         }
                       />
                       <button
-                        onClick={handleSaveName}
+                        onClick={handleSaveBio}
                         className={styles.button1}
                       >
                         保存

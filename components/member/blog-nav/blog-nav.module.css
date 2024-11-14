@@ -33,7 +33,7 @@
 .location{
   margin: 10px;
 }
-.status {
+.bio {
   display: flex;
   flex-direction: column;
   justify-content: center;
