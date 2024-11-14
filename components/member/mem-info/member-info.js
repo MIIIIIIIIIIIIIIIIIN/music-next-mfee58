@@ -82,6 +82,25 @@ const MemberInfo = () => {
     }
   };
 
+    // 保存Bio的函數
+    const handleSaveBio = async () => {
+      try {
+        const response = await axios.put(
+          "http://localhost:3005/member/update-bio",
+          { bio: member.bio },
+          { withCredentials: true }
+        );
+        // setMessage(response.data.message || "暱稱已更新");
+        setIsEditing(false);
+        // Show success notification
+        setShowSuccessOverlay(true);
+        setTimeout(() => setShowSuccessOverlay(false), 1000); // 隱藏提示框
+      } catch (error) {
+        console.error("Error updating bio:", error);
+        setMessage("更新暱稱失敗，請重試");
+      }
+    };
+
   // 上傳圖片的函數
 
   const handleImageUpload = async () => {
@@ -161,7 +180,44 @@ const MemberInfo = () => {
               上傳頭像建議尺寸： 140x140px 以內，圖片檔案大小不可超過 2MB
             </h6>
             <h6 className={styles["input-top"]}>
-              簡介 <FormInput value={bio} onChange={handleBioChange} />
+            <div className={styles["left-text"]}>
+                  {isEditing ? (
+                    <>
+                      <FormInput
+                        size="small"
+                        value={member.bio}
+                        onChange={(e) =>
+                          setMember((prevMember) => ({
+                            ...prevMember,
+                            bio: e.target.value,
+                          }))
+                        }
+                      />
+                      <button
+                        onClick={handleSaveName}
+                        className={styles.button1}
+                      >
+                        保存
+                      </button>
+                      <button
+                        onClick={() => setIsEditing(false)}
+                        className={styles.button1}
+                      >
+                        取消
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <span>{member.bio || "新增暱稱"}</span>
+                      <button
+                        onClick={() => setIsEditing(true)}
+                        className={styles.button}
+                      >
+                        編輯
+                      </button>
+                    </>
+                  )}
+                </div>
             </h6>
 
             <div className={styles["body-input"]}>

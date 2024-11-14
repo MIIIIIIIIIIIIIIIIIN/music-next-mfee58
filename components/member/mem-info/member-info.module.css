@@ -76,8 +76,15 @@
 }
 
 .input-top {
-  border-bottom: 1px solid #000;
-  padding-bottom: 10px;
+  height: 100%;
+  width: 40%;
+  display: flex;
+  /* border-bottom: 1px solid #000; */
+  justify-content: space-around;
+  align-items: center;
+  margin: 5px 0;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .body-input {
