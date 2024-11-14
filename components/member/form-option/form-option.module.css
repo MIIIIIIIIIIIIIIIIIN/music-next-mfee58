@@ -11,7 +11,7 @@
 
 /* 行政區下拉選單的樣式 */
 .regionDropdown {
-  width: 150px;
+  /* width: 150px; */
   padding: 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
@@ -26,4 +26,19 @@
     background-color: black; 
     color: var(--basecolor);
   
+}
+
+/* 下拉選單的寬度樣式 */
+/* form-option.module.css */
+
+.sizeS {
+  width: 100px;
+}
+
+.sizeM {
+  width: 150px;
+}
+
+.sizeL {
+  width: 200px;
 }

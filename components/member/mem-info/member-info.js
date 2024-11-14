@@ -12,7 +12,13 @@ const MemberInfo = () => {
   const [birth, setBirth] = useState("");
   const [gender, setGender] = useState("");
   const [region, setRegion] = useState("");
+    // const [district, setDistrict] = useState("");
   const [member, setMember] = useState({});
+  
+  // 縣市行政區
+  const [county, setCounty] = useState("");
+  const [district, setDistrict] = useState("");
+
   const [isEditing, setIsEditing] = useState(false);
   const [message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -27,9 +33,10 @@ const MemberInfo = () => {
         });
         const data = await response.json();
         if (data.admin) {
+          console.log("後端資料:", data.admin); // 檢查後端資料
           setMember(data.admin);
           setGender(data.admin.m_gender);
-
+  
           const birthDate = new Date(data.admin.birth);
           if (!isNaN(birthDate)) {
             setBirth(birthDate.toISOString().split("T")[0]);
@@ -37,7 +44,10 @@ const MemberInfo = () => {
             console.error("無法解析的生日日期格式:", data.admin.m_birth);
             setBirth("日期格式錯誤");
           }
-          setRegion(data.admin.m_location);
+  
+       // 直接使用 location 和 district 而不需要拆分
+       setCounty(data.admin.location || "");
+       setDistrict(data.admin.district || "");
         } else {
           router.push("/login");
         }
@@ -45,14 +55,10 @@ const MemberInfo = () => {
         console.error("Error fetching data:", error);
       }
     };
-
-    const savedBio = localStorage.getItem("bio");
-    if (savedBio) {
-      setBio(savedBio);
-    }
-
+  
     fetchData();
   }, [router]);
+  
 
   // 單獨的圖片上傳函數
   const uploadImage = async (file) => {
@@ -211,7 +217,10 @@ const MemberInfo = () => {
                           }))
                         }
                       />
-                      <button onClick={handleSaveName} className={styles.button1}>
+                      <button
+                        onClick={handleSaveName}
+                        className={styles.button1}
+                      >
                         保存
                       </button>
                       <button
@@ -252,7 +261,8 @@ const MemberInfo = () => {
                 <div className={styles["right-text"]}>
                   <Dropdown
                     type="region"
-                    initialValue={member.location}
+                    sizeType="small"
+                    initialValue={{ county: county || "", district: district || "" }}
                     onChange={setRegion}
                   />
                 </div>
