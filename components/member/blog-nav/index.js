@@ -10,6 +10,7 @@ const BlogNav = () => {
   const [location, setLocation] = useState("");
   const [gender, setGender] = useState("");
   const [bio, setBio] = useState("");
+  const [district, setDistrict] = useState("");
 
   useEffect(() => {
     const fetchSessionData = async () => {
@@ -20,21 +21,27 @@ const BlogNav = () => {
         const data = await response.json();
 
         if (data.admin) {
-        setMember(data.admin || {});
+          setMember(data.admin || {});
 
           setName(data.admin.nickname || "");
           setGender(data.admin.gender || "");
           setLocation(data.admin.location || "");
           setBio(data.admin.bio || "");
+          setDistrict(data.admin.district || "");
 
-        // 使用 UTC 解析生日
-        const birthDate = new Date(data.admin.birth);
-        const formattedBirth = `${String(birthDate.getUTCMonth() + 1).padStart(2, "0")}-${String(birthDate.getUTCDate()).padStart(2, "0")}`;
-        setBirth(formattedBirth);
-      } else {
-        console.log("用戶尚未登入");
-        router.push("/login");
-      }
+          // 使用 UTC 解析生日
+          const birthDate = new Date(data.admin.birth);
+          const formattedBirth = `${String(
+            birthDate.getUTCMonth() + 1
+          ).padStart(2, "0")}-${String(birthDate.getUTCDate()).padStart(
+            2,
+            "0"
+          )}`;
+          setBirth(formattedBirth);
+        } else {
+          console.log("用戶尚未登入");
+          router.push("/login");
+        }
       } catch (error) {
         console.error("Error fetching session data:", error);
       }
@@ -59,9 +66,10 @@ const BlogNav = () => {
       <h4 className={styles["name"]}>{name}</h4>
       <div className={styles["info"]}>
         <div className="gender">{gender}</div>
+        <div className={styles["birth"]}>{birth}</div>
         <div className={styles["else"]}>
-          <div className={styles["birth"]}>{birth}</div>
-          <div className="location">{location}</div>
+          <div className={styles["location"]}>{location}</div>
+          <div className="location">{district}</div>
         </div>
       </div>
       <div className={styles["bio"]}>

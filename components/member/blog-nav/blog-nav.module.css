@@ -29,9 +29,12 @@
   align-items: center;
 }
 
-.birth,
-.location{
+.birth{
   margin: 10px;
+}
+
+.location{
+  margin-right: 20px;
 }
 .bio {
   display: flex;

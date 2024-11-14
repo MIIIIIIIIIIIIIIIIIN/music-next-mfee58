@@ -134,13 +134,20 @@ margin-left: 20px;
   height: 100%;
   width: 100%;
   display: flex;
+  /* gap: 50px; */
   border-bottom: 1px solid #000;
   justify-content: space-around;
   align-items: center;
   margin: 5px 0;
   padding: 10px;
   box-sizing: border-box;
+  display: flex;
 }
+.right-text select {
+  margin-right: 20px; /* 為第一個下拉選單增加右邊距，為第二個不影響 */
+}
+
+
 
 .left-text input:hover {
   background-color: #000000; /* 改變背景色 */
