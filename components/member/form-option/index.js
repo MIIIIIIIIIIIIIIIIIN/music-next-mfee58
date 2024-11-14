@@ -439,7 +439,7 @@ const Dropdown = ({ type, initialValue={}, onChange, sizeType }) => {
             <option value="">請選擇</option>
             <option value="男">男</option>
             <option value="女">女</option>
-            <option value="其他">其他</option>
+            <option value="不透露">不透露</option>
           </select>
         ) : (
           <>
