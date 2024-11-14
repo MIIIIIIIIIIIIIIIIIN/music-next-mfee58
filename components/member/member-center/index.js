@@ -24,7 +24,7 @@ const MemWeb2 = () => {
   return (
     <>
       <div className={styles["wrapper"]}>
-        <Nav className={styles["nav"]} />
+        <Nav />
 
         <div className={styles["container"]}>
           <div className={styles["leftContent"]}>
