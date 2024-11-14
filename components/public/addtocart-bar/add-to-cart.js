@@ -6,10 +6,12 @@ import { useEffect, useState } from "react";
 import Logo from "../logo";
 import Link from "next/link";
 import useFetchDB from "@/components/George/hooks/usefetchDB";
+import { CartProvider, useCartDetail } from "@/components/George/context/cartdetail-provider";
 
 export const AddToCartBar = ({ memAuth }) => {
   const [atBottom, setAtBottom] = useState(false);
   const { mdBox, urid } = useFetchDB();
+  const { addToCart, handleAddtoCart } = useCartDetail();
 
   useEffect(() => {
     const comparingScroll = () => {
@@ -32,14 +34,14 @@ export const AddToCartBar = ({ memAuth }) => {
   }, []);
 
   const handleAuth = () => {
-    if (!memAuth ) {
-      alert('請先登入會員才能進行贊助！');
-      window.location='http://localhost:3000/login'
+    if (!memAuth) {
+      alert("請先登入會員才能進行贊助！");
+      window.location = "http://localhost:3000/login";
       return;
-    }else{
-      window.location = 'http://localhost:3000/George/cart'
+    } else {
+      window.location = "http://localhost:3000/George/cart";
     }
-  }
+  };
 
   return (
     <>
@@ -52,11 +54,14 @@ export const AddToCartBar = ({ memAuth }) => {
             <div className={styles["frame"]}>
               <Logo type={2} />
               <div className={styles["bottom-bar-buttons"]}>
-                <button className={styles["barbutton-addtocart"]}>
+                <button className={styles["barbutton-addtocart"]} onClick={handleAddtoCart}>
                   <div className={styles["text-wrapper-4"]}>Add to Cart</div>
                 </button>
                 <Link href={"/George/cart/urid"}>
-                  <button className={styles["div-wrapper"]} onClick={handleAuth}>
+                  <button
+                    className={styles["div-wrapper"]}
+                    onClick={handleAuth}
+                  >
                     <div className={styles["text-wrapper-4"]}>Cart</div>
                   </button>
                 </Link>

@@ -113,8 +113,6 @@ export default function ProductsDetail() {
         const response = await axios.get(
           `http://localhost:3005/api/youmaylike/${pid}`
         );
-        console.log("檔案在這~~: ", response.data);
-        
         setYouMayLike(response.data);
       } catch (error) {
         console.error("無法取得你可能也喜歡的其他專輯", error);
@@ -123,9 +121,9 @@ export default function ProductsDetail() {
     fetchYouMayLike();
   }, [pid]);
 
-  useEffect(() => {
-    console.log("你可能也喜歡: ", pid);
-  }, [pid]);
+  // useEffect(() => {
+  //   console.log("你可能也喜歡: ", pid);
+  // }, [pid]);
 
   useEffect(()=>{
     const fetchMemData = async () => {
@@ -151,7 +149,6 @@ export default function ProductsDetail() {
     fetchMemData()
   }, [router.isReady])
 
-
   return (
     <>
       <Nav />
@@ -161,6 +158,7 @@ export default function ProductsDetail() {
             albumDetail={albumDetail}
             albumImages={albumImages}
             pid={pid}
+            memAuth={memAuth}
           />
           {/* <SpotifyEmbedPlayer />
       <ProductsListen pid={pid}/> */}
@@ -168,6 +166,7 @@ export default function ProductsDetail() {
             albumDetail={albumDetail}
             albumImages={albumImages}
             pid={pid}
+            
           />
           <ProductsMore
             albumDetail={albumDetail}

@@ -22,7 +22,7 @@ export default function ProductsCart({ mdBox, listData }) {
           <div className={style.checkingout}>
             <ul className={style.checkingoutlist}>
               <li>
-                <span className={style.procedure}>1</span>購物車
+                <span className={`${style.procedure} ${style.proceduring}`}>1</span>購物車
               </li>
               <li>
                 <span className={style.procedure}>2</span>結帳

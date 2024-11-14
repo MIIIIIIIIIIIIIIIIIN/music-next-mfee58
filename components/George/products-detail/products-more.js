@@ -14,9 +14,9 @@ export default function ProductsMore({
 }) {
   const { listData, albumsimg, genres } = useFetchDB();
 
-useEffect(()=>{
-  console.log("more: ", otherImages);
-}, [otherImages])
+// useEffect(()=>{
+//   console.log("more: ", otherImages);
+// }, [otherImages])
 
   return (
     <>

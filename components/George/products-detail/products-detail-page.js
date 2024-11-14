@@ -12,44 +12,18 @@ import { CartProvider, useCartDetail } from "../context/cartdetail-provider";
 import axios from "axios";
 import useFetchDB from "@/components/George/hooks/usefetchDB";
 
-export default function ProductsDetailPage({ albumDetail, albumImages }) {
+export default function ProductsDetailPage({
+  albumDetail,
+  albumImages,
+  memAuth,
+}) {
   const { urid } = useFetchDB();
-  const { addToCart, setAddToCart } = useCartDetail();
+  const { handleAddtoCart, showAlert } = useCartDetail();
   const { quantity } = useQuantity();
+
   const handleClick = () => {
     "";
   };
-
-  const handleAddtoCart = () => {
-    if (albumDetail) {
-      // 準備要傳送的資料
-      const cartData = {
-        commodityid: null,
-        albumId: albumDetail?.p_albums_id || null,
-        userId: 1,
-        pic: albumImages?.images?.[0]?.p_productsimg_filename,
-        quantity: quantity,
-        price: parseInt(albumDetail?.p_albums_price),
-      };
-
-      // 發送 POST 請求將資料儲存到購物車
-      axios
-        .post("http://localhost:3005/api/addToCart", cartData)
-        .then((response) => {
-          console.log("Item added to cart", response.data); // 回應成功時
-        })
-        .catch((error) => {
-          console.error("Error adding item to cart", error); // 錯誤處理
-        });
-    }
-  };
-
-  // useEffect(() => {
-  //   console.log("檢查欸吐卡ㄊ1: ", addToCart);
-  // }, [addToCart]);
-  // useEffect(() => {
-  //   console.log("test: ", albumImages);
-  // }, [albumImages]);
 
   return (
     <>
@@ -105,11 +79,10 @@ export default function ProductsDetailPage({ albumDetail, albumImages }) {
           </div>
           <div className={style.btns}>
             {/* <Link href={`/George/cart/${urid}`}> */}
-            <Link href={`/George/cart/${urid}`}>
-
+            <Link href={`/George/cart/${memAuth.id}`}>
               <BlackWBtns
                 type="2"
-                onClick={handleClick}
+                onClick={handleAddtoCart}
                 className={style.blackBtn}
               >
                 直接購買
@@ -126,6 +99,11 @@ export default function ProductsDetailPage({ albumDetail, albumImages }) {
           </div>
         </div>
       </div>
+      {showAlert && (
+        <div className={`${style.alert} ${showAlert ? style.show : ""}`}>
+          已加入購物車
+        </div>
+      )}
     </>
   );
 }
