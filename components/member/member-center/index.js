@@ -7,6 +7,7 @@ import MemberACC from "../mem-acc/mem-acc";
 import MemberPassword from "../mem-password";
 import MemberFav from "../mem-fav";
 import Mp3Uploader from "@/components/public/mp3-uploader";
+import MemberFavTest from "../mem-fav/test";
 
 const MemWeb2 = () => {
   const infoRef = useRef(null);
@@ -54,6 +55,7 @@ const MemWeb2 = () => {
 
             <div ref={favRef}>
               <MemberFav />
+              <MemberFavTest />
             </div>
             
             {/* <div ref={uploaderRef}>
