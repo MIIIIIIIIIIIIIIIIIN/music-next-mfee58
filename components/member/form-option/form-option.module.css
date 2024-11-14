@@ -31,6 +31,9 @@
 /* 下拉選單的寬度樣式 */
 /* form-option.module.css */
 
+.sizeXS{
+  width: 100px;
+}
 .sizeS {
   width: 100px;
 }

@@ -423,6 +423,7 @@ const Dropdown = ({ type, initialValue={}, onChange, sizeType }) => {
   };
 
   const sizeClass =
+    sizeType === "x-small" ? styles.sizeXS :
     sizeType === "small" ? styles.sizeS :
     sizeType === "medium" ? styles.sizeM :
     sizeType === "large" ? styles.sizeL : "";

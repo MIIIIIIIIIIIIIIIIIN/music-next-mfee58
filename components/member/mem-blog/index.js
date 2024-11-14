@@ -32,7 +32,9 @@ const handleLogout = async () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3005/mem-data/${memberId}", {
+        // const response = await fetch("http://localhost:3005/mem-data/${memberId}", {
+        const response = await fetch("http://localhost:3005/mem-data", {
+
           credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
         });
         const data = await response.json();

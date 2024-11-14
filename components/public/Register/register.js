@@ -459,7 +459,8 @@ const Register = () => {
 
         // 2 秒後跳轉到會員專屬頁面
         setTimeout(() => {
-          router.push(`/member-blog?${memberId}`);
+          // router.push(`/member-blog?${memberId}`);
+          router.push(`/member-blog`);
         }, 2000);
       } else {
         if (response.data.message === "該帳號已被註冊") {

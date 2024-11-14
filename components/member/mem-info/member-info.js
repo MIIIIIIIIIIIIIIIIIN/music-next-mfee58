@@ -35,7 +35,7 @@ const MemberInfo = () => {
         if (data.admin) {
           console.log("後端資料:", data.admin); // 檢查後端資料
           setMember(data.admin);
-          setGender(data.admin.m_gender);
+          setGender(data.admin.gender);
   
           const birthDate = new Date(data.admin.birth);
           if (!isNaN(birthDate)) {
@@ -136,6 +136,37 @@ const MemberInfo = () => {
     localStorage.setItem("bio", newBio);
   };
 
+  // 新增函數用於保存性別到後端
+  const handleSaveGender = async () => {
+    try {
+      await axios.put(
+        "http://localhost:3005/member/update-gender",
+        { gender },
+        { withCredentials: true }
+      );
+      setShowSuccessOverlay(true);
+      setTimeout(() => setShowSuccessOverlay(false), 1000);
+    } catch (error) {
+      console.error("Error updating gender:", error);
+      setMessage("更新性別失敗，請重試");
+    }
+  };
+// 新增函數用於保存所在地到後端
+  const handleSaveLocation = async () => {
+    try {
+      await axios.put(
+        "http://localhost:3005/member/update-location", // 使用 update-location 路由
+        { county, district }, // 傳送縣市和行政區
+        { withCredentials: true }
+      );
+      setShowSuccessOverlay(true);
+      setTimeout(() => setShowSuccessOverlay(false), 2000);
+    } catch (error) {
+      console.error("Error updating location:", error);
+      setMessage("更新所在地失敗，請重試");
+    }
+  };
+  
   return (
     <div className={styles["member-info"]}>
       <div className={styles.container}>
@@ -165,6 +196,8 @@ const MemberInfo = () => {
             <h6 className={styles["icon-title"]}>
               上傳頭像建議尺寸：140x140px以內，圖片檔案大小不可超過2MB
             </h6>
+            <h6>簡介</h6>
+
             <div className={styles["input-top"]}>
               {isEditing ? (
                 <>
@@ -251,20 +284,34 @@ const MemberInfo = () => {
               <div className={styles["input-right"]}>
                 <h6 className={styles["right-title"]}>性別</h6>
                 <div className={styles["right-text"]}>
-                  <Dropdown
+                <Dropdown
                     type="gender"
-                    initialValue={member.gender}
-                    onChange={setGender}
+                    initialValue={gender}
+                    onChange={(value) => setGender(value)}
                   />
+                  <button onClick={handleSaveGender} className={styles.button}>
+                    保存
+                  </button>
                 </div>
                 <h6 className={styles["right-title"]}>所在地</h6>
                 <div className={styles["right-text"]}>
-                  <Dropdown
-                    type="region"
-                    sizeType="small"
-                    initialValue={{ county: county || "", district: district || "" }}
-                    onChange={setRegion}
+                <Dropdown
+                    type="county"
+                    sizeType={"medium"}
+                    initialValue={{ county: member.location, district: member.district }}
+                    onChange={(value) => {
+    setCounty(value.county);
+    setDistrict(value.district);
+  }}
                   />
+                  {/* <Dropdown
+                    type="district"
+                    initialValue={district}
+                    onChange={(value) => setDistrict(value)}
+                  /> */}
+                  <button onClick={handleSaveLocation} className={styles.button}>
+                    保存
+                  </button>
                 </div>
               </div>
             </div>
