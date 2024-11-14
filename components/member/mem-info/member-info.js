@@ -20,6 +20,7 @@ const MemberInfo = () => {
   const [district, setDistrict] = useState("");
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isEditingBio, setIsEditingBio] = useState(false);
   const [message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [bio, setBio] = useState("");
@@ -121,7 +122,7 @@ const MemberInfo = () => {
         { bio: member.bio },
         { withCredentials: true }
       );
-      setIsEditing(false);
+      setIsEditingBio(false);
       setShowSuccessOverlay(true);
       setTimeout(() => setShowSuccessOverlay(false), 1000);
     } catch (error) {
@@ -199,7 +200,7 @@ const MemberInfo = () => {
             <h6>簡介</h6>
 
             <div className={styles["input-top"]}>
-              {isEditing ? (
+              {isEditingBio ? (
                 <>
                   <FormInput
                     size="small"
@@ -212,10 +213,10 @@ const MemberInfo = () => {
                     }
                   />
                   <button onClick={handleSaveBio} className={styles.button1}>
-                    保存
+                  儲存
                   </button>
                   <button
-                    onClick={() => setIsEditing(false)}
+                    onClick={() => setIsEditingBio(false)}
                     className={styles.button1}
                   >
                     取消
@@ -225,7 +226,7 @@ const MemberInfo = () => {
                 <>
                   <span>{member.bio || "新增簡介"}</span>
                   <button
-                    onClick={() => setIsEditing(true)}
+                    onClick={() => setIsEditingBio(true)}
                     className={styles.button}
                   >
                     編輯
@@ -254,7 +255,7 @@ const MemberInfo = () => {
                         onClick={handleSaveName}
                         className={styles.button1}
                       >
-                        保存
+                        儲存
                       </button>
                       <button
                         onClick={() => setIsEditing(false)}
@@ -290,7 +291,7 @@ const MemberInfo = () => {
                     onChange={(value) => setGender(value)}
                   />
                   <button onClick={handleSaveGender} className={styles.button}>
-                    保存
+                    儲存
                   </button>
                 </div>
                 <h6 className={styles["right-title"]}>所在地</h6>
@@ -310,7 +311,7 @@ const MemberInfo = () => {
                     onChange={(value) => setDistrict(value)}
                   /> */}
                   <button onClick={handleSaveLocation} className={styles.button}>
-                    保存
+                    儲存
                   </button>
                 </div>
               </div>

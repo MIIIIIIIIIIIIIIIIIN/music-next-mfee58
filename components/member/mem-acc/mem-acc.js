@@ -27,20 +27,18 @@ const MemberACC = () => {
         });
         const data = await response.json();
         console.log(data);
-  
+
         // setBirth(data.admin?.birth);
 
         setAccount(data.admin?.account);
         setPhone(data.admin?.phone);
         setEmail(data.admin?.email);
-
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
   }, []);
-
 
   const handleClick = () => {
     router.push("/");
@@ -70,16 +68,14 @@ const MemberACC = () => {
 
       <div className={styles["member-acc"]}>
         <div className={styles.container}>
-          <div className={styles["acc-nav"]}>
-            {/* <InfoNav /> */}
-          </div>
+          <div className={styles["acc-nav"]}>{/* <InfoNav /> */}</div>
           <div className={styles["acc-main"]}>
             {/* 右側內容 */}
             <h5 className={styles["main-title"]}>帳號設定</h5>
             <div className={styles["main-body"]}>
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>帳號(不會顯示於頁面)</h6>
-                <div className={styles["body-input"]  }>
+                <div className={styles["body-input"]}>
                   <MemIcons iconName="icon-user" />
                   {/* 預設 icon-mail, 中尺寸 */}
                   <FormInputM size="medium" value={account} readOnly={true} />

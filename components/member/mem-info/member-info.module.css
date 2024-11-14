@@ -36,7 +36,8 @@
 
   width: 100%;
   cursor: pointer;
-  border-bottom: 1px dotted #5a9030;
+  /* border-bottom: 2px dotted #fff; */
+
   padding-bottom: 50px;
 }
 

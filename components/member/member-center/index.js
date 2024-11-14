@@ -40,22 +40,29 @@ const MemWeb2 = () => {
             <div ref={infoRef}>
               <MemberInfo />
             </div>
+            <img src="/image/img-mem/line005.png" alt="" />
+
             <div ref={accRef}>
               <MemberACC />
             </div>
+            <img src="/image/img-mem/line005.png" alt="" />
+
             <div ref={passwordRef}>
               <MemberPassword />
             </div>
+            <img src="/image/img-mem/line005.png" alt="" />
+
             <div ref={favRef}>
               <MemberFav />
             </div>
+            
             {/* <div ref={uploaderRef}>
               <Mp3Uploader />
             </div> */}
           </div>
         </div>
 
-        <div className={styles["footer"]}>Footer</div>
+        <div className={styles["footer"]}>.</div>
       </div>
     </>
   );
