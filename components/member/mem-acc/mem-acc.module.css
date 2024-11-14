@@ -37,6 +37,11 @@
 
   align-items: flex-start; /* 整體內容靠左 */
   padding-left: 20px; /* 可以調整為與 .main-title 一致的 padding */
+
+  width: 100%;
+  cursor: pointer;
+  border-bottom: 1px dotted #5a9030;
+  padding-bottom: 50px;
 }
 .body-sec {
 /* padding: 20px 0; */
