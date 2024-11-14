@@ -1,5 +1,7 @@
 import React from "react";
 import MemIcons from "@/components/member/mem-icons";
+import ResetPassword from "@/components/member/reset-password";
+
 
 export default function Test() {
   return (
@@ -12,6 +14,7 @@ export default function Test() {
       <MemIcons iconName="icon-user" size="medium" /> {/* 中尺寸 */}
       <MemIcons iconName="icon-user" size="large" /> {/* 大尺寸 */}
       <MemIcons iconName="icon-phone" /> {/* 預設中尺寸 */}
+      <ResetPassword />
     </>
   );
 }
