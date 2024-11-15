@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import axios from "axios";
 import styles from "./login.module.css";
 import MemIcons from "@/components/member/mem-icons";
-import { useAuth } from "@/Context/auth-context";
+
+axios.defaults.withCredentials = true;
 
 const Login = () => {
-  const { login } = useAuth(); // 從 AuthContext 中取出 login 方法
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -12,35 +13,34 @@ const Login = () => {
   const [showSuccess, setShowSuccess] = useState(false);
 
   // 通用的登入函數
-  const handleLogin = async (e) => {
+  const handleLogin = async (e, loginEmail = email, loginPassword = password) => {
     if (e) e.preventDefault();
 
-    const success = await login(email, password);
+    try {
+      const response = await axios.post("http://localhost:3005/member/login", {
+        email: loginEmail,
+        password: loginPassword,
+      });
 
-    if (success) {
-      setShowSuccess(true); // 登入成功時顯示提示框
-      setTimeout(() => {
-        window.location.href = "/member-blog";
-      }, 2000); // 延遲兩秒後跳轉頁面
-    } else {
+      if (response.data.success) {
+        setShowSuccess(true); // 登入成功時顯示提示框
+        setTimeout(() => {
+          window.location.href = "/member-blog";
+        }, 2000); // 延遲兩秒後跳轉頁面
+      } else {
+        setErrorMessage(response.data.error);
+      }
+    } catch (error) {
       setErrorMessage("登入失敗");
+      console.error("Login error:", error);
     }
   };
 
   // 快速登入的功能，使用測試帳號和密碼
-  const quickLogin = async () => {
+  const quickLogin = () => {
     setEmail("test001");
     setPassword("tt001");
-    const success = await login("test001", "tt001");
-
-    if (success) {
-      setShowSuccess(true); // 快速登入成功時顯示提示框
-      setTimeout(() => {
-        window.location.href = "/member-blog";
-      }, 2000); // 延遲兩秒後跳轉頁面
-    } else {
-      setErrorMessage("快速登入失敗");
-    }
+    handleLogin(null, "test001", "tt001");
   };
 
   return (
@@ -87,7 +87,10 @@ const Login = () => {
           <button type="submit" className={styles.loginButton}>
             登入
           </button>
+          
         </form>
+        
+
 
         <div className={styles.links}>
           <a href="./register" className={styles.createAccount}>
@@ -98,9 +101,8 @@ const Login = () => {
             <MemIcons iconName="icons-home" size="medium" />
           </a>
         </div>
-
-        {/* 快速登入按鈕 */}
-        <button onClick={quickLogin} className={styles.quickLoginButton}>
+                {/* 快速登入按鈕 */}
+                <button onClick={quickLogin} className={styles.quickLoginButton}>
           快速登入
         </button>
       </div>
