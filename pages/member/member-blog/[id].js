@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-
 import styles from "./mem-blog.module.css";
 
 import Nav from "@/components/public/nav";
@@ -50,8 +49,6 @@ const MemberBlog = () => {
         console.error("Error fetching member data:", error);
         setErrorMessage("資料讀取失敗");
       }
-
-      
     };
 
     fetchMemberData();
@@ -61,7 +58,9 @@ const MemberBlog = () => {
     return <p>{errorMessage}</p>;
   }
 
-  
+  const goToMemberCenter = () => {
+    router.push(`/member/member-center/${router.query.id}`);
+  };
 
   return (
     <div>
@@ -70,15 +69,27 @@ const MemberBlog = () => {
         <>
           <Nav />
           {/* 編輯按鈕 */}
+          {/*           
           <a href="/Jade/member-center">
             <img
               src="/icons/icon-setting.svg"
               alt="設定"
               className={styles["settingIcon"]}
             />
-          </a>
+          </a> */}
+
           {/* <p>姓名: {memberData.m_nickname}</p> */}
           {/* <p>信箱: {memberData.m_email}</p> */}
+
+          {/* 編輯按鈕 */}
+          <button onClick={goToMemberCenter} className={styles["editButton"]}>
+          <img
+              src="/icons/icon-setting.svg"
+              alt="設定"
+              className={styles["settingIcon"]}
+            />
+          </button>
+
           <div className={styles["container"]}>
             <div className={styles["leftContent"]}>
               {memberData && <BlogNav memberData={memberData} />}
