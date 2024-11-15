@@ -12,23 +12,22 @@ const BlogNav = ({ memberData }) => {
   const [district, setDistrict] = useState("");
 
   useEffect(() => {
-    if (memberData) {
-      setMember(memberData);
-      setName(memberData.nickname || "");
-      setGender(memberData.gender || "");
-      setLocation(memberData.location || "");
-      setBio(memberData.bio || "");
-      setDistrict(memberData.district || "");
-
-
-      // 使用 UTC 解析生日，僅提取月份和日期
-      const birthDate = new Date(memberData.birth);
-      const formattedBirth = `${String(birthDate.getUTCMonth() + 1).padStart(2, "0")}-${String(
-        birthDate.getUTCDate()
-      ).padStart(2, "0")}`;
-      setBirth(formattedBirth);
+    if (memberData && memberData.m_birth) {
+      const birthDate = new Date(memberData.m_birth);
+      
+      // 檢查日期是否有效
+      if (!isNaN(birthDate.getTime())) {
+        const formattedBirth = `${String(birthDate.getUTCMonth() + 1).padStart(2, "0")}-${String(
+          birthDate.getUTCDate()
+        ).padStart(2, "0")}`;
+        setBirth(formattedBirth);
+      } else {
+        console.warn("Invalid birth date:", memberData.m_birth); // 顯示除錯訊息
+        setBirth("未知日期"); // 如果日期無效，設定為「未知日期」
+      }
     }
-  }, [memberData]); // 監聽 `memberData` 的變化
+  }, [memberData]);
+  
 
   return (
     <div className={styles["blogNav"]}>
@@ -46,7 +45,9 @@ const BlogNav = ({ memberData }) => {
       <h4 className={styles["name"]}>{memberData.m_nickname}</h4>
       <div className={styles["info"]}>
         <div className="gender">{memberData.m_gender}</div>
-        <div className={styles["birth"]}>{memberData.m_birth}</div>
+        {/* <div className={styles["birth"]}>{memberData.m_birth}</div> */}
+        <div className={styles["birth"]}>{birth}</div>
+
         <div className={styles["else"]}>
           <div className={styles["location"]}>{memberData.m_location}</div>
           <div className="location">{memberData.m_district}</div>
