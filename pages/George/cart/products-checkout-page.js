@@ -2,24 +2,22 @@ import React, { useState, useEffect } from "react";
 import FooterDeskTop from "@/components/George/george-components/footer/desktop";
 import FooterMobile from "@/components/George/george-components/footer/mobile";
 import Nav from "@/components/George/george-components/nav";
-import ProductsCart from "@/components/George/products-cart-checkout/products-cart";
-import { QuantityProvider } from "@/components/George/context/quantity-provider";
-import { CartProvider } from "@/components/George/context/cartdetail-provider";
-import useFetchDB from "@/components/George/hooks/usefetchDB";
+import ProductsCheckout from "@/components/George/products-cart-checkout/products-checkout";
 
-export default function ProductsCartPage(props) {
+export default function ProductsCheckoutPage(props) {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
-  const { memData, listData, mdBox } = useFetchDB();
-
-
-  
 
   useEffect(() => {
+    // 定義處理螢幕寬度變化的函數
     const handleResize = () => {
       setIsMobile(window.innerWidth < 900);
     };
+
+    // 初次渲染時呼叫一次以設置初始狀態
     handleResize();
+
+    // 添加 resize 事件監聽器
     window.addEventListener("resize", handleResize);
 
     const handleScroll = () => {
@@ -34,20 +32,12 @@ export default function ProductsCartPage(props) {
     };
   }, []);
 
-  useEffect(() => {
-  
-      console.log("urid: ", listData);
-      
-  }, [listData]);
-
   return (
     <>
       <Nav />
-      <QuantityProvider>
-        <CartProvider mdBox={mdBox}>
-          <ProductsCart mdBox={mdBox} listData={listData} />
-        </CartProvider>
-      </QuantityProvider>
+      <div className="video-container">
+        <ProductsCheckout /> {/* 圖卡及結帳頁面內容 */}
+      </div>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

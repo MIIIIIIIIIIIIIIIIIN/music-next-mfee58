@@ -9,6 +9,7 @@ const useFetchDB = () => {
   const [genres, setGenres] = useState([]);
   const [memData, setMemData] = useState([]);
   const [mdBox, setMdBox] = useState([]);
+  const [memAuth, setMemAuth] = useState();
   const router = useRouter();
   const { urid } = router.query;
 
@@ -56,6 +57,32 @@ const useFetchDB = () => {
     };
     fetchMemData();
   }, []);
+
+
+  useEffect(()=>{
+    const fetchMemData = async () => {
+      try {
+        const response = await fetch("http://localhost:3005/mem-data", {
+          credentials: "include",
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch member data");
+        }
+        const data = await response.json();
+        // console.log(data);
+        
+        // 確保設置的值不是 undefined
+        setMemAuth(data.admin || null);
+        // console.log(member);
+  
+      } catch (error) {
+        console.error("Error fetching member data:", error);
+        setMemAuth(null); // 發生錯誤時設置為 null
+      }
+    };
+    fetchMemData()
+  }, [router.isReady])
+
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -151,7 +178,7 @@ const useFetchDB = () => {
   }, [listData]);
   
 
-  return { listData, albumsimg, genres, memData, mdBox };
+  return { listData, albumsimg, genres, memData, mdBox, memAuth };
 };
 
 export default useFetchDB;

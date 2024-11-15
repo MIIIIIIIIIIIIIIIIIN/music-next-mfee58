@@ -115,8 +115,8 @@ export default function ProductsCheckout(props) {
                           <option value="" disabled selected>
                             請選擇
                           </option>
-                          <option value="cashondelivery">取貨付款</option>
-                          <option value="debitcard">信用卡</option>
+                          <option value="cashondelivery">貨到付款</option>
+                          <option value="debitcard">Line Pay</option>
                         </select>
                       </li>
                     </ul>
@@ -143,7 +143,7 @@ export default function ProductsCheckout(props) {
                         <div>合計</div>
                         <div>$629</div>
                       </div>
-                      <Link href={"/George/products-completed-page"}>
+                      <Link href={"/George/cart/products-completed-page"}>
                       <BlackWBtns
                         type="2"
                         onClick={handleClick}

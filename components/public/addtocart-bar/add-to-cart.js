@@ -8,10 +8,11 @@ import Link from "next/link";
 import useFetchDB from "@/components/George/hooks/usefetchDB";
 import { CartProvider, useCartDetail } from "@/components/George/context/cartdetail-provider";
 
-export const AddToCartBar = ({ memAuth }) => {
+export const AddToCartBar = () => {
+  const { handleAddtoCart } = useCartDetail();
   const [atBottom, setAtBottom] = useState(false);
-  const { mdBox, urid } = useFetchDB();
-  const { addToCart, handleAddtoCart } = useCartDetail();
+  const { memAuth } = useFetchDB();
+  
 
   useEffect(() => {
     const comparingScroll = () => {
@@ -36,12 +37,17 @@ export const AddToCartBar = ({ memAuth }) => {
   const handleAuth = () => {
     if (!memAuth) {
       alert("請先登入會員才能進行贊助！");
-      window.location = "http://localhost:3000/login";
+      const targetUrl = encodeURIComponent(`/George/cart/${memAuth ? memAuth.id : ""}`);
+      window.location = `http://localhost:3000/login?redirect=${targetUrl}`;
       return;
     } else {
-      window.location = "http://localhost:3000/George/cart";
+      window.location = `http://localhost:3000/George/cart/${memAuth.id}`;
     }
   };
+
+  useEffect(()=>{
+
+  }, [])
 
   return (
     <>
@@ -57,7 +63,7 @@ export const AddToCartBar = ({ memAuth }) => {
                 <button className={styles["barbutton-addtocart"]} onClick={handleAddtoCart}>
                   <div className={styles["text-wrapper-4"]}>Add to Cart</div>
                 </button>
-                <Link href={"/George/cart/urid"}>
+                <Link href={`/George/cart/${memAuth ? memAuth.id : ""}`}>
                   <button
                     className={styles["div-wrapper"]}
                     onClick={handleAuth}

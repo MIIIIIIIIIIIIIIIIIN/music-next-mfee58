@@ -25,7 +25,7 @@ export default function ProductsCompleted(props) {
               <div className={style.ordernumbers}>訂單號碼: Ph12345678</div>
             </div>
             <div className={style.btnscontroller}>
-              <Link href={"/George/products-page"}>
+              <Link href={"/George/product"}>
               <BlackWBtns type="2" onClick={handleClick}>
                 繼續購物
               </BlackWBtns>

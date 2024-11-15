@@ -11,13 +11,14 @@ import { QuantityProvider, useQuantity } from "../context/quantity-provider";
 import { CartProvider, useCartDetail } from "../context/cartdetail-provider";
 import axios from "axios";
 import useFetchDB from "@/components/George/hooks/usefetchDB";
+import { BsFillCartCheckFill } from "react-icons/bs";
+
 
 export default function ProductsDetailPage({
   albumDetail,
   albumImages,
-  memAuth,
 }) {
-  const { urid } = useFetchDB();
+  const { memAuth } = useFetchDB();
   const { handleAddtoCart, showAlert } = useCartDetail();
   const { quantity } = useQuantity();
 
@@ -25,6 +26,10 @@ export default function ProductsDetailPage({
     "";
   };
 
+  useEffect(()=>{
+    console.log("Member: ", memAuth);
+    
+  }, [memAuth])
   return (
     <>
       <div className={style.containBox}>
@@ -79,7 +84,8 @@ export default function ProductsDetailPage({
           </div>
           <div className={style.btns}>
             {/* <Link href={`/George/cart/${urid}`}> */}
-            <Link href={`/George/cart/${memAuth.id}`}>
+            <Link href={memAuth ? `/George/cart/${memAuth.id}` : "http://localhost:3000/login"}>
+
               <BlackWBtns
                 type="2"
                 onClick={handleAddtoCart}
@@ -101,7 +107,7 @@ export default function ProductsDetailPage({
       </div>
       {showAlert && (
         <div className={`${style.alert} ${showAlert ? style.show : ""}`}>
-          已加入購物車
+          已加入購物車<BsFillCartCheckFill />
         </div>
       )}
     </>

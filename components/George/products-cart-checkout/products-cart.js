@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import style from "./products-cart.module.css";
 import BlackWBtnsMobile from "../george-components/black_wbtns_mobile";
-import { Quantity } from "../george-components/quantity/quantity";
+import { CartQuantity } from "../george-components/cart-quantity/cart-quantity";
+import { CartProvider, useCartDetail } from "../context/cartdetail-provider";
 import Link from "next/link";
+import axios from "axios";
 
 export default function ProductsCart({ mdBox, listData }) {
+  const { handleIncrement, handleDecrement, cartItems } = useCartDetail();
   const handleClick = () => {
     "";
   };
+
+  // [0].p_cart_quantity
+  useEffect(() => {
+    console.log("cartItems 長怎樣: ", cartItems);
+  }, [cartItems]);
 
   return (
     <>
@@ -22,7 +30,10 @@ export default function ProductsCart({ mdBox, listData }) {
           <div className={style.checkingout}>
             <ul className={style.checkingoutlist}>
               <li>
-                <span className={`${style.procedure} ${style.proceduring}`}>1</span>購物車
+                <span className={`${style.procedure} ${style.proceduring}`}>
+                  1
+                </span>
+                購物車
               </li>
               <li>
                 <span className={style.procedure}>2</span>結帳
@@ -55,7 +66,10 @@ export default function ProductsCart({ mdBox, listData }) {
                         .filter((id) => v.p_albums_id === id.p_albums_id)
                         .map((album, index) => {
                           return (
-                            <div className={style.checkoutdescriptions} key={index}>
+                            <div
+                              className={style.checkoutdescriptions}
+                              key={index}
+                            >
                               <div className={style.mobilecontroller}>
                                 <h4 className={style.descriptionstitle}>
                                   {album.p_albums_title}
@@ -66,7 +80,13 @@ export default function ProductsCart({ mdBox, listData }) {
                               </div>
                               <div className={style.checkoutqpbox}>
                                 <div className={style.checkoutquantity}>
-                                  <Quantity />
+                                  <CartQuantity
+                                    cartItems={cartItems}
+                                    handleIncrement={handleIncrement}
+                                    handleDecrement={handleDecrement}
+                                    albumId={album.p_albums_id}
+                                    index={i}
+                                  />
                                 </div>
                                 <div className={style.checkoutprice}>
                                   ${album.p_albums_price}
@@ -86,7 +106,7 @@ export default function ProductsCart({ mdBox, listData }) {
           {/* total + checkout button */}
           <div className={style.totalandcheckoutbutton}>
             <div className={style.totalamount}>總金額(1件商品)：$549</div>
-            <Link href={"/George/checkout/products-checkout-page"}>
+            <Link href={"/George/cart/products-checkout-page"}>
               <BlackWBtnsMobile
                 type="2"
                 onClick={handleClick}

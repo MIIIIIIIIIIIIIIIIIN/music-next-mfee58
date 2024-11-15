@@ -6,13 +6,13 @@ import ProductsGenres from "@/components/George/cate/products-genres";
 import FooterDeskTop from "@/components/public/footer/desktop";
 import FooterMobile from "@/components/public/footer/mobile";
 import Nav from "@/components/public/nav";
-import { AddToCartBar } from "@/components/public/addtocart-bar/add-to-cart";
-
+// import { AddToCartBar } from "@/components/public/addtocart-bar/add-to-cart";
+// import { CartProvider } from "@/components/George/context/cartdetail-provider";
+import { QuantityProvider } from "@/components/George/context/quantity-provider";
 
 export default function ProductsPage() {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(false);
-  
 
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
@@ -41,10 +41,14 @@ export default function ProductsPage() {
   return (
     <>
       <Nav />
-      <ProductsActivities />
-      <ProductsRecommendation />
-      <ProductsLatestLaunched />
-      <AddToCartBar />
+      <QuantityProvider>
+        {/* <CartProvider> */}
+          <ProductsActivities />
+          <ProductsRecommendation />
+          <ProductsLatestLaunched />
+          {/* <AddToCartBar /> */}
+        {/* </CartProvider> */}
+      </QuantityProvider>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

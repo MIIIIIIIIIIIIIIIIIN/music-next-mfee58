@@ -22,7 +22,6 @@ export default function ProductsDetail() {
   const [otherAlbums, setOtherAlbums] = useState([]);
   const [otherImages, setOtherImages] = useState([]);
   const [youMayLike, setYouMayLike] = useState([]);
-  const [memAuth, setMemAuth] = useState();
   const router = useRouter();
   const { pid } = router.query;
   const {quantity} = useQuantity
@@ -125,29 +124,7 @@ export default function ProductsDetail() {
   //   console.log("你可能也喜歡: ", pid);
   // }, [pid]);
 
-  useEffect(()=>{
-    const fetchMemData = async () => {
-      try {
-        const response = await fetch("http://localhost:3005/mem-data", {
-          credentials: "include",
-        });
-        if (!response.ok) {
-          throw new Error("Failed to fetch member data");
-        }
-        const data = await response.json();
-        // console.log(data);
-        
-        // 確保設置的值不是 undefined
-        setMemAuth(data.admin || null);
-        // console.log(member);
-  
-      } catch (error) {
-        console.error("Error fetching member data:", error);
-        setMemAuth(null); // 發生錯誤時設置為 null
-      }
-    };
-    fetchMemData()
-  }, [router.isReady])
+
 
   return (
     <>
@@ -158,7 +135,6 @@ export default function ProductsDetail() {
             albumDetail={albumDetail}
             albumImages={albumImages}
             pid={pid}
-            memAuth={memAuth}
           />
           {/* <SpotifyEmbedPlayer />
       <ProductsListen pid={pid}/> */}
@@ -179,8 +155,8 @@ export default function ProductsDetail() {
             albumImages={albumImages}
             youMayLike={youMayLike}
           />
-          <AddToCartBar albumDetail={albumDetail} pid={pid} memAuth={memAuth} />
-        </CartProvider>
+          <AddToCartBar />
+        </CartProvider >
       </QuantityProvider>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
