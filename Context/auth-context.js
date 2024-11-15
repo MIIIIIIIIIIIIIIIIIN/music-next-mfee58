@@ -2,13 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { JWT_LOGIN_POST } from "@/config/api-path";
 
 const AuthContext = createContext();
-/*
-1. 登入
-2. 登出
-3. 取得登入者的資料
-4. 取得已登入者的 token (或直接拿到 Authorization headers)
 
-*/
 const emptyAuth = {
   id: 0,
   email: "",
@@ -53,12 +47,12 @@ export function AuthContextProvider({ children }) {
         }
         setAuth(result.data);
         console.log("Login successful:", result.data);
-        return true;
+        return { success: true, id: result.data.id };
       }
     } catch (ex) {
       console.error("Login error:", ex);
     }
-    return false;
+    return { success: false };
   };
 
   const getAuthHeader = () => {

@@ -12,37 +12,37 @@ const Login = () => {
   const [showSuccess, setShowSuccess] = useState(false);
 
   // 通用的登入函數
-  const handleLogin = async (e) => {
-    if (e) e.preventDefault();
+// Login.js
+const handleLogin = async (e) => {
+  if (e) e.preventDefault();
+  
+  const { success, id } = await login(email, password);
 
-    const success = await login(email, password);
+  if (success) {
+    setShowSuccess(true);
+    setTimeout(() => {
+      window.location.href = `/member/member-blog/${id}`;
+    }, 2000);
+  } else {
+    setErrorMessage("登入失敗");
+  }
+};
 
-    if (success) {
-        // console.log("Login successful:", auth); // 檢查 auth 中是否有 token
-      setShowSuccess(true); // 登入成功時顯示提示框
-      setTimeout(() => {
-        window.location.href = "/member-blog/";
-      }, 2000); // 延遲兩秒後跳轉頁面
-    } else {
-      setErrorMessage("登入失敗");
-    }
-  };
+const quickLogin = async () => {
+  setEmail("test001");
+  setPassword("tt001");
+  const { success, id } = await login("test001", "tt001");
 
-  // 快速登入的功能，使用測試帳號和密碼
-  const quickLogin = async () => {
-    setEmail("test001");
-    setPassword("tt001");
-    const success = await login("test001", "tt001");
+  if (success) {
+    setShowSuccess(true);
+    setTimeout(() => {
+      window.location.href = `/member/member-blog/${id}`;
+    }, 2000);
+  } else {
+    setErrorMessage("快速登入失敗");
+  }
+};
 
-    if (success) {
-      setShowSuccess(true); // 快速登入成功時顯示提示框
-      setTimeout(() => {
-        window.location.href = "/member-blog";
-      }, 2000); // 延遲兩秒後跳轉頁面
-    } else {
-      setErrorMessage("快速登入失敗");
-    }
-  };
 
   return (
     <div className={styles.container}>
