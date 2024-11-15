@@ -58,37 +58,18 @@ const MemberBlog = () => {
     return <p>{errorMessage}</p>;
   }
 
-  const goToMemberCenter = () => {
-    router.push(`/member/member-center/${router.query.id}`);
-  };
-
   return (
     <div>
-      {/* <h1>會員部落格頁面</h1> */}
       {memberData ? (
         <>
           <Nav />
-          {/* 編輯按鈕 */}
-          {/*           
-          <a href="/Jade/member-center">
-            <img
-              src="/icons/icon-setting.svg"
-              alt="設定"
-              className={styles["settingIcon"]}
-            />
-          </a> */}
 
-          {/* <p>姓名: {memberData.m_nickname}</p> */}
-          {/* <p>信箱: {memberData.m_email}</p> */}
-
-          {/* 編輯按鈕 */}
-          <button onClick={goToMemberCenter} className={styles["editButton"]}>
-          <img
-              src="/icons/icon-setting.svg"
-              alt="設定"
-              className={styles["settingIcon"]}
-            />
-          </button>
+          {/* 新增連結到會員中心 */}
+          <h1>會員基本資料</h1>
+      {/* 新增一個按鈕連結到會員中心 */}
+      <Link href="/member/member-center">
+        <button>前往會員中心</button>
+      </Link>
 
           <div className={styles["container"]}>
             <div className={styles["leftContent"]}>
