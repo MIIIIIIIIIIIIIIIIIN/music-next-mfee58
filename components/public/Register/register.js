@@ -422,14 +422,14 @@ const Register = () => {
   };
   const handleRegister = async (e) => {
     e.preventDefault();
-
+  
     if (account.length < 6) {
       setAccountError("帳號需至少6碼");
       return;
     } else {
       setAccountError("");
     }
-
+  
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       setEmailError("請輸入有效的信箱格式");
@@ -437,30 +437,26 @@ const Register = () => {
     } else {
       setEmailError("");
     }
-
+  
     try {
-      const response = await axios.post(
-        "http://localhost:3005/member/register",
-        {
-          name,
-          account,
-          password,
-          email,
-          nickname,
-          location,
-          district, // 傳送行政區
-          birthDate, // 傳送生日
-        }
-      );
-      // 確認回應狀態為 201（註冊成功）
+      const response = await axios.post("http://localhost:3005/member/register", {
+        name,
+        account,
+        password,
+        email,
+        nickname,
+        location,
+        district, // 傳送行政區
+        birth: birthDate, // 改成傳送 birth，而不是 birthDate
+        gender,
+      });
+  
       if (response.status === 201) {
-        const { memberId } = response.data; // 從 response.data 中取得 memberId
-        setShowSuccess(true); // 顯示成功訊息
-
-        // 2 秒後跳轉到會員專屬頁面
+        const { memberId } = response.data;
+        setShowSuccess(true);
+  
         setTimeout(() => {
-          // router.push(`/member-blog?${memberId}`);
-          router.push(`/member-blog`);
+          router.push(`/member/blog/${memberId}`);
         }, 2000);
       } else {
         if (response.data.message === "該帳號已被註冊") {
@@ -489,6 +485,7 @@ const Register = () => {
       }
     }
   };
+  
 
   const handleAccountChange = (e) => {
     const value = e.target.value;

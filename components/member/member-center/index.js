@@ -5,9 +5,9 @@ import InfoNav from "../info-nav";
 import MemberInfo from "../mem-info/member-info";
 import MemberACC from "../mem-acc/mem-acc";
 import MemberPassword from "../mem-password";
-import MemberFav from "../mem-fav";
+// import MemberFav from "../mem-fav";
 import Mp3Uploader from "@/components/public/mp3-uploader";
-import MemberFavTest from "../mem-fav/test";
+// import MemberFavTest from "../mem-fav/test";
 
 const MemWeb2 = () => {
   const infoRef = useRef(null);
@@ -44,18 +44,18 @@ const MemWeb2 = () => {
             <img src="/image/img-mem/line005.png" alt="" />
 
             <div ref={accRef}>
-              <MemberACC />
+              {/* <MemberACC /> */}
             </div>
             <img src="/image/img-mem/line005.png" alt="" />
 
             <div ref={passwordRef}>
-              <MemberPassword />
+              {/* <MemberPassword /> */}
             </div>
             <img src="/image/img-mem/line005.png" alt="" />
 
             <div ref={favRef}>
-              <MemberFav />
-              <MemberFavTest />
+              {/* <MemberFav />
+              <MemberFavTest /> */}
             </div>
             
             {/* <div ref={uploaderRef}>
