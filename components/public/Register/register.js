@@ -3,8 +3,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import styles from "./register.module.css";
 import MemIcons from "@/components/member/mem-icons";
+import { useAuth } from "@/Context/auth-context"; // 引入 useAuth
 
 const Register = () => {
+  const { login } = useAuth(); // 從 AuthContext 中取出 login 函數
+  const router = useRouter();
+
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [birth, setBirth] = useState("");
@@ -20,7 +24,6 @@ const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [message, setMessage] = useState("");
-  const router = useRouter();
 
   const districtsData = {
     台北市: [
@@ -412,7 +415,7 @@ const Register = () => {
   const handleLocationChange = (e) => {
     const selectedLocation = e.target.value;
     setLocation(selectedLocation);
-    setDistrict(""); // 清空行政區選擇
+    setDistrict("");
 
     if (districtsData[selectedLocation]) {
       setDistrictOptions(districtsData[selectedLocation]);
@@ -420,16 +423,17 @@ const Register = () => {
       setDistrictOptions([]);
     }
   };
+
   const handleRegister = async (e) => {
     e.preventDefault();
-  
+
     if (account.length < 6) {
       setAccountError("帳號需至少6碼");
       return;
     } else {
       setAccountError("");
     }
-  
+
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       setEmailError("請輸入有效的信箱格式");
@@ -437,7 +441,7 @@ const Register = () => {
     } else {
       setEmailError("");
     }
-  
+
     try {
       const response = await axios.post("http://localhost:3005/member/register", {
         name,
@@ -446,18 +450,21 @@ const Register = () => {
         email,
         nickname,
         location,
-        district, // 傳送行政區
-        birth: birthDate, // 改成傳送 birth，而不是 birthDate
+        district,
+        birth: birthDate,
         gender,
       });
-  
+
       if (response.status === 201) {
-        const { memberId } = response.data;
         setShowSuccess(true);
-  
-        setTimeout(() => {
-          router.push(`/member/blog/${memberId}`);
-        }, 2000);
+
+        // 自動登入並導航到會員頁面
+        const loginResult = await login(account, password);
+        if (loginResult.success) {
+          router.push(`/member/blog/${loginResult.account}`);
+        } else {
+          setMessage("自動登入失敗，請手動登入");
+        }
       } else {
         if (response.data.message === "該帳號已被註冊") {
           setAccountError("此帳號已被註冊");
@@ -485,7 +492,6 @@ const Register = () => {
       }
     }
   };
-  
 
   const handleAccountChange = (e) => {
     const value = e.target.value;
