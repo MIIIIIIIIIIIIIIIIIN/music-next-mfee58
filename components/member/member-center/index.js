@@ -39,7 +39,7 @@ const MemWeb2 = () => {
           </div>
           <div className={styles["rightContent"]}>
             <div ref={infoRef}>
-              <MemberInfo />
+              {/* <MemberInfo /> */}
             </div>
             <img src="/image/img-mem/line005.png" alt="" />
 

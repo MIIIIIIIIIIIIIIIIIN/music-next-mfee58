@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import styles from "./login.module.css";
 import MemIcons from "@/components/member/mem-icons";
 import { useAuth } from "@/Context/auth-context";
-import { useRouter } from "next/router"; // 引入 useRouter
 
 const Login = () => {
-  const { login } = useAuth();
-  const router = useRouter(); // 初始化 router
+  const { login } = useAuth(); // 從 AuthContext 中取出 login 方法
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,30 +14,31 @@ const Login = () => {
   // 通用的登入函數
   const handleLogin = async (e) => {
     if (e) e.preventDefault();
-    
-    const { success, account } = await login(email, password);
-
-    if (success && account) {
+  
+    const { success, id, account } = await login(email, password);
+  
+    if (success) {
       setShowSuccess(true);
       setTimeout(() => {
-        router.replace(`/member/blog/${account}`); // 使用 router.replace 避免刷新
+        // 使用 account 作為跳轉的 URL 參數
+        window.location.href = `/member/blog/${account}`;
       }, 2000);
     } else {
       setErrorMessage("登入失敗");
     }
   };
+  
 
-  const quickLogin = async (e) => {
-    if (e) e.preventDefault();
+  // 快速登入功能
+  const quickLogin = async () => {
     setEmail("test001");
     setPassword("tt001");
+    const { success, id } = await login("test001", "tt001");
 
-    const { success, account } = await login("test001", "tt001");
-
-    if (success && account) {
+    if (success) {
       setShowSuccess(true);
       setTimeout(() => {
-        router.replace(`/member/blog/${account}`); // 使用 router.replace 避免刷新
+        window.location.href = `/member/blog/${id}`;
       }, 2000);
     } else {
       setErrorMessage("快速登入失敗");
@@ -83,7 +82,10 @@ const Login = () => {
               className={styles.eyeIcon}
               onClick={() => setShowPassword(!showPassword)}
             >
-              <MemIcons iconName={showPassword ? "icons-eye-off" : "icons-eye"} size="medium" />
+              <MemIcons
+                iconName={showPassword ? "icons-eye-off" : "icons-eye"}
+                size="medium"
+              />
             </span>
           </div>
           {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
@@ -112,7 +114,7 @@ const Login = () => {
       {showSuccess && (
         <div className={styles.successOverlay}>
           <div className={styles.successMessage}>
-            <p>登入成功!歡迎回來!</p>
+            <p>登入成功! 歡迎回來!</p>
           </div>
         </div>
       )}

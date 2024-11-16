@@ -636,7 +636,7 @@ const Register = () => {
             <br />
 
             <br />
-            <a href="/login">
+            <a href="/member/login">
               <p>已有帳號? 前往登入</p>
             </a>
             <br />

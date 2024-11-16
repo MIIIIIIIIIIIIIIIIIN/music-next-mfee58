@@ -8,46 +8,40 @@ const emptyAuth = {
   email: "",
   nickname: "",
   token: "",
+  account: "",
 };
+
 const storageKey = "member-auth";
 
 export function AuthContextProvider({ children }) {
   const [auth, setAuth] = useState(() => {
-    if (typeof window !== "undefined") { // 檢查 window 是否存在
-      const savedAuth = localStorage.getItem(storageKey);
+    if (typeof window !== "undefined") {
+      const savedAuth = sessionStorage.getItem(storageKey);
       return savedAuth ? JSON.parse(savedAuth) : { ...emptyAuth };
     }
     return { ...emptyAuth };
   });
 
-  // 登出的功能
-  const logout = () => {
-    if (typeof window !== "undefined") {
-      localStorage.removeItem(storageKey);
-    }
-    setAuth({ ...emptyAuth });
-  };
-
-  // 登入的功能
   const login = async (email, password) => {
     try {
-      const r = await fetch(JWT_LOGIN_POST, {
+      const response = await fetch(JWT_LOGIN_POST, {
         method: "POST",
         body: JSON.stringify({ email, password }),
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const result = await r.json();
-      console.log("API response:", result);
 
-      if (result.success) {
+      const result = await response.json();
+      if (result.success && result.data) {
+        const account = result.data.account;
+        if (!account) return { success: false };
+
         if (typeof window !== "undefined") {
-          localStorage.setItem(storageKey, JSON.stringify(result.data));
+          sessionStorage.setItem(storageKey, JSON.stringify(result.data));
         }
         setAuth(result.data);
-        console.log("Login successful:", result.data);
-        return { success: true, id: result.data.id };
+        return { success: true, account };
       }
     } catch (ex) {
       console.error("Login error:", ex);
@@ -55,23 +49,25 @@ export function AuthContextProvider({ children }) {
     return { success: false };
   };
 
-  const getAuthHeader = () => {
-    if (auth.token) {
-      return { Authorization: "Bearer " + auth.token };
-    } else {
-      return {};
+  const logout = () => {
+    if (typeof window !== "undefined") {
+      sessionStorage.removeItem(storageKey);
     }
+    setAuth({ ...emptyAuth });
   };
 
-  // 當 `auth` 狀態改變時，同步更新到 `localStorage`
+  const getAuthHeader = () => {
+    return auth.token ? { Authorization: "Bearer " + auth.token } : {};
+  };
+
   useEffect(() => {
     if (typeof window !== "undefined" && auth.token) {
-      localStorage.setItem(storageKey, JSON.stringify(auth));
+      sessionStorage.setItem(storageKey, JSON.stringify(auth));
     }
   }, [auth]);
 
   return (
-    <AuthContext.Provider value={{ auth, logout, login, getAuthHeader }}>
+    <AuthContext.Provider value={{ auth, login, logout, getAuthHeader }}>
       {children}
     </AuthContext.Provider>
   );
