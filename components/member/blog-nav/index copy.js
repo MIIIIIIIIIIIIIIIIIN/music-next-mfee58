@@ -40,7 +40,7 @@ const BlogNav = () => {
           setBirth(formattedBirth);
         } else {
           console.log("用戶尚未登入");
-          router.push("/login");
+          router.push("/member/login");
         }
       } catch (error) {
         console.error("Error fetching session data:", error);

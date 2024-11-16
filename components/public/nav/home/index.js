@@ -251,7 +251,7 @@ export default function NavHome() {
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              router.push(member ? "/member-blog" : "/login");
+              router.push(member ? "/member-blog" : "/member/login");
             }}
           >
             <ProfileIcons

@@ -46,12 +46,12 @@ const MemWeb2 = () => {
             <img src="/image/img-mem/line005.png" alt="" />
 
             <div ref={accRef}>
-              {/* <MemberACC /> */}
+              <MemberACC />
             </div>
             <img src="/image/img-mem/line005.png" alt="" />
 
             <div ref={passwordRef}>
-              {/* <MemberPassword /> */}
+              <MemberPassword />
             </div>
             <img src="/image/img-mem/line005.png" alt="" />
 

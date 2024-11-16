@@ -28,16 +28,22 @@ const MemberInfo = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!auth.id) return; // 確保 id 存在
+      if (!auth.id) return;
 
       try {
-        const response = await axios.get(`http://localhost:3005/mem-data/${auth.id}`, {
+        const response = await axios.get(`http://localhost:3005/member/mem-data/by-id/${auth.id}`, {
           withCredentials: true,
         });
         const data = response.data;
 
         if (data.success) {
-          setMember(data);
+          const memberData = data.memberData;
+          setMember(memberData);
+          setBirth(memberData.m_birth);
+          setGender(memberData.m_gender);
+          setCounty(memberData.m_location || "");
+          setDistrict(memberData.m_district || "");
+          setBio(memberData.m_bio || "");
         } else {
           console.warn("未獲取到有效的會員資料");
         }
@@ -148,8 +154,8 @@ const MemberInfo = () => {
                 property1="lg"
                 className={styles.header}
                 img={
-                  member.icon
-                    ? `http://localhost:3005${member.icon}`
+                  member.m_icon
+                    ? `http://localhost:3005${member.m_icon}`
                     : "/image/img-mem/user-logo000.jpg"
                 }
                 onClick={() => document.getElementById("fileInput").click()}
@@ -167,7 +173,6 @@ const MemberInfo = () => {
               上傳頭像建議尺寸：140x140px以內，圖片檔案大小不可超過2MB
             </h6>
             <h6>簡介</h6>
-
             <div className={styles["input-top"]}>
               {isEditingBio ? (
                 <>
@@ -198,7 +203,6 @@ const MemberInfo = () => {
                 </>
               )}
             </div>
-
             <div className={styles["body-input"]}>
               <div className={styles["input-left"]}>
                 <h6 className={styles["left-title"]}>暱稱(顯示名稱)</h6>
@@ -207,11 +211,11 @@ const MemberInfo = () => {
                     <>
                       <FormInput
                         size="small"
-                        value={member.nickname}
+                        value={member.m_nickname}
                         onChange={(e) =>
                           setMember((prevMember) => ({
                             ...prevMember,
-                            nickname: e.target.value,
+                            m_nickname: e.target.value,
                           }))
                         }
                       />
@@ -230,7 +234,7 @@ const MemberInfo = () => {
                     </>
                   ) : (
                     <>
-                      <span>{member.nickname || "新增暱稱"}</span>
+                      <span>{member.m_nickname || "新增暱稱"}</span>
                       <button
                         onClick={() => setIsEditing(true)}
                         className={styles.button}
@@ -245,7 +249,6 @@ const MemberInfo = () => {
                   <FormInput value={birth} readOnly />
                 </div>
               </div>
-
               <div className={styles["input-right"]}>
                 <h6 className={styles["right-title"]}>性別</h6>
                 <div className={styles["right-text"]}>

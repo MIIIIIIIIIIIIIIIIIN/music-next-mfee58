@@ -76,7 +76,7 @@ const MemberBlog = () => {
               {memberData && <BlogNav memberData={memberData} />}
               <br />
 
-              <Link href="/login" passHref>
+              <Link href="/member/login" passHref>
                 <div className={styles.logoutButton}>登出</div>
               </Link>
             </div>

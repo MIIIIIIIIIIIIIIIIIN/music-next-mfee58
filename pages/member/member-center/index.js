@@ -8,13 +8,13 @@ const MemberCenter = () => {
 
   useEffect(() => {
     if (!auth.token) {
-      router.push("/login"); // 未登入則導向登入頁
+      router.push("/member/login"); // 未登入則導向登入頁
     }
   }, [auth, router]);
 
   const handleLogout = () => {
     logout(); // 執行登出
-    router.push("/login"); // 登出後導向登入頁面
+    router.push("/member/login"); // 登出後導向登入頁面
   };
 
   return auth.token ? (

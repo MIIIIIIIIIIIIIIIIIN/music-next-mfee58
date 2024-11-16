@@ -23,7 +23,7 @@ const handleLogout = async () => {
     if (response.data.success) {
       alert(response.data.message);
       // 跳轉到登入頁面或首頁
-      window.location.href = "/login";
+      window.location.href = "/member/login";
     }
   } catch (error) {
     console.error("登出失敗:", error);
