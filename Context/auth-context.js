@@ -4,7 +4,7 @@ import { JWT_LOGIN_POST } from "@/config/api-path";
 const AuthContext = createContext();
 
 const emptyAuth = {
-  id: 0,
+  id: null,
   email: "",
   nickname: "",
   token: "",

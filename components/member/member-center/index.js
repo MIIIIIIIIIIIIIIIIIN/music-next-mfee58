@@ -8,6 +8,8 @@ import MemberPassword from "../mem-password";
 // import MemberFav from "../mem-fav";
 import Mp3Uploader from "@/components/public/mp3-uploader";
 // import MemberFavTest from "../mem-fav/test";
+import { useAuth } from "@/Context/auth-context";
+import { useRouter } from "next/router";
 
 const MemWeb2 = () => {
   const infoRef = useRef(null);
@@ -39,7 +41,7 @@ const MemWeb2 = () => {
           </div>
           <div className={styles["rightContent"]}>
             <div ref={infoRef}>
-              {/* <MemberInfo /> */}
+              <MemberInfo />
             </div>
             <img src="/image/img-mem/line005.png" alt="" />
 

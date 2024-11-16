@@ -271,7 +271,7 @@ export default function NavDesktop() {
                   router.push("/member-blog");
                 } else {
                   // 如果會員未登入，跳轉到 /login
-                  router.push("/login");
+                  router.push("/member/login");
                 }
               }}
             >
