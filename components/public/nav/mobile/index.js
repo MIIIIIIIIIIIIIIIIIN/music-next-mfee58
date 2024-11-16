@@ -95,7 +95,7 @@ export default function NavMobile() {
                   <ProfileIcons
                     property1="XXS"
                     className={styles.header}
-                    img="/icons/icon-user.svg"
+                    img="/icons/icon-usernav.svg"
                   />
                 )}
               </a>

@@ -289,7 +289,7 @@ export default function NavDesktop() {
                 <ProfileIcons
                   property1="XXS"
                   className={styles.header}
-                  img="/icons/icon-user.svg"
+                  img="/icons/icon-usernav.svg"
                 />
               )}
             </a>

@@ -257,7 +257,7 @@ export default function NavHome() {
             <ProfileIcons
               property1="XXS"
               className={styles.header}
-              img={member?.icon || "/icons/icon-user.svg"}
+              img={member?.icon || "/icons/icon-usernav.svg"}
             />
           </a>
 
