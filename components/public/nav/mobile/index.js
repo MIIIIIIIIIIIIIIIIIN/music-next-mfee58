@@ -11,9 +11,11 @@ import FundraisingList from "./system-list/fundraising";
 import MemberList from "./system-list/member";
 import Logo from "../../logo";
 import { useRouter } from "next/router";
+import { useAuth } from "@/Context/auth-context";
 
 export default function NavMobile() {
   const router = useRouter();
+  const { auth } = useAuth();
   const [display, setDislay] = useState(false);
   const items = useRef(null);
   const input = useRef(null);
@@ -49,6 +51,17 @@ export default function NavMobile() {
     fetchData();
   }, []);
 
+  const handleProfileClick = (e) => {
+    e.preventDefault();
+    if (member && member.account) {
+      // 已登入，跳轉到 /member/blog/{會員帳號}
+      router.push(`/member/blog/${member.account}`);
+    } else {
+      // 未登入，跳轉到 /member/login
+      router.push("/member/login");
+    }
+  };
+
   return (
     <>
       <div className={styles.wrap}>
@@ -72,11 +85,11 @@ export default function NavMobile() {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (member) {
-                    // 如果會員已登入，跳轉到 /member-blog
-                    router.push("/member-blog");
+                  if (auth?.account) {
+                    // 如果會員已登入，跳轉到 /member/blog/{會員帳號}
+                    router.push(`/member/blog/${auth.account}`);
                   } else {
-                    // 如果會員未登入，跳轉到 /login
+                    // 如果會員未登入，跳轉到 /member/login
                     router.push("/member/login");
                   }
                 }}

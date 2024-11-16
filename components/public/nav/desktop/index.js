@@ -5,9 +5,11 @@ import Mall from "../checklist/mall";
 import Logo from "../../logo";
 import styles from "./nav.module.css";
 import { useRouter } from "next/router";
+import { useAuth } from "@/Context/auth-context"; // 引入 useAuth
 
 export default function NavDesktop() {
   const router = useRouter();
+  const { auth } = useAuth(); // 使用 useAuth 來檢查會員登入狀態
   const [display, setDislay] = useState(false);
   const items = useRef(null);
   const input = useRef(null);
@@ -266,11 +268,11 @@ export default function NavDesktop() {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                if (member) {
-                  // 如果會員已登入，跳轉到 /member-blog
-                  router.push("/member-blog");
+                if (auth?.account) {
+                  // 如果會員已登入，跳轉到 `/member/blog/{會員帳號}`
+                  router.push(`/member/blog/${auth.account}`);
                 } else {
-                  // 如果會員未登入，跳轉到 /login
+                  // 如果會員未登入，跳轉到 /member/login
                   router.push("/member/login");
                 }
               }}
