@@ -34,11 +34,11 @@ export default function ProductsCartPage(props) {
     };
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
   
-      console.log("urid: ", listData);
+  //     console.log("urid: ", listData);
       
-  }, [listData]);
+  // }, [listData]);
 
   return (
     <>

@@ -11,7 +11,10 @@ import ProductsMore from "@/components/George/products-detail/products-more";
 import OthersYouLike from "@/components/George/products-detail/products-othersYouLike";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { QuantityProvider, useQuantity } from "@/components/George/context/quantity-provider";
+import {
+  QuantityProvider,
+  useQuantity,
+} from "@/components/George/context/quantity-provider";
 import { CartProvider } from "@/components/George/context/cartdetail-provider";
 
 export default function ProductsDetail() {
@@ -24,7 +27,7 @@ export default function ProductsDetail() {
   const [youMayLike, setYouMayLike] = useState([]);
   const router = useRouter();
   const { pid } = router.query;
-  const {quantity} = useQuantity
+  const { quantity } = useQuantity;
 
   useEffect(() => {
     if (!router.isReady || !pid) return;
@@ -124,8 +127,6 @@ export default function ProductsDetail() {
   //   console.log("你可能也喜歡: ", pid);
   // }, [pid]);
 
-
-
   return (
     <>
       <Nav />
@@ -136,13 +137,12 @@ export default function ProductsDetail() {
             albumImages={albumImages}
             pid={pid}
           />
-          {/* <SpotifyEmbedPlayer />
-      <ProductsListen pid={pid}/> */}
+          {/* <SpotifyEmbedPlayer /> */}
+          <ProductsListen />
           <ProductsDescription
             albumDetail={albumDetail}
             albumImages={albumImages}
             pid={pid}
-            
           />
           <ProductsMore
             albumDetail={albumDetail}
@@ -156,7 +156,7 @@ export default function ProductsDetail() {
             youMayLike={youMayLike}
           />
           <AddToCartBar />
-        </CartProvider >
+        </CartProvider>
       </QuantityProvider>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>

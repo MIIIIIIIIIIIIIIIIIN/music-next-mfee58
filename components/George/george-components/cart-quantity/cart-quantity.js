@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./quantity.module.css";
 
-export const CartQuantity = ({ cartItems, handleIncrement, handleDecrement, albumId, index }) => {
+export const CartQuantity = ({ handleDeleteClick, cartItems, handleIncrement, handleDecrement, albumId, index }) => {
 
   const [plusIsPressed, setPlusIsPressed] = useState(false);
   const [deIsPressed, setDeIsPressed] = useState(false);
@@ -15,7 +15,7 @@ export const CartQuantity = ({ cartItems, handleIncrement, handleDecrement, albu
           }
           onMouseDown={() => setDeIsPressed(true)}
           onMouseUp={() => setDeIsPressed(false)}
-          onClick={()=>{handleDecrement(albumId)}}
+          onClick={()=>{handleDeleteClick(albumId)}}
         >
           <button className={style["text-wrapper-2"]}>–</button>
         </div>

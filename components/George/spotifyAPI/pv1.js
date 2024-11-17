@@ -7,12 +7,12 @@ export default function MySpotifyPlayer({ accessToken, playlistId }) {
       token={accessToken}
       uris={[`spotify:playlist:${playlistId}`]}
       styles={{
-        bgColor: '#1db954',
-        color: '#ffffff',
+        bgColor: 'rgba(20, 255, 0, 0.5)',
+        color: '#000000',
         loaderColor: '#fff',
         sliderColor: '#1db954',
-        trackArtistColor: '#ccc',
-        trackNameColor: '#fff',
+        trackArtistColor: '#000000',
+        trackNameColor: '#000000',
       }}
       autoPlay={true}
       play={true}

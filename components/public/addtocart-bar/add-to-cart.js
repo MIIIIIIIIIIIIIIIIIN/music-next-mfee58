@@ -34,16 +34,16 @@ export const AddToCartBar = () => {
     };
   }, []);
 
-  const handleAuth = () => {
-    if (!memAuth) {
-      alert("請先登入會員才能進行贊助！");
-      const targetUrl = encodeURIComponent(`/George/cart/${memAuth ? memAuth.id : ""}`);
-      window.location = `http://localhost:3000/login?redirect=${targetUrl}`;
-      return;
-    } else {
-      window.location = `http://localhost:3000/George/cart/${memAuth.id}`;
-    }
-  };
+  // const handleAuth = () => {
+  //   if (!memAuth) {
+  //     alert("請先登入會員才能進行贊助！");
+  //     const targetUrl = encodeURIComponent(`/George/cart/${memAuth ? memAuth.id : ""}`);
+  //     window.location = `http://localhost:3000/login?redirect=${targetUrl}`;
+  //     return;
+  //   } else {
+  //     window.location = `http://localhost:3000/George/cart/${memAuth.id}`;
+  //   }
+  // };
 
   useEffect(()=>{
 
@@ -63,10 +63,11 @@ export const AddToCartBar = () => {
                 <button className={styles["barbutton-addtocart"]} onClick={handleAddtoCart}>
                   <div className={styles["text-wrapper-4"]}>Add to Cart</div>
                 </button>
-                <Link href={`/George/cart/${memAuth ? memAuth.id : ""}`}>
+                {/* <Link href={`/George/cart/${memAuth ? memAuth.id : ""}`}> */}
+                <Link href={memAuth ? `/George/cart/${memAuth.id}` : `http://localhost:3000/login`}>
                   <button
                     className={styles["div-wrapper"]}
-                    onClick={handleAuth}
+                    // onClick={handleAuth}
                   >
                     <div className={styles["text-wrapper-4"]}>Cart</div>
                   </button>

@@ -13,7 +13,7 @@ export default function SpotifyPlaylist() {
   const { pid } = router.query; // 產品資料庫 ID
 
   // 直接定義 playlistId
-  const playlistId = "3Mk6qmUSVeeF5CLqkrkmTP";
+  const playlistId = "7Id3BfkmdnlIZ43TNqEhD6";
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -34,7 +34,7 @@ export default function SpotifyPlaylist() {
         setPlaylist(response.data);
       } catch (error) {
         console.error("Error fetching playlist:", error);
-        setError("Failed to fetch playlist data.");
+        // setError("Failed to fetch playlist data.");
       }
     };
 
@@ -51,15 +51,15 @@ export default function SpotifyPlaylist() {
       setPlaylist(response.data);
     } catch (error) {
       console.error("Error fetching playlist:", error);
-      setError("Failed to fetch playlist data.");
+      // setError("Failed to fetch playlist data.");
     }
   }
 
   if (!accessToken) {
     return (
-      <button>
-        <a href={`http://localhost:3005/api/logintospotify?pid=${pid}`}>確認試聽</a>
-      </button>
+      
+        <a href={`http://localhost:3005/api/logintospotify?pid=${pid}`}><button className={styles.listenbutton}>點擊試聽</button></a>
+      
     );
   }
 
@@ -69,12 +69,14 @@ export default function SpotifyPlaylist() {
         <p>{error}</p>
       ) : playlist ? (
         <div>
-          <h2>{playlist.name}</h2>
+          {/* <h2>{playlist.name}</h2> */}
+          <div className={styles.albumcover}>
           <img
             src={playlist.images[0]?.url}
             alt="Playlist Cover"
             className={styles.playlistCover}
           />
+          </div>
           <ul>
             {playlist.tracks.items.map((track, index) => (
               <li key={index}>

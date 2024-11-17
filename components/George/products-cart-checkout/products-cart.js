@@ -5,17 +5,49 @@ import { CartQuantity } from "../george-components/cart-quantity/cart-quantity";
 import { CartProvider, useCartDetail } from "../context/cartdetail-provider";
 import Link from "next/link";
 import axios from "axios";
+import ConfirmModal from "../george-components/confirm-modal/confirm-modal";
 
 export default function ProductsCart({ mdBox, listData }) {
-  const { handleIncrement, handleDecrement, cartItems } = useCartDetail();
-  const handleClick = () => {
-    "";
+  const {
+    selectAllItems,
+    cartItems,
+    handleSelectItem,
+    selectedItems,
+    calculateTotalAmount,
+    handleIncrement,
+    handleDecrement,
+    showConfirm,
+    confirmDelete,
+    cancelDelete,
+    handleDeleteClick,
+    toOrder,
+    // handleSelectAll,
+    // isAllSelected,
+  } = useCartDetail();
+
+  const [isAllSelected, setIsAllSelected] = useState(false);
+
+  const handleSelectAll = () => {
+    const newSelectAllState = !isAllSelected;
+    setIsAllSelected(newSelectAllState);
+    selectAllItems(newSelectAllState);
   };
 
-  // [0].p_cart_quantity
+  const handleClick = () => {};
+
+  // 全選反向判斷
   useEffect(() => {
-    console.log("cartItems 長怎樣: ", cartItems);
-  }, [cartItems]);
+    const allSelected =
+      cartItems.length > 0 &&
+      cartItems.every((item) => selectedItems.includes(item.p_albums_id));
+    setIsAllSelected(allSelected);
+  }, [cartItems, selectedItems]);
+
+
+
+  // useEffect(() => {
+  //   console.log("cartItems 長怎樣: ", cartItems);
+  // }, [cartItems]);
 
   return (
     <>
@@ -44,14 +76,28 @@ export default function ProductsCart({ mdBox, listData }) {
             </ul>
           </div>
 
+          <div className={style.selectAll}>
+            <input
+              type="checkbox"
+              checked={isAllSelected}
+              onChange={handleSelectAll} // 全選/取消全選邏輯
+            />
+            <span className={style.selectWord}>全選</span>
+          </div>
+          {/* <div className={style.seperationline}></div> */}
           {/* 購買細項 */}
-          {mdBox &&
-            mdBox.map((v, i) => {
+          {cartItems &&
+            cartItems.map((v, i) => {
               return (
                 <div className={style.checkoutcontainer} key={i}>
                   <div className={style.checkoutcontainer1}>
                     <div className={style.checkboxandpic}>
-                      <input type="checkbox" name="albumcheck" />
+                      <input
+                        type="checkbox"
+                        name="albumcheck"
+                        checked={selectedItems.includes(v.p_albums_id)}
+                        onChange={() => handleSelectItem(v.p_albums_id)}
+                      />
                       <div className={style.albumbox}>
                         <img
                           src={`/${v.p_cart_img_filename}`}
@@ -86,6 +132,7 @@ export default function ProductsCart({ mdBox, listData }) {
                                     handleDecrement={handleDecrement}
                                     albumId={album.p_albums_id}
                                     index={i}
+                                    handleDeleteClick={handleDeleteClick}
                                   />
                                 </div>
                                 <div className={style.checkoutprice}>
@@ -105,8 +152,11 @@ export default function ProductsCart({ mdBox, listData }) {
 
           {/* total + checkout button */}
           <div className={style.totalandcheckoutbutton}>
-            <div className={style.totalamount}>總金額(1件商品)：$549</div>
-            <Link href={"/George/cart/products-checkout-page"}>
+            <div className={style.totalamount}>
+              總金額({selectedItems.length}件商品)：${calculateTotalAmount()}
+            </div>
+            {/* <Link href="/George/cart/products-checkout-page"> */}
+            <Link href={{ pathname: "/George/cart/products-checkout-page", query: { toOrder: JSON.stringify(toOrder) } }}>
               <BlackWBtnsMobile
                 type="2"
                 onClick={handleClick}
@@ -118,6 +168,11 @@ export default function ProductsCart({ mdBox, listData }) {
           </div>
         </div>
       </div>
+      <ConfirmModal
+        confirmDelete={confirmDelete}
+        showConfirm={showConfirm}
+        cancelDelete={cancelDelete}
+      />
     </>
   );
 }

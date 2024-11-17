@@ -26,6 +26,17 @@ export default function ProductsDetailPage({
     "";
   };
 
+  const handleAuth = () => {
+    if (!memAuth) {
+      alert("請先登入會員！");
+      const targetUrl = encodeURIComponent(`/George/cart/${memAuth ? memAuth.id : ""}`);
+      window.location = `http://localhost:3000/login?redirect=${targetUrl}`;
+      return;
+    } else {
+      window.location = `http://localhost:3000/George/cart/${memAuth.id}`;
+    }
+  };
+
   useEffect(()=>{
     console.log("Member: ", memAuth);
     
@@ -97,7 +108,7 @@ export default function ProductsDetailPage({
 
             <WhiteWBtns
               type="1"
-              onClick={handleAddtoCart}
+              onClick={memAuth ? handleAddtoCart : handleAuth}
               className={style.whiteBtn}
             >
               加入購物車

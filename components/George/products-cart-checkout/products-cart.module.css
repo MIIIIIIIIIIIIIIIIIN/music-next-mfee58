@@ -14,9 +14,27 @@
   left:0;
   object-fit: cover;
 }
+.vcover{
+  position: absolute;
+  top: 0px;
+  height: 30px;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1), /* 漸層顏色的起點（接近導航欄顏色） */
+    rgba(255, 255, 255, 0.8), /* 漸層顏色的起點（接近導航欄顏色） */
+    rgba(255, 255, 255, 0.6), /* 漸層顏色的起點（接近導航欄顏色） */
+    rgba(255, 255, 255, 0.4), /* 漸層顏色的起點（接近導航欄顏色） */
+    rgba(255, 255, 255, 0.2), /* 漸層顏色的起點（接近導航欄顏色） */
+    rgba(0, 0, 0, 0) /* 透明，和影片自然過渡 */
+  );
+  filter: blur(0px);
+  z-index: 500;
+}
+
 .container {
   width: 60vw;
-  margin: 50px auto;
+  margin: 80px auto;
   background: rgba(255,255,255,0.5);
   border-radius: 10px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
@@ -24,6 +42,59 @@
   text-align: center;
   z-index: 9999;
 }
+/* Select All */
+.selectAll{
+  text-align: left;
+  margin: 0 45px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.selectAll input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  background-color: white;
+  border: 2px solid gray;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.selectAll input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  background-color: white;
+  border: 2px solid gray;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+.selectAll input[type="checkbox"]:checked {
+  background-color: white;
+  border: 2px solid black;
+}
+.selectAll input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid black;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+.selectAll input[type="checkbox"]:hover {
+  background-color: lightgray;
+  transform: scale(1.1);
+}
+
 /* checkbox */
 .checkoutcontainer1 input[type="checkbox"] {
   -webkit-appearance: none;
@@ -175,7 +246,7 @@
 @media (max-width: 375px) {
   .container {
     width: 95vw;
-    margin: 0 auto 100px;
+    margin: 20px auto 100px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
