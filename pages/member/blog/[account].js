@@ -16,13 +16,16 @@ const MemberBlog = () => {
 
   useEffect(() => {
     if (!auth.account) {
-      setErrorMessage("無法取得有效的 account");
+      // setErrorMessage("無法取得有效的 account");
+      router.push("/member/login");
       return;
     }
 
     const fetchMemberData = async () => {
       try {
-        const response = await fetch(`http://localhost:3005/member/mem-data/${auth.account}`);
+        const response = await fetch(
+          `http://localhost:3005/member/mem-data/${auth.account}`
+        );
         const data = await response.json();
         if (data.success) {
           setMemberData(data.memberData);
@@ -42,30 +45,29 @@ const MemberBlog = () => {
     return <p>{errorMessage}</p>;
   }
 
-    // 點擊登出按鈕後的處理
-    const handleLogout = () => {
-      logout(); // 執行登出
-      router.push("/member/login"); // 登出後重導向到登入頁面
-    };
-  
-    if (errorMessage) {
-      return <p>{errorMessage}</p>;
-    }
+  // 點擊登出按鈕後的處理
+  const handleLogout = () => {
+    logout(); // 執行登出
+    router.push("/member/login"); // 登出後重導向到登入頁面
+  };
+
+  if (errorMessage) {
+    return <p>{errorMessage}</p>;
+  }
 
   return (
     <div>
       {memberData ? (
         <>
-          <Nav />
-
-          <Link href="/member/center">
-            <button>前往會員中心</button>
-          </Link>
+          <Nav className={styles["nav"]} />
 
           <div className={styles["container"]}>
             <div className={styles["leftContent"]}>
               <BlogNav memberData={memberData} />
               <br />
+              <Link href="/member/center">
+                <button>前往會員中心</button>
+              </Link>
 
               <div className={styles.logoutButton} onClick={handleLogout}>
                 登出
@@ -76,6 +78,21 @@ const MemberBlog = () => {
               <div className={styles["albumSec"]}>
                 <div className={styles["album"]}>
                   <UserIcon />
+                </div>{" "}
+                <div className={styles["album"]}>
+                  <UserIcon />
+                </div>{" "}
+                <div className={styles["album"]}>
+                  <UserIcon />
+                </div>{" "}
+                <div className={styles["album"]}>
+                  <UserIcon />
+                </div>{" "}
+                <div className={styles["album"]}>
+                  <UserIcon />
+                </div>{" "}
+                <div className={styles["album"]}>
+                  <UserIcon />
                 </div>
                 <div className={styles["album"]}>
                   <PlayButton size="large" />
@@ -83,11 +100,10 @@ const MemberBlog = () => {
               </div>
             </div>
           </div>
-
-          <div className={styles.logoutButton} onClick={handleLogout}>
+          <div className={styles["footer"]}></div>
+          {/* <div className={styles.logoutButton} onClick={handleLogout}>
             登出
-          </div>
-
+          </div> */}
         </>
       ) : (
         <p>載入中...</p>

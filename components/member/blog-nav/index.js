@@ -36,8 +36,8 @@ const BlogNav = ({ memberData }) => {
           property1="lg"
           className={styles.header}
           img={
-            member.icon
-              ? `http://localhost:3005${member.icon}`
+            memberData.m_icon
+              ? `http://localhost:3005${memberData.m_icon}`
               : "/image/img-mem/user-logo000.jpg"
           } // 預設圖示
         />
