@@ -17,19 +17,19 @@ const MOCK_DATA = {
           id: "t1", 
           name: "城市邊緣", 
           duration: 30,
-          audioUrl: "/Liam/music/01//01.mp3"
+          audioUrl: "/Liam/music/01/01.mp3"
         },
         { 
           id: "t2", 
           name: "無重力時刻", 
           duration: 30,
-          audioUrl: "/Liam/music/01//02.mp3"
+          audioUrl: "/Liam/music/01/02.mp3"
         },
         { 
           id: "t3", 
           name: "山間絮語", 
           duration: 30,
-          audioUrl: "/Liam/music/01//03.mp3"
+          audioUrl: "/Liam/music/01/03.mp3"
         }
       ]
     },
