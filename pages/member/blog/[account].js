@@ -14,6 +14,9 @@ const MemberBlog = () => {
   const [memberData, setMemberData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleEdit = () => {
+    router.push("/member/center");
+  };
   useEffect(() => {
     if (!auth.account) {
       // setErrorMessage("無法取得有效的 account");
@@ -65,12 +68,15 @@ const MemberBlog = () => {
             <div className={styles["leftContent"]}>
               <BlogNav memberData={memberData} />
               <br />
-              <Link href="/member/center">
-                <button>前往會員中心</button>
-              </Link>
+              <div className={styles["background-pattern"]}></div>
 
-              <div className={styles.logoutButton} onClick={handleLogout}>
-                登出
+              <div className={styles["btn"]}>
+                <div className={styles.editButton} onClick={handleEdit}>
+                  修改
+                </div>
+                <div className={styles.logoutButton} onClick={handleLogout}>
+                  登出
+                </div>
               </div>
             </div>
 

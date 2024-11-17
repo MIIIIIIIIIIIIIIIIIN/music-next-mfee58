@@ -12,6 +12,7 @@ const BlogNav = ({ memberData }) => {
   const [district, setDistrict] = useState("");
 
   useEffect(() => {
+    console.log("memberData:", memberData); // 調試輸出
     if (memberData && memberData.m_birth) {
       const birthDate = new Date(memberData.m_birth);
       
@@ -50,7 +51,7 @@ const BlogNav = ({ memberData }) => {
 
         <div className={styles["else"]}>
           <div className={styles["location"]}>{memberData.m_location}</div>
-          <div className="location">{memberData.m_district}</div>
+          <div className={styles["location"]}>{memberData.m_district}</div>
         </div>
       </div>
       <div className={styles["bio"]}>
