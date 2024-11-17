@@ -9,7 +9,8 @@ import PlayButton from "@/components/public/play-button";
 import Link from "next/link";
 
 const MemberBlog = () => {
-  const { auth } = useAuth();
+  const { auth, logout } = useAuth();
+  const router = useRouter();
   const [memberData, setMemberData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -41,6 +42,16 @@ const MemberBlog = () => {
     return <p>{errorMessage}</p>;
   }
 
+    // 點擊登出按鈕後的處理
+    const handleLogout = () => {
+      logout(); // 執行登出
+      router.push("/member/login"); // 登出後重導向到登入頁面
+    };
+  
+    if (errorMessage) {
+      return <p>{errorMessage}</p>;
+    }
+
   return (
     <div>
       {memberData ? (
@@ -56,9 +67,9 @@ const MemberBlog = () => {
               <BlogNav memberData={memberData} />
               <br />
 
-              <Link href="/member/login" passHref>
-                <div className={styles.logoutButton}>登出</div>
-              </Link>
+              <div className={styles.logoutButton} onClick={handleLogout}>
+                登出
+              </div>
             </div>
 
             <div className={styles["rightContent"]}>
@@ -73,9 +84,10 @@ const MemberBlog = () => {
             </div>
           </div>
 
-          <Link href="/member/login" passHref>
-            <div className={styles.logoutButton}>登出</div>
-          </Link>
+          <div className={styles.logoutButton} onClick={handleLogout}>
+            登出
+          </div>
+
         </>
       ) : (
         <p>載入中...</p>
