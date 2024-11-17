@@ -21,5 +21,7 @@ export const AB_GET_ONE = `${API_SERVER}/api/albums`;
 export const AB_ITEM_PUT = `${API_SERVER}/api/albums`;
 
 
-export const JWT_LOGIN_POST =  `${API_SERVER}/login-jwt`;
+// export const JWT_LOGIN_POST =  `${API_SERVER}/login-jwt`;
+
+export const JWT_LOGIN_POST = `${API_SERVER}/member/login`;
 

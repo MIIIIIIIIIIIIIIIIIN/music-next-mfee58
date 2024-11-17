@@ -37,6 +37,12 @@
 
   align-items: flex-start; /* 整體內容靠左 */
   padding-left: 20px; /* 可以調整為與 .main-title 一致的 padding */
+
+  width: 100%;
+  cursor: pointer;
+  /* border-bottom: 2px dotted var(--basecolor); */
+
+  padding-bottom: 50px;
 }
 .body-sec {
 /* padding: 20px 0; */
@@ -51,7 +57,8 @@ padding: 50px 150px;
   justify-content: flex-start; /* 靠左對齊 */
   /* width: 100%; 讓 .body-input 和父層寬度一致 */
   margin-top: 10px; /* 添加與 .body-title 之間的間距 */
-  border-bottom: 1px solid var(--gray-2);
+  border-bottom: 1px solid #000;
+
   padding: 10px;
   gap: 30px;
   width: 400px;
@@ -63,6 +70,7 @@ padding: 50px 150px;
   display: flex;
   /* padding: 30px ; */
 }
+
 
 .acc-nav {
   flex: 2;

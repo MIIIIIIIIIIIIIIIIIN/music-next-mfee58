@@ -8,54 +8,54 @@ const MOCK_DATA = {
     {
       id: 1,
       title: "夏日精選",
-      artist: "周杰倫",
+      artist: "夜雨聲",
       album: "夏日精選輯",
       genre: "流行",
       cover: "/Liam/01/01.jpg",
       trackList: [
         { 
           id: "t1", 
-          name: "七里香", 
+          name: "城市邊緣", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01//01.mp3"
         },
         { 
           id: "t2", 
-          name: "晴天", 
+          name: "無重力時刻", 
           duration: 30,
-          audioUrl: "/Liam/music/02.mp3"
+          audioUrl: "/Liam/music/01//02.mp3"
         },
         { 
           id: "t3", 
-          name: "花海", 
+          name: "山間絮語", 
           duration: 30,
-          audioUrl: "/Liam/music/03.mp3"
+          audioUrl: "/Liam/music/01//03.mp3"
         }
       ]
     },
     {
       id: 2,
       title: "冬季精選",
-      artist: "陳奕迅",
+      artist: "海嵐樂團",
       album: "冬日精選輯",
       genre: "R&B",
       cover: "/Liam/01/02.jpg",
       trackList: [
         { 
           id: "t4", 
-          name: "K歌之王", 
+          name: "藍色浪潮", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/02.mp3"
         },
         { 
           id: "t5", 
-          name: "陀飛輪", 
+          name: "春意盎然", 
           duration: 30,
           audioUrl: "/Liam/music/01.mp3"
         },
         { 
           id: "t6", 
-          name: "富士山下", 
+          name: "午夜咖啡廳", 
           duration: 30,
           audioUrl: "/Liam/music/01.mp3"
         }
@@ -64,26 +64,26 @@ const MOCK_DATA = {
     {
       id: 3,
       title: "春季精選",
-      artist: "林俊傑",
+      artist: "林澗",
       album: "春日精選輯",
       genre: "流行",
       cover: "/Liam/01/03.jpg",
       trackList: [
         { 
           id: "t7", 
-          name: "因你而在", 
+          name: "銀河漫遊", 
           duration: 30,
           audioUrl: "/Liam/music/01.mp3"
         },
         { 
           id: "t8", 
-          name: "可惜沒如果", 
+          name: "四季輪迴", 
           duration: 30,
           audioUrl: "/Liam/music/01.mp3"
         },
         { 
           id: "t9", 
-          name: "那些你很冒險的夢", 
+          name: "自由飛翔", 
           duration: 30,
           audioUrl: "/Liam/music/01.mp3"
         }
@@ -92,20 +92,20 @@ const MOCK_DATA = {
     {
       id: 4,
       title: "秋季精選",
-      artist: "五月天",
+      artist: "雲端漫步者",
       album: "秋日精選輯",
       genre: "搖滾",
       cover: "/Liam/01/04.jpg",
       trackList: [
         { 
           id: "t10", 
-          name: "倔強", 
+          name: "星空列車", 
           duration: 30,
           audioUrl: "/Liam/music/01.mp3"
         },
         { 
           id: "t11", 
-          name: "溫柔", 
+          name: "時光的拼圖", 
           duration: 30,
           audioUrl: "/Liam/music/01.mp3"
         },
@@ -120,20 +120,20 @@ const MOCK_DATA = {
     {
       id: 5,
       title: "年度精選",
-      artist: "張惠妹",
+      artist: "霓虹森林",
       album: "年度精選輯",
       genre: "流行",
       cover: "/Liam/01/05.jpg",
       trackList: [
         { 
           id: "t13", 
-          name: "姐妹", 
+          name: "三樓的風", 
           duration: 30,
           audioUrl: "/Liam/music/01.mp3"
         },
         { 
           id: "t14", 
-          name: "哭不出來", 
+          name: "紙飛機的軌跡", 
           duration: 30,
           audioUrl: "/Liam/music/01.mp3"
         },
