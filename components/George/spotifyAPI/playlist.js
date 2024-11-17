@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./playlist.module.css";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ export default function SpotifyPlaylist() {
   const [accessToken, setAccessToken] = useState("");
   const [playlist, setPlaylist] = useState(null);
   const [error, setError] = useState(null);
-  
+
   const router = useRouter();
   const { pid } = router.query; // 產品資料庫 ID
 
@@ -28,9 +28,12 @@ export default function SpotifyPlaylist() {
   useEffect(() => {
     const fetchPlaylist = async () => {
       try {
-        const response = await axios.get(`http://localhost:3005/api/playlist/${playlistId}`, {
-          params: { access_token: accessToken },
-        });
+        const response = await axios.get(
+          `http://localhost:3005/api/playlist/${playlistId}`,
+          {
+            params: { access_token: accessToken },
+          }
+        );
         setPlaylist(response.data);
       } catch (error) {
         console.error("Error fetching playlist:", error);
@@ -57,9 +60,9 @@ export default function SpotifyPlaylist() {
 
   if (!accessToken) {
     return (
-      
-        <a href={`http://localhost:3005/api/logintospotify?pid=${pid}`}><button className={styles.listenbutton}>點擊試聽</button></a>
-      
+      <a href={`http://localhost:3005/api/logintospotify?pid=${pid}`}>
+        <button className={styles.listenbutton}>試聽歌曲</button>
+      </a>
     );
   }
 
@@ -68,27 +71,27 @@ export default function SpotifyPlaylist() {
       {error ? (
         <p>{error}</p>
       ) : playlist ? (
-        <div>
+        <div className={styles.playlist}>
           {/* <h2>{playlist.name}</h2> */}
           <div className={styles.albumcover}>
-          <img
-            src={playlist.images[0]?.url}
-            alt="Playlist Cover"
-            className={styles.playlistCover}
-          />
+            <img
+              src={playlist.images[0]?.url}
+              alt="Playlist Cover"
+              className={styles.playlistCover}
+            />
           </div>
-          <ul>
+          {/* <ul className={styles.playlistitems}>
             {playlist.tracks.items.map((track, index) => (
-              <li key={index}>
-                {track.track.name} by {track.track.artists[0].name}
-              </li>
+              <li key={index}>{index + 1}. {track.track.name}</li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       ) : (
         <p>Loading playlist...</p>
       )}
-      <MySpotifyPlayer accessToken={accessToken} playlistId={playlistId}/>
+      <div className={styles.playerBox}>
+        <MySpotifyPlayer accessToken={accessToken} playlistId={playlistId} />
+      </div>
     </div>
   );
 }
