@@ -110,7 +110,6 @@ export default function DetailNav() {
       case "content":
         return (
           <div id="content-section">
-
             <DetailMain />
             <GroupPlaneCard />
           </div>

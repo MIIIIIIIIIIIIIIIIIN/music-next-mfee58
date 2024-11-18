@@ -7,8 +7,8 @@ const useFetchDB = () => {
   const [listData, setListData] = useState({ rows: [] });
   const [albumsimg, setAlbumsImg] = useState({});
   const [genres, setGenres] = useState([]);
-  const [memData, setMemData] = useState([]);
   const [mdBox, setMdBox] = useState([]);
+  const [memData, setMemData] = useState([]);
   const [memAuth, setMemAuth] = useState();
   const router = useRouter();
   const { urid } = router.query;
