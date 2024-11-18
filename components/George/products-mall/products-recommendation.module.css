@@ -85,8 +85,8 @@
   }
 
   .itemContainer {
-    height: auto; /* 自動調整高度以適應內容 */
-    margin: 10px; /* 減少間距 */
+    height: auto;
+    margin: 10px;
   }
 
   .recCarousel {

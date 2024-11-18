@@ -8,9 +8,11 @@ import Fundraising from "../checklist/fundraising";
 import Forum from "../checklist/forum";
 import Logo from "../../logo";
 import styles from "./nav.module.css";
+import { useAuth } from "@/Context/auth-context";
 
 export default function NavHome() {
   const router = useRouter();
+  const { auth } = useAuth();
   const [display, setDisplay] = useState(false);
   const items = useRef(null);
   const input = useRef(null);
@@ -26,7 +28,7 @@ export default function NavHome() {
   const [scrollDirection, setScrollDirection] = useState("up");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(true);
-  
+
   // 會員狀態
   const [member, setMember] = useState(null);
 
@@ -50,7 +52,7 @@ export default function NavHome() {
     let ticking = false;
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // 判斷滾動方向
       if (currentScrollY > lastScrollY) {
         setScrollDirection("down");
@@ -86,7 +88,11 @@ export default function NavHome() {
   }, [lastScrollY, scrollDirection]);
 
   return (
-    <div className={`${styles.wrap} ${isNavVisible ? styles.visible : styles.hidden}`}>
+    <div
+      className={`${styles.wrap} ${
+        isNavVisible ? styles.visible : styles.hidden
+      }`}
+    >
       <div className={styles.container}>
         {/* Logo 區域 */}
         <div className={styles.logo}>
@@ -129,7 +135,7 @@ export default function NavHome() {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                router.push("/George/products-page");
+                router.push("/George/product");
               }}
             >
               <div className={styles.top}></div>
@@ -251,13 +257,19 @@ export default function NavHome() {
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              router.push(member ? "/member-blog" : "/login");
+              if (auth?.account) {
+                // 如果會員已登入，跳轉到 /member/blog/{會員帳號}
+                router.push(`/member/blog/${auth.account}`);
+              } else {
+                // 如果會員未登入，跳轉到 /member/login
+                router.push("/member/login");
+              }
             }}
           >
             <ProfileIcons
               property1="XXS"
               className={styles.header}
-              img={member?.icon || "/icons/icon-user.svg"}
+              img={member?.icon || "/icons/icon-usernav.svg"}
             />
           </a>
 

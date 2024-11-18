@@ -11,7 +11,7 @@ const MOCK_DATA = {
       artist: "夜雨聲",
       album: "夏日精選輯",
       genre: "流行",
-      cover: "/Liam/01/01.jpg",
+      cover: "/Liam/05/1.jpg",
       trackList: [
         { 
           id: "t1", 
@@ -39,25 +39,25 @@ const MOCK_DATA = {
       artist: "海嵐樂團",
       album: "冬日精選輯",
       genre: "R&B",
-      cover: "/Liam/01/02.jpg",
+      cover: "/Liam/18/2.jpg",
       trackList: [
         { 
           id: "t4", 
           name: "藍色浪潮", 
           duration: 30,
-          audioUrl: "/Liam/music/02.mp3"
+          audioUrl: "/Liam/music/01/11.mp3"
         },
         { 
           id: "t5", 
           name: "春意盎然", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01/12.mp3"
         },
         { 
           id: "t6", 
           name: "午夜咖啡廳", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01/8.mp3"
         }
       ]
     },
@@ -67,25 +67,25 @@ const MOCK_DATA = {
       artist: "林澗",
       album: "春日精選輯",
       genre: "流行",
-      cover: "/Liam/01/03.jpg",
+      cover: "/Liam/16/1.jpg",
       trackList: [
         { 
           id: "t7", 
           name: "銀河漫遊", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01/1.mp3"
         },
         { 
           id: "t8", 
           name: "四季輪迴", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01/2.mp3"
         },
         { 
           id: "t9", 
           name: "自由飛翔", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01/3.mp3"
         }
       ]
     },
@@ -95,25 +95,25 @@ const MOCK_DATA = {
       artist: "雲端漫步者",
       album: "秋日精選輯",
       genre: "搖滾",
-      cover: "/Liam/01/04.jpg",
+      cover: "/Liam/25/1.jpg",
       trackList: [
         { 
           id: "t10", 
           name: "星空列車", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01/4.mp3"
         },
         { 
           id: "t11", 
           name: "時光的拼圖", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01/5.mp3"
         },
         { 
           id: "t12", 
           name: "擁抱", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01/6.mp3"
         }
       ]
     },
@@ -123,25 +123,25 @@ const MOCK_DATA = {
       artist: "霓虹森林",
       album: "年度精選輯",
       genre: "流行",
-      cover: "/Liam/01/05.jpg",
+      cover: "/Liam/30/1.jpg",
       trackList: [
         { 
           id: "t13", 
           name: "三樓的風", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01/7.mp3"
         },
         { 
           id: "t14", 
           name: "紙飛機的軌跡", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01/8.mp3"
         },
         { 
           id: "t15", 
           name: "記得", 
           duration: 30,
-          audioUrl: "/Liam/music/01.mp3"
+          audioUrl: "/Liam/music/01/9.mp3"
         }
       ]
     }

@@ -8,9 +8,11 @@ import Chat from "@/components/Liam/chat/chat";
 import AudioPlayer from "@/components/Liam/music";
 import { TabProvider } from "@/components/Liam/detail/top/tab-Context";
 import { CartProvider } from "@/components/George/context/cartdetail-provider";
+import { QuantityProvider } from "@/components/George/context/quantity-provider";
 
 export default function ProjectDetail() {
   return (
+    <QuantityProvider>
     <CartProvider>
       <TabProvider>
         <div>
@@ -23,5 +25,6 @@ export default function ProjectDetail() {
         </div>
       </TabProvider>
     </CartProvider>
+    </QuantityProvider>
   );
 }
