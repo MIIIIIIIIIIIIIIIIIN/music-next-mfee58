@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from "@/Context/auth-context"; // 使用 useAuth
+import { CartProvider } from '@/components/George/context/cartdetail-provider';
 import axios from 'axios';
 const TabContext = createContext();
 

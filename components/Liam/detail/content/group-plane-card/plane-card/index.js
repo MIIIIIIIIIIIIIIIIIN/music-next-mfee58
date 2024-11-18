@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './card.module.css';
 
+
 const PlaneCard = ({ 
   onSelect = () => {}, 
   e = {
