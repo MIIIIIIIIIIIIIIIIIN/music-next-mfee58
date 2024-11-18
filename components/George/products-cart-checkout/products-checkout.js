@@ -118,6 +118,8 @@ export default function ProductsCheckout(props) {
 
     if (parsedToOrder.length > 0 && formData && totalAmount && orderNumber) {
       // 訂單本人
+      const createdAt = new Date().toISOString().slice(0, 19).replace("T", " ");
+      const updatedAt = new Date().toISOString().slice(0, 19).replace("T", " ");
       const orderData = {
         userId: parsedToOrder[0].user_id, // 假設所有項目屬於同一個 user_id
         totalAmount: totalAmount,
@@ -128,8 +130,8 @@ export default function ProductsCheckout(props) {
         phone: formData.phone,
         email: formData.email,
         orderNumber: orderNumber,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: createdAt,
+        updatedAt: updatedAt,
       };
 
       //訂單細項
