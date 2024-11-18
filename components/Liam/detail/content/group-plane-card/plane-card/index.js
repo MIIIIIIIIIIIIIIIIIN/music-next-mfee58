@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './card.module.css';
 
+
 const PlaneCard = ({ 
   onSelect = () => {}, 
   e = {
@@ -10,12 +11,12 @@ const PlaneCard = ({
     f_plan_content: '',
     f_plan_people: 0
   },
-  member = null
+  member 
 
 }) => {
   
   const handleSelect = () => {
-    console.log(member);
+    console.log('1234'+member);
     
     if (!member ) {
       alert('請先登入會員才能進行贊助！');

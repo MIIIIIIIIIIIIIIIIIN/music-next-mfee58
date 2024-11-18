@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { ChevronDown, ChevronUp, ShoppingCart, ArrowLeft } from "lucide-react";
 import styles from "./product-selector.module.css";
+import { CartProvider, useCartDetail} from '@/components/George/context/cartdetail-provider'
+import { useTab } from "../detail/top/tab-Context";
 
 const INITIAL_ALBUM_INFO = {
   title: "[音樂創作 x 夢研]",
@@ -35,6 +37,7 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
   const [quantities, setQuantities] = useState({});
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [showFaqs, setShowFaqs] = useState(false);
+  const { handleAddtoCart, showAlert } = useCartDetail();
 
   // 初始化商品資料
   useEffect(() => {

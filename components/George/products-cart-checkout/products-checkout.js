@@ -172,14 +172,33 @@ export default function ProductsCheckout(props) {
       formData.payment &&
       formData.payment !== "";
     if (canGo) {
-      // generateOrderNumbers();
-      handlePostToOrderDB();
+      handlePayment()
+      // handlePostToOrderDB();
       console.log("發送!");
     } else {
       setShowModal(true);
       setTimeout(() => setShowModal(false), 1500);
     }
   };
+
+  const handlePayment = () => {
+    const paymentProducts = parsedToOrder.map(item => ({
+      productName: 'item.name',
+      quantity: item.p_cart_quantity,
+      price:  Math.floor(item.p_cart_price)
+
+    }));
+
+    console.log("結帳商品資訊:", paymentProducts);
+    
+    const productsParam = encodeURIComponent(JSON.stringify(paymentProducts));
+    
+    router.push({
+      pathname: 'http://localhost:3001/payment',
+      query: { products: productsParam }
+    });
+  };
+
 
   const cleanTheCart = async (id, pid) => {
     console.log("清除購物車 userID: ", id);
@@ -196,9 +215,9 @@ export default function ProductsCheckout(props) {
 
   useEffect(() => {
     // console.log("來了嗎: ", toOrder);
-    // console.log("你到底pid? ", pid);
-    console.log("觀察showModal: ", showModal);
-  }, [showModal, errors]);
+    console.log("你到底listData? ", listData);
+    console.log("觀察parsedToOrder: ", parsedToOrder);
+  }, [parsedToOrder, listData]);
 
   return (
     <>
@@ -401,7 +420,7 @@ export default function ProductsCheckout(props) {
                       <div>合計</div>
                       <div>${totalAmount + 80}</div>
                     </div>
-                    <Link
+                    {/* <Link
                       href={
                         showModal
                           ? ""
@@ -410,7 +429,7 @@ export default function ProductsCheckout(props) {
                               query: { orderNumber: orderNumber },
                             }
                       }
-                    >
+                    > */}
                       <BlackWBtns
                         type="2"
                         onClick={handleGoCheckOut}
@@ -418,7 +437,7 @@ export default function ProductsCheckout(props) {
                       >
                         前往結帳
                       </BlackWBtns>
-                    </Link>
+                    {/* </Link> */}
                   </div>
                 </div>
               </div>
