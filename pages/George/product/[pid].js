@@ -16,6 +16,7 @@ import {
   useQuantity,
 } from "@/components/George/context/quantity-provider";
 import { CartProvider } from "@/components/George/context/cartdetail-provider";
+import { TabProvider } from "@/components/Liam/detail/top/tab-Context";
 
 export default function ProductsDetail() {
   const [isMobile, setIsMobile] = useState(false);
@@ -130,34 +131,36 @@ export default function ProductsDetail() {
   return (
     <>
       <Nav />
-      <QuantityProvider>
-        <CartProvider albumDetail={albumDetail} albumImages={albumImages}>
-          <ProductsDetailPage
-            albumDetail={albumDetail}
-            albumImages={albumImages}
-            pid={pid}
-          />
-          {/* <SpotifyEmbedPlayer /> */}
-          <ProductsListen />
-          <ProductsDescription
-            albumDetail={albumDetail}
-            albumImages={albumImages}
-            pid={pid}
-          />
-          <ProductsMore
-            albumDetail={albumDetail}
-            albumImages={albumImages}
-            otherAlbums={otherAlbums}
-            otherImages={otherImages}
-          />
-          <OthersYouLike
-            albumDetail={albumDetail}
-            albumImages={albumImages}
-            youMayLike={youMayLike}
-          />
-          <AddToCartBar />
-        </CartProvider>
-      </QuantityProvider>
+      <TabProvider>
+        <QuantityProvider>
+          <CartProvider albumDetail={albumDetail} albumImages={albumImages}>
+            <ProductsDetailPage
+              albumDetail={albumDetail}
+              albumImages={albumImages}
+              pid={pid}
+            />
+            {/* <SpotifyEmbedPlayer /> */}
+            <ProductsListen />
+            <ProductsDescription
+              albumDetail={albumDetail}
+              albumImages={albumImages}
+              pid={pid}
+            />
+            <ProductsMore
+              albumDetail={albumDetail}
+              albumImages={albumImages}
+              otherAlbums={otherAlbums}
+              otherImages={otherImages}
+            />
+            <OthersYouLike
+              albumDetail={albumDetail}
+              albumImages={albumImages}
+              youMayLike={youMayLike}
+            />
+            <AddToCartBar />
+          </CartProvider>
+        </QuantityProvider>
+      </TabProvider>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

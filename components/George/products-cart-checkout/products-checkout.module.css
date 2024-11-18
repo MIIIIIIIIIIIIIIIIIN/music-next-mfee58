@@ -36,7 +36,7 @@
   
 }
 .container {
-  width: 60vw;
+  width: 65vw;
   margin: 0px auto 30px;
   background: rgba(255,255,255,0.5);
   border-radius: 10px;
@@ -101,10 +101,12 @@
 .albumbox {
   width: 250px;
   height: 250px;
+  aspect-ratio: 1/1;
 }
 .albumbox img {
   width: 100%;
   object-fit: cover;
+  
 }
 .albumpics {
   width: 100%;
@@ -136,7 +138,7 @@
   flex-direction: column;
   gap: 15px;
   height: 250px;
-  width: 300px;
+  width: 250px;
   margin: 25px 50px 0;
 }
 .checkoutdirectory {

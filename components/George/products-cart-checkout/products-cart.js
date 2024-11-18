@@ -6,6 +6,7 @@ import { CartProvider, useCartDetail } from "../context/cartdetail-provider";
 import Link from "next/link";
 import axios from "axios";
 import ConfirmModal from "../george-components/confirm-modal/confirm-modal";
+import { useTab } from "@/components/Liam/detail/top/tab-Context";
 
 export default function ProductsCart({ mdBox, listData }) {
   const {
@@ -21,9 +22,12 @@ export default function ProductsCart({ mdBox, listData }) {
     cancelDelete,
     handleDeleteClick,
     toOrder,
+    dataBox,
     // handleSelectAll,
     // isAllSelected,
   } = useCartDetail();
+  const { planCartItems, plane } = useTab();
+  const [finalBox, setFinalBox] = useState([]);
 
   const [isAllSelected, setIsAllSelected] = useState(false);
 
@@ -33,8 +37,8 @@ export default function ProductsCart({ mdBox, listData }) {
     selectAllItems(newSelectAllState);
   };
 
-  const handleClick = () => {};
 
+  
   // 全選反向判斷
   useEffect(() => {
     const allSelected =
@@ -43,11 +47,9 @@ export default function ProductsCart({ mdBox, listData }) {
     setIsAllSelected(allSelected);
   }, [cartItems, selectedItems]);
 
+  const handleClick = () => {};
 
 
-  // useEffect(() => {
-  //   console.log("cartItems 長怎樣: ", cartItems);
-  // }, [cartItems]);
 
   return (
     <>
@@ -84,10 +86,18 @@ export default function ProductsCart({ mdBox, listData }) {
             />
             <span className={style.selectWord}>全選</span>
           </div>
-          {/* <div className={style.seperationline}></div> */}
+
           {/* 購買細項 */}
-          {cartItems &&
-            cartItems.map((v, i) => {
+          {dataBox &&
+            dataBox.map((v, i) => {
+              const isAlbum = v.f_plan_id; // 判斷是否為專輯
+              const title = isAlbum ? v.f_plan_title : v.p_albums_title;
+              const artistOrContent = isAlbum
+                ? v.f_plan_content
+                : v.p_albums_artist;
+              const price = isAlbum ? v.f_plan_amount : v.p_albums_price;
+              // console.log(isAlbum, title, artistOrContent, price);
+
               return (
                 <div className={style.checkoutcontainer} key={i}>
                   <div className={style.checkoutcontainer1}>
@@ -100,48 +110,42 @@ export default function ProductsCart({ mdBox, listData }) {
                       />
                       <div className={style.albumbox}>
                         <img
-                          src={`/${v.p_cart_img_filename}`}
-                          alt={v.p_cart_img_filename}
+                          src={
+                            isAlbum
+                              ? `${v.f_plan_picture}`
+                              : `/${v.p_cart_img_filename}`
+                          }
+                          alt={
+                            isAlbum
+                              ? v.p_cart_img_filename
+                              : v.p_cart_img_filename
+                          }
                           className={style.albumpics}
                         />
                       </div>
                     </div>
 
-                    {Array.isArray(listData.rows) &&
-                      listData.rows
-                        .filter((id) => v.p_albums_id === id.p_albums_id)
-                        .map((album, index) => {
-                          return (
-                            <div
-                              className={style.checkoutdescriptions}
-                              key={index}
-                            >
-                              <div className={style.mobilecontroller}>
-                                <h4 className={style.descriptionstitle}>
-                                  {album.p_albums_title}
-                                </h4>
-                                <div className={style.descriptionsalbumname}>
-                                  {album.p_albums_artist}
-                                </div>
-                              </div>
-                              <div className={style.checkoutqpbox}>
-                                <div className={style.checkoutquantity}>
-                                  <CartQuantity
-                                    cartItems={cartItems}
-                                    handleIncrement={handleIncrement}
-                                    handleDecrement={handleDecrement}
-                                    albumId={album.p_albums_id}
-                                    index={i}
-                                    handleDeleteClick={handleDeleteClick}
-                                  />
-                                </div>
-                                <div className={style.checkoutprice}>
-                                  ${album.p_albums_price}
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
+                    <div className={style.checkoutdescriptions}>
+                      <div className={style.mobilecontroller}>
+                        <h4 className={style.descriptionstitle}>{title}</h4>
+                        <div className={style.descriptionsalbumname}>
+                          {artistOrContent}
+                        </div>
+                      </div>
+                      <div className={style.checkoutqpbox}>
+                        <div className={style.checkoutquantity}>
+                          <CartQuantity
+                            cartItems={cartItems}
+                            handleIncrement={handleIncrement}
+                            handleDecrement={handleDecrement}
+                            albumId={v.p_albums_id}
+                            index={i}
+                            handleDeleteClick={handleDeleteClick}
+                          />
+                        </div>
+                        <div className={style.checkoutprice}>{price}</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               );
@@ -156,7 +160,12 @@ export default function ProductsCart({ mdBox, listData }) {
               總金額({selectedItems.length}件商品)：${calculateTotalAmount()}
             </div>
             {/* <Link href="/George/cart/products-checkout-page"> */}
-            <Link href={{ pathname: "/George/cart/products-checkout-page", query: { toOrder: JSON.stringify(toOrder) } }}>
+            <Link
+              href={{
+                pathname: "/George/cart/products-checkout-page",
+                query: { toOrder: JSON.stringify(toOrder) },
+              }}
+            >
               <BlackWBtnsMobile
                 type="2"
                 onClick={handleClick}

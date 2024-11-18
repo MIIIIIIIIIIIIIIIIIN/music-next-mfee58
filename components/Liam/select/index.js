@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { ChevronDown, ChevronUp, ShoppingCart, ArrowLeft } from "lucide-react";
 import styles from "./product-selector.module.css";
-import { CartProvider, useCartDetail} from '@/components/George/context/cartdetail-provider'
+
 import { useTab } from "../detail/top/tab-Context";
 
 const INITIAL_ALBUM_INFO = {
@@ -28,7 +28,12 @@ const INITIAL_FAQS = [
   },
 ];
 
-export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane }) => {
+export const ProductSelector = ({
+  selectedPlan,
+  setShowProductSelector,
+  plane,
+  handleAddtoCart,
+}) => {
   const router = useRouter();
   const [albumInfo] = useState(INITIAL_ALBUM_INFO);
   const [products, setProducts] = useState([]);
@@ -37,23 +42,23 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
   const [quantities, setQuantities] = useState({});
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [showFaqs, setShowFaqs] = useState(false);
-  const { handleAddtoCart, showAlert } = useCartDetail();
+  const { setPlanCartItems } = useTab();
 
   // 初始化商品資料
   useEffect(() => {
     if (plane && plane.length > 0) {
-      const productList = plane.map(plan => ({
+      const productList = plane.map((plan) => ({
         id: plan.f_plan_id,
         type: "優惠方案",
         name: plan.f_plan_title,
         price: plan.f_plan_amount,
         imageUrl: plan.f_plan_picture || "/01.jpg",
         description: plan.f_plan_content,
-        people: plan.f_plan_people
+        people: plan.f_plan_people,
       }));
 
       productList.push({
-        id: 'addon-1',
+        id: "addon-1",
         type: "加購方案",
         name: "黃金一年會員資格請訂閱",
         price: 1300,
@@ -64,8 +69,9 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
 
       // 初始化商品數量
       const initialQuantities = {};
-      productList.forEach(product => {
-        initialQuantities[product.id] = product.id === selectedPlan?.f_plan_id ? 1 : 0;
+      productList.forEach((product) => {
+        initialQuantities[product.id] =
+          product.id === selectedPlan?.f_plan_id ? 1 : 0;
       });
       setQuantities(initialQuantities);
     }
@@ -73,14 +79,32 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
 
   // 處理數量改變
   const handleQuantityChange = (productId, change) => {
-    setQuantities(prev => {
-      const currentQuantity = prev[productId] || 0;
-      const newQuantity = Math.max(0, currentQuantity + change);
-      console.log(`商品 ${productId} 數量更新:`, newQuantity);
-      return { ...prev, [productId]: newQuantity };
-    });
-  };
-
+  // 先更新數量
+  setQuantities(prev => {
+    const currentQuantity = prev[productId] || 0;
+    const newQuantity = Math.max(0, currentQuantity + change);
+    const newQuantities = { ...prev, [productId]: newQuantity };
+    
+    // 在數量更新後，立即更新購物車項目
+    const updatedCartItems = products
+      .filter(product => newQuantities[product.id] > 0)
+      .map(product => ({
+        f_plan_id: product.id,
+        f_plan_title: product.name,
+        f_plan_content: product.description,
+        f_plan_picture: product.imageUrl,
+        p_cart_quantity: newQuantities[product.id],
+        p_plan_amount: product.price,
+      }));
+        
+  console.log("更新後的購物車項目:", updatedCartItems);
+    
+    // 更新 planCartItems
+    setPlanCartItems(updatedCartItems);
+    
+    return newQuantities;
+  });
+};
   // 計算總金額
   const calculateTotal = () => {
     return products.reduce(
@@ -88,6 +112,22 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
       0
     );
   };
+// 監聽購物車項目變化
+useEffect(() => {
+  const currentCartItems = products
+    .filter(product => quantities[product.id] > 0)
+    .map(product => ({
+      f_plan_id: product.id,
+      f_plan_title: product.name,
+      f_plan_content: product.description,
+      f_plan_picture: product.imageUrl,
+      p_cart_quantity: quantities[product.id],
+      p_plan_amount: product.price,
+    }));
+
+  setPlanCartItems(currentCartItems);
+
+}, [quantities, products]);
 
   // FAQ 相關功能
   const toggleFaq = (faqId) => {
@@ -141,30 +181,35 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
 
   // 處理加入購物車
   const handleCartButtonClick = () => {
-    console.log("當前購物車商品:", cartItems.map(item => ({
-      商品名稱: item.name,
-      數量: item.quantity,
-      價格: item.price,
-      總價: item.price * item.quantity
-    })));
-    setShowCart(true);
+    console.log(
+      "當前購物車商品:",
+      cartItems.map((item) => ({
+        id: item.id,
+        商品名稱: item.name,
+        商品照: item.imageUrl,
+        數量: item.quantity,
+        價格: item.price,
+        總價: item.price * item.quantity,
+      }))
+    );
+    // setShowCart(true);
   };
 
   // 處理結帳
   const handlePayment = () => {
-    const paymentProducts = cartItems.map(item => ({
+    const paymentProducts = cartItems.map((item) => ({
       productName: item.name,
       quantity: item.quantity,
-      price: item.price
+      price: item.price,
     }));
 
     console.log("結帳商品資訊:", paymentProducts);
-    
+
     const productsParam = encodeURIComponent(JSON.stringify(paymentProducts));
-    
+
     router.push({
-      pathname: 'http://localhost:3001/payment',
-      query: { products: productsParam }
+      pathname: "http://localhost:3001/payment",
+      query: { products: productsParam },
     });
   };
 
@@ -182,13 +227,17 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
             <div className={styles.productType}>{product.type}</div>
             <div className={styles.productName}>{product.name}</div>
             {product.description && (
-              <div className={styles.productDescription}>{product.description}</div>
+              <div className={styles.productDescription}>
+                {product.description}
+              </div>
             )}
             <div className={styles.priceText}>
               ${product.price.toLocaleString()}
             </div>
             {product.people !== undefined && (
-              <div className={styles.peopleCount}>已有 {product.people} 人贊助</div>
+              <div className={styles.peopleCount}>
+                已有 {product.people} 人贊助
+              </div>
             )}
           </div>
           <div className={styles.priceSection}>
@@ -261,7 +310,10 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
                   <span>總計</span>
                   <span>${calculateTotal().toLocaleString()}</span>
                 </div>
-                <button onClick={handlePayment} className={styles.checkoutButton}>
+                <button
+                  onClick={handlePayment}
+                  className={styles.checkoutButton}
+                >
                   前往結帳
                 </button>
               </div>
@@ -279,11 +331,12 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
     <div className={styles.wrapper}>
       <div className={styles.albumHeader}>
         <div className={styles.albumTitle}>
-          <button 
+          <button
             className={styles.back}
             onClick={() => setShowProductSelector(false)}
           >
-            <ArrowLeft size={20} />返回
+            <ArrowLeft size={20} />
+            返回
           </button>
           <h5 className={styles.title}>
             {albumInfo.title}
@@ -340,8 +393,8 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
             <div className={styles.divider}>
               <button
                 className={styles.cartButton}
-                onClick={handleCartButtonClick}
-                disabled={!hasItems}
+                onClick={handleAddtoCart}
+                // disabled={!hasItems}
               >
                 <ShoppingCart size={20} />
                 加入購物車

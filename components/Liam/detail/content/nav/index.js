@@ -6,6 +6,10 @@ import GroupPlaneCard from "../group-plane-card";
 import NewsCard from "../../new";
 import Message from "../../message";
 import { useTab } from "../../top/tab-Context";
+import {
+  CartProvider,
+  useCartDetail,
+} from "@/components/George/context/cartdetail-provider";
 
 const comment = [
   {
@@ -104,6 +108,7 @@ const newsItems = [
 
 export default function DetailNav() {
   const { activeTab, setActiveTab } = useTab();
+  const { handleAddtoCart, setPlanCartItems, planCartItems } = useCartDetail();
 
   const renderContent = () => {
     switch (activeTab) {
@@ -111,7 +116,11 @@ export default function DetailNav() {
         return (
           <div id="content-section">
             <DetailMain />
-            <GroupPlaneCard />
+            <GroupPlaneCard
+              handleAddtoCart={handleAddtoCart}
+              setPlanCartItems={setPlanCartItems}
+              planCartItems={planCartItems}
+            />
           </div>
         );
       case "faq":
