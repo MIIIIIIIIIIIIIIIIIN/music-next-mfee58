@@ -116,6 +116,15 @@ text-align: left;
   font-size: 0.9em;
 }
 
+.loginText {
+  color: #555; 
+  cursor: pointer;
+}
+
+.loginText:hover {
+  text-decoration: underline;
+}
+
 /* 成功提示框 */
 
 .successOverlay {

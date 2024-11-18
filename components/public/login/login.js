@@ -16,7 +16,7 @@ const Login = () => {
   // 通用的登入函數
   const handleLogin = async (e) => {
     if (e) e.preventDefault();
-    
+
     const { success, account } = await login(email, password);
 
     if (success && account) {
@@ -83,7 +83,10 @@ const Login = () => {
               className={styles.eyeIcon}
               onClick={() => setShowPassword(!showPassword)}
             >
-              <MemIcons iconName={showPassword ? "icons-eye-off" : "icons-eye"} size="medium" />
+              <MemIcons
+                iconName={showPassword ? "icons-eye-off" : "icons-eye"}
+                size="medium"
+              />
             </span>
           </div>
           {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
@@ -93,13 +96,21 @@ const Login = () => {
         </form>
 
         <div className={styles.links}>
-          <a href="./register" className={styles.createAccount}>
+          <p
+            onClick={() => router.push("/register")}
+            className={styles.createAccount}
+            style={{ cursor: "pointer" }}
+          >
             建立帳號
-          </a>
+          </p>
           <br />
-          <a href="/" className={styles.createAccount}>
+          <div
+            onClick={() => router.push("/")}
+            className={styles.createAccount}
+            style={{ cursor: "pointer" }}
+          >
             <MemIcons iconName="icons-home" size="medium" />
-          </a>
+          </div>
         </div>
 
         {/* 快速登入按鈕 */}

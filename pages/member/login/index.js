@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import styles from "./login.module.css";
 import MemIcons from "@/components/member/mem-icons";
 import { useAuth } from "@/Context/auth-context";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const { login } = useAuth(); // 從 AuthContext 中取出 login 方法
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -14,9 +17,9 @@ const Login = () => {
   // 通用的登入函數
   const handleLogin = async (e) => {
     if (e) e.preventDefault();
-  
+
     const { success, id, account } = await login(email, password);
-  
+
     if (success) {
       setShowSuccess(true);
       setTimeout(() => {
@@ -27,7 +30,6 @@ const Login = () => {
       setErrorMessage("登入失敗");
     }
   };
-  
 
   // 快速登入功能
   const quickLogin = async () => {
@@ -95,15 +97,22 @@ const Login = () => {
         </form>
 
         <div className={styles.links}>
-          <a href="./register" className={styles.createAccount}>
+          <p
+            onClick={() => router.push("/register")}
+            className={styles.createAccount}
+            style={{ cursor: "pointer" }}
+          >
             建立帳號
-          </a>
+          </p>
           <br />
-          <a href="/" className={styles.createAccount}>
+          <div
+            onClick={() => router.push("/")}
+            className={styles.createAccount}
+            style={{ cursor: "pointer" }}
+          >
             <MemIcons iconName="icons-home" size="medium" />
-          </a>
+          </div>
         </div>
-
         {/* 快速登入按鈕 */}
         <button onClick={quickLogin} className={styles.quickLoginButton}>
           快速登入
