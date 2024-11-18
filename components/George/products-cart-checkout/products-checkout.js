@@ -137,6 +137,7 @@ export default function ProductsCheckout(props) {
       //訂單細項
       const orderItemsData = parsedToOrder.map((item) => ({
         orderId: null,
+        // f_plan_id: item.f_plan_id,
         albumsId: item.p_albums_id,
         totalAmount: item.p_cart_price * item.p_cart_quantity,
       }));
