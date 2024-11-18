@@ -67,9 +67,6 @@ const MemberBlog = () => {
           <div className={styles["container"]}>
             <div className={styles["leftContent"]}>
               <BlogNav memberData={memberData} />
-              <br />
-              <div className={styles["background-pattern"]}></div>
-
               <div className={styles["btn"]}>
                 <div className={styles.editButton} onClick={handleEdit}>
                   修改
@@ -78,28 +75,28 @@ const MemberBlog = () => {
                   登出
                 </div>
               </div>
+              <br />
+              <div className={styles["background-pattern"]}></div>
             </div>
 
             <div className={styles["rightContent"]}>
               <div className={styles["albumSec"]}>
                 <div className={styles["album"]}>
                   <UserIcon />
-                </div>{" "}
+                </div>
+               
                 <div className={styles["album"]}>
                   <UserIcon />
-                </div>{" "}
-                <div className={styles["album"]}>
+                </div> <div className={styles["album"]}>
                   <UserIcon />
-                </div>{" "}
-                <div className={styles["album"]}>
+                </div> <div className={styles["album"]}>
                   <UserIcon />
-                </div>{" "}
-                <div className={styles["album"]}>
-                  <UserIcon />
-                </div>{" "}
-                <div className={styles["album"]}>
+                </div> <div className={styles["album"]}>
                   <UserIcon />
                 </div>
+                <div className={styles["album"]}>
+                  <PlayButton size="large" />
+                </div>{" "}
                 <div className={styles["album"]}>
                   <PlayButton size="large" />
                 </div>

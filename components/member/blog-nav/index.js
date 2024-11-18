@@ -18,9 +18,15 @@ const BlogNav = ({ memberData }) => {
       
       // 檢查日期是否有效
       if (!isNaN(birthDate.getTime())) {
-        const formattedBirth = `${String(birthDate.getUTCMonth() + 1).padStart(2, "0")}-${String(
-          birthDate.getUTCDate()
-        ).padStart(2, "0")}`;
+        // const formattedBirth = `${String(birthDate.getUTCMonth() + 1).padStart(2, "0")}-${String(
+        //   birthDate.getUTCDate()
+        // ).padStart(2, "0")}`;
+        // 使用 toLocaleDateString 將日期轉換為台灣格式
+      const formattedBirth = birthDate.toLocaleDateString("zh-TW", {
+        timeZone: "Asia/Taipei",
+        month: "2-digit",
+        day: "2-digit",
+      });
         setBirth(formattedBirth);
       } else {
         console.warn("Invalid birth date:", memberData.m_birth); // 顯示除錯訊息
@@ -45,7 +51,7 @@ const BlogNav = ({ memberData }) => {
       </div>
       <h4 className={styles["name"]}>{memberData.m_nickname}</h4>
       <div className={styles["info"]}>
-        <div className="gender">{memberData.m_gender}</div>
+        <div className={styles["gender"]}>{memberData.m_gender}</div>
         {/* <div className={styles["birth"]}>{memberData.m_birth}</div> */}
         <div className={styles["birth"]}>{birth}</div>
 

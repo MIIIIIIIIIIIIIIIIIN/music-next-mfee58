@@ -32,6 +32,10 @@
   gap: 1vw;
 }
 
+.gender {
+  margin: 1vh;
+  font-size: 1.2vw; /* 動態字體大小 */
+}
 .birth {
   margin: 1vh;
   font-size: 1.2vw; /* 動態字體大小 */
@@ -104,7 +108,7 @@
     margin: 20px;
   }
 
-  .name, .birth, .location, .bio, .nav-title, .body-text {
+  .name, .birth, .location, .bio, .nav-title, .body-text, .gender {
     font-size: 4vw; /* 使用較大字體適應小螢幕 */
   }
 
@@ -117,4 +121,5 @@
   .else {
     gap: 10px;
   }
+
 }

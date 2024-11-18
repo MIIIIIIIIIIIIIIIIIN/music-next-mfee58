@@ -10,6 +10,7 @@ const MemberPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [showSuccessOverlay, setShowSuccessOverlay] = useState(false);
 
   const handleChangePassword = async () => {
     console.log("currentPassword:", currentPassword);
@@ -18,6 +19,7 @@ const MemberPassword = () => {
 
     setError("");
     setSuccess("");
+    setShowSuccessOverlay(false);
 
     if (!currentPassword || !newPassword) {
       setError("請填寫所有密碼欄位");
@@ -51,6 +53,8 @@ const MemberPassword = () => {
       const data = await response.json();
       console.log("後端回應資料:", data);
       if (response.ok) {
+        setShowSuccessOverlay(true);
+        setTimeout(() => setShowSuccessOverlay(false), 2000); // 成功提示顯示1秒
         setSuccess("密碼更新成功");
         setCurrentPassword("");
         setNewPassword("");
@@ -68,14 +72,14 @@ const MemberPassword = () => {
     <div className={styles["member-pw"]}>
       <div className={styles.container}>
         <div className={styles["pw-main"]}>
-          <h5 className={styles["main-title"]}>變更密碼123</h5>
+          <h5 className={styles["main-title"]}>變更密碼</h5>
 
           <div className={styles["main-body"]}>
             {error && <p style={{ color: "red" }}>{error}</p>}
             {success && <p style={{ color: "green" }}>{success}</p>}
 
             <div className={styles["body-sec"]}>
-              <h6 className={styles["body-title"]}>舊密碼123</h6>
+              <h6 className={styles["body-title"]}>舊密碼</h6>
               <div className={styles["body-input"]}>
                 <PasswordInput
                   size="large"
@@ -125,8 +129,14 @@ const MemberPassword = () => {
           </div>
         </div>
       </div>
+      {showSuccessOverlay && (
+        <div className={styles.successOverlay}>
+          <div className={styles.successMessage}>
+            <p>密碼更新成功!</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
-
 export default MemberPassword;

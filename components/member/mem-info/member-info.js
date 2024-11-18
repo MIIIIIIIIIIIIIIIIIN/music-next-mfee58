@@ -36,7 +36,18 @@ const MemberInfo = () => {
         if (data.success) {
           const memberData = data.memberData;
           setMember(memberData);
-          setBirth(new Date(memberData.m_birth).toISOString().split("T")[0]); // Format birthdate as YYYY-MM-DD
+          
+          // 設定生日為台灣時區格式
+          const birthDate = new Date(memberData.m_birth);
+          const formattedBirth = birthDate.toLocaleDateString("zh-TW", {
+            timeZone: "Asia/Taipei",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          });
+          setBirth(formattedBirth);
+          
+          // setBirth(new Date(memberData.m_birth).toISOString().split("T")[0]); // Format birthdate as YYYY-MM-DD
           setGender(memberData.m_gender);
           setCounty(memberData.m_location || "");
           setDistrict(memberData.m_district || "");
