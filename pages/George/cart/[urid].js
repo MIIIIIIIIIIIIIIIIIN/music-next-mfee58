@@ -6,28 +6,20 @@ import ProductsCart from "@/components/George/products-cart-checkout/products-ca
 import { QuantityProvider } from "@/components/George/context/quantity-provider";
 import { CartProvider } from "@/components/George/context/cartdetail-provider";
 import useFetchDB from "@/components/George/hooks/usefetchDB";
-import { useRouter } from "next/router";
-
 
 export default function ProductsCartPage(props) {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
-  const { memData } = useFetchDB();
-  const router = useRouter();
-  const { urid } = router.query;
+  const { memData, listData, mdBox } = useFetchDB();
 
 
+  
 
   useEffect(() => {
-    // 定義處理螢幕寬度變化的函數
     const handleResize = () => {
       setIsMobile(window.innerWidth < 900);
     };
-
-    // 初次渲染時呼叫一次以設置初始狀態
     handleResize();
-
-    // 添加 resize 事件監聽器
     window.addEventListener("resize", handleResize);
 
     const handleScroll = () => {
@@ -42,13 +34,18 @@ export default function ProductsCartPage(props) {
     };
   }, []);
 
+  // useEffect(() => {
+  
+  //     console.log("urid: ", listData);
+      
+  // }, [listData]);
 
   return (
     <>
       <Nav />
       <QuantityProvider>
-        <CartProvider>
-          <ProductsCart />
+        <CartProvider mdBox={mdBox}>
+          <ProductsCart mdBox={mdBox} listData={listData} />
         </CartProvider>
       </QuantityProvider>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}

@@ -8,7 +8,6 @@
   background-color: #f8f9fa;  /* 增加背景色來區分內容區域 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* 添加陰影讓內容更加突出 */
   border-radius: 8px;  /* 讓容器有圓角 */
-
 }
 .albumpic {
   width: 40em;
@@ -91,6 +90,46 @@
 }
 .icons{
   margin-right: 10px;
+}
+
+.alert {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #00ff08;
+  color: black;
+  border-radius: 5px;
+  border: 2.5px dotted black;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* 初始透明度 */
+  transform: translateX(20px); /* 初始位置下移 */
+  transition: opacity 4s ease, transform 4s ease; /* 同步淡入和移動效果 */
+}
+
+.alert.show {
+  opacity: 1; /* 顯示時的透明度 */
+  transform: translateX(0); /* 淡入時回到原位 */
+  animation: alertFadeInOut 4s ease forwards; 
+}
+
+@keyframes alertFadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(300px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(1000px);
+  }
 }
 
 @media (max-width: 375px){

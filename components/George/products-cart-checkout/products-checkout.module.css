@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 150px;
+  padding-top: 80px;
 }
 
 .vcover{
@@ -37,7 +37,7 @@
 }
 .container {
   width: 60vw;
-  margin: 30px auto 30px;
+  margin: 0px auto 30px;
   background: rgba(255,255,255,0.5);
   border-radius: 10px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
@@ -90,7 +90,8 @@
   margin: 50px auto;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 50px;
 }
 .checkoutcontainer1 {
   display: flex;
@@ -100,6 +101,9 @@
 .albumbox {
   width: 250px;
   height: 250px;
+}
+.albumbox img {
+  width: 100%;
   object-fit: cover;
 }
 .albumpics {
@@ -175,9 +179,61 @@
   border: 1.5px solid black;
   padding: 20px;
 }
+.padirectory{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .padirectory li {
   margin-bottom: 20px;
   text-align: left;
+}
+.error{
+  position: absolute;
+  font-size: 14px;
+  color: rgb(20, 255, 0, 1);
+  /* font-weight: bold;  */
+  letter-spacing: 0.5px;
+  text-shadow: -1px 1px 10px grey;
+
+}
+.redname{
+  border: 2px solid rgba(255, 225, 0, 1)
+}
+
+.redphone{
+  border: 2px solid rgba(255, 225, 0, 1)
+}
+
+.redemail{
+  border: 2px solid rgba(255, 225, 0, 1)
+}
+
+.redaddress{
+  border: 2px solid rgba(255, 225, 0, 1)
+}
+
+.errorname{
+  left: 695px;
+  bottom: 362px;
+}
+.errorphone{
+  left: 695px;
+  bottom: 307px;
+}
+
+.erroremail{
+  left: 695px;
+  bottom: 252px;
+}
+.erroraddress{
+  left: 695px;
+  bottom: 145px;
+}
+
+.errorpayment{
+  left: 695px;
+  bottom: 90px;
 }
 
 /* right side */
@@ -226,6 +282,8 @@
   gap: 100px;
   justify-content: center;
 }
+
+
 
 @media (max-width: 375px) {
   .container {

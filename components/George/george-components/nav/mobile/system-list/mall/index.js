@@ -5,7 +5,7 @@ export default function MallList() {
         <div className="triangle"></div>
         <ul>
           <li className="item">
-            <a href="#">
+            <a href="/George/category">
             <div className="info">
               <p>Pop</p>
             </div>

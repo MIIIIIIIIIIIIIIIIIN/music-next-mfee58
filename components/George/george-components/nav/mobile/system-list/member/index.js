@@ -5,7 +5,7 @@ export default function MemberList() {
         <div className="triangle"></div>
         <ul>
           <li className="item">
-            <a href="#">
+            <a href="/Jade/member-center">
             <div className="info">
               <p>基本資料</p>
             </div>
@@ -25,13 +25,13 @@ export default function MemberList() {
             </div>
             </a>
           </li>
-          <li className="item">
+          {/* <li className="item">
             <a href="#">
             <div className="info">
               <p>訂單查詢</p>
             </div>
             </a>
-          </li>
+          </li> */}
           <li className="item">
             <a href="#">
             <div className="info">
@@ -39,13 +39,13 @@ export default function MemberList() {
             </div>
             </a>
           </li>
-          <li className="item">
+          {/* <li className="item">
             <a href="#">
             <div className="info">
               <p>帳號刪除</p>
             </div>
             </a>
-          </li>
+          </li> */}
         </ul>
       </div>
       <style jsx>

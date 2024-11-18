@@ -7,7 +7,11 @@ const useFetchDB = () => {
   const [listData, setListData] = useState({ rows: [] });
   const [albumsimg, setAlbumsImg] = useState({});
   const [genres, setGenres] = useState([]);
+  const [memData, setMemData] = useState([]);
+  const [mdBox, setMdBox] = useState([]);
+  const [memAuth, setMemAuth] = useState();
   const router = useRouter();
+  const { urid } = router.query;
 
   // Delete
   const delItem = (p_albums_id) => {
@@ -23,33 +27,99 @@ const useFetchDB = () => {
       });
   };
 
-  // Fetch list data
+  //抓取會員資料
+  useEffect(() => {
+    if (!router.isReady || !urid) return;
+    const fetchMemUrid = async () => {
+      try {
+        const responseMemUrData = await axios.get(
+          `http://localhost:3005/api/getMem/${urid}`
+        );
+        setMdBox(responseMemUrData.data);
+      } catch {
+        console.error("Error fetching genres: ", error);
+      }
+    };
+    fetchMemUrid();
+  }, [router.isReady, urid]);
+
+  // fetch mem data
+  useEffect(() => {
+    const fetchMemData = async () => {
+      try {
+        const responseMemData = await axios.get(
+          `http://localhost:3005/api/getMem`
+        );
+        setMemData(responseMemData.data);
+      } catch (error) {
+        console.error("Error fetching genres: ", error);
+      }
+    };
+    fetchMemData();
+  }, []);
+
+
+  useEffect(()=>{
+    const fetchMemData = async () => {
+      try {
+        const response = await fetch("http://localhost:3005/mem-data", {
+          credentials: "include",
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch member data");
+        }
+        const data = await response.json();
+        // console.log(data);
+        
+        // 確保設置的值不是 undefined
+        setMemAuth(data.admin || null);
+        // console.log(member);
+  
+      } catch (error) {
+        console.error("Error fetching member data:", error);
+        setMemAuth(null); // 發生錯誤時設置為 null
+      }
+    };
+    fetchMemData()
+  }, [router.isReady])
+
+
   useEffect(() => {
     if (!router.isReady) return;
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    fetch(`${AB_LIST}${location.search}`, { signal })
-      .then((r) => r.json())
-      .then((obj) => {
+  
+    // 建立取消請求的 token
+    const source = axios.CancelToken.source();
+  
+    const fetchListData = async () => {
+      try {
+        const response = await axios.get(`${AB_LIST}${location.search}`, {
+          cancelToken: source.token,
+        });
+        const obj = response.data;
+  
         if (obj) {
           setListData(obj);
         } else if (obj.redirect) {
           router.push(obj.redirect);
         }
-      })
-      .catch((error) => {
-        if (error.name === "AbortError") {
-          console.log("Fetch aborted");
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Request canceled", error.message);
         } else {
-          console.error("Fetch error:", error);
+          console.error("Error fetching data", error);
         }
-      });
-
-    return () => {
-      controller.abort();
+      }
     };
-  }, [router]);
+  
+    fetchListData();
+  
+    // 清理函數，用於中止請求
+    return () => {
+      source.cancel("Component unmounted, request canceled");
+    };
+  }, [router.isReady, router]);
+
+
 
   // Fetch genres
   useEffect(() => {
@@ -66,21 +136,22 @@ const useFetchDB = () => {
 
   // Fetch album images
   useEffect(() => {
-    if (listData.rows.length === 0) return;
-    const controller = new AbortController();
-    const signal = controller.signal;
+    if (!listData || listData.length === 0) return; // 如果 listData 為空則不執行
+    const source = axios.CancelToken.source();
   
     const getImages = async () => {
       try {
         await Promise.all(
           listData.rows.map((album) =>
             axios
-              .get(`http://localhost:3005/api/getImages/${album.p_albums_id}`, { signal })
+              .get(`http://localhost:3005/api/getImages/${album.p_albums_id}`, {
+                cancelToken: source.token,
+              })
               .then((response) => {
                 const imgObj = response.data;
                 if (imgObj) {
-                  setAlbumsImg((abimg) => ({
-                    ...abimg,
+                  setAlbumsImg((prevAlbumsImg) => ({
+                    ...prevAlbumsImg,
                     [album.p_albums_id]: imgObj.images,
                   }));
                 }
@@ -100,12 +171,14 @@ const useFetchDB = () => {
     };
   
     getImages();
+  
     return () => {
-      controller.abort();
+      source.cancel("Component unmounted, image requests canceled");
     };
   }, [listData]);
+  
 
-  return { listData, albumsimg, genres };
+  return { listData, albumsimg, genres, memData, mdBox, memAuth };
 };
 
 export default useFetchDB;

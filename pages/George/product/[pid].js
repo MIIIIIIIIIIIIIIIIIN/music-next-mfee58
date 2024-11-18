@@ -5,11 +5,17 @@ import Nav from "@/components/public/nav";
 import { AddToCartBar } from "@/components/public/addtocart-bar/add-to-cart";
 import ProductsDetailPage from "@/components/George/products-detail/products-detail-page";
 import ProductsListen from "@/components/George/products-detail/products-listen";
+import SpotifyEmbedPlayer from "@/components/George/spotifyAPI/player";
 import ProductsDescription from "@/components/George/products-detail/products-description";
 import ProductsMore from "@/components/George/products-detail/products-more";
 import OthersYouLike from "@/components/George/products-detail/products-othersYouLike";
 import { useRouter } from "next/router";
 import axios from "axios";
+import {
+  QuantityProvider,
+  useQuantity,
+} from "@/components/George/context/quantity-provider";
+import { CartProvider } from "@/components/George/context/cartdetail-provider";
 
 export default function ProductsDetail() {
   const [isMobile, setIsMobile] = useState(false);
@@ -21,7 +27,7 @@ export default function ProductsDetail() {
   const [youMayLike, setYouMayLike] = useState([]);
   const router = useRouter();
   const { pid } = router.query;
-  
+  const { quantity } = useQuantity;
 
   useEffect(() => {
     if (!router.isReady || !pid) return;
@@ -103,32 +109,55 @@ export default function ProductsDetail() {
     }
   }, [albumDetail]);
 
-  useEffect(()=>{
-      const fetchYouMayLike = async () => {
-        try{
-          const response = await axios.get(`http://localhost:3005/api/youmaylike/${pid}`);
-          setYouMayLike(response.data)
-        } catch (error) {
-          console.error("無法取得你可能也喜歡的其他專輯", error);
-        }
+  useEffect(() => {
+    const fetchYouMayLike = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3005/api/youmaylike/${pid}`
+        );
+        setYouMayLike(response.data);
+      } catch (error) {
+        console.error("無法取得你可能也喜歡的其他專輯", error);
       }
-      fetchYouMayLike();
-  }, [pid])
+    };
+    fetchYouMayLike();
+  }, [pid]);
 
-  useEffect(()=>{
-    console.log("你可能也喜歡: ", youMayLike);
-    
-  }, [youMayLike])
+  // useEffect(() => {
+  //   console.log("你可能也喜歡: ", pid);
+  // }, [pid]);
 
   return (
     <>
       <Nav />
-      <ProductsDetailPage albumDetail={albumDetail} albumImages={albumImages} pid={pid}/>
-      <ProductsListen />
-      <ProductsDescription albumDetail={albumDetail} albumImages={albumImages} pid={pid}/>
-      <ProductsMore albumDetail={albumDetail} albumImages={albumImages} otherAlbums={otherAlbums} otherImages={otherImages}/>
-      <OthersYouLike albumDetail={albumDetail} albumImages={albumImages} youMayLike={youMayLike}/>
-      <AddToCartBar albumDetail={albumDetail} pid={pid}/>
+      <QuantityProvider>
+        <CartProvider albumDetail={albumDetail} albumImages={albumImages}>
+          <ProductsDetailPage
+            albumDetail={albumDetail}
+            albumImages={albumImages}
+            pid={pid}
+          />
+          {/* <SpotifyEmbedPlayer /> */}
+          <ProductsListen />
+          <ProductsDescription
+            albumDetail={albumDetail}
+            albumImages={albumImages}
+            pid={pid}
+          />
+          <ProductsMore
+            albumDetail={albumDetail}
+            albumImages={albumImages}
+            otherAlbums={otherAlbums}
+            otherImages={otherImages}
+          />
+          <OthersYouLike
+            albumDetail={albumDetail}
+            albumImages={albumImages}
+            youMayLike={youMayLike}
+          />
+          <AddToCartBar />
+        </CartProvider>
+      </QuantityProvider>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

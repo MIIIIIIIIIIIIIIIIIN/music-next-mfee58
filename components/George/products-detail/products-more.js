@@ -14,10 +14,9 @@ export default function ProductsMore({
 }) {
   const { listData, albumsimg, genres } = useFetchDB();
 
-useEffect(()=>{
-  console.log("more: ", otherImages);
-  
-}, [])
+// useEffect(()=>{
+//   console.log("more: ", otherImages);
+// }, [otherImages])
 
   return (
     <>
@@ -94,7 +93,7 @@ useEffect(()=>{
                   image={album.p_productsimg_filename}
                   singer={album.p_albums_artist}
                   headline={album.p_albums_title}
-                  
+                  moreid={album.p_albums_id}
                 />
               );
             })}

@@ -2,22 +2,11 @@ import React, { useState, useEffect } from "react";
 import FooterDeskTop from "@/components/George/george-components/footer/desktop";
 import FooterMobile from "@/components/George/george-components/footer/mobile";
 import Nav from "@/components/George/george-components/nav";
-import ProductsCart from "@/components/George/products-cart-checkout/products-cart";
-import { QuantityProvider } from "@/components/George/context/quantity-provider";
-import { CartProvider } from "@/components/George/context/cartdetail-provider";
-import useFetchDB from "@/components/George/hooks/usefetchDB";
-import { useRouter } from "next/router";
+import ProductsCompleted from "@/components/George/products-cart-checkout/products-completed";
 
-
-export default function ProductsCartPage(props) {
+export default function ProductsCompletedPage(props) {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
-  const { memData } = useFetchDB();
-  const router = useRouter();
-  const { urid } = router.query;
-
-
-
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
     const handleResize = () => {
@@ -42,15 +31,10 @@ export default function ProductsCartPage(props) {
     };
   }, []);
 
-
   return (
     <>
       <Nav />
-      <QuantityProvider>
-        <CartProvider>
-          <ProductsCart />
-        </CartProvider>
-      </QuantityProvider>
+      <ProductsCompleted />
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

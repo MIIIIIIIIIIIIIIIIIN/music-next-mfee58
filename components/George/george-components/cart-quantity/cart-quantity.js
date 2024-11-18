@@ -1,19 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./quantity.module.css";
-import { useQuantity } from "../../context/quantity-provider";
 
-export const Quantity = () => {
-  const {
-    quantity,
-    handleIncrement,
-    handleDecrement,
-    plusIsPressed,
-    deIsPressed,
-    setPlusIsPressed,
-    setDeIsPressed,
-  } = useQuantity();
+export const CartQuantity = ({ handleDeleteClick, cartItems, handleIncrement, handleDecrement, albumId, index }) => {
 
-
+  const [plusIsPressed, setPlusIsPressed] = useState(false);
+  const [deIsPressed, setDeIsPressed] = useState(false);
 
   return (
     <>
@@ -24,13 +15,13 @@ export const Quantity = () => {
           }
           onMouseDown={() => setDeIsPressed(true)}
           onMouseUp={() => setDeIsPressed(false)}
-          onClick={handleDecrement}
+          onClick={()=>{handleDeleteClick(albumId)}}
         >
           <button className={style["text-wrapper-2"]}>–</button>
         </div>
 
         <div className={style["QUTANTITY"]}>
-          <div className={style["text-wrapper"]}>{quantity}</div>
+          <div className={style["text-wrapper"]}> {cartItems[index] ? cartItems[index].p_cart_quantity : 0}</div>
         </div>
 
         <div
@@ -41,7 +32,7 @@ export const Quantity = () => {
           }
           onMouseDown={() => setPlusIsPressed(true)}
           onMouseUp={() => setPlusIsPressed(false)}
-          onClick={handleIncrement}
+          onClick={()=>{handleIncrement(albumId)}}
         >
           <button className={style["div"]}>+</button>
         </div>
