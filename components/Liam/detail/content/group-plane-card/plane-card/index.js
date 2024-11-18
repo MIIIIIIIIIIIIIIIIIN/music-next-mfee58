@@ -19,7 +19,7 @@ const PlaneCard = ({
     
     if (!member ) {
       alert('請先登入會員才能進行贊助！');
-      window.location='http://localhost:3000/login'
+      window.location='http://localhost:3000/member/login'
       return;
     }
 

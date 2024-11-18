@@ -1,18 +1,14 @@
 import styles from "./mem-acc.module.css";
-import { useRouter } from "next/router";
-import Nav from "@/components/public/nav";
-import UserIcon from "../../public/user-icon";
-import FormOption from "../form-option";
-import FormInputM from "../form-input";
-import ButtonToggleM from "../button-show";
-import Dropdown from "../form-option";
-import InfoNav from "../info-nav-liam";
-import FooterDeskTop from "@/components/public/footer/desktop";
-import MemIcons from "../mem-icons";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/Context/auth-context";
+import { useRouter } from "next/router";
+import axios from "axios";
+import FormInputM from "../form-input";
 
 const MemberACC = () => {
   const router = useRouter();
+  const { auth } = useAuth(); // 獲取 auth 內容
+
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [isEmailValid, setEmailValid] = useState(true);
@@ -21,36 +17,33 @@ const MemberACC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!auth.id) return; // 確保已登入且 auth 有 id
+
       try {
-        const response = await fetch("http://localhost:3005/mem-data", {
-          credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
+        const response = await axios.get(`http://localhost:3005/member/mem-data/by-id/${auth.id}`, {
+          withCredentials: true,
         });
-        const data = await response.json();
-        console.log(data);
-  
-        // setBirth(data.admin?.birth);
+        const data = response.data;
 
-        setAccount(data.admin?.account);
-        setPhone(data.admin?.phone);
-        setEmail(data.admin?.email);
-
+        if (data.success) {
+          const memberData = data.memberData;
+          setAccount(memberData.m_account);
+          setPhone(memberData.m_phone);
+          setEmail(memberData.m_email);
+        } else {
+          console.warn("未獲取到有效的會員資料");
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
+
     fetchData();
-  }, []);
-
-
-  const handleClick = () => {
-    router.push("/");
-  };
+  }, [auth.id]);
 
   const handleEmailChange = (e) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
-
-    // 基本的信箱格式檢查(包含 @符號 以及 .符號)
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setEmailValid(emailPattern.test(emailValue));
   };
@@ -58,48 +51,32 @@ const MemberACC = () => {
   const handlePhoneChange = (e) => {
     const phoneValue = e.target.value;
     setPhone(phoneValue);
-
-    // 手機格式驗證 (基本驗證)
     const phonePattern = /^(\+?\d{1,4}[-.\s]?)?(\d{10})$/;
     setPhoneValid(phonePattern.test(phoneValue));
   };
 
   return (
     <>
-      {/* <Nav /> */}
-
       <div className={styles["member-acc"]}>
         <div className={styles.container}>
-          <div className={styles["acc-nav"]}>
-            {/* <InfoNav /> */}
-          </div>
           <div className={styles["acc-main"]}>
-            {/* 右側內容 */}
             <h5 className={styles["main-title"]}>帳號設定</h5>
             <div className={styles["main-body"]}>
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>帳號(不會顯示於頁面)</h6>
-                <div className={styles["body-input"]  }>
-                  <MemIcons iconName="icon-user" />
-                  {/* 預設 icon-mail, 中尺寸 */}
+                <div className={styles["body-input"]}>
                   <FormInputM size="medium" value={account} readOnly={true} />
-                  {/* <ButtonToggleM
-                    size="small"
-                    className={styles["buttonToggle"]}
-                  /> */}
                 </div>
               </div>
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>手機</h6>
                 <div className={styles["body-input"]}>
-                  <MemIcons iconName="icon-phone" />
                   <FormInputM
                     size="medium"
                     value={phone}
                     onChange={handlePhoneChange}
-                    isPhone={true} // 啟用手機格式驗證
+                    isPhone={true}
                   />
-                  {/* <ButtonToggleM size="small" /> */}
                 </div>
                 {!isPhoneValid && (
                   <div className={styles["error-text"]}>
@@ -110,14 +87,12 @@ const MemberACC = () => {
               <div className={styles["body-sec"]}>
                 <h6 className={styles["body-title"]}>信箱</h6>
                 <div className={styles["body-input"]}>
-                  <MemIcons iconName="icon-mail" />
                   <FormInputM
                     size="medium"
                     value={email}
                     onChange={handleEmailChange}
-                    isEmail={true} // 啟用信箱格式驗證
+                    isEmail={true}
                   />
-                  {/* <ButtonToggleM size="small" /> */}
                 </div>
                 {!isEmailValid && (
                   <div className={styles["error-text"]}>
@@ -129,7 +104,6 @@ const MemberACC = () => {
           </div>
         </div>
       </div>
-      {/* <FooterDeskTop /> */}
     </>
   );
 };

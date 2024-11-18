@@ -29,11 +29,14 @@
   align-items: center;
 }
 
-.birth,
-.location{
+.birth{
   margin: 10px;
 }
-.status {
+
+.location{
+  margin-right: 20px;
+}
+.bio {
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -36,7 +36,8 @@
 
   width: 100%;
   cursor: pointer;
-  border-bottom: 1px dotted #333;
+  /* border-bottom: 2px dotted #fff; */
+
   padding-bottom: 50px;
 }
 
@@ -76,8 +77,24 @@
 }
 
 .input-top {
+  height: 100%;
+  width: 40%;
+  display: flex;
   border-bottom: 1px solid #000;
-  padding-bottom: 10px;
+  justify-content: space-around;
+  align-items: center;
+  margin: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.input-top .button1{
+margin-left: 20px;
+}
+
+
+.input-top .button1:hover {
+  background-color: black;
+  color: var(--basecolor);
 }
 
 .body-input {
@@ -118,13 +135,20 @@
   height: 100%;
   width: 100%;
   display: flex;
+  /* gap: 50px; */
   border-bottom: 1px solid #000;
   justify-content: space-around;
   align-items: center;
   margin: 5px 0;
   padding: 10px;
   box-sizing: border-box;
+  display: flex;
 }
+.right-text select {
+  margin-right: 20px; /* 為第一個下拉選單增加右邊距，為第二個不影響 */
+}
+
+
 
 .left-text input:hover {
   background-color: #000000; /* 改變背景色 */
@@ -136,6 +160,26 @@
   /* cursor:text; */
   /* height: 100%;
   width: 100%; */
+}
+
+.left-text-birth {
+  background-color: initial; /* 確保背景顏色為默認 */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #000;
+  justify-content: space-around;
+  align-items: center;
+  margin: 5px 0;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: default;
+}
+.left-text-birth input:hover {
+  background-color: initial; 
+  border: none;
+  color: initial;
+  cursor: default;
 }
 
 /* 成功提示框 */

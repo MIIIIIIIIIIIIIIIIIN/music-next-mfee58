@@ -3,8 +3,13 @@ import styles from "./group-plane-card.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ProductSelector } from "../../../select/index";
+import { useAuth } from "@/Context/auth-context"; // 使用 useAuth
+import axios from "axios";
+
 
 export default function GroupPlaneCard() {
+  const { auth } = useAuth(); // 獲取 auth 內容
+
   const router = useRouter();
   const [showProductSelector, setShowProductSelector] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -41,28 +46,28 @@ export default function GroupPlaneCard() {
         console.error("Error fetching plane data:", error);
       }
     };
-    const fetchMemberData = async () => {
-      try {
-        const response = await fetch("http://localhost:3005/mem-data", {
-          credentials: "include",
-        });
-        if (!response.ok) {
-          throw new Error("Failed to fetch member data");
-        }
-        const data = await response.json();
-        // console.log(data);
-        
-        // 確保設置的值不是 undefined
-        setMember(data.admin || null);
-        // console.log(member);
+    const fetchData = async () => {
+      if (!auth.id) return;
 
+      try {
+        const response = await axios.get(`http://localhost:3005/member/mem-data/by-id/${auth.id}`, {
+          withCredentials: true,
+        });
+        const data = response.data;
+
+        if (data.success) {
+          const memberData = data.memberData;
+          setMember(memberData);
+
+        } else {
+          console.warn("未獲取到有效的會員資料");
+        }
       } catch (error) {
-        console.error("Error fetching member data:", error);
-        setMember(null); // 發生錯誤時設置為 null
-      }
+        console.error("Error fetching data:", error);
+      } 
     };
     fetchPlane();
-    fetchMemberData()
+    fetchData()
    
     
   }, [router.isReady]);

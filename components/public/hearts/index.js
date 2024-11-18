@@ -1,91 +1,127 @@
 import React, { useState, useEffect } from "react";
 import { Heart as HeartIcon } from "lucide-react";
 import { useRouter } from "next/router";
-import styles from "./hearts.module.css";
+import { useAuth } from "@/Context/auth-context";
+
+const styles = {
+  container: {
+    position: 'relative',
+    display: 'inline-flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  heart: {
+    transition: 'all 0.2s ease-in-out',
+  }
+};
 
 const Heart = ({ size = 1, onClick }) => {
+  const { auth } = useAuth();
   const [isActive, setIsActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { project } = router.query;
 
-  // Check if project is in favorites when component mounts
+  // 檢查收藏狀態
   useEffect(() => {
+    let isMounted = true;
+    
     const checkFavoriteStatus = async () => {
-      if (!project) return;
+      if (!project || !auth?.id) return;
       
       try {
-        const response = await fetch(`http://localhost:3005/fundraiser/favorites/check/${project}`, {
-          method: 'GET',
-          credentials: 'include', // Include cookies if using session-based auth
-          headers: {
-            'Content-Type': 'application/json'
+        setIsLoading(true);
+        
+        // 修正 API 路徑，移除 /api 前綴
+        const response = await fetch(
+          `http://localhost:3005/fundraiser/favorites/check/${project}/${auth.id}`,
+          {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }
-        });
+        );
 
-        if (response.ok) {
-          const data = await response.json();
+        if (!response.ok) {
+          throw new Error('檢查收藏狀態失敗');
+        }
+
+        const data = await response.json();
+        
+        if (isMounted && data.success) {
           setIsActive(data.isFavorite);
         }
       } catch (error) {
         console.error('Error checking favorite status:', error);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
 
     checkFavoriteStatus();
-  }, [project]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [project, auth?.id]);
 
   const handleClick = async () => {
-    if (!project) return;
+    if (!auth?.id) {
+      router.push('/member/login');
+      return;
+    }
+
+    if (!project || isLoading) return;
 
     try {
+      setIsLoading(true);
+
       const endpoint = isActive
-        ? `http://localhost:3005/fundraiser/favorites/remove/${project}`
-        : `http://localhost:3005/fundraiser/favorites/add/${project}`;
+        ? `http://localhost:3005/fundraiser/favorites/remove/${project}/${auth.id}`
+        : `http://localhost:3005/fundraiser/favorites/add/${project}/${auth.id}`;
 
       const response = await fetch(endpoint, {
         method: isActive ? 'DELETE' : 'POST',
-        credentials: 'include', // Include cookies if using session-based auth
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         }
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setIsActive(!isActive);
-        
-        // Call the onClick prop if provided
         if (onClick) {
           onClick(!isActive);
         }
-
-        // Show feedback to user (optional)
-        const action = isActive ? '移除最愛' : '加入最愛';
-        console.log(`成功${action}`);
       } else {
-        const error = await response.json();
-        console.error('Failed to update favorite:', error);
-        
-        // Show error to user (optional)
-        console.error(`無法${isActive ? '移除' : '加入'}最愛`);
+        console.error('操作失敗:', data.error);
       }
     } catch (error) {
       console.error('Error updating favorite:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const getHeartClass = () => {
-    const state = isActive ? "active" : "default";
-    return `${styles.heart} ${styles[`heart${size}-${state}`]} ${
-      isActive ? styles.active : ""
-    }`;
+  const heartStyle = {
+    ...styles.heart,
+    cursor: isLoading ? 'wait' : 'pointer',
+    opacity: isLoading ? 0.6 : 1,
+    transform: `scale(${size})`
   };
 
   return (
-    <div className={styles.heartContainer}>
+    <div style={styles.container}>
       <HeartIcon
-        className={getHeartClass()}
+        style={heartStyle}
         fill={isActive ? "#FF0000" : "none"}
-        onClick={handleClick}
+        onClick={!isLoading ? handleClick : undefined}
         stroke={isActive ? "#FF0000" : "#494949"}
       />
     </div>

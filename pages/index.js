@@ -50,7 +50,7 @@ const Section = ({ children }) => {
 
 const Home = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const images = ["/Liam/01/01.jpg", "/Liam/01/02.jpg", "/Liam/01/03.jpg"];
+  const images = ["/01.jpg", "/02.jpg", "/03.jpg"];
 
   useEffect(() => {
     const handleScroll = () => {
