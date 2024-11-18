@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { ChevronDown, ChevronUp, ShoppingCart, ArrowLeft } from "lucide-react";
 import styles from "./product-selector.module.css";
-import { CartProvider, useCartDetail} from '@/components/George/context/cartdetail-provider'
 import { useTab } from "../detail/top/tab-Context";
 
 const INITIAL_ALBUM_INFO = {
@@ -28,7 +27,7 @@ const INITIAL_FAQS = [
   },
 ];
 
-export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane }) => {
+export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane, handleAddtoCart }) => {
   const router = useRouter();
   const [albumInfo] = useState(INITIAL_ALBUM_INFO);
   const [products, setProducts] = useState([]);
@@ -37,7 +36,6 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
   const [quantities, setQuantities] = useState({});
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [showFaqs, setShowFaqs] = useState(false);
-  const { handleAddtoCart, showAlert } = useCartDetail();
 
   // 初始化商品資料
   useEffect(() => {
@@ -341,6 +339,7 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane })
               <button
                 className={styles.cartButton}
                 onClick={handleCartButtonClick}
+                // onClick={handleAddtoCart}
                 disabled={!hasItems}
               >
                 <ShoppingCart size={20} />

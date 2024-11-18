@@ -133,17 +133,20 @@
     color: white;
     font-size: 12px;
   }
+  .leftSideImageContainer{
+    
+  }
   .leftSideImageContainer::after {
     content: ""; /* 必須添加 */
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0.3em;
-    height: 40%;
-    width: 100%;
+    height: 30%;
+    width: 110%;
     background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
     pointer-events: none;
-    margin-right: 1em;
     font-weight: bold;
+    padding: 0;
   }
 }
