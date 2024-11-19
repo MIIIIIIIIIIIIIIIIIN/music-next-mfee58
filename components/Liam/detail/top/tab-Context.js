@@ -1,7 +1,9 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@/Context/auth-context"; // 使用 useAuth
+import { CartProvider } from "@/components/George/context/cartdetail-provider";
 import axios from "axios";
+
 const TabContext = createContext();
 
 export function TabProvider({ children }) {
@@ -11,6 +13,8 @@ export function TabProvider({ children }) {
   const [activeTab, setActiveTab] = useState("content");
   const [plane, setPlane] = useState([]);
   const [member, setMember] = useState();
+  const [planCartItems, setPlanCartItems] = useState([]);
+  
 
   useEffect(() => {
     const fetchPlane = async () => {
@@ -21,7 +25,7 @@ export function TabProvider({ children }) {
         const { project } = router.query;
 
         const response = await fetch(
-          `http://localhost:3005/fundraiser/plane/${project}`
+          `http://localhost:3005/fundraiser/plane/1`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -66,7 +70,7 @@ export function TabProvider({ children }) {
   }, [router.isReady]);
 
   return (
-    <TabContext.Provider value={{ activeTab, setActiveTab, plane, member }}>
+    <TabContext.Provider value={{ activeTab, setActiveTab, plane, member, setPlanCartItems, planCartItems }}>
       {children}
     </TabContext.Provider>
   );

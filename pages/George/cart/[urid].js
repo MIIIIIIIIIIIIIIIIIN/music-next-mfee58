@@ -6,14 +6,12 @@ import ProductsCart from "@/components/George/products-cart-checkout/products-ca
 import { QuantityProvider } from "@/components/George/context/quantity-provider";
 import { CartProvider } from "@/components/George/context/cartdetail-provider";
 import useFetchDB from "@/components/George/hooks/usefetchDB";
+import { TabProvider } from "@/components/Liam/detail/top/tab-Context";
 
 export default function ProductsCartPage(props) {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
   const { memData, listData, mdBox } = useFetchDB();
-
-
-  
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,19 +33,21 @@ export default function ProductsCartPage(props) {
   }, []);
 
   // useEffect(() => {
-  
+
   //     console.log("urid: ", listData);
-      
+
   // }, [listData]);
 
   return (
     <>
       <Nav />
-      <QuantityProvider>
-        <CartProvider mdBox={mdBox}>
-          <ProductsCart mdBox={mdBox} listData={listData} />
-        </CartProvider>
-      </QuantityProvider>
+      <TabProvider>
+        <QuantityProvider>
+          <CartProvider mdBox={mdBox}>
+            <ProductsCart mdBox={mdBox} listData={listData} />
+          </CartProvider>
+        </QuantityProvider>
+      </TabProvider>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

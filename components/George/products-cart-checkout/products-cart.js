@@ -21,19 +21,14 @@ export default function ProductsCart({ mdBox, listData }) {
     cancelDelete,
     handleDeleteClick,
     toOrder,
-    // handleSelectAll,
-    // isAllSelected,
   } = useCartDetail();
 
   const [isAllSelected, setIsAllSelected] = useState(false);
-
   const handleSelectAll = () => {
     const newSelectAllState = !isAllSelected;
     setIsAllSelected(newSelectAllState);
     selectAllItems(newSelectAllState);
   };
-
-  const handleClick = () => {};
 
   // 全選反向判斷
   useEffect(() => {
@@ -43,11 +38,7 @@ export default function ProductsCart({ mdBox, listData }) {
     setIsAllSelected(allSelected);
   }, [cartItems, selectedItems]);
 
-
-
-  // useEffect(() => {
-  //   console.log("cartItems 長怎樣: ", cartItems);
-  // }, [cartItems]);
+  const handleClick = () => {};
 
   return (
     <>
@@ -84,7 +75,7 @@ export default function ProductsCart({ mdBox, listData }) {
             />
             <span className={style.selectWord}>全選</span>
           </div>
-          {/* <div className={style.seperationline}></div> */}
+
           {/* 購買細項 */}
           {cartItems &&
             cartItems.map((v, i) => {
@@ -155,8 +146,13 @@ export default function ProductsCart({ mdBox, listData }) {
             <div className={style.totalamount}>
               總金額({selectedItems.length}件商品)：${calculateTotalAmount()}
             </div>
-            {/* <Link href="/George/cart/products-checkout-page"> */}
-            <Link href={{ pathname: "/George/cart/products-checkout-page", query: { toOrder: JSON.stringify(toOrder) } }}>
+
+            <Link
+              href={{
+                pathname: "/George/cart/products-checkout-page",
+                query: { toOrder: JSON.stringify(toOrder) },
+              }}
+            >
               <BlackWBtnsMobile
                 type="2"
                 onClick={handleClick}

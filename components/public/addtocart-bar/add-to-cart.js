@@ -60,7 +60,7 @@ export const AddToCartBar = () => {
             <div className={styles["frame"]}>
               <Logo type={2} />
               <div className={styles["bottom-bar-buttons"]}>
-                <button className={styles["barbutton-addtocart"]} onClick={handleAddtoCart}>
+                <button className={styles["barbutton-addtocart"]} onClick={memAuth ? handleAddtoCart : handleAuth}>
                   <div className={styles["text-wrapper-4"]}>Add to Cart</div>
                 </button>
                 {/* <Link href={`/George/cart/${memAuth ? memAuth.id : ""}`}> */}

@@ -360,7 +360,7 @@ export default function ProductsGenres() {
                 </button>
               </Link>
               <button className={styles.buttonBig}>
-                <p>我的最愛</p>
+                <p><Heart albumUrl={albumUrl}/>我的最愛</p>
               </button>
               <div className={styles.albumsdes}>{}</div>
               <div className={styles.combo}>

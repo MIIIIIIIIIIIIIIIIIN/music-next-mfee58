@@ -8,13 +8,16 @@ import { useRouter } from "next/router";
 import OrderModal from "../george-components/order-modal/order-modal";
 import axios from "axios";
 import { useCartDetail } from "../context/cartdetail-provider";
+// import { useTab } from "@/components/Liam/detail/top/tab-Context";
 
 export default function ProductsCheckout(props) {
   const router = useRouter();
   const { toOrder } = router.query;
+  // const { plane } = useTab();
   const { listData } = useFetchDB();
   const { setCartItems } = useCartDetail();
   const [parsedToOrder, setParsedToOrder] = useState([]);
+  // const [newcart, setNewcart ] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -109,20 +112,51 @@ export default function ProductsCheckout(props) {
     }
   }, [toOrder]);
 
+  // const
+  // setParsedToOrder((prev) => [...prev, ...plane.map((item) => item)]);
+
+  // useEffect(() => {
+  //   if (listData && parsedToOrder && plane) {
+  //     const cartContent = listData.rows.filter((item) =>
+  //       parsedToOrder.some((v) => v.p_albums_id === item.p_albums_id)
+  //     );
+  //     const updatedCartContent = cartContent.map((item) => {
+  //       const matchingItem = parsedToOrder.find((v) => v.p_albums_id === item.p_albums_id);
+
+  //       if (matchingItem) {
+  //         // 這裡將 p_cart_img_filename 從 parsedToOrder 加入到 cartContent
+  //         return { ...item, p_cart_img_filename: matchingItem.p_cart_img_filename, p_cart_quantity: matchingItem.p_cart_quantity };
+  //       }
+
+  //       return item;
+  //     });
+
+  //     setNewcart((v)=> [...updatedCartContent, ...plane.map((item) => item)])
+
+  //     // console.log("有沒有阿1: ", img);
+  //     console.log("有沒有newcart: ", newcart);
+  //     // console.log(parsedToOrder);
+
+  //   }
+  // }, [listData, parsedToOrder, plane, newcart]);
+
   // 寫進訂單資料庫
   const handlePostToOrderDB = () => {
     console.log("檢查 parsedToOrder: ", parsedToOrder);
+    // console.log("檢查 newcart: ", newcart);
     console.log("檢查 formData: ", formData);
     console.log("檢查 totalAmount: ", totalAmount);
     console.log("檢查 orderNumber: ", orderNumber);
-
     if (parsedToOrder.length > 0 && formData && totalAmount && orderNumber) {
+      // if (newcart.length > 0 && formData && totalAmount && orderNumber) {
       // 訂單本人
       const createdAt = new Date().toISOString().slice(0, 19).replace("T", " ");
       const updatedAt = new Date().toISOString().slice(0, 19).replace("T", " ");
       const orderData = {
         userId: parsedToOrder[0].user_id, // 假設所有項目屬於同一個 user_id
         totalAmount: totalAmount,
+        // userId: newcart[0].user_id, // 假設所有項目屬於同一個 user_id
+        // totalAmount: item.p_cart_price * item.p_cart_quantity || item.f_plan_amount * 1,
         shippingAddress: formData.address,
         shippingFee: 80,
         paymentStatus: "已付款",
@@ -137,12 +171,13 @@ export default function ProductsCheckout(props) {
       //訂單細項
       const orderItemsData = parsedToOrder.map((item) => ({
         orderId: null,
+        // f_plan_id: item.f_plan_id,
         albumsId: item.p_albums_id,
         totalAmount: item.p_cart_price * item.p_cart_quantity,
       }));
 
-      console.log("發送訂單資料: ", orderData);
-      console.log("發送訂單資料: ", orderItemsData);
+      // console.log("發送訂單資料: ", orderData);
+      // console.log("發送訂單資料: ", orderItemsData);
 
       // 發送 POST 請求將資料儲存到購物車
       axios
@@ -154,7 +189,7 @@ export default function ProductsCheckout(props) {
           console.log("Item added to order", response.data);
           const pid = parsedToOrder.map((v) => v.p_albums_id);
           cleanTheCart(parsedToOrder[0].user_id, pid);
-          setCartItems([]);
+          setCartItems([]); // 清空購物車
         })
         .catch((error) => {
           console.error("Error adding item to order", error);
@@ -171,8 +206,8 @@ export default function ProductsCheckout(props) {
       formData.payment &&
       formData.payment !== "";
     if (canGo) {
-      handlePayment()
-      // handlePostToOrderDB();
+      handlePayment();
+      handlePostToOrderDB();
       console.log("發送!");
     } else {
       setShowModal(true);
@@ -181,23 +216,23 @@ export default function ProductsCheckout(props) {
   };
 
   const handlePayment = () => {
-    const paymentProducts = parsedToOrder.map(item => ({
-      productName: 'item.name',
+    const paymentProducts = parsedToOrder.map((item) => ({
+      productName: "item.name",
       quantity: item.p_cart_quantity,
-      price:  Math.floor(item.p_cart_price)
-
+      price: Math.floor(item.p_cart_price),
     }));
 
     console.log("結帳商品資訊:", paymentProducts);
-    
-    const productsParam = encodeURIComponent(JSON.stringify(paymentProducts));
-    
-    router.push({
-      pathname: 'http://localhost:3001/payment',
-      query: { products: productsParam }
-    });
-  };
 
+    const productsParam = encodeURIComponent(JSON.stringify(paymentProducts));
+
+    setTimeout(() => {
+      router.push({
+        pathname: "http://localhost:3002/payment",
+        query: { products: productsParam },
+      });
+    }, 1500);
+  };
 
   const cleanTheCart = async (id, pid) => {
     console.log("清除購物車 userID: ", id);
@@ -212,11 +247,11 @@ export default function ProductsCheckout(props) {
     }
   };
 
-  useEffect(() => {
-    // console.log("來了嗎: ", toOrder);
-    console.log("你到底listData? ", listData);
-    console.log("觀察parsedToOrder: ", parsedToOrder);
-  }, [parsedToOrder, listData]);
+  // useEffect(() => {
+  //   console.log("來了嗎: ", plane);
+  //   console.log("你到底listData? ", listData);
+  //   console.log("觀察parsedToOrder: ", parsedToOrder);
+  // }, [parsedToOrder, listData, plane]);
 
   return (
     <>
@@ -247,11 +282,17 @@ export default function ProductsCheckout(props) {
 
           {/* 購買細項 */}
           {parsedToOrder.map((v, i) => {
+            {
+              /* {newcart && newcart.map((v, i) => { */
+            }
             return (
               <div className={style.checkoutcontainer} key={i}>
                 <div className={style.checkoutcontainer1}>
                   <div className={style.albumbox}>
                     <img
+                      // /Liam/01/05.jpg
+                      // ppcx100/ppc027-(1).jpg
+                      // src={v.p_cart_img_filename? `/${v.p_cart_img_filename}` : `${v.f_plan_picture}`}
                       src={`/${v.p_cart_img_filename}`}
                       alt=""
                       className={style.albumpics}
@@ -266,9 +307,11 @@ export default function ProductsCheckout(props) {
                             <div>
                               <h4 className={style.descriptionstitle}>
                                 {v.p_albums_title}
+                                {/* {v.p_albums_title || v.f_plan_title} */}
                               </h4>
                               <div className={style.descriptionsalbumname}>
                                 {v.p_albums_artist}
+                                {/* {v.p_albums_artist || v.f_plan_content} */}
                               </div>
                             </div>
                           </div>
@@ -429,13 +472,13 @@ export default function ProductsCheckout(props) {
                             }
                       }
                     > */}
-                      <BlackWBtns
-                        type="2"
-                        onClick={handleGoCheckOut}
-                        className={`${style.blackBtn}`}
-                      >
-                        前往結帳
-                      </BlackWBtns>
+                    <BlackWBtns
+                      type="2"
+                      onClick={handleGoCheckOut}
+                      className={`${style.blackBtn}`}
+                    >
+                      前往結帳
+                    </BlackWBtns>
                     {/* </Link> */}
                   </div>
                 </div>

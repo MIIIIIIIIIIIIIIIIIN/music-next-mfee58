@@ -5,6 +5,7 @@ import Nav from "@/components/George/george-components/nav";
 import ProductsCheckout from "@/components/George/products-cart-checkout/products-checkout";
 import { CartProvider } from "@/components/George/context/cartdetail-provider";
 import { QuantityProvider } from "@/components/George/context/quantity-provider";
+import { TabProvider } from "@/components/Liam/detail/top/tab-Context";
 
 export default function ProductsCheckoutPage(props) {
   const [isMobile, setIsMobile] = useState(false);
@@ -38,11 +39,13 @@ export default function ProductsCheckoutPage(props) {
     <>
       <Nav />
       <QuantityProvider>
-      <CartProvider>
-        <div className="video-container">
-          <ProductsCheckout /> {/* 圖卡及結帳頁面內容 */}
-        </div>
-      </CartProvider>
+        <TabProvider>
+          <CartProvider>
+            <div className="video-container">
+              <ProductsCheckout /> {/* 圖卡及結帳頁面內容 */}
+            </div>
+          </CartProvider>
+        </TabProvider>
       </QuantityProvider>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>

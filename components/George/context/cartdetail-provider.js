@@ -26,13 +26,13 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
       const updated = prev.includes(id)
         ? prev.filter((itemId) => itemId !== id)
         : [...prev, id];
-  
+
       // 立即更新 toOrder
       const selectForOrder = cartItems.filter((v) =>
         updated.includes(v.p_albums_id)
       );
       setToOrder(selectForOrder);
-  
+
       return updated; // 確保 `selectedItems` 正確更新
     });
   };
@@ -160,14 +160,16 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
     if (albumDetail) {
       // 準備要傳送的資料
       const cartData = {
-        commodityid: null,
-        albumId: albumDetail?.p_albums_id || null,
+        // f_plan_id: albumDetail?.f_plan_id || null,
+        // albumId: albumDetail?.p_albums_id || null,
+        f_plan_id: null,
+        albumId: albumDetail?.p_albums_id,
         userId: 1,
         pic: albumImages?.images?.[0]?.p_productsimg_filename,
         quantity: quantity,
         price: parseInt(albumDetail?.p_albums_price),
       };
-
+      console.log("要送出去ㄌ: ", cartData);
       // 發送 POST 請求將資料儲存到購物車
       axios
         .post("http://localhost:3005/api/addToCart", cartData)
@@ -191,7 +193,6 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
       );
       setToOrder(selectForOrder);
     }
-
   }, [selectedItems, cartItems]);
 
   // 資料寫進cartItems from mdBox
@@ -200,12 +201,10 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
       setCartItems(mdBox);
     }
   }, [mdBox]);
-  
-  // useEffect(() => {
-  //   console.log("給訂單: ", toOrder);
-  //   console.log("看selectedItems: ", selectedItems);
 
-  // }, [selectedItems, toOrder]);
+  // useEffect(() => {
+  //   console.log("給訂單: ", );
+  // }, []);
 
   return (
     <CartContext.Provider

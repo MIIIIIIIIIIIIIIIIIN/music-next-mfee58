@@ -8,7 +8,8 @@ import { useTab } from "../../top/tab-Context";
 
 import axios from "axios";
 
-export default function GroupPlaneCard({ handleAddtoCart }) {
+
+export default function GroupPlaneCard({handleAddtoCart, setPlanCartItems,planCartItems}) {
   const { auth } = useAuth(); // 獲取 auth 內容
 
   const router = useRouter();
@@ -94,6 +95,8 @@ export default function GroupPlaneCard({ handleAddtoCart }) {
         selectedPlan={selectedPlan}
         plane={plane}
         handleAddtoCart={handleAddtoCart}
+        setPlanCartItems={setPlanCartItems}
+        planCartItems={planCartItems}
       />
     );
   }

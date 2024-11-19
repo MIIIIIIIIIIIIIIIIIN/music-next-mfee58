@@ -8,7 +8,6 @@ export default function ProductsFilter() {
   const [isMobile, setIsMobile] = useState(false);
   const [isNavMobile, setIsNavVisible] = useState(false);
 
-
   // 處理螢幕寬度變化
   useEffect(() => {
     // 定義處理螢幕寬度變化的函數
@@ -27,11 +26,10 @@ export default function ProductsFilter() {
     };
   }, []);
 
-  
   return (
     <>
       <Nav />
-      <ProductsGenres/>
+      <ProductsGenres />
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );
