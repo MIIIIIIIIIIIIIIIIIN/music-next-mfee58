@@ -1,11 +1,14 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { QuantityProvider, useQuantity } from "./quantity-provider";
+import { useTab } from "@/components/Liam/detail/top/tab-Context";
 import axios from "axios";
+import useFetchDB from "../hooks/usefetchDB";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
   const { quantity } = useQuantity();
+  const { planCartItems, plane } = useTab();
   const [addToCart, setAddToCart] = useState({
     price: parseInt(albumDetail?.p_albums_price) || 0,
     singer: albumDetail?.p_albums_artist || "",
@@ -19,6 +22,9 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
   const [toOrder, setToOrder] = useState([]);
+  const { listData } = useFetchDB();
+  const [dataBox, setDataBox] = useState([]);
+
 
   // 選取專輯
   const handleSelectItem = (id) => {
@@ -26,13 +32,13 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
       const updated = prev.includes(id)
         ? prev.filter((itemId) => itemId !== id)
         : [...prev, id];
-  
+
       // 立即更新 toOrder
       const selectForOrder = cartItems.filter((v) =>
         updated.includes(v.p_albums_id)
       );
       setToOrder(selectForOrder);
-  
+
       return updated; // 確保 `selectedItems` 正確更新
     });
   };
@@ -78,18 +84,27 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
     }
   };
 
+  
+
   // 新增數量(前端)
   const handleIncrement = (id) => {
-    setCartItems((pre) =>
-      pre.map((v) =>
-        v.p_albums_id === id
-          ? { ...v, p_cart_quantity: v.p_cart_quantity + 1 }
-          : v
-      )
+    setDataBox((prevDataBox) =>
+      prevDataBox.map((item) => {
+        if (item.p_albums_id === id || item.f_plan_id === id) {
+          return { ...item, p_cart_quantity: item.p_cart_quantity + 1 };
+        }
+        return item;
+      })
     );
+  
     // 發送 API 更新資料庫
-    const updatedItem = cartItems.find((v) => v.p_albums_id === id);
-    updateCartQuantityInDB(id, updatedItem.p_cart_quantity + 1);
+    const updatedItem = dataBox.find(
+      (item) => item.p_albums_id === id || item.f_plan_id === id
+    );
+
+    if (updatedItem) {
+      updateCartQuantityInDB(id, updatedItem.p_cart_quantity + 1);
+    }
   };
 
   //減少數量(前端)
@@ -157,17 +172,38 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
 
   //詳細內容頁 一次加入購物車
   const handleAddtoCart = () => {
-    if (albumDetail) {
+    console.log("快樂大集合1: ", albumDetail);
+    console.log("快樂大集合2: ", planCartItems);
+    if (albumDetail !== undefined) {
+      const cartDataArray = planCartItems.map((item) => {
+        return {
+          f_plan_id: item.f_plan_id,
+          albumId: null,
+          userId: 1,
+          pic: item.f_plan_picture,
+          quantity: item.p_cart_quantity,
+          price: parseInt(item.p_plan_amount),
+        };
+      });
+      axios
+        .post("http://localhost:3005/api/addToCart", cartDataArray)
+        .then((response) => {
+          console.log("Item added to cart", response.data);
+        })
+        .catch((error) => {
+          console.error("Error adding item to cart", error);
+        });
+    } else {
       // 準備要傳送的資料
       const cartData = {
-        commodityid: null,
-        albumId: albumDetail?.p_albums_id || null,
+        f_plan_id: null,
+        albumId: albumDetail?.p_albums_id,
         userId: 1,
         pic: albumImages?.images?.[0]?.p_productsimg_filename,
         quantity: quantity,
         price: parseInt(albumDetail?.p_albums_price),
       };
-
+      console.log("要送出去ㄌ: ", cartData);
       // 發送 POST 請求將資料儲存到購物車
       axios
         .post("http://localhost:3005/api/addToCart", cartData)
@@ -191,7 +227,6 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
       );
       setToOrder(selectForOrder);
     }
-
   }, [selectedItems, cartItems]);
 
   // 資料寫進cartItems from mdBox
@@ -200,12 +235,66 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
       setCartItems(mdBox);
     }
   }, [mdBox]);
-  
-  // useEffect(() => {
-  //   console.log("給訂單: ", toOrder);
-  //   console.log("看selectedItems: ", selectedItems);
 
-  // }, [selectedItems, toOrder]);
+  // 合併募資、商城購物車
+  useEffect(() => {
+    if (listData && planCartItems && plane && cartItems) {
+      // 首先過濾相符的商品
+      const container = listData.rows
+        .filter((item) =>
+          cartItems.some((v) => v.p_albums_id === item.p_albums_id)
+        )
+        .map((item) => {
+          // 找到對應的購物車項目
+          const cartItem = cartItems.find(
+            (v) => v.p_albums_id === item.p_albums_id
+          );
+          // 回傳合併後的物件，包含 p_cart_img_filename
+          return {
+            ...item,
+            p_cart_img_filename: cartItem?.p_cart_img_filename,
+            p_cart_quantity: cartItem?.p_cart_quantity,
+            p_cart_price: cartItem?.p_cart_price,
+          };
+        });
+      console.log("商品容器:", container);
+
+      // 過濾相符的方案
+      const planContainer = plane
+        .filter((item) =>
+          cartItems.some((cartItem) => cartItem.f_plan_id === item.f_plan_id)
+        )
+        .map((item) => {
+          // 找到對應的購物車項目
+          const cartItem = cartItems.find(
+            (v) => v.f_plan_id === item.f_plan_id
+          );
+          // 回傳合併後的物件，包含 p_cart_img_filename
+          return {
+            ...item,
+            p_cart_img_filename: cartItem?.p_cart_img_filename,
+            p_cart_quantity: cartItem?.p_cart_quantity,
+            p_cart_price: cartItem?.p_cart_price,
+          };
+        });
+      console.log("方案容器:", planContainer);
+
+      // 合併兩個容器
+      const mergedContainer = [...container, ...planContainer];
+
+      // 設定狀態
+      setDataBox(mergedContainer);
+
+      console.log("合併後的資料:", mergedContainer);
+    }
+  }, [listData, planCartItems, plane, cartItems]);
+
+
+
+  useEffect(() => {
+    console.log("給訂單: ", listData);
+    console.log("plane: ", plane);
+  }, [listData, plane]);
 
   return (
     <CartContext.Provider
@@ -227,6 +316,7 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
         cancelDelete,
         handleDeleteClick,
         toOrder,
+        dataBox,
       }}
     >
       {children}

@@ -1,52 +1,55 @@
-import React, { useEffect, useState } from "react";
-import styles from "./mem-blog.module.css"; // 引入相應的 CSS 模組
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+import styles from "./mem-blog.module.css";
 import Nav from "@/components/public/nav";
 import UserIcon from "@/components/public/user-icon";
 import BlogNav from "../blog-nav";
 import PlayButton from "@/components/public/play-button";
 import Logout from "@/components/public/logout";
 import Link from "next/link";
-import axios from "axios";
 
-const MemBlog = () => {
-  const [name, setName] = useState("");
-  const [birth, setBirth] = useState("");
+const MemberBlog = () => {
+  const router = useRouter();
+  const [memberData, setMemberData] = useState(null);  // 用於存放會員資料
+  const [errorMessage, setErrorMessage] = useState(""); // 用於顯示錯誤訊息
 
-
-
-const handleLogout = async () => {
-  try {
-    const response = await axios.post("http://localhost:3005/member/logout", {}, { withCredentials: true });
-    if (response.data.success) {
-      alert(response.data.message);
-      // 跳轉到登入頁面或首頁
-      window.location.href = "/login";
-    }
-  } catch (error) {
-    console.error("登出失敗:", error);
-  }
-};
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3005/mem-data", {
-          credentials: "include", // 攜帶 cookie，確保 session 可以被讀取
-        });
-        const data = await response.json();
-        console.log(data);
+    // 確保 router 已準備好且 URL 中存在 id
+    if (!router.isReady || !router.query.id) {
+      return;
+    }
 
-        setName(data.admin?.nickname); // 確保讀取 admin 裡的 nickname
-        setBirth(data.admin?.birth);
+    const { id } = router.query; // 確保使用查詢參數
+
+    const fetchMemberData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3005/member/mem-data/${id}`, {
+          method: "GET",
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          setMemberData(data);  // 成功取得會員資料
+        } else {
+          setErrorMessage("無法取得會員資料");
+        }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching member data:", error);
+        setErrorMessage("資料讀取失敗");
       }
     };
-    fetchData();
-  }, []);
+
+    fetchMemberData();
+  }, [router.isReady, router.query.id]);  // 當 router 就緒且 `id` 更新時重新執行
+
+  if (errorMessage) {
+    return <p>{errorMessage}</p>;
+  }
 
   return (
     <>
-      <div className={styles["wrapper"]}>
+          <div className={styles["wrapper"]}>
         {/* <Nav className={styles["nav"]} /> */}
         <Nav />
         {/* 設定圖標，放置在右上角 */}
@@ -61,13 +64,14 @@ const handleLogout = async () => {
         <div className={styles["container"]}>
           <div className={styles["leftContent"]}>
             {/* <InfoNav /> */}
-            <BlogNav value={name} />
+            {/* <BlogNav value={name} /> */}
+            {memberData && <BlogNav memberData={memberData} />}
             {/* <button>
               <a href="./login">Login</a>
             </button> */}
             <br />
 
-            <Link href="/login" passHref>
+            <Link href="/member/login" passHref>
               <div className={styles.logoutButton}>
                 登出
               </div>
@@ -98,8 +102,19 @@ const handleLogout = async () => {
 
         <div className={styles["footer"]}>Footer</div>
       </div>
+    <div>
+      <h1>會員部落格頁面</h1>
+      {memberData ? (
+        <>
+          <p>姓名: {memberData.m_nickname}</p>
+          <p>信箱: {memberData.m_email}</p>
+        </>
+      ) : (
+        <p>載入中...</p>
+      )}
+    </div>
     </>
   );
 };
 
-export default MemBlog;
+export default MemberBlog;

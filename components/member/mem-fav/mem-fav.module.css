@@ -45,10 +45,10 @@
   flex-direction: column;
   align-items: flex-start;
   /* justify-content: space-around; */
-  margin: 50px;
+  margin: 0px 100px;
   /* padding: 50px; */
   max-height: 70%; /* 設置容器最大高度，視需求調整 */
-  overflow-y: scroll; /* 當內容超過高度時顯示垂直滾動條 */
+  /* overflow-y: scroll;  */
   width: 70%;
   /* border: #14ff00 2px solid;  */
   border-radius: 10px;
@@ -56,31 +56,6 @@
 
 }
 
-/* 捲軸寬度和高度（垂直和水平捲軸） */
-.mainBody::-webkit-scrollbar {
-  width: 15px; /* 垂直捲軸寬度 */
-  height: 8px; /* 水平捲軸高度（如果需要） */
-}
-
-/* 捲軸軌道的樣式 */
-.mainBody::-webkit-scrollbar-track {
-  background: var(--gray-2); /* 軌道背景色 */
-  border-radius: 5px; /* 軌道圓角 */
-  border: var(--basecolor) 2px solid; /* 軌道邊框*/
-}
-
-/* 捲軸滑塊的樣式 */
-.mainBody::-webkit-scrollbar-thumb {
-  background: var(--gray-1); /* 滑塊顏色 */
-  border-radius: 5px; /* 滑塊圓角 */
-  /* border: black 2px solid; 軌道邊框 */
-
-}
-
-/* 當滑塊被懸停時的樣式 */
-.mainBody::-webkit-scrollbar-thumb:hover {
-  background: var(--basecolor); /* 滑塊懸停顏色 */
-}
 /* ------------------------------ */
 .favInfo {
   display: flex;

@@ -5,8 +5,11 @@ import InfoNav from "../info-nav";
 import MemberInfo from "../mem-info/member-info";
 import MemberACC from "../mem-acc/mem-acc";
 import MemberPassword from "../mem-password";
-import MemberFav from "../mem-fav";
+// import MemberFav from "../mem-fav";
 import Mp3Uploader from "@/components/public/mp3-uploader";
+// import MemberFavTest from "../mem-fav/test";
+import { useAuth } from "@/Context/auth-context";
+import { useRouter } from "next/router";
 
 const MemWeb2 = () => {
   const infoRef = useRef(null);
@@ -24,7 +27,7 @@ const MemWeb2 = () => {
   return (
     <>
       <div className={styles["wrapper"]}>
-        <Nav className={styles["nav"]} />
+        <Nav />
 
         <div className={styles["container"]}>
           <div className={styles["leftContent"]}>
@@ -40,22 +43,30 @@ const MemWeb2 = () => {
             <div ref={infoRef}>
               <MemberInfo />
             </div>
+            <img src="/image/img-mem/line005.png" alt="" />
+
             <div ref={accRef}>
               <MemberACC />
             </div>
+            <img src="/image/img-mem/line005.png" alt="" />
+
             <div ref={passwordRef}>
               <MemberPassword />
             </div>
+            <img src="/image/img-mem/line005.png" alt="" />
+
             <div ref={favRef}>
-              <MemberFav />
+              {/* <MemberFav />
+              <MemberFavTest /> */}
             </div>
+            
             {/* <div ref={uploaderRef}>
               <Mp3Uploader />
             </div> */}
           </div>
         </div>
 
-        <div className={styles["footer"]}>Footer</div>
+        <div className={styles["footer"]}>.</div>
       </div>
     </>
   );

@@ -37,10 +37,10 @@ export default function ProductsDetailPage({
     }
   };
 
-  useEffect(()=>{
-    console.log("Member: ", memAuth);
+  // useEffect(()=>{
+  //   console.log("Member: ", memAuth);
     
-  }, [memAuth])
+  // }, [memAuth])
   return (
     <>
       <div className={style.containBox}>
@@ -96,7 +96,6 @@ export default function ProductsDetailPage({
           <div className={style.btns}>
             {/* <Link href={`/George/cart/${urid}`}> */}
             <Link href={memAuth ? `/George/cart/${memAuth.id}` : "http://localhost:3000/login"}>
-
               <BlackWBtns
                 type="2"
                 onClick={handleAddtoCart}

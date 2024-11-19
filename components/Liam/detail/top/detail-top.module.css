@@ -211,9 +211,21 @@
   .container {
     flex-direction: column;
     height: 550px;
+  background-image: none;
+  margin-top: 50px;
+
   }
   .top {
-    height: 150px;
+    height: 250px;
+  }
+  .name{
+    color: #fff;
+    transform: translateY(-220px);
+
+    position: absolute;
+    text-align: center;
+    margin: auto;
+    
   }
   .left {
     width: 100%;
