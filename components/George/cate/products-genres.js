@@ -30,6 +30,7 @@ export default function ProductsGenres() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchStatus, setSearchStatus] = useState(false);
   const [playerFixed, setPlayerFixed] = useState(false);
+  const [albumUrl, setAlbumUrl] = useState(0);
 
   const handleLoadMore = () => {
     setVisibleItems(visibleItems + 8);
@@ -93,10 +94,11 @@ export default function ProductsGenres() {
       (album) => albumId === album.p_albums_id
     );
     const imagesDes = imagesDescription.p_albums_description;
-
+    const urltodetail = imagesDescription.p_albums_id
     // console.log(imagesDes);
     // console.log(albumId);
 
+    setAlbumUrl(urltodetail)
     setRightSidePic(imageFilenames);
     setRightPicsController(true);
     setRightVisibleController(true);
@@ -352,13 +354,13 @@ export default function ProductsGenres() {
                   <IoIosArrowForward />
                 </button>
               </div>
-              <Link href={"/George/products-detail"}>
+              <Link href={`/George/product/${albumUrl}`}>
                 <button className={styles.buttonBig}>
                   <p>前往專輯</p>
                 </button>
               </Link>
               <button className={styles.buttonBig}>
-                <p>我的最愛</p>
+                <p><Heart albumUrl={albumUrl}/>我的最愛</p>
               </button>
               <div className={styles.albumsdes}>{}</div>
               <div className={styles.combo}>
