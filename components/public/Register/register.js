@@ -15,6 +15,8 @@ const Register = () => {
   const [nickname, setNickname] = useState("");
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
   const [birthDate, setBirthDate] = useState(""); // 新增生日狀態
@@ -24,6 +26,9 @@ const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [message, setMessage] = useState("");
+
+  // Current date in "YYYY-MM-DD" format for max date
+  const today = new Date().toISOString().split("T")[0];
 
   const districtsData = {
     台北市: [
@@ -442,17 +447,20 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3005/member/register", {
-        name,
-        account,
-        password,
-        email,
-        nickname,
-        location,
-        district,
-        birth: birthDate,
-        gender,
-      });
+      const response = await axios.post(
+        "http://localhost:3005/member/register",
+        {
+          name,
+          account,
+          password,
+          email,
+          nickname,
+          location,
+          district,
+          birth: birthDate,
+          gender,
+        }
+      );
 
       if (response.status === 201) {
         setShowSuccess(true);
@@ -525,7 +533,7 @@ const Register = () => {
           <h2 className={styles.title}>會員註冊</h2>
           <form onSubmit={handleRegister} className={styles.form}>
             <div className={styles.inputGroup}>
-              <MemIcons iconName="icon-user" size="medium" />
+              <MemIcons iconName="icon-nickname" size="medium" />
               <input
                 type="text"
                 placeholder="暱稱 (必填*之後可做修改)"
@@ -551,13 +559,22 @@ const Register = () => {
             <div className={styles.inputGroup}>
               <MemIcons iconName="icons-lock-2" size="medium" />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="密碼"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className={styles.input}
                 required
               />
+                          <span
+              className={styles.eyeIcon}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <MemIcons
+                iconName={showPassword ? "icons-eye-off" : "icons-eye"}
+                size="medium"
+              />
+            </span>
             </div>
             <div className={styles.inputGroup}>
               <MemIcons iconName="icon-mail" size="medium" />
@@ -572,7 +589,7 @@ const Register = () => {
             </div>
             {emailError && <p className={styles.error}>{emailError}</p>}
             <div className={styles.inputGroup}>
-              <MemIcons iconName="icon-user" size="medium" />
+              <MemIcons iconName="icon-location" size="medium" />
               <select
                 value={location}
                 onChange={handleLocationChange}
@@ -607,7 +624,7 @@ const Register = () => {
             </div>
             {location && districtOptions.length > 0 && (
               <div className={styles.inputGroup}>
-                <MemIcons iconName="icon-user" size="medium" />
+                <MemIcons iconName="icon-location" size="medium" />
                 <select
                   value={district}
                   onChange={(e) => setDistrict(e.target.value)}
@@ -630,6 +647,7 @@ const Register = () => {
                 placeholder="生日"
                 value={birthDate}
                 onChange={(e) => setBirthDate(e.target.value)}
+                max={today} // 設定生日日期最大值為今天
                 className={styles.input}
                 required
               />
@@ -639,15 +657,20 @@ const Register = () => {
               註冊
             </button>
             <br />
-
+            <p
+              onClick={() => router.push("/member/login")}
+              className={styles.loginText}
+            >
+              已有帳號? 前往登入
+            </p>
             <br />
-            <a href="/member/login">
-              <p>已有帳號? 前往登入</p>
-            </a>
-            <br />
-            <a href="/" className={styles.createAccount}>
+            <div
+              onClick={() => router.push("/")}
+              className={styles.createAccount}
+              style={{ cursor: "pointer" }}
+            >
               <MemIcons iconName="icons-home" size="medium" />
-            </a>
+            </div>
           </form>
         </div>
       </div>

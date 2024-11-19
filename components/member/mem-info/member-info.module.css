@@ -133,7 +133,7 @@ margin-left: 20px;
 .left-text,
 .right-text {
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   /* gap: 50px; */
   border-bottom: 1px solid #000;
@@ -243,6 +243,7 @@ margin-left: 20px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 100px;
 }
 
 .button1 {
@@ -366,4 +367,94 @@ margin-left: 20px;
     height: auto;
     width: 100%;
   }
+
+    .input-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 300px; /* 調整簡介欄位寬度 */
+      margin: 0 auto;
+      flex-direction: row;
+    }
+  
+    .input-top .button1 {
+      width: 60px; /* 設定按鈕寬度為 60px */
+      margin: 5px; /* 增加按鈕之間的間距 */
+      padding: 5px;
+      font-size: 14px;
+    }
+  
+    .input-top input {
+      width: 100%; /* 簡介欄位填滿整個容器 */
+      max-width: 300px; /* 最大寬度為 300px */
+      padding: 8px; /* 增加內邊距 */
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  
+
+  .input-left {
+    width: 300px; /* 設定暱稱欄位寬度為 300px */
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  .left-text,
+  .left-text-birth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* 填滿整個容器 */
+    padding: 10px;
+  }
+
+  .left-text .button1,
+  .input-top .button1 {
+    width: 60px; /* 設定按鈕寬度為 60px */
+    margin: 5px; /* 增加按鈕之間的間距 */
+    padding: 5px;
+    font-size: 14px;
+  }
+
+  .left-text input,
+  .input-top input {
+    width: 100%; /* 填滿整個容器 */
+    max-width: 300px; /* 最大寬度為 300px */
+    padding: 8px; /* 增加內邊距 */
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .left-text {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 水平置中 */
+    padding: 10px;
+    gap: 70px; /* 設定暱稱和按鈕之間的間距為10px */
+    font-size: 16px;
+  }
+  .button {
+    /* background-color: blue; */
+    color: #333;
+    /* padding: 10px ; */
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* margin: 0 50px; */
+    width: 100px;
+  }
+  .left-text-birth {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #000;
+  }
+
+  .left-text-birth input {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    text-align: center;
+    font-size: 16px;
+  }
+  
 }

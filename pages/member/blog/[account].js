@@ -9,19 +9,26 @@ import PlayButton from "@/components/public/play-button";
 import Link from "next/link";
 
 const MemberBlog = () => {
-  const { auth } = useAuth();
+  const { auth, logout } = useAuth();
+  const router = useRouter();
   const [memberData, setMemberData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleEdit = () => {
+    router.push("/member/center");
+  };
   useEffect(() => {
     if (!auth.account) {
-      setErrorMessage("無法取得有效的 account");
+      // setErrorMessage("無法取得有效的 account");
+      router.push("/member/login");
       return;
     }
 
     const fetchMemberData = async () => {
       try {
-        const response = await fetch(`http://localhost:3005/member/mem-data/${auth.account}`);
+        const response = await fetch(
+          `http://localhost:3005/member/mem-data/${auth.account}`
+        );
         const data = await response.json();
         if (data.success) {
           setMemberData(data.memberData);
@@ -41,24 +48,35 @@ const MemberBlog = () => {
     return <p>{errorMessage}</p>;
   }
 
+  // 點擊登出按鈕後的處理
+  const handleLogout = () => {
+    logout(); // 執行登出
+    router.push("/member/login"); // 登出後重導向到登入頁面
+  };
+
+  if (errorMessage) {
+    return <p>{errorMessage}</p>;
+  }
+
   return (
     <div>
       {memberData ? (
         <>
-          <Nav />
-
-          <Link href="/member/center">
-            <button>前往會員中心</button>
-          </Link>
+          <Nav className={styles["nav"]} />
 
           <div className={styles["container"]}>
             <div className={styles["leftContent"]}>
               <BlogNav memberData={memberData} />
+              <div className={styles["btn"]}>
+                <div className={styles.editButton} onClick={handleEdit}>
+                  修改
+                </div>
+                <div className={styles.logoutButton} onClick={handleLogout}>
+                  登出
+                </div>
+              </div>
               <br />
-
-              <Link href="/member/login" passHref>
-                <div className={styles.logoutButton}>登出</div>
-              </Link>
+              <div className={styles["background-pattern"]}></div>
             </div>
 
             <div className={styles["rightContent"]}>
@@ -66,16 +84,29 @@ const MemberBlog = () => {
                 <div className={styles["album"]}>
                   <UserIcon />
                 </div>
+               
+                <div className={styles["album"]}>
+                  <UserIcon />
+                </div> <div className={styles["album"]}>
+                  <UserIcon />
+                </div> <div className={styles["album"]}>
+                  <UserIcon />
+                </div> <div className={styles["album"]}>
+                  <UserIcon />
+                </div>
+                <div className={styles["album"]}>
+                  <PlayButton size="large" />
+                </div>{" "}
                 <div className={styles["album"]}>
                   <PlayButton size="large" />
                 </div>
               </div>
             </div>
           </div>
-
-          <Link href="/member/login" passHref>
-            <div className={styles.logoutButton}>登出</div>
-          </Link>
+          <div className={styles["footer"]}></div>
+          {/* <div className={styles.logoutButton} onClick={handleLogout}>
+            登出
+          </div> */}
         </>
       ) : (
         <p>載入中...</p>

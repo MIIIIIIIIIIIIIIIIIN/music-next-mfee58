@@ -8,6 +8,7 @@
   position: relative;
   background-repeat: no-repeat;
   background-position: 100% 100%;
+  
 }
 
 /* 固定 nav bar 在頂部 */
@@ -21,6 +22,7 @@
   left: 0;
   width: 100%;
   z-index: 10;
+  
 }
 
 .settingIcon {
@@ -45,6 +47,7 @@
   gap: 20px;
   width: 80%;
   margin: auto;
+  
 
   /* margin-top: 90px; */
 }
@@ -91,9 +94,11 @@
   gap: 30px;
   padding: 20px;
   /* position: relative; 為絕對定位的設定圖標提供參考框架 */
+  
 }
 
 .albumSec {
+  
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
@@ -101,6 +106,7 @@
   /* background-color: var(--gray-2);   */
   justify-content: center; /* 水平置中 */
   align-content: center; /* 垂直置中 */
+  
 }
 
 
@@ -181,6 +187,7 @@
   }
 
   .rightContent {
+    
     width: 100%; /* 讓右側內容佔滿可用寬度 */
     margin-left: 0; /* 移除左側空白 */
     display: grid;
@@ -202,7 +209,6 @@
     height: 150px; /* 調整方形高度 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* 降低陰影效果 */
     border-radius: 5px;
-    
   }
 
   .footer {
