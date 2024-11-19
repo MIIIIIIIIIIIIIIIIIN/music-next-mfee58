@@ -106,7 +106,6 @@ useEffect(() => {
       p_plan_amount: product.price,
     }));
 
-  setPlanCartItems(currentCartItems);
 
 }, [quantities, products]);
 
@@ -173,7 +172,7 @@ useEffect(() => {
         總價: item.price * item.quantity,
       }))
     );
-    // setShowCart(true);
+    setShowCart(true);
   };
 
 
@@ -543,7 +542,6 @@ const updatePlanPeople = async (planId, projectList, quantity) => {
             <div className={styles.divider}>
               <button
                 className={styles.cartButton}
-                // onClick={handleCartButtonClick}
                 onClick={handleCartButtonClick}
               
                 disabled={!hasItems}

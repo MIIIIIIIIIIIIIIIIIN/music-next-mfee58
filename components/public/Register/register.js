@@ -416,6 +416,7 @@ const Register = () => {
     金門縣: ["金沙鎮", "金湖鎮", "金寧鄉", "金城鎮", "烈嶼鄉", "烏坵鄉"],
     連江縣: ["南竿鄉", "北竿鄉", "莒光鄉", "東引鄉"],
   };
+
   const handleLocationChange = (e) => {
     const selectedLocation = e.target.value;
     setLocation(selectedLocation);
