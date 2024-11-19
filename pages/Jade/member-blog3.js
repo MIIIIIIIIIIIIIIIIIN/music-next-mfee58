@@ -1,13 +1,13 @@
 import React from "react";
-import InfoNav from "@/components/member/info-nav-liam";
-import MemberInfo from "@/components/member/mem-info/member-info";
-import MemberACC from "@/components/member/mem-acc/mem-acc";
-import MemberPassword from "@/components/member/mem-password";
-import MemberOrder from "@/components/member/mem-order";
-import MemberFav from "@/components/member/mem-fav";
-import FooterDeskTop from "@/components/public/footer/desktop";
-import Nav from "@/components/public/nav";
-import MemWeb2 from "@/components/member/member-center";
+// import InfoNav from "@/components/member/info-nav-liam";
+// import MemberInfo from "@/components/member/mem-info/member-info";
+// import MemberACC from "@/components/member/mem-acc/mem-acc";
+// import MemberPassword from "@/components/member/mem-password";
+// import MemberOrder from "@/components/member/mem-order";
+// import MemberFav from "@/components/member/mem-fav";
+// import FooterDeskTop from "@/components/public/footer/desktop";
+// import Nav from "@/components/public/nav";
+// import MemWeb2 from "@/components/member/member-center";
 import MemBlog3 from "@/components/member/mem-blog3";
 
 export default function MemBlog3Page() {

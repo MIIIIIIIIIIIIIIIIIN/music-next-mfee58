@@ -8,11 +8,11 @@ export default function Mall() {
         <div className="triangle"></div>
         <ul>
           <li className="item">
-            <a href="/George/category">
+            <Link href="/George/category">
               <div className="info">
                 <p>專輯分類</p>
               </div>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

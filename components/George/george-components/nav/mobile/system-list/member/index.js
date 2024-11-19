@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function MemberList() {
   return (
     <>
@@ -5,46 +7,46 @@ export default function MemberList() {
         <div className="triangle"></div>
         <ul>
           <li className="item">
-            <a href="/Jade/member-center">
+            <Link href="/Jade/member-center">
             <div className="info">
               <p>基本資料</p>
             </div>
-            </a>
+            </Link>
           </li>
           <li className="item">
-            <a href="#">
+            <Link href="#">
             <div className="info">
               <p>帳號設定</p>
             </div>
-            </a>
+            </Link>
           </li>
           <li className="item">
-            <a href="#">
+            <Link href="#">
             <div className="info">
               <p>變更密碼</p>
             </div>
-            </a>
+            </Link>
           </li>
           {/* <li className="item">
-            <a href="#">
+            <Link href="#">
             <div className="info">
               <p>訂單查詢</p>
             </div>
-            </a>
+            </Link>
           </li> */}
           <li className="item">
-            <a href="#">
+            <Link href="#">
             <div className="info">
               <p>收藏名單</p>
             </div>
-            </a>
+            </Link>
           </li>
           {/* <li className="item">
-            <a href="#">
+            <Link href="#">
             <div className="info">
               <p>帳號刪除</p>
             </div>
-            </a>
+            </Link>
           </li> */}
         </ul>
       </div>

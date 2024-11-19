@@ -124,6 +124,9 @@ export default function FundraisingList() {
           button:hover {
             background: rgb(0, 255, 72);
           }
+          @media (max-width: 640px) {
+            
+          }
         `}
       </style>
     </div>

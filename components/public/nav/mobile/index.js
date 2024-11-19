@@ -253,7 +253,13 @@ export default function NavMobile() {
                   backgroundColor: activeIndex === 1 ? "#14ff00" : "#fff",
                 }}
               >
-                <a href="#">
+                <a   href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                
+                    router.push(`/Liam/Fundraising-list`);
+                
+                }}>
                   <h6>
                     募資
                     <span>

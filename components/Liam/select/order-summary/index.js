@@ -1,4 +1,5 @@
 // components/OrderSummary.jsx
+
 import styles from './order-summary.module.css';
 const OrderSummary = ({
     products,
@@ -64,7 +65,7 @@ const OrderSummary = ({
             </div>
           </div>
   
-          <FAQSection
+          <div
             faqs={faqs}
             expandedFaq={expandedFaq}
             showFaqs={showFaqs}
@@ -78,7 +79,7 @@ const OrderSummary = ({
               onClick={onShowCart}
               disabled={!hasItems}
             >
-              <ShoppingCart size={20} />
+              <div size={20} />
               加入購物車
             </button>
           </div>

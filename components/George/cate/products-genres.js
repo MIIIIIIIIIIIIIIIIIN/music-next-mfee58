@@ -372,9 +372,9 @@ export default function ProductsGenres() {
               </button>
               <div className={styles.albumsdes}>{}</div>
               <div className={styles.combo}>
-                <div className={styles.PlayButton}>
+                {/* <div className={styles.PlayButton}>
                   <PlayButton />
-                </div>
+                </div> */}
                 <div className={styles.rightDescription}>{rightDes}</div>
               </div>
             </div>

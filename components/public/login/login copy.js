@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import styles from "./login.module.css";
 import MemIcons from "@/components/member/mem-icons";
+import Link from "next/link";
 
 axios.defaults.withCredentials = true;
 
@@ -93,13 +94,13 @@ const Login = () => {
 
 
         <div className={styles.links}>
-          <a href="./register" className={styles.createAccount}>
+          <Link href="./register" className={styles.createAccount}>
             建立帳號
-          </a>
+          </Link>
           <br />
-          <a href="/" className={styles.createAccount}>
+          <Link href="/" className={styles.createAccount}>
             <MemIcons iconName="icons-home" size="medium" />
-          </a>
+          </Link>
         </div>
                 {/* 快速登入按鈕 */}
                 <button onClick={quickLogin} className={styles.quickLoginButton}>
