@@ -34,16 +34,16 @@ export const AddToCartBar = () => {
     };
   }, []);
 
-  // const handleAuth = () => {
-  //   if (!memAuth) {
-  //     alert("請先登入會員才能進行贊助！");
-  //     const targetUrl = encodeURIComponent(`/George/cart/${memAuth ? memAuth.id : ""}`);
-  //     window.location = `http://localhost:3000/login?redirect=${targetUrl}`;
-  //     return;
-  //   } else {
-  //     window.location = `http://localhost:3000/George/cart/${memAuth.id}`;
-  //   }
-  // };
+  const handleAuth = () => {
+    if (!memAuth) {
+      alert("請先登入會員才能進行贊助！");
+      const targetUrl = encodeURIComponent(`/George/cart/${memAuth ? memAuth.id : ""}`);
+      window.location = `http://localhost:3000/login?redirect=${targetUrl}`;
+      return;
+    } else {
+      window.location = `http://localhost:3000/George/cart/${memAuth.id}`;
+    }
+  };
 
   useEffect(()=>{
 
