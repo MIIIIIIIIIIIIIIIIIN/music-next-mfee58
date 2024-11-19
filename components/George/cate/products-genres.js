@@ -11,6 +11,7 @@ import { FaArrowRight } from "react-icons/fa";
 import axios from "axios";
 import useFetchDB from "../hooks/usefetchDB";
 
+
 export default function ProductsGenres() {
   const { listData, albumsimg, genres } = useFetchDB();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -61,6 +62,7 @@ export default function ProductsGenres() {
     }
   };
 
+
   // search keywords
   const inputValue = (e) => {
     setSearchTerm(e.target.value);
@@ -75,7 +77,7 @@ export default function ProductsGenres() {
       const response = await axios.get(
         `http://localhost:3005/api/getKeyWord?keyword=${searchTerm}`
       );
-      // console.log("Recived Keyword: ", response.data);
+      console.log("Recived Keyword: ", response.data);
       setKeyWord(response.data);
     } catch (error) {
       console.error("Error fetching keywords: ", error);
@@ -94,11 +96,11 @@ export default function ProductsGenres() {
       (album) => albumId === album.p_albums_id
     );
     const imagesDes = imagesDescription.p_albums_description;
-    const urltodetail = imagesDescription.p_albums_id
+    const urltodetail = imagesDescription.p_albums_id;
     // console.log(imagesDes);
     // console.log(albumId);
 
-    setAlbumUrl(urltodetail)
+    setAlbumUrl(urltodetail);
     setRightSidePic(imageFilenames);
     setRightPicsController(true);
     setRightVisibleController(true);
@@ -167,19 +169,20 @@ export default function ProductsGenres() {
           </button>
         </div>
         <div>
-          {genres && genres.map((v, i) => {
-            return (
-              <button
-                key={i}
-                className={styles.genresBts}
-                onClick={() => {
-                  handleCategoryClick(v.p_genres_name);
-                }}
-              >
-                {v.p_genres_name}
-              </button>
-            );
-          })}
+          {genres &&
+            genres.map((v, i) => {
+              return (
+                <button
+                  key={i}
+                  className={styles.genresBts}
+                  onClick={() => {
+                    handleCategoryClick(v.p_genres_name);
+                  }}
+                >
+                  {v.p_genres_name}
+                </button>
+              );
+            })}
         </div>
       </div>
       {/* 分類詳細資料 */}
@@ -270,7 +273,9 @@ export default function ProductsGenres() {
                     </div>
                   </li>
                 ))
-              : listData && listData.rows && listData.rows.slice(0, visibleItems).map((album) => (
+              : listData &&
+                listData.rows &&
+                listData.rows.slice(0, visibleItems).map((album) => (
                   <li
                     key={album.p_albums_id}
                     className={
@@ -360,7 +365,10 @@ export default function ProductsGenres() {
                 </button>
               </Link>
               <button className={styles.buttonBig}>
-                <p><Heart albumUrl={albumUrl}/>我的最愛</p>
+                
+                  <Heart albumUrl={albumUrl} />
+                  我的最愛
+                
               </button>
               <div className={styles.albumsdes}>{}</div>
               <div className={styles.combo}>

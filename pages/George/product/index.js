@@ -43,10 +43,10 @@ export default function ProductsPage() {
       <Nav />
       <QuantityProvider>
         {/* <CartProvider> */}
-          <ProductsActivities />
-          <ProductsRecommendation />
-          <ProductsLatestLaunched />
-          {/* <AddToCartBar /> */}
+        <ProductsActivities />
+        <ProductsRecommendation />
+        <ProductsLatestLaunched />
+        {/* <AddToCartBar /> */}
         {/* </CartProvider> */}
       </QuantityProvider>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
