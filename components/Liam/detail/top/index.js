@@ -186,7 +186,7 @@ export default function DetailTop({}) {
           <div className={styles.videoContainer}>
             <div className={styles.videoWrapper}>
               <video
-                src={projectData.f_project_video || projectData.f_project_picture}
+                src={projectData.video || projectData.f_project_picture}
                 poster={projectData.f_project_picture}
                 controls
                 className={styles.videoPlayer}
@@ -195,7 +195,7 @@ export default function DetailTop({}) {
                 您的瀏覽器不支援影片播放。
               </video>
               
-              <button 
+              {/* <button 
                 className={styles.fullscreenButton}
                 onClick={(e) => {
                   const videoElement = e.currentTarget.parentElement.querySelector('video');
@@ -221,7 +221,7 @@ export default function DetailTop({}) {
                 >
                   <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
                 </svg>
-              </button>
+              </button> */}
             </div>
           </div>
           <div className={styles.bar}>
