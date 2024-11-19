@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Masonry from "react-masonry-css";
 import { Clock, Flame, Flag } from "lucide-react";
 import styles from "./forum.module.css";
-import Heart from "@/components/public/hearts";
+import Heart from "@/components/public/heart";
 import {
   FacebookShareButton,
   TwitterShareButton,

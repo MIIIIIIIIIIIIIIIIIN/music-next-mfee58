@@ -124,7 +124,7 @@ export default function Kv() {
 
   return (
     <div>
-      <div className={styles.top}>
+      <div className={styles.top}   style={{ backgroundImage: `url(${topProject.f_project_picture})` }}>
         <div className={styles.title}>
           <a href={`/Liam/detail?project=${topProject.f_project_id}`}>
             <h3>{topProject.f_project_title}</h3>

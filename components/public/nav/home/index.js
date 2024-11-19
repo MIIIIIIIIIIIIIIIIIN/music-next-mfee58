@@ -135,7 +135,7 @@ export default function NavHome() {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                router.push("/George/products-page");
+                router.push("/George/product");
               }}
             >
               <div className={styles.top}></div>

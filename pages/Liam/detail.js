@@ -12,19 +12,19 @@ import { QuantityProvider } from "@/components/George/context/quantity-provider"
 
 export default function ProjectDetail() {
   return (
-    <TabProvider>
-      <QuantityProvider>
-        <CartProvider>
-          <div>
-            <Nav />
-            <DetailTop />
-            <AudioPlayer />
-            <DetailNav />
-            <Footer />
-            <Chat />
-          </div>
-        </CartProvider>
-      </QuantityProvider>
-    </TabProvider>
+    <QuantityProvider>
+    <CartProvider>
+      <TabProvider>
+        <div>
+          <Nav />
+          <DetailTop />
+          <AudioPlayer />
+          <DetailNav />
+          <Footer />
+          <Chat />
+        </div>
+      </TabProvider>
+    </CartProvider>
+    </QuantityProvider>
   );
 }

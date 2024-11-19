@@ -12,14 +12,21 @@ const BlogNav = ({ memberData }) => {
   const [district, setDistrict] = useState("");
 
   useEffect(() => {
+    // console.log("memberData:", memberData); // 調試輸出
     if (memberData && memberData.m_birth) {
       const birthDate = new Date(memberData.m_birth);
       
       // 檢查日期是否有效
       if (!isNaN(birthDate.getTime())) {
-        const formattedBirth = `${String(birthDate.getUTCMonth() + 1).padStart(2, "0")}-${String(
-          birthDate.getUTCDate()
-        ).padStart(2, "0")}`;
+        // const formattedBirth = `${String(birthDate.getUTCMonth() + 1).padStart(2, "0")}-${String(
+        //   birthDate.getUTCDate()
+        // ).padStart(2, "0")}`;
+        // 使用 toLocaleDateString 將日期轉換為台灣格式
+      const formattedBirth = birthDate.toLocaleDateString("zh-TW", {
+        timeZone: "Asia/Taipei",
+        month: "2-digit",
+        day: "2-digit",
+      });
         setBirth(formattedBirth);
       } else {
         console.warn("Invalid birth date:", memberData.m_birth); // 顯示除錯訊息
@@ -36,21 +43,21 @@ const BlogNav = ({ memberData }) => {
           property1="lg"
           className={styles.header}
           img={
-            member.icon
-              ? `http://localhost:3005${member.icon}`
+            memberData.m_icon
+              ? `http://localhost:3005${memberData.m_icon}`
               : "/image/img-mem/user-logo000.jpg"
           } // 預設圖示
         />
       </div>
       <h4 className={styles["name"]}>{memberData.m_nickname}</h4>
       <div className={styles["info"]}>
-        <div className="gender">{memberData.m_gender}</div>
+        <div className={styles["gender"]}>{memberData.m_gender}</div>
         {/* <div className={styles["birth"]}>{memberData.m_birth}</div> */}
         <div className={styles["birth"]}>{birth}</div>
 
         <div className={styles["else"]}>
           <div className={styles["location"]}>{memberData.m_location}</div>
-          <div className="location">{memberData.m_district}</div>
+          <div className={styles["location"]}>{memberData.m_district}</div>
         </div>
       </div>
       <div className={styles["bio"]}>

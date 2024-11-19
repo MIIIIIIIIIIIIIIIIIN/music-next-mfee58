@@ -35,18 +35,20 @@ export function AuthContextProvider({ children }) {
       const result = await response.json();
       if (result.success && result.data) {
         const account = result.data.account;
-        if (!account) return { success: false };
+        if (!account) return { success: false, message: "帳號不存在" };
 
         if (typeof window !== "undefined") {
           sessionStorage.setItem(storageKey, JSON.stringify(result.data));
         }
         setAuth(result.data);
         return { success: true, account };
+      } else {
+        return { success: false, message: "登入失敗，請檢查帳號或密碼" };
       }
     } catch (ex) {
       console.error("Login error:", ex);
+      return { success: false, message: "伺服器錯誤，請稍後再試" };
     }
-    return { success: false };
   };
 
   const logout = () => {

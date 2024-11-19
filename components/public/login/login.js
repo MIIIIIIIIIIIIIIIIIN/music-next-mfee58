@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import axios from "axios";
 import styles from "./login.module.css";
 import MemIcons from "@/components/member/mem-icons";
-
-axios.defaults.withCredentials = true;
+import { useAuth } from "@/Context/auth-context";
+import { useRouter } from "next/router"; // 引入 useRouter
 
 const Login = () => {
+  const { login } = useAuth();
+  const router = useRouter(); // 初始化 router
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -13,34 +14,36 @@ const Login = () => {
   const [showSuccess, setShowSuccess] = useState(false);
 
   // 通用的登入函數
-  const handleLogin = async (e, loginEmail = email, loginPassword = password) => {
+  const handleLogin = async (e) => {
     if (e) e.preventDefault();
 
-    try {
-      const response = await axios.post("http://localhost:3005/member/login", {
-        email: loginEmail,
-        password: loginPassword,
-      });
+    const { success, account } = await login(email, password);
 
-      if (response.data.success) {
-        setShowSuccess(true); // 登入成功時顯示提示框
-        setTimeout(() => {
-          window.location.href = "/member-blog";
-        }, 2000); // 延遲兩秒後跳轉頁面
-      } else {
-        setErrorMessage(response.data.error);
-      }
-    } catch (error) {
+    if (success && account) {
+      setShowSuccess(true);
+      setTimeout(() => {
+        router.replace(`/member/blog/${account}`); // 使用 router.replace 避免刷新
+      }, 2000);
+    } else {
       setErrorMessage("登入失敗");
-      console.error("Login error:", error);
     }
   };
 
-  // 快速登入的功能，使用測試帳號和密碼
-  const quickLogin = () => {
+  const quickLogin = async (e) => {
+    if (e) e.preventDefault();
     setEmail("test001");
     setPassword("tt001");
-    handleLogin(null, "test001", "tt001");
+
+    const { success, account } = await login("test001", "tt001");
+
+    if (success && account) {
+      setShowSuccess(true);
+      setTimeout(() => {
+        router.replace(`/member/blog/${account}`); // 使用 router.replace 避免刷新
+      }, 2000);
+    } else {
+      setErrorMessage("快速登入失敗");
+    }
   };
 
   return (
@@ -80,29 +83,38 @@ const Login = () => {
               className={styles.eyeIcon}
               onClick={() => setShowPassword(!showPassword)}
             >
-              <MemIcons iconName={showPassword ? "icons-eye-off" : "icons-eye"} size="medium" />
+              <MemIcons
+                iconName={showPassword ? "icons-eye-off" : "icons-eye"}
+                size="medium"
+              />
             </span>
           </div>
           {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
           <button type="submit" className={styles.loginButton}>
             登入
           </button>
-          
         </form>
-        
-
 
         <div className={styles.links}>
-          <a href="./register" className={styles.createAccount}>
+          <p
+            onClick={() => router.push("/register")}
+            className={styles.createAccount}
+            style={{ cursor: "pointer" }}
+          >
             建立帳號
-          </a>
+          </p>
           <br />
-          <a href="/" className={styles.createAccount}>
+          <div
+            onClick={() => router.push("/")}
+            className={styles.createAccount}
+            style={{ cursor: "pointer" }}
+          >
             <MemIcons iconName="icons-home" size="medium" />
-          </a>
+          </div>
         </div>
-                {/* 快速登入按鈕 */}
-                <button onClick={quickLogin} className={styles.quickLoginButton}>
+
+        {/* 快速登入按鈕 */}
+        <button onClick={quickLogin} className={styles.quickLoginButton}>
           快速登入
         </button>
       </div>

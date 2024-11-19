@@ -22,7 +22,7 @@ const Dropdown = ({ type }) => {
             <option value="">請選擇</option>
             <option value="male">男</option>
             <option value="female">女</option>
-            <option value="other">其他</option>
+            <option value="other">不透露</option>
           </>
         ) : (
           <>

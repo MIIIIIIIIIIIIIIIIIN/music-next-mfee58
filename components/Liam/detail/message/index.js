@@ -8,8 +8,13 @@ import {
 } from "lucide-react";
 import styles from "./message.module.css";
 
+import { useAuth } from "@/Context/auth-context"; // 使用 useAuth
+import axios from "axios";
+
 const CommentItem = () => {
   const router = useRouter();
+  const { auth } = useAuth(); // 獲取 auth 內容
+
   const [comments, setComments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -75,43 +80,53 @@ const CommentItem = () => {
     };
 
     const fetchMemberData = async () => {
+      if (!auth.id) return;
+      
       try {
-        // 獲取當前用戶ID
-        const userResponse = await fetch("http://localhost:3005/mem-data", {
-          credentials: "include",
-        });
-        if (!userResponse.ok) {
-          throw new Error("Failed to fetch member data");
+        // 獲取當前用戶ID - 使用 axios
+        const response = await axios.get(
+          `http://localhost:3005/member/mem-data/by-id/${auth.id}`,
+          { withCredentials: true }
+        );
+        
+        // axios 直接返回數據在 response.data 中
+        const userData = response.data;
+        console.log('User Data:', userData);
+        
+        if (userData?.memberData?.m_member_id) {
+          setCurrentEditId(userData.memberData.m_member_id);
         }
-        const userData = await userResponse.json();
-        if (userData.admin?.id) {
-          setCurrentEditId(userData.admin.id);
-        }
-
-        // 獲取所有會員資料
-        const memberResponse = await fetch("http://localhost:3005/fundraiser/member", {
-          credentials: "include",
-        });
-        const memberData = await memberResponse.json();
-        console.log(memberData);
-
+    
+        // 獲取所有會員資料 - 也改用 axios 保持一致
+        const memberResponse = await axios.get(
+          "http://localhost:3005/fundraiser/member",
+          { withCredentials: true }
+        );
+        
+        const memberData = memberResponse.data;
+        console.log('Member Data:', memberData);
+    
         // 將會員資料轉換為以 id 為 key 的物件
         const memberMap = {};
-        memberData.rows.forEach(member => {
-          memberMap[member.m_member_id] = member;
-        });
-        // console.log(memberMap);
+        if (memberData.rows) {
+          memberData.rows.forEach(member => {
+            memberMap[member.m_member_id] = member;
+          });
+        }
         
         setMemberData(memberMap);
-
-
+    
       } catch (error) {
         console.error("Fetch error:", error);
+        if (axios.isAxiosError(error)) {
+          // 處理 Axios 特定的錯誤
+          console.error('Axios Error:', error.response?.data || error.message);
+        }
         setCurrentEditId(null);
       }
     };
     
-    
+    // 調用函數
     fetchMemberData();
     fetchMessages();
   }, [router.isReady]);
