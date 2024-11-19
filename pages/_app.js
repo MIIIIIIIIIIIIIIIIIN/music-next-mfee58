@@ -3,12 +3,9 @@ import "@/styles/styleguide.css";
 import { AuthContextProvider } from "@/Context/auth-context";
 
 export default function App({ Component, pageProps }) {
-    return(
+  return (
     <AuthContextProvider>
       <Component {...pageProps} />
     </AuthContextProvider>
   );
 }
-
-
-
