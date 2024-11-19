@@ -11,6 +11,7 @@ import Mp3Uploader from "@/components/public/mp3-uploader";
 import { useAuth } from "@/Context/auth-context";
 import { useRouter } from "next/router";
 
+import OrderList from "@/components/Liam/order-detail";
 const MemWeb2 = () => {
   const infoRef = useRef(null);
   const accRef = useRef(null);
@@ -58,6 +59,7 @@ const MemWeb2 = () => {
             <div ref={favRef}>
               {/* <MemberFav />
               <MemberFavTest /> */}
+              <OrderList></OrderList>
             </div>
             
             {/* <div ref={uploaderRef}>

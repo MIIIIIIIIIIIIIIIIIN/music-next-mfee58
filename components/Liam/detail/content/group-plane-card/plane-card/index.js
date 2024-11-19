@@ -16,7 +16,7 @@ const PlaneCard = ({
 }) => {
   
   const handleSelect = () => {
-    console.log('1234'+member);
+
     
     if (!member ) {
       alert('請先登入會員才能進行贊助！');

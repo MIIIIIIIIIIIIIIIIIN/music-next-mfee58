@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { ChevronDown, ChevronUp, ShoppingCart, ArrowLeft } from "lucide-react";
 import styles from "./product-selector.module.css";
+import { useAuth } from "@/Context/auth-context"; // 使用 useAuth
 import { useTab } from "../detail/top/tab-Context";
 
 const INITIAL_ALBUM_INFO = {
@@ -36,6 +37,8 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane, h
   const [quantities, setQuantities] = useState({});
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [showFaqs, setShowFaqs] = useState(false);
+  const { member } = useTab();
+
 
   // 初始化商品資料
   useEffect(() => {
@@ -75,7 +78,10 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane, h
       const currentQuantity = prev[productId] || 0;
       const newQuantity = Math.max(0, currentQuantity + change);
       console.log(`商品 ${productId} 數量更新:`, newQuantity);
+      console.log(member.m_member_id);
+      
       return { ...prev, [productId]: newQuantity };
+
     });
   };
 
@@ -148,24 +154,193 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane, h
     setShowCart(true);
   };
 
+
   // 處理結帳
-  const handlePayment = () => {
+// const handlePayment = async () => {
+//   try {
+//     // 準備結帳商品資訊
+//     const paymentProducts = cartItems.map(item => ({
+//       productName: item.name,
+//       quantity: item.quantity,
+//       price: item.price,
+//       planId: item.id,
+//       projectList: plane.find(p => p.f_plan_id === item.id)?.f_project_list
+//     }));
+
+//     // 更新購買人數的函數
+//     const updatePlanPeople = async (planId, projectList, quantity) => {
+//       try {
+//         const response = await fetch('http://localhost:3005/fundraiser/api/updatePlanPeople', {
+//           method: 'POST',
+//           headers: {
+//             'Content-Type': 'application/json',
+//           },
+//           body: JSON.stringify({
+//             f_plan_id: planId,
+//             f_project_list: projectList,
+//             increment: quantity
+//           })
+//         });
+
+//         if (!response.ok) {
+//           throw new Error('Failed to update plan people');
+//         }
+
+//         const result = await response.json();
+//         console.log('Successfully updated plan people:', result);
+//       } catch (error) {
+//         console.error('Error updating plan people:', error);
+//         throw error;
+//       }
+//     };
+
+//     // 遍歷所有購買商品並更新購買人數
+//     for (const product of paymentProducts) {
+//       if (product.planId && product.projectList) {
+//         await updatePlanPeople(
+//           product.planId,
+//           product.projectList,
+//           product.quantity
+//         );
+//       }
+//     }
+
+//     // 編碼商品資訊並導向支付頁面
+//     const productsParam = encodeURIComponent(JSON.stringify(paymentProducts));
+    
+//     router.push({
+//       pathname: 'http://localhost:3001/payment',
+//       query: { products: productsParam }
+//     });
+
+//   } catch (error) {
+//     console.error('Payment process error:', error);
+//     // 這裡可以加入錯誤處理的提示
+//     alert('處理付款時發生錯誤，請稍後再試');
+//   }
+// };
+
+const handlePayment = async () => {
+  try {
+    // 準備結帳商品資訊
     const paymentProducts = cartItems.map(item => ({
       productName: item.name,
-      quantity: item.quantity,
-      price: item.price
+      quantity: parseInt(item.quantity),
+      price: parseInt(item.price),
+      planId: item.id,
+      projectList: plane.find(p => p.f_plan_id === item.id)?.f_project_list
     }));
 
-    console.log("結帳商品資訊:", paymentProducts);
-    
-    const productsParam = encodeURIComponent(JSON.stringify(paymentProducts));
-    
-    router.push({
-      pathname: 'http://localhost:3001/payment',
-      query: { products: productsParam }
-    });
-  };
+    // 計算總金額
+    const totalAmount = paymentProducts.reduce(
+      (sum, item) => sum + (item.quantity * item.price), 
+      0
+    );
 
+    // 創建訂單
+    const createOrder = async () => {
+      try {
+        const response = await fetch('http://localhost:3005/fundraiser/api/orders', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            memberId: member.m_member_id,
+            products: paymentProducts
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to create order');
+        }
+
+        const result = await response.json();
+        return result.data.orderId;
+      } catch (error) {
+        console.error('Error creating order:', error);
+        throw error;
+      }
+    };
+
+    // 建立訂單
+    const orderId = await createOrder();
+
+    // 初始化 LINE Pay 支付
+    try {
+      const linePayResponse = await fetch('http://localhost:3001/line-pay/payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderId: orderId,
+          products: paymentProducts,
+          totalAmount: totalAmount
+        })
+      });
+
+      if (!linePayResponse.ok) {
+        throw new Error('LINE Pay initialization failed');
+      }
+
+      const linePayData = await linePayResponse.json();
+      
+      // 導向到 LINE Pay 支付頁面
+      if (linePayData.paymentUrl) {
+        window.location.href = linePayData.paymentUrl;
+      } else {
+        throw new Error('沒有收到 LINE Pay 支付連結');
+      }
+
+    } catch (error) {
+      console.error('Error initializing LINE Pay:', error);
+      throw error;
+    }
+
+    // 更新購買人數
+    for (const product of paymentProducts) {
+      if (product.planId && product.projectList) {
+        await updatePlanPeople(
+          product.planId,
+          product.projectList,
+          product.quantity
+        );
+      }
+    }
+
+  } catch (error) {
+    console.error('Payment process error:', error);
+    alert(error.message || '處理付款時發生錯誤，請稍後再試');
+  }
+};
+
+// 輔助函數：更新購買人數
+const updatePlanPeople = async (planId, projectList, quantity) => {
+  try {
+    const response = await fetch('http://localhost:3005/fundraiser/api/updatePlanPeople', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        f_plan_id: planId,
+        f_project_list: projectList,
+        increment: quantity
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update plan people');
+    }
+
+    const result = await response.json();
+    console.log('Successfully updated plan people:', result);
+  } catch (error) {
+    console.error('Error updating plan people:', error);
+    throw error;
+  }
+};
   // 渲染商品項目
   const renderProductItem = (product) => (
     <div key={product.id} className={styles.productItem}>
@@ -221,7 +396,7 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane, h
         <div className={styles.cartHeader}>
           <button
             onClick={() => setShowCart(false)}
-            className={styles.backButton}
+            className={styles.back}
           >
             <ArrowLeft size={20} />
             返回
@@ -338,8 +513,9 @@ export const ProductSelector = ({ selectedPlan, setShowProductSelector, plane, h
             <div className={styles.divider}>
               <button
                 className={styles.cartButton}
+                // onClick={handleCartButtonClick}
                 onClick={handleCartButtonClick}
-                // onClick={handleAddtoCart}
+              
                 disabled={!hasItems}
               >
                 <ShoppingCart size={20} />

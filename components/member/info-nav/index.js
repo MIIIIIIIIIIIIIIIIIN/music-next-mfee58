@@ -9,7 +9,7 @@ const InfoNav = ({ onScrollToInfo, onScrollToAcc, onScrollToPassword, onScrollTo
         <h5 className={styles["body-text"]} onClick={onScrollToInfo}>基本資料</h5>
         <h5 className={styles["body-text"]} onClick={onScrollToAcc}>帳號設定</h5>
         <h5 className={styles["body-text"]} onClick={onScrollToPassword}>變更密碼</h5>
-        <h5 className={styles["body-text"]} onClick={onScrollToFav}>收藏名單</h5>
+        <h5 className={styles["body-text"]} onClick={onScrollToFav}>訂單查詢</h5>
         {/* <h5 className={styles["body-text"]} onClick={onScrollToUploader}>上傳作品</h5> */}
       </div>
     </div>
