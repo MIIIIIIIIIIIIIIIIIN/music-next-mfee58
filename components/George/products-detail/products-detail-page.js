@@ -20,7 +20,7 @@ export default function ProductsDetailPage({
 }) {
   const { memAuth } = useFetchDB();
   const { handleAddtoCart, showAlert } = useCartDetail();
-  const { quantity } = useQuantity();
+  const { quantity, warningText } = useQuantity();
 
   const handleClick = () => {
     "";
