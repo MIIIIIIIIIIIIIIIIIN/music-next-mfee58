@@ -3,7 +3,7 @@ import styles from "./stream-frame.module.css";
 import ViewerCount from "@/components/public/icons/viewer_count";
 
 const LiveStream = ({
-  videoId = "uTMc48XmjrA",
+  videoId = "M5OgbCKSQ8M",
   streamerName = "DefaultStreamer",
 }) => {
   const [streamData, setStreamData] = useState({
