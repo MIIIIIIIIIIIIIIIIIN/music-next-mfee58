@@ -92,6 +92,10 @@
   margin-right: 10px;
 }
 
+.warningText{
+  color: red;
+}
+
 .alert {
   position: fixed;
   bottom: 20px;

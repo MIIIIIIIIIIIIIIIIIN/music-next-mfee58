@@ -127,7 +127,7 @@ export default function ProductsCart({ mdBox, listData }) {
                                   />
                                 </div>
                                 <div className={style.checkoutprice}>
-                                  ${album.p_albums_price}
+                                  ${album.p_albums_price * v.p_cart_quantity}
                                 </div>
                               </div>
                             </div>

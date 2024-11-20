@@ -13,8 +13,6 @@ export const Quantity = () => {
     setDeIsPressed,
   } = useQuantity();
 
-
-
   return (
     <>
       <div className={style["quantity"]}>
