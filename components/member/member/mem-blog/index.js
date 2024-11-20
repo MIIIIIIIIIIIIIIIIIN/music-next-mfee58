@@ -53,13 +53,13 @@ const MemberBlog = () => {
         {/* <Nav className={styles["nav"]} /> */}
         <Nav />
         {/* 設定圖標，放置在右上角 */}
-        <a href="/Jade/member-center">
+        <Link href="/Jade/member-center">
           <img
             src="/icons/icon-setting.svg"
             alt="設定"
             className={styles["settingIcon"]}
           />
-        </a>
+        </Link>
 
         <div className={styles["container"]}>
           <div className={styles["leftContent"]}>

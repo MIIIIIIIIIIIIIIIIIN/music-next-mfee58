@@ -15,8 +15,6 @@ import ButtonToggleM from "@/components/member/button-show";
 import InfoNav from "@/components/member/info-nav-liam";
 import MemIcons from "@/components/member/mem-icons";
 
-// import styles from "../styles/Home.module.css";
-
 export default function Home() {
   const goToHome = () => {
     window.location.href = "http://localhost:3000";
@@ -44,13 +42,13 @@ export default function Home() {
         <br />
         <br />
         <h2>ButtonToggleM</h2>
-        <span>size="small"</span>
+        <span>size=&quot;small&quot;</span>
         <ButtonToggleM size="small" />
         <br />
-        <span>size="medium"</span>
+        <span>size=&quot;medium&quot;</span>
         <ButtonToggleM size="medium" />
         <br />
-        <span>size="large"</span>
+        <span>size=&quot;large&quot;</span>
         <ButtonToggleM size="large" />
         <br />
         <hr />
@@ -92,27 +90,27 @@ export default function Home() {
         <br />
         <hr />
         <h2>Form Input</h2>
-        <span> FormInput size="small"</span>
+        <span> FormInput size=&quot;small&quot;</span>
         <FormInput size="small" />
         <br />
         <br />
-        <span> FormInput size="medium"</span>
+        <span> FormInput size=&quot;medium&quot;</span>
         <FormInput size="medium" />
         <br />
         <br />
-        <span> FormInput size="large"</span>
+        <span> FormInput size=&quot;large&quot;</span>
         <FormInput size="large" />
         <br />
         <br />
         <hr />
         <h2>Form Input M</h2>
-        <h5>size="small w120</h5>
+        <h5>size=&quot;small w120&quot;</h5>
         <FormInputM size="small" />
         <br />
-        <h5>size="medium w200</h5>
+        <h5>size=&quot;medium w200&quot;</h5>
         <FormInputM size="medium" />
         <br />
-        <h5>size="large w300</h5>
+        <h5>size=&quot;large w300&quot;</h5>
         <FormInputM size="large" />
         <br />
         <br />
@@ -121,13 +119,13 @@ export default function Home() {
         <span>Default</span>
         <PasswordInput />
         <br />
-        <span>size="small"</span>
+        <span>size=&quot;small&quot;</span>
         <PasswordInput size="small" />
         <br />
-        <span>size="medium"</span>
+        <span>size=&quot;medium&quot;</span>
         <PasswordInput size="medium" />
         <br />
-        <span>size="large"</span>
+        <span>size=&quot;large&quot;</span>
         <PasswordInput size="large"/>
         <br />
         <hr />
@@ -149,15 +147,7 @@ export default function Home() {
         <br />
         <br />
         <FormInputM />
-        {/*
-        <br />
-        <br />
-        <hr />
-        <h2>user icon</h2> */}
         <UserIcon />
-        {/* <button className={styles.backToHomeButton} onClick={goToHome}>
-          回到首頁
-        </button> */}
       </div>
     </>
   );
