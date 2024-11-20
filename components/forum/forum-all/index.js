@@ -146,7 +146,7 @@ const ForumPost = ({
                   onClick={() => setShowShareMenu(!showShareMenu)}
                 >
                   <Share2 size={18} />
-                  <span className={styles.buttonCount}>{shares}</span>
+                  {/* <span className={styles.buttonCount}>{shares}</span> */}
                 </button>
 
                 {showShareMenu && (
