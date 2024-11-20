@@ -228,7 +228,7 @@ export default function ProductsCheckout(props) {
 
   const handlePayment = () => {
     const paymentProducts = parsedToOrder.map((item) => ({
-      productName: "item.name",
+      productName: item.name,
       quantity: item.p_cart_quantity,
       price: Math.floor(item.p_cart_price),
     }));
