@@ -32,6 +32,7 @@ export default function ProductsGenres() {
   const [searchStatus, setSearchStatus] = useState(false);
   const [playerFixed, setPlayerFixed] = useState(false);
   const [albumUrl, setAlbumUrl] = useState(0);
+  const [selectedGenres, setSelectedGenres] = useState(null)
 
   const handleLoadMore = () => {
     setVisibleItems(visibleItems + 8);
@@ -43,10 +44,12 @@ export default function ProductsGenres() {
   };
 
   const handleCategoryClick = async (genres) => {
+    console.log("genres: ", genres);
     setLoading(true);
     setKeyWord([]);
     setSearchStatus(false);
     setVisibleItems(8);
+    setSelectedGenres(genres)
     try {
       // console.log("Sending genres:", genres);
       const response = await axios.post(
@@ -71,7 +74,7 @@ export default function ProductsGenres() {
   const handleSearchClick = async () => {
     setLoading(true);
     setVisibleItems(8);
-
+    setSelectedGenres("全部")
     try {
       console.log("Sending keyword: ", searchTerm);
       const response = await axios.get(
@@ -174,7 +177,9 @@ export default function ProductsGenres() {
               return (
                 <button
                   key={i}
-                  className={styles.genresBts}
+                  className={`${styles.genresBts} ${
+                  selectedGenres === v.p_genres_name ? styles.genresBtsClicked : ""
+                }`}
                   onClick={() => {
                     handleCategoryClick(v.p_genres_name);
                   }}

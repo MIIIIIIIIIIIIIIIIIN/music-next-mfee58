@@ -40,6 +40,17 @@ export default function ProductsCheckout(props) {
     setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
+  // 填入資料
+  const handleFillField = () => {
+    setFormData({
+      name: "熊仔",
+      phone: "0912345678",
+      email: "shuan@gmail.com",
+      address: "台北市大安區快樂路123號3樓",
+      payment: "Link Pay",
+    })
+  }
+
   //訂編生一個
   const generateOrderNumbers = () => {
     const random = Math.floor(10000000 + Math.random() * 90000000);
@@ -329,7 +340,7 @@ export default function ProductsCheckout(props) {
                   <ul className={style.checkoutdirectory}>
                     <li>${parseInt(v.p_cart_price)}</li>
                     <li>{v.p_cart_quantity}</li>
-                    <li>${v.p_cart_price * v.p_cart_quantity}</li>
+                    <li>${(v.p_cart_price * v.p_cart_quantity).toLocaleString()}</li>
                   </ul>
                 </div>
               </div>
@@ -346,23 +357,23 @@ export default function ProductsCheckout(props) {
               <div className={style.paymentleftside}>
                 <div className={style.payaddresstitle}>選擇地址及付款方式</div>
                 <div className={style.PandAdirectory}>
-                  <ul className={style.padirectory}>
-                    <li>收件姓名</li>
-                    <li>聯絡電話</li>
-                    <li>電子郵件</li>
-                    <li>送貨方式</li>
-                    <li>填入地址</li>
-                    <li>付款方式</li>
+                  <ul className={style.padirectory01}>
+                    <li className={style.item} onClick={handleFillField}>收件姓名</li>
+                    <li className={style.item}>聯絡電話</li>
+                    <li className={style.item}>電子郵件</li>
+                    <li className={style.item}>送貨方式</li>
+                    <li className={style.item}>填入地址</li>
+                    <li className={style.item}>付款方式</li>
                   </ul>
                   <ul className={style.padirectory}>
-                    <li>
+                    <li className={style.inputGroup}>
                       <input
                         type="text"
                         name="name"
                         placeholder="請填入中文姓名"
                         value={formData.name}
                         onChange={handleChange}
-                        className={errors.name ? style.redname : ""}
+                        className={errors.name ? style.redname : style.texts}
                       />
                       {errors.name && (
                         <span className={`${style.error} ${style.errorname}`}>
@@ -370,14 +381,14 @@ export default function ProductsCheckout(props) {
                         </span>
                       )}
                     </li>
-                    <li>
+                    <li className={style.inputGroup}>
                       <input
                         type="text"
                         name="phone"
                         placeholder="請輸入連絡電話"
                         value={formData.phone}
                         onChange={handleChange}
-                        className={errors.phone ? style.redphone : ""}
+                        className={errors.phone ? style.redphone : style.texts}
                       />
                       {errors.phone && (
                         <span className={`${style.error} ${style.errorphone}`}>
@@ -385,14 +396,14 @@ export default function ProductsCheckout(props) {
                         </span>
                       )}
                     </li>
-                    <li>
+                    <li className={style.inputGroup}>
                       <input
                         type="text"
                         name="email"
                         placeholder="請輸入電子郵件"
                         value={formData.email}
                         onChange={handleChange}
-                        className={errors.email ? style.redemail : ""}
+                        className={errors.email ? style.redemail : style.texts}
                       />
                       {errors.email && (
                         <span className={`${style.error} ${style.erroremail}`}>
@@ -400,15 +411,15 @@ export default function ProductsCheckout(props) {
                         </span>
                       )}
                     </li>
-                    <li>宅配</li>
-                    <li>
+                    <li className={style.inputGroup}>宅配</li>
+                    <li className={style.inputGroup}>
                       <input
                         type="text"
                         name="address"
                         placeholder="請輸入地址"
                         value={formData.address}
                         onChange={handleChange}
-                        className={errors.address ? style.redaddress : ""}
+                        className={errors.address ? style.redaddress : style.texts}
                       />
                       {errors.address && (
                         <span
@@ -423,6 +434,7 @@ export default function ProductsCheckout(props) {
                         name="payment"
                         value={formData.payment}
                         onChange={handleChange}
+                        className={style.inputGroup}
                       >
                         <option value="" disabled selected>
                           請選擇
@@ -450,7 +462,7 @@ export default function ProductsCheckout(props) {
                       <li>運費</li>
                     </ul>
                     <ul className={style.finalcheckdirectory}>
-                      <li>${totalAmount}</li>
+                      <li>${(totalAmount).toLocaleString()}</li>
                       <li>$80</li>
                     </ul>
                   </div>
@@ -460,7 +472,7 @@ export default function ProductsCheckout(props) {
                   <div className={style.finaltotalbox}>
                     <div className={style.finaltotal}>
                       <div>合計</div>
-                      <div>${totalAmount + 80}</div>
+                      <div>${(totalAmount + 80).toLocaleString()}</div>
                     </div>
                     {/* <Link
                       href={

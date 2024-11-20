@@ -21,6 +21,7 @@ export default function ProductsCart({ mdBox, listData }) {
     cancelDelete,
     handleDeleteClick,
     toOrder,
+    calculateTotalQuantity,
   } = useCartDetail();
 
   const [isAllSelected, setIsAllSelected] = useState(false);
@@ -127,7 +128,7 @@ export default function ProductsCart({ mdBox, listData }) {
                                   />
                                 </div>
                                 <div className={style.checkoutprice}>
-                                  ${album.p_albums_price * v.p_cart_quantity}
+                                  ${(album.p_albums_price * v.p_cart_quantity).toLocaleString()}
                                 </div>
                               </div>
                             </div>
@@ -144,7 +145,7 @@ export default function ProductsCart({ mdBox, listData }) {
           {/* total + checkout button */}
           <div className={style.totalandcheckoutbutton}>
             <div className={style.totalamount}>
-              總金額({selectedItems.length}件商品)：${calculateTotalAmount()}
+              總金額({calculateTotalQuantity()}件商品)：${(calculateTotalAmount()).toLocaleString()}
             </div>
 
             <Link
