@@ -10,13 +10,13 @@
   }
 /* items 2 */
 .itemContainer {
-  height: 27em;
+  height: auto;
   background-color: #f9f9f9;
- 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   margin: 15px;
   transition: transform 0.3s ease;
+  padding: 10px;
 }
 
 .itemContainer:hover {
@@ -38,6 +38,11 @@
 .itemDescription {
   font-size: 14px;
   padding: 0 20px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
 }
 .overlayContent {
   opacity: 0;
