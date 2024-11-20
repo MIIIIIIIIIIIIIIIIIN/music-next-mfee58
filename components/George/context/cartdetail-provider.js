@@ -59,6 +59,13 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
       );
   };
 
+  // 總數量計算
+  const calculateTotalQuantity = () => {
+    return cartItems
+      .filter((item) => selectedItems.includes(item.p_albums_id)) 
+      .reduce((total, item) => total + item.p_cart_quantity, 0);
+  };
+
   // 新增 & 修改數量(傳後端)
   const updateCartQuantityInDB = async (id, quantity) => {
     const item = cartItems.find((v) => v.p_albums_id === id);
@@ -226,6 +233,7 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
         cancelDelete,
         handleDeleteClick,
         toOrder,
+        calculateTotalQuantity,
       }}
     >
       {children}

@@ -81,25 +81,52 @@ const MemberBlog = () => {
 
             <div className={styles["rightContent"]}>
               <div className={styles["albumSec"]}>
-                <div className={styles["album"]}>
-                  <UserIcon />
-                </div>
-               
-                <div className={styles["album"]}>
-                  <UserIcon />
-                </div> <div className={styles["album"]}>
-                  <UserIcon />
-                </div> <div className={styles["album"]}>
-                  <UserIcon />
-                </div> <div className={styles["album"]}>
-                  <UserIcon />
-                </div>
-                <div className={styles["album"]}>
-                  <PlayButton size="large" />
-                </div>{" "}
-                <div className={styles["album"]}>
-                  <PlayButton size="large" />
-                </div>
+                <img
+                  src="/image/img-Jade/001album.jpg"
+                  alt="logo"
+                  className={styles["album"]}
+                />
+
+                <img
+                  src="/image/img-Jade/002album.jpg"
+                  alt="logo"
+                  className={styles["album"]}
+                />
+
+<img 
+                  
+                  src="/image/img-Jade/003album.jpg" 
+                  alt="logo"
+                  className={styles["album"]}
+                  />
+
+<img 
+                  
+                  src="/image/img-Jade/004album.jpg" 
+                  alt="logo"
+                  className={styles["album"]}
+                  />
+   
+
+   <img 
+                  
+                  src="/image/img-Jade/005album.jpg" 
+                  alt="logo"
+                  className={styles["album"]}
+                  />
+                    <img 
+                  
+                  src="/image/img-Jade/user004.jpg" 
+                  alt="logo"
+                  className={styles["album"]}
+                  />
+                                      <img 
+                  
+                  src="/image/img-Jade/user005.jpg" 
+                  alt="logo"
+                  className={styles["album"]}
+                  />
+                  
               </div>
             </div>
           </div>

@@ -68,8 +68,7 @@
 
 .filterButton.active {
   background: #14FF00;
-  color: white;
-  border-color: #14FF00;
+  color: rgb(0, 0, 0);
 }
 
 /* 活動篩選標籤 */
