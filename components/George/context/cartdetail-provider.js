@@ -89,7 +89,7 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
   const handleIncrement = (id) => {
     setCartItems((pre) =>
       pre.map((v) =>
-        v.p_albums_id === id
+        v.p_albums_id === id && v.p_cart_quantity < 10
           ? { ...v, p_cart_quantity: v.p_cart_quantity + 1 }
           : v
       )
