@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import styles from "./mem-blog.module.css";
 import Nav from "@/components/public/nav";
 import UserIcon from "@/components/public/user-icon";
-import BlogNav from "@/components/member/blog-nav/index2";
+import BlogNav from "@/components/member/blog-nav/index";
 import PlayButton from "@/components/public/play-button";
 import Link from "next/link";
 
