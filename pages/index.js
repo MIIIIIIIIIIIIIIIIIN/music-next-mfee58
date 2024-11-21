@@ -81,7 +81,7 @@ const Home = () => {
 
       <div className="content-container">
         <Section>
-          <Title num={1} text="每日推薦" />
+          <Title num={1} text="活動推薦" />
           <Carousel images={images} interval={2000} />
         </Section>
 

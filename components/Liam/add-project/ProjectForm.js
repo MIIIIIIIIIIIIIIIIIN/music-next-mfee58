@@ -72,7 +72,7 @@ const ReviewProgress = ({ onComplete }) => {
 };
 
 // 專案表單元件
-const ProjectForm = ({ onBack, onSubmit, currentStep ,handleFormData,formData}) => {
+const ProjectForm = ({ onBack, onSubmit, currentStep ,handleFormData,formData,setFormData}) => {
  
   const [videoPreview, setVideoPreview] = useState("");
   const [imagePreview, setImagePreview] = useState("");
@@ -475,12 +475,14 @@ const ProjectSystem = ({setShowModal,member}) => {
           currentStep={currentStep}
           handleFormData={handleFormData}
           formData={formData}
+          setFormData={setFormData}
         />
       )}
 
-      {currentView === "review" && <ReviewProgress onComplete={handleReviewComplete} />}
+         
+      {currentView === "review" && <ReviewProgress onComplete={handleReviewComplete}   setFormData={setFormData}/>}
 
-      {currentView === "success" && <SuccessPage onReturn={handleReturnToMain} handleClose={handleClose} />}
+      {currentView === "success" && <SuccessPage onReturn={handleReturnToMain} handleClose={handleClose}  setFormData={setFormData}/>}
     </div>
   );
 };
