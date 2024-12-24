@@ -5,7 +5,7 @@ import Mall from "../checklist/mall";
 import Logo from "../../logo";
 import styles from "./nav.module.css";
 import { useRouter } from "next/router";
-import { useAuth } from "@/Context/auth-context";
+import { useAuth } from "@/Context/auth-context"; // 引入 useAuth
 
 export default function NavDesktop() {
   const router = useRouter();

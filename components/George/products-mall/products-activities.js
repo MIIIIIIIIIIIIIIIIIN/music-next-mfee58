@@ -6,6 +6,9 @@ import useFetchDB from "../hooks/usefetchDB";
 export default function ProductsActivities({ accessToken }) {
   const { listData, albumsimg, genres } = useFetchDB();
 
+  useEffect(()=>{
+    console.log("This is listData: ", listData)
+  }, [listData])
   return (
     <>
       <div className={style.container}>

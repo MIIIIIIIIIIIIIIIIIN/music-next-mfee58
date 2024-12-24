@@ -1,36 +1,46 @@
+import Link from "next/link";
+
+
 export default function MallList() {
   return (
     <>
       <div className="container display">
         <div className="triangle"></div>
         <ul>
+        <li className="item">
+            <Link href="/George/product">
+            <div className="info">
+              <p>Mall</p>
+            </div>
+            </Link>
+          </li>
           <li className="item">
-            <a href="/George/category">
+            <Link href="/George/category">
             <div className="info">
               <p>Pop</p>
             </div>
-            </a>
+            </Link>
           </li>
           <li className="item">
-            <a href="#">
+            <Link href="#">
             <div className="info">
               <p>Rock</p>
             </div>
-            </a>
+            </Link>
           </li>
           <li className="item">
-            <a href="#">
+            <Link href="#">
             <div className="info">
               <p>Blue</p>
             </div>
-            </a>
+            </Link>
           </li>
           <li className="item">
-            <a href="#">
+            <Link href="#">
             <div className="info">
               <p>Soul</p>
             </div>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

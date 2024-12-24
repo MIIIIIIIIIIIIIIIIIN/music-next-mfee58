@@ -6,7 +6,6 @@ import { CartProvider, useCartDetail } from "../context/cartdetail-provider";
 import Link from "next/link";
 import axios from "axios";
 import ConfirmModal from "../george-components/confirm-modal/confirm-modal";
-import { useTab } from "@/components/Liam/detail/top/tab-Context";
 
 export default function ProductsCart({ mdBox, listData }) {
   const {
@@ -22,10 +21,10 @@ export default function ProductsCart({ mdBox, listData }) {
     cancelDelete,
     handleDeleteClick,
     toOrder,
+    calculateTotalQuantity,
   } = useCartDetail();
 
   const [isAllSelected, setIsAllSelected] = useState(false);
-
   const handleSelectAll = () => {
     const newSelectAllState = !isAllSelected;
     setIsAllSelected(newSelectAllState);
@@ -41,11 +40,6 @@ export default function ProductsCart({ mdBox, listData }) {
   }, [cartItems, selectedItems]);
 
   const handleClick = () => {};
-
-  // useEffect(() => {
-  //   console.log("cartItems 長怎樣: ", cartItems);
-  // }, [cartItems]);
-
 
   return (
     <>
@@ -102,13 +96,15 @@ export default function ProductsCart({ mdBox, listData }) {
                         />
                       </div>
                     </div>
-  
                     {Array.isArray(listData.rows) &&
                       listData.rows
                         .filter((id) => v.p_albums_id === id.p_albums_id)
                         .map((album, index) => {
                           return (
-                            <div className={style.checkoutdescriptions} key={index}>
+                            <div
+                              className={style.checkoutdescriptions}
+                              key={index}
+                            >
                               <div className={style.mobilecontroller}>
                                 <h4 className={style.descriptionstitle}>
                                   {album.p_albums_title}
@@ -129,7 +125,7 @@ export default function ProductsCart({ mdBox, listData }) {
                                   />
                                 </div>
                                 <div className={style.checkoutprice}>
-                                  ${album.p_albums_price}
+                                  ${(album.p_albums_price * v.p_cart_quantity).toLocaleString()}
                                 </div>
                               </div>
                             </div>
@@ -146,9 +142,8 @@ export default function ProductsCart({ mdBox, listData }) {
           {/* total + checkout button */}
           <div className={style.totalandcheckoutbutton}>
             <div className={style.totalamount}>
-              總金額({selectedItems.length}件商品)：${calculateTotalAmount()}
+              總金額({calculateTotalQuantity()}件商品)：${(calculateTotalAmount()).toLocaleString()}
             </div>
-  
             <Link
               href={{
                 pathname: "/George/cart/products-checkout-page",

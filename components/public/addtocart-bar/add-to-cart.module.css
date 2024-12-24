@@ -125,3 +125,9 @@
   transition: all 0.3s ease;
   transform: rotate(-20deg);
 }
+
+@media (max-width: 375px) {
+  .cart-icon-container{
+    display: none;
+  }
+}

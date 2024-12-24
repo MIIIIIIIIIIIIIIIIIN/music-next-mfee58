@@ -50,7 +50,7 @@ const Section = ({ children }) => {
 
 const Home = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const images = ["/01.jpg", "/02.jpg", "/03.jpg"];
+  const images = ["/01.webp", "/02.webp", "/03.webp"];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,7 +81,7 @@ const Home = () => {
 
       <div className="content-container">
         <Section>
-          <Title num={1} text="每日推薦" />
+          <Title num={1} text="活動推薦" />
           <Carousel images={images} interval={2000} />
         </Section>
 

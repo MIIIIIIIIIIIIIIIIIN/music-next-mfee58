@@ -1,31 +1,127 @@
-// components/Heart/index.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Heart as HeartIcon } from "lucide-react";
-import styles from "./hearts.module.css";
+import { useRouter } from "next/router";
+import { useAuth } from "@/Context/auth-context";
 
-const Heart = ({ size = 1, initialActive = false, onClick }) => {
-  const [isActive, setIsActive] = useState(initialActive);
+const styles = {
+  container: {
+    position: 'relative',
+    display: 'inline-flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  heart: {
+    transition: 'all 0.2s ease-in-out',
+  }
+};
 
-  const handleClick = () => {
-    setIsActive(!isActive);
-    if (onClick) {
-      onClick(!isActive);
+const Heart = ({ size = 1, onClick, albumUrl }) => {
+  const { auth } = useAuth();
+  const [isActive, setIsActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const { project } = router.query;
+
+  // 檢查收藏狀態
+  useEffect(() => {
+    let isMounted = true;
+    
+    const checkFavoriteStatus = async () => {
+      if (!albumUrl || !auth?.id) return;
+      
+      try {
+        setIsLoading(true);
+        
+        // 修正 API 路徑，移除 /api 前綴
+        const response = await fetch(
+          `http://localhost:3005/api/favorites/check/${albumUrl}/${auth.id}`,
+          {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error('檢查收藏狀態失敗');
+        }
+
+        const data = await response.json();
+        
+        if (isMounted && data.success) {
+          setIsActive(data.isFavorite);
+        }
+      } catch (error) {
+        console.error('Error checking favorite status:', error);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    checkFavoriteStatus();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [albumUrl, auth?.id]);
+
+  const handleClick = async () => {
+    if (!auth?.id) {
+      router.push('/member/login');
+      return;
+    }
+
+    if (!albumUrl || isLoading) return;
+
+    try {
+      setIsLoading(true);
+
+      const endpoint = isActive
+        ? `http://localhost:3005/api/favorites/remove/${albumUrl}/${auth.id}`
+        : `http://localhost:3005/api/favorites/add/${albumUrl}/${auth.id}`;
+
+      const response = await fetch(endpoint, {
+        method: isActive ? 'DELETE' : 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsActive(!isActive);
+        if (onClick) {
+          onClick(!isActive);
+        }
+      } else {
+        console.error('操作失敗:', data.error);
+      }
+    } catch (error) {
+      console.error('Error updating favorite:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const getHeartClass = () => {
-    const state = isActive ? "active" : "default";
-    return `${styles.heart} ${styles[`heart${size}-${state}`]} ${
-      isActive ? styles.active : ""
-    }`;
+  const heartStyle = {
+    ...styles.heart,
+    cursor: isLoading ? 'wait' : 'pointer',
+    opacity: isLoading ? 0.6 : 1,
+    transform: `scale(${size})`
   };
 
   return (
-    <div className={styles.heartContainer}>
+    <div style={styles.container}>
       <HeartIcon
-        className={getHeartClass()}
+        style={heartStyle}
         fill={isActive ? "#FF0000" : "none"}
-        onClick={handleClick}
+        onClick={!isLoading ? handleClick : undefined}
         stroke={isActive ? "#FF0000" : "#494949"}
       />
     </div>

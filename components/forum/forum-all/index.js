@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Masonry from "react-masonry-css";
 import { Clock, Flame, Flag } from "lucide-react";
 import styles from "./forum.module.css";
-import Heart from "@/components/public/hearts";
+import Heart from "@/components/public/heart";
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -146,7 +146,7 @@ const ForumPost = ({
                   onClick={() => setShowShareMenu(!showShareMenu)}
                 >
                   <Share2 size={18} />
-                  <span className={styles.buttonCount}>{shares}</span>
+                  {/* <span className={styles.buttonCount}>{shares}</span> */}
                 </button>
 
                 {showShareMenu && (

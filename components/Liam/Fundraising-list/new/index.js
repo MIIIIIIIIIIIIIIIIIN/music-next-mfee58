@@ -140,6 +140,11 @@ const ImageCarousel = () => {
     }
   };
 
+  
+useEffect(()=>{
+  console.log("圖片爹斯", projects)
+}, [projects])
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper} ref={containerRef}>

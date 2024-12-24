@@ -2,7 +2,8 @@
   background-color: aqua;
   height: 80vh;
   position: relative;
-  background-image: url('../../../../public/03.jpg');
+  background-size: cover;
+  /* background-image: url('../../../../public/03.jpg'); */
 }
 .title{
   background-color: #fff;

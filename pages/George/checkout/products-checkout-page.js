@@ -3,6 +3,7 @@ import FooterDeskTop from "@/components/George/george-components/footer/desktop"
 import FooterMobile from "@/components/George/george-components/footer/mobile";
 import Nav from "@/components/George/george-components/nav";
 import ProductsCheckout from "@/components/George/products-cart-checkout/products-checkout";
+import { CartProvider } from "@/components/George/context/cartdetail-provider";
 
 export default function ProductsCheckoutPage(props) {
   const [isMobile, setIsMobile] = useState(false);
@@ -35,9 +36,11 @@ export default function ProductsCheckoutPage(props) {
   return (
     <>
       <Nav />
-      <div className="video-container">
-        <ProductsCheckout /> {/* 圖卡及結帳頁面內容 */}
-      </div>
+      <CartProvider>
+        <div className="video-container">
+          <ProductsCheckout /> {/* 圖卡及結帳頁面內容 */}
+        </div>
+      </CartProvider>
       {isMobile ? <FooterMobile /> : <FooterDeskTop />}
     </>
   );

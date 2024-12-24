@@ -5,7 +5,7 @@ import styles from "./mem-blog.module.css";
 
 import Nav from "@/components/public/nav";
 import UserIcon from "@/components/public/user-icon";
-import BlogNav from "@/components/member/blog-nav";
+import BlogNav from "@/components/member/blog-nav/index";
 import PlayButton from "@/components/public/play-button";
 import Logout from "@/components/public/logout";
 import Link from "next/link";

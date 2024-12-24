@@ -2,16 +2,17 @@ import { createContext, useState, useContext } from "react";
 
 const QuantityContext = createContext();
 
-export const QuantityProvider = ({children}) => {
+export const QuantityProvider = ({ children }) => {
   const [quantity, setQuantity] = useState(1);
   const [plusIsPressed, setPlusIsPressed] = useState(false);
   const [deIsPressed, setDeIsPressed] = useState(false);
 
   const handleIncrement = () => {
-    if (quantity > 0) {
+    if (10 > quantity > 0) {
       setQuantity(quantity + 1);
     }
   };
+
   const handleDecrement = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
@@ -30,7 +31,7 @@ export const QuantityProvider = ({children}) => {
         setDeIsPressed,
       }}
     >
-    {children}
+      {children}
     </QuantityContext.Provider>
   );
 };

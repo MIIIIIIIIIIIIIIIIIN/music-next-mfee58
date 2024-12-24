@@ -135,15 +135,15 @@ export default function NavHome() {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                router.push("/George/products-page");
+                router.push("/George/product");
               }}
             >
               <div className={styles.top}></div>
               <div className={styles.bottom}>
                 <h6>商城</h6>
               </div>
-              {displayMall && <Mall />}
             </a>
+            {displayMall && <Mall />}
           </li>
 
           {/* 募資選項 */}

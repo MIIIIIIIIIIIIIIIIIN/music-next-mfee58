@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 export default function Fundraising() {
   return (
@@ -7,11 +8,11 @@ export default function Fundraising() {
         <div className='triangle'></div>
         <ul >
           <li className='item'>
-            <a href="/Liam/Categories">
+            <Link href="/Liam/Categories">
             <div className="info">
               <p>Pop</p>
             </div>
-            </a>
+            </Link>
           </li>
           <li className='item'>
 

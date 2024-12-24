@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from './feedback.module.css';
+import { useAuth } from "@/Context/auth-context"; // 使用 useAuth
+import axios from "axios";
 
 const PurchaseFeedback = ({ projectId, orderId }) => {
+  const { auth } = useAuth(); // 獲取 auth 內容
+
   const router = useRouter();
   const [showFeedback, setShowFeedback] = useState(false);
   const [member, setMember] = useState(null);

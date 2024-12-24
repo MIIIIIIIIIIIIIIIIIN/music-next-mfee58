@@ -11,6 +11,7 @@ import { FaArrowRight } from "react-icons/fa";
 import axios from "axios";
 import useFetchDB from "../hooks/usefetchDB";
 
+
 export default function ProductsGenres() {
   const { listData, albumsimg, genres } = useFetchDB();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,6 +31,8 @@ export default function ProductsGenres() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchStatus, setSearchStatus] = useState(false);
   const [playerFixed, setPlayerFixed] = useState(false);
+  const [albumUrl, setAlbumUrl] = useState(0);
+  const [selectedGenres, setSelectedGenres] = useState(null)
 
   const handleLoadMore = () => {
     setVisibleItems(visibleItems + 8);
@@ -41,10 +44,12 @@ export default function ProductsGenres() {
   };
 
   const handleCategoryClick = async (genres) => {
+    console.log("genres: ", genres);
     setLoading(true);
     setKeyWord([]);
     setSearchStatus(false);
     setVisibleItems(8);
+    setSelectedGenres(genres)
     try {
       // console.log("Sending genres:", genres);
       const response = await axios.post(
@@ -60,6 +65,7 @@ export default function ProductsGenres() {
     }
   };
 
+
   // search keywords
   const inputValue = (e) => {
     setSearchTerm(e.target.value);
@@ -68,13 +74,13 @@ export default function ProductsGenres() {
   const handleSearchClick = async () => {
     setLoading(true);
     setVisibleItems(8);
-
+    setSelectedGenres("全部")
     try {
       console.log("Sending keyword: ", searchTerm);
       const response = await axios.get(
         `http://localhost:3005/api/getKeyWord?keyword=${searchTerm}`
       );
-      // console.log("Recived Keyword: ", response.data);
+      console.log("Recived Keyword: ", response.data);
       setKeyWord(response.data);
     } catch (error) {
       console.error("Error fetching keywords: ", error);
@@ -93,10 +99,11 @@ export default function ProductsGenres() {
       (album) => albumId === album.p_albums_id
     );
     const imagesDes = imagesDescription.p_albums_description;
-
+    const urltodetail = imagesDescription.p_albums_id;
     // console.log(imagesDes);
     // console.log(albumId);
 
+    setAlbumUrl(urltodetail);
     setRightSidePic(imageFilenames);
     setRightPicsController(true);
     setRightVisibleController(true);
@@ -165,19 +172,22 @@ export default function ProductsGenres() {
           </button>
         </div>
         <div>
-          {genres && genres.map((v, i) => {
-            return (
-              <button
-                key={i}
-                className={styles.genresBts}
-                onClick={() => {
-                  handleCategoryClick(v.p_genres_name);
-                }}
-              >
-                {v.p_genres_name}
-              </button>
-            );
-          })}
+          {genres &&
+            genres.map((v, i) => {
+              return (
+                <button
+                  key={i}
+                  className={`${styles.genresBts} ${
+                  selectedGenres === v.p_genres_name ? styles.genresBtsClicked : ""
+                }`}
+                  onClick={() => {
+                    handleCategoryClick(v.p_genres_name);
+                  }}
+                >
+                  {v.p_genres_name}
+                </button>
+              );
+            })}
         </div>
       </div>
       {/* 分類詳細資料 */}
@@ -268,7 +278,9 @@ export default function ProductsGenres() {
                     </div>
                   </li>
                 ))
-              : listData && listData.rows && listData.rows.slice(0, visibleItems).map((album) => (
+              : listData &&
+                listData.rows &&
+                listData.rows.slice(0, visibleItems).map((album) => (
                   <li
                     key={album.p_albums_id}
                     className={
@@ -352,19 +364,22 @@ export default function ProductsGenres() {
                   <IoIosArrowForward />
                 </button>
               </div>
-              <Link href={"/George/products-detail"}>
+              <Link href={`/George/product/${albumUrl}`}>
                 <button className={styles.buttonBig}>
                   <p>前往專輯</p>
                 </button>
               </Link>
               <button className={styles.buttonBig}>
-                <p>我的最愛</p>
+                
+                  <Heart albumUrl={albumUrl} />
+                  我的最愛
+                
               </button>
               <div className={styles.albumsdes}>{}</div>
               <div className={styles.combo}>
-                <div className={styles.PlayButton}>
+                {/* <div className={styles.PlayButton}>
                   <PlayButton />
-                </div>
+                </div> */}
                 <div className={styles.rightDescription}>{rightDes}</div>
               </div>
             </div>

@@ -13,7 +13,7 @@ export default function GroupPlaneCard({handleAddtoCart, setPlanCartItems,planCa
   const { auth } = useAuth(); // 獲取 auth 內容
 
   const router = useRouter();
-  const {member, plane} = useTab()
+  const { member, plane } = useTab();
   const [showProductSelector, setShowProductSelector] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
   // const [plane, setPlane] = useState([]);
@@ -22,12 +22,10 @@ export default function GroupPlaneCard({handleAddtoCart, setPlanCartItems,planCa
   const handlePlanSelect = (planData) => {
     setSelectedPlan(plane);
     setShowProductSelector(true);
-
   };
-  useEffect(()=>{
-    console.log(member,plane);
-    
-  },[member,plane])
+  useEffect(() => {
+    console.log(member, plane);
+  }, [member, plane]);
   // useEffect(() => {
   //   const fetchPlane = async () => {
   //     try {
@@ -72,16 +70,22 @@ export default function GroupPlaneCard({handleAddtoCart, setPlanCartItems,planCa
   //       }
   //     } catch (error) {
   //       console.error("Error fetching data:", error);
-  //     } 
+  //     }
   //   };
   //   fetchPlane();
   //   fetchData()
-   
-    
+
   // }, [router.isReady]);
 
-  if(plane.length==0){
-    return  <div className={styles.emptyContainer} style={{textAlign:'center',height:'50px'}}>暫無專案</div>
+  if (plane.length == 0) {
+    return (
+      <div
+        className={styles.emptyContainer}
+        style={{ textAlign: "center", height: "50px" }}
+      >
+        暫無專案
+      </div>
+    );
   }
 
   if (showProductSelector) {
@@ -97,7 +101,6 @@ export default function GroupPlaneCard({handleAddtoCart, setPlanCartItems,planCa
     );
   }
 
-
   return (
     <div className={styles.container}>
       <ul className={styles.list}>
@@ -109,7 +112,7 @@ export default function GroupPlaneCard({handleAddtoCart, setPlanCartItems,planCa
         {plane.map((e, i) => {
           return (
             <li key={i} className={styles.item}>
-              <PlaneCard onSelect={handlePlanSelect} e={e} member={member}/>
+              <PlaneCard onSelect={handlePlanSelect} e={e} member={member} />
             </li>
           );
         })}

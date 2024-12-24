@@ -2,7 +2,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* height: 120vh; */
   overflow: hidden;
     /* background-image: url("/image/img-Jade/mem-bgImg.png"); */
   background-image: url("/image/img-mem/bg016.jpg");
@@ -11,6 +11,7 @@
   position: relative;
   background-repeat: no-repeat;
   background-position: 100% 100%;
+
 }
 
 /* 固定 nav bar 在頂部 */
@@ -31,12 +32,13 @@
   flex: 1;
   padding-top: 80px;
   padding-bottom: 100px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   /* background-color: #fff; */
   display: flex;
   flex-direction: row;
+  
   gap: 20px;
-  width: 80%;
+  width: 85%;
   margin: auto;
   /* margin-top: 90px; */
   background: rgba(255, 255, 255, 0.486); /* 更低透明度的白色背景 */

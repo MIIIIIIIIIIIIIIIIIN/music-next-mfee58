@@ -72,17 +72,8 @@ const ReviewProgress = ({ onComplete }) => {
 };
 
 // 專案表單元件
-const ProjectForm = ({ onBack, onSubmit, currentStep }) => {
-  const [formData, setFormData] = useState({
-    f_project_name: "",
-    f_tag: "",
-    f_project_amount: "",
-    f_project_title: "",
-    f_project_content: "",
-    f_project_picture: null,
-    top: null,
-    header: null,
-  });
+const ProjectForm = ({ onBack, onSubmit, currentStep ,handleFormData,formData,setFormData}) => {
+ 
   const [videoPreview, setVideoPreview] = useState("");
   const [imagePreview, setImagePreview] = useState("");
   const [headerPreview, setHeaderPreview] = useState("");
@@ -241,7 +232,7 @@ const ProjectForm = ({ onBack, onSubmit, currentStep }) => {
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
-          <label htmlFor="f_project_name">專案名稱 *</label>
+          <label htmlFor="f_project_name" onClick={handleFormData}>專案名稱 *</label>
           <input
             type="text"
             id="f_project_name"
@@ -424,8 +415,33 @@ const SuccessPage = ({ onReturn, handleClose }) => {
 
 // 主要系統元件
 const ProjectSystem = ({setShowModal,member}) => {
+  const [formData, setFormData] = useState({
+    f_project_name: "",
+    f_tag: "",
+    f_project_amount: "",
+    f_project_title: "",
+    f_project_content: "",
+    f_project_picture: null,
+    top: null,
+    header: null,
+  });
   const [currentView, setCurrentView] = useState("form");
   const [currentStep, setCurrentStep] = useState(1);
+   
+  const handleFormData=()=>{
+    setFormData(
+      {
+        f_project_name: "銀翼殺手",
+        f_tag: "Pop",
+        f_project_amount: 123454,
+        f_project_title: "雨中落淚",
+        f_project_content: "當人造記憶在腦海中閃爍我是否真的存在？淚水滑落臉龐卻不知是否為真實的情感奔流的電子血液在人造的血管中奔騰每一次心跳都是程式設計的律動還是靈魂深處的顫慄？檢視著鏡中的倒影找尋著存在的證明記憶如同碎片般零落拼湊不完整的人生拼圖或許答案不在過去而在當下每個感受的瞬間縱使是人工編織的夢此刻的痛楚卻如此真實",
+        f_project_picture: null,
+        top: null,
+        header: null,
+      
+      })
+  }
 
   const handleFormSubmit = (formData) => {
     setCurrentStep(2);
@@ -457,12 +473,16 @@ const ProjectSystem = ({setShowModal,member}) => {
           onBack={handleReturnToMain}
           onSubmit={handleFormSubmit}
           currentStep={currentStep}
+          handleFormData={handleFormData}
+          formData={formData}
+          setFormData={setFormData}
         />
       )}
 
-      {currentView === "review" && <ReviewProgress onComplete={handleReviewComplete} />}
+         
+      {currentView === "review" && <ReviewProgress onComplete={handleReviewComplete}   setFormData={setFormData}/>}
 
-      {currentView === "success" && <SuccessPage onReturn={handleReturnToMain} handleClose={handleClose} />}
+      {currentView === "success" && <SuccessPage onReturn={handleReturnToMain} handleClose={handleClose}  setFormData={setFormData}/>}
     </div>
   );
 };

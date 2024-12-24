@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import styles from "./mem-blog.module.css"; // 引入相應的 CSS 模組
 import Nav from "@/components/public/nav";
 import UserIcon from "@/components/public/user-icon";
-import BlogNav from "../blog-nav";
+import BlogNav from "../blog-nav/index";
 import PlayButton from "@/components/public/play-button";
 import Logout from "@/components/public/logout";
 import Link from "next/link";
@@ -55,13 +55,13 @@ const handleLogout = async () => {
         {/* <Nav className={styles["nav"]} /> */}
         <Nav />
         {/* 設定圖標，放置在右上角 */}
-        <a href="/Jade/member-center">
+        <Link href="/Jade/member-center">
           <img
             src="/icons/icon-setting.svg"
             alt="設定"
             className={styles["settingIcon"]}
           />
-        </a>
+        </Link>
 
         <div className={styles["container"]}>
           <div className={styles["leftContent"]}>

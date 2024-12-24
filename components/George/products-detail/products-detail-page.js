@@ -20,7 +20,7 @@ export default function ProductsDetailPage({
 }) {
   const { memAuth } = useFetchDB();
   const { handleAddtoCart, showAlert } = useCartDetail();
-  const { quantity } = useQuantity();
+  const { quantity, warningText } = useQuantity();
 
   const handleClick = () => {
     "";
@@ -30,7 +30,7 @@ export default function ProductsDetailPage({
     if (!memAuth) {
       alert("請先登入會員！");
       const targetUrl = encodeURIComponent(`/George/cart/${memAuth ? memAuth.id : ""}`);
-      window.location = `http://localhost:3000/login?redirect=${targetUrl}`;
+      window.location = `http://localhost:3000/member/login?redirect=${targetUrl}`;
       return;
     } else {
       window.location = `http://localhost:3000/George/cart/${memAuth.id}`;
@@ -95,7 +95,8 @@ export default function ProductsDetailPage({
           </div>
           <div className={style.btns}>
             {/* <Link href={`/George/cart/${urid}`}> */}
-            <Link href={memAuth ? `/George/cart/${memAuth.id}` : "http://localhost:3000/login"}>
+            {/* <Link href={memAuth ? `/George/cart/${memAuth.id}` : ""}> */}
+            <Link href={`/George/cart/1`}>
               <BlackWBtns
                 type="2"
                 onClick={handleAddtoCart}
@@ -107,7 +108,7 @@ export default function ProductsDetailPage({
 
             <WhiteWBtns
               type="1"
-              onClick={memAuth ? handleAddtoCart : handleAuth}
+              onClick={handleAddtoCart}
               className={style.whiteBtn}
             >
               加入購物車

@@ -1,14 +1,11 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { QuantityProvider, useQuantity } from "./quantity-provider";
-// import { useTab } from "@/components/Liam/detail/top/tab-Context";
 import axios from "axios";
-// import useFetchDB from "../hooks/usefetchDB";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
   const { quantity } = useQuantity();
-  // const { planCartItems, plane } = useTab();
   const [addToCart, setAddToCart] = useState({
     price: parseInt(albumDetail?.p_albums_price) || 0,
     singer: albumDetail?.p_albums_artist || "",
@@ -22,8 +19,6 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
   const [toOrder, setToOrder] = useState([]);
-  // const { listData } = useFetchDB();
-  // const [dataBox, setDataBox] = useState([]);
 
   // 選取專輯
   const handleSelectItem = (id) => {
@@ -64,6 +59,13 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
       );
   };
 
+  // 總數量計算
+  const calculateTotalQuantity = () => {
+    return cartItems
+      .filter((item) => selectedItems.includes(item.p_albums_id)) 
+      .reduce((total, item) => total + item.p_cart_quantity, 0);
+  };
+
   // 新增 & 修改數量(傳後端)
   const updateCartQuantityInDB = async (id, quantity) => {
     const item = cartItems.find((v) => v.p_albums_id === id);
@@ -87,7 +89,7 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
   const handleIncrement = (id) => {
     setCartItems((pre) =>
       pre.map((v) =>
-        v.p_albums_id === id
+        v.p_albums_id === id && v.p_cart_quantity < 10
           ? { ...v, p_cart_quantity: v.p_cart_quantity + 1 }
           : v
       )
@@ -165,6 +167,8 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
     if (albumDetail) {
       // 準備要傳送的資料
       const cartData = {
+        // f_plan_id: albumDetail?.f_plan_id || null,
+        // albumId: albumDetail?.p_albums_id || null,
         f_plan_id: null,
         albumId: albumDetail?.p_albums_id,
         userId: 1,
@@ -205,6 +209,10 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
     }
   }, [mdBox]);
 
+  // useEffect(() => {
+  //   console.log("給訂單: ", );
+  // }, []);
+
   return (
     <CartContext.Provider
       value={{
@@ -225,6 +233,7 @@ export const CartProvider = ({ children, mdBox, albumDetail, albumImages }) => {
         cancelDelete,
         handleDeleteClick,
         toOrder,
+        calculateTotalQuantity,
       }}
     >
       {children}

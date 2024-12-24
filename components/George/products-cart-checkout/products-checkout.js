@@ -40,6 +40,17 @@ export default function ProductsCheckout(props) {
     setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
+  // 填入資料
+  const handleFillField = () => {
+    setFormData({
+      name: "熊仔",
+      phone: "0912345678",
+      email: "shuan@gmail.com",
+      address: "台北市大安區快樂路123號3樓",
+      payment: "Link Pay",
+    })
+  }
+
   //訂編生一個
   const generateOrderNumbers = () => {
     const random = Math.floor(10000000 + Math.random() * 90000000);
@@ -147,7 +158,6 @@ export default function ProductsCheckout(props) {
     console.log("檢查 formData: ", formData);
     console.log("檢查 totalAmount: ", totalAmount);
     console.log("檢查 orderNumber: ", orderNumber);
-
     if (parsedToOrder.length > 0 && formData && totalAmount && orderNumber) {
       // if (newcart.length > 0 && formData && totalAmount && orderNumber) {
       // 訂單本人
@@ -169,7 +179,7 @@ export default function ProductsCheckout(props) {
         updatedAt: updatedAt,
       };
 
-      // 訂單細項
+      //訂單細項
       const orderItemsData = parsedToOrder.map((item) => ({
         orderId: null,
         // f_plan_id: item.f_plan_id,
@@ -177,14 +187,8 @@ export default function ProductsCheckout(props) {
         totalAmount: item.p_cart_price * item.p_cart_quantity,
       }));
 
-      console.log("發送訂單資料: ", orderData);
-      console.log("發送訂單資料: ", orderItemsData);
-
-      // const orderItemsData = newcart.map((item) => ({
-      //   orderId: null, // 這裡可能需要從後端的返回值中填入真實的 orderId
-      //   albumsId: item.p_albums_id || item.f_plan_id,
-      //   totalAmount: item.p_cart_price * item.p_cart_quantity || item.f_plan_amount * 1,
-      // }));
+      // console.log("發送訂單資料: ", orderData);
+      // console.log("發送訂單資料: ", orderItemsData);
 
       // 發送 POST 請求將資料儲存到購物車
       axios
@@ -214,7 +218,7 @@ export default function ProductsCheckout(props) {
       formData.payment !== "";
     if (canGo) {
       handlePayment();
-      // handlePostToOrderDB();
+      handlePostToOrderDB();
       console.log("發送!");
     } else {
       setShowModal(true);
@@ -224,7 +228,7 @@ export default function ProductsCheckout(props) {
 
   const handlePayment = () => {
     const paymentProducts = parsedToOrder.map((item) => ({
-      productName: "item.name",
+      productName: item.name,
       quantity: item.p_cart_quantity,
       price: Math.floor(item.p_cart_price),
     }));
@@ -233,10 +237,12 @@ export default function ProductsCheckout(props) {
 
     const productsParam = encodeURIComponent(JSON.stringify(paymentProducts));
 
-    router.push({
-      pathname: "http://localhost:3001/payment",
-      query: { products: productsParam },
-    });
+    setTimeout(() => {
+      router.push({
+        pathname: "http://localhost:3002/payment",
+        query: { products: productsParam },
+      });
+    }, 1500);
   };
 
   const cleanTheCart = async (id, pid) => {
@@ -287,16 +293,18 @@ export default function ProductsCheckout(props) {
 
           {/* 購買細項 */}
           {parsedToOrder.map((v, i) => {
-            // {newcart && newcart.map((v, i) => {
+            {
+              /* {newcart && newcart.map((v, i) => { */
+            }
             return (
               <div className={style.checkoutcontainer} key={i}>
                 <div className={style.checkoutcontainer1}>
                   <div className={style.albumbox}>
                     <img
-                      src={`/${v.p_cart_img_filename}`}
                       // /Liam/01/05.jpg
                       // ppcx100/ppc027-(1).jpg
                       // src={v.p_cart_img_filename? `/${v.p_cart_img_filename}` : `${v.f_plan_picture}`}
+                      src={`/${v.p_cart_img_filename}`}
                       alt=""
                       className={style.albumpics}
                     />
@@ -332,17 +340,7 @@ export default function ProductsCheckout(props) {
                   <ul className={style.checkoutdirectory}>
                     <li>${parseInt(v.p_cart_price)}</li>
                     <li>{v.p_cart_quantity}</li>
-                    <li>${v.p_cart_price * v.p_cart_quantity}</li>
-
-                    {/* <li>
-                      ${parseInt(v.p_albums_price) || parseInt(v.f_plan_amount)}
-                    </li>
-                    <li>{v.p_cart_quantity || 1}</li>
-                    <li>
-                      $
-                      {v.p_albums_price * v.p_cart_quantity ||
-                        v.f_plan_amount * 1}
-                    </li> */}
+                    <li>${(v.p_cart_price * v.p_cart_quantity).toLocaleString()}</li>
                   </ul>
                 </div>
               </div>
@@ -359,23 +357,23 @@ export default function ProductsCheckout(props) {
               <div className={style.paymentleftside}>
                 <div className={style.payaddresstitle}>選擇地址及付款方式</div>
                 <div className={style.PandAdirectory}>
-                  <ul className={style.padirectory}>
-                    <li>收件姓名</li>
-                    <li>聯絡電話</li>
-                    <li>電子郵件</li>
-                    <li>送貨方式</li>
-                    <li>填入地址</li>
-                    <li>付款方式</li>
+                  <ul className={style.padirectory01}>
+                    <li className={style.item} onClick={handleFillField}>收件姓名</li>
+                    <li className={style.item}>聯絡電話</li>
+                    <li className={style.item}>電子郵件</li>
+                    <li className={style.item}>送貨方式</li>
+                    <li className={style.item}>填入地址</li>
+                    <li className={style.item}>付款方式</li>
                   </ul>
                   <ul className={style.padirectory}>
-                    <li>
+                    <li className={style.inputGroup}>
                       <input
                         type="text"
                         name="name"
                         placeholder="請填入中文姓名"
                         value={formData.name}
                         onChange={handleChange}
-                        className={errors.name ? style.redname : ""}
+                        className={errors.name ? style.redname : style.texts}
                       />
                       {errors.name && (
                         <span className={`${style.error} ${style.errorname}`}>
@@ -383,14 +381,14 @@ export default function ProductsCheckout(props) {
                         </span>
                       )}
                     </li>
-                    <li>
+                    <li className={style.inputGroup}>
                       <input
                         type="text"
                         name="phone"
                         placeholder="請輸入連絡電話"
                         value={formData.phone}
                         onChange={handleChange}
-                        className={errors.phone ? style.redphone : ""}
+                        className={errors.phone ? style.redphone : style.texts}
                       />
                       {errors.phone && (
                         <span className={`${style.error} ${style.errorphone}`}>
@@ -398,14 +396,14 @@ export default function ProductsCheckout(props) {
                         </span>
                       )}
                     </li>
-                    <li>
+                    <li className={style.inputGroup}>
                       <input
                         type="text"
                         name="email"
                         placeholder="請輸入電子郵件"
                         value={formData.email}
                         onChange={handleChange}
-                        className={errors.email ? style.redemail : ""}
+                        className={errors.email ? style.redemail : style.texts}
                       />
                       {errors.email && (
                         <span className={`${style.error} ${style.erroremail}`}>
@@ -413,15 +411,15 @@ export default function ProductsCheckout(props) {
                         </span>
                       )}
                     </li>
-                    <li>宅配</li>
-                    <li>
+                    <li className={style.inputGroup}>宅配</li>
+                    <li className={style.inputGroup}>
                       <input
                         type="text"
                         name="address"
                         placeholder="請輸入地址"
                         value={formData.address}
                         onChange={handleChange}
-                        className={errors.address ? style.redaddress : ""}
+                        className={errors.address ? style.redaddress : style.texts}
                       />
                       {errors.address && (
                         <span
@@ -436,6 +434,7 @@ export default function ProductsCheckout(props) {
                         name="payment"
                         value={formData.payment}
                         onChange={handleChange}
+                        className={style.inputGroup}
                       >
                         <option value="" disabled selected>
                           請選擇
@@ -463,7 +462,7 @@ export default function ProductsCheckout(props) {
                       <li>運費</li>
                     </ul>
                     <ul className={style.finalcheckdirectory}>
-                      <li>${totalAmount}</li>
+                      <li>${(totalAmount).toLocaleString()}</li>
                       <li>$80</li>
                     </ul>
                   </div>
@@ -473,7 +472,7 @@ export default function ProductsCheckout(props) {
                   <div className={style.finaltotalbox}>
                     <div className={style.finaltotal}>
                       <div>合計</div>
-                      <div>${totalAmount + 80}</div>
+                      <div>${(totalAmount + 80).toLocaleString()}</div>
                     </div>
                     {/* <Link
                       href={

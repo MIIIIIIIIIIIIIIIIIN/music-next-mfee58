@@ -8,9 +8,11 @@ import MemberPassword from "../mem-password";
 // import MemberFav from "../mem-fav";
 import Mp3Uploader from "@/components/public/mp3-uploader";
 // import MemberFavTest from "../mem-fav/test";
+import MemberFav from "../mem-fav";
 import { useAuth } from "@/Context/auth-context";
 import { useRouter } from "next/router";
 
+import OrderList from "@/components/Liam/order-detail";
 const MemWeb2 = () => {
   const infoRef = useRef(null);
   const accRef = useRef(null);
@@ -58,6 +60,7 @@ const MemWeb2 = () => {
             <div ref={favRef}>
               {/* <MemberFav />
               <MemberFavTest /> */}
+              <OrderList></OrderList>
             </div>
             
             {/* <div ref={uploaderRef}>

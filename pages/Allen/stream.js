@@ -47,7 +47,7 @@ export default function Stream() {
         <div style={styles.sideBar}>
           <FollowingStream />
         </div>
-        <LiveStream streamerName="ちちのムスメ" />
+        <LiveStream streamerName="Anya" />
         <ChatRoom />
       </div>
       <MoreLikeThis />
