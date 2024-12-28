@@ -45,15 +45,23 @@ export default function ProductsLatestLaunched() {
           responsive={{
             desktop: {
               breakpoint: {
+                max: 1800,
+                min: 1200,
+              },
+              items: 6,
+              partialVisibilityGutter: 40,
+            },
+            desktop: {
+              breakpoint: {
                 max: 3000,
-                min: 1024,
+                min: 1801,
               },
               items: 6.5,
               partialVisibilityGutter: 40,
             },
             mobile: {
               breakpoint: {
-                max: 464,
+                max: 576,
                 min: 0,
               },
               items: 1,
@@ -61,10 +69,42 @@ export default function ProductsLatestLaunched() {
             },
             tablet: {
               breakpoint: {
-                max: 1024,
-                min: 464,
+                max: 767,
+                min: 577,
               },
               items: 2,
+              partialVisibilityGutter: 20,
+            },
+            laptop: {
+              breakpoint: {
+                max: 800,
+                min: 768,
+              },
+              items: 2.5,
+              partialVisibilityGutter: 20,
+            },
+            laptop: {
+              breakpoint: {
+                max: 900,
+                min: 801,
+              },
+              items: 3,
+              partialVisibilityGutter: 30,
+            },
+            laptop: {
+              breakpoint: {
+                max: 1100,
+                min: 901,
+              },
+              items: 4,
+              partialVisibilityGutter: 30,
+            },
+            laptop: {
+              breakpoint: {
+                max: 1199,
+                min: 1101,
+              },
+              items: 4.5,
               partialVisibilityGutter: 30,
             },
           }}
