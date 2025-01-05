@@ -63,3 +63,17 @@
     transition: transform 0.3s ease;
   }
 }
+
+@media (min-width: 376px) and (max-width: 576) {
+  .carouselItem {
+    width: 225px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 30em;
+    margin: auto;
+    transition: transform 0.3s ease;
+  }
+  .latestLaunch{
+    margin: 0px;
+  }
+}
