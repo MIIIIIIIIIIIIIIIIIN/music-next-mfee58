@@ -36,7 +36,8 @@ export default function ProductsCheckout(props) {
     setFormData({ ...formData, [name]: value });
 
     // 即時驗證
-    const error = validateField(name, value);
+    const error = validateField(name,
+       value);
     setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
