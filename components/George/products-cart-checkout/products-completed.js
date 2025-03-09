@@ -34,9 +34,9 @@ console.log(orderNumber);
               <Link href={"/George/product"}>
                 <BlackWBtns type="2">繼續購物</BlackWBtns>
               </Link>{" "}
-              <WhiteWBtns type="1" onClick={handleClick}>
+              {/* <WhiteWBtns type="1" onClick={handleClick}>
                 查看訂單
-              </WhiteWBtns>
+              </WhiteWBtns> */}
             </div>
           </div>
         </div>
